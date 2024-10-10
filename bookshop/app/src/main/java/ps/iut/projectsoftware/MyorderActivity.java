@@ -1,42 +1,46 @@
 package ps.iut.projectsoftware;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.*;
+import android.animation.*;
 import android.app.*;
-import android.os.*;
-import android.view.*;
-import android.view.View.*;
-import android.widget.*;
+import android.app.Activity;
 import android.content.*;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.*;
 import android.graphics.*;
 import android.graphics.drawable.*;
 import android.media.*;
 import android.net.*;
+import android.net.Uri;
+import android.os.*;
 import android.text.*;
 import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
+import android.view.*;
+import android.view.View.*;
 import android.view.animation.*;
-import java.io.*;
-import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.webkit.*;
+import android.widget.*;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import com.google.android.material.button.*;
-import android.content.Intent;
-import android.net.Uri;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import androidx.annotation.*;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.DialogFragment;
+import com.google.android.material.button.*;
+import com.google.firebase.FirebaseApp;
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
+import org.json.*;
 
 public class MyorderActivity extends AppCompatActivity {
 	
+	private LinearLayout linear9;
 	private LinearLayout linear8;
 	private ListView listview1;
 	private MaterialButton materialbutton1;
@@ -44,28 +48,32 @@ public class MyorderActivity extends AppCompatActivity {
 	private MaterialButton materialbutton3;
 	
 	private Intent ocm = new Intent();
+	private SharedPreferences orders;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.myorder);
 		initialize(_savedInstanceState);
-		com.google.firebase.FirebaseApp.initializeApp(this);
+		FirebaseApp.initializeApp(this);
 		initializeLogic();
 	}
 	
 	private void initialize(Bundle _savedInstanceState) {
+		linear9 = findViewById(R.id.linear9);
 		linear8 = findViewById(R.id.linear8);
 		listview1 = findViewById(R.id.listview1);
 		materialbutton1 = findViewById(R.id.materialbutton1);
 		materialbutton2 = findViewById(R.id.materialbutton2);
 		materialbutton3 = findViewById(R.id.materialbutton3);
+		orders = getSharedPreferences("orders", Activity.MODE_PRIVATE);
 	}
 	
 	private void initializeLogic() {
 		if (Build.VERSION.SDK_INT >= 21) { Window
 			w = this.getWindow();
-			w.setNavigationBarColor(Color.parseColor("#3F51B5")); }
+			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }
+		linear9.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFE8EAF6, 0xFF3F51B5));
 	}
 	
 	@Override
@@ -107,7 +115,14 @@ public class MyorderActivity extends AppCompatActivity {
 			}
 			
 			final LinearLayout linear1 = _view.findViewById(R.id.linear1);
+			final LinearLayout photo = _view.findViewById(R.id.photo);
+			final LinearLayout linear2 = _view.findViewById(R.id.linear2);
 			final ImageView imageview1 = _view.findViewById(R.id.imageview1);
+			final TextView textview4 = _view.findViewById(R.id.textview4);
+			final TextView semester = _view.findViewById(R.id.semester);
+			final LinearLayout linear3 = _view.findViewById(R.id.linear3);
+			final TextView textview5 = _view.findViewById(R.id.textview5);
+			final TextView price = _view.findViewById(R.id.price);
 			
 			return _view;
 		}

@@ -1,56 +1,72 @@
 package ps.iut.projectsoftware;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.*;
+import android.animation.*;
 import android.app.*;
-import android.os.*;
-import android.view.*;
-import android.view.View.*;
-import android.widget.*;
+import android.app.Activity;
 import android.content.*;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.*;
 import android.graphics.*;
+import android.graphics.Typeface;
 import android.graphics.drawable.*;
 import android.media.*;
 import android.net.*;
+import android.net.Uri;
+import android.os.*;
 import android.text.*;
 import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
+import android.view.*;
+import android.view.View;
+import android.view.View.*;
 import android.view.animation.*;
-import java.io.*;
-import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
-import android.widget.LinearLayout;
-import android.widget.ImageView;
-import android.widget.EditText;
-import com.google.android.material.button.*;
+import android.webkit.*;
+import android.widget.*;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.content.Intent;
-import android.net.Uri;
-import android.app.Activity;
-import android.content.SharedPreferences;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import android.view.View;
 import android.widget.CompoundButton;
-import android.graphics.Typeface;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import androidx.annotation.*;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.DialogFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.*;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.regex.*;
+import org.json.*;
 
 public class SginupActivity extends AppCompatActivity {
+	
+	private Timer _timer = new Timer();
+	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
 	
 	private double times = 0;
 	private boolean block = false;
 	private boolean bool = false;
+	private boolean registered = false;
+	private HashMap<String, Object> map = new HashMap<>();
 	
 	private LinearLayout linear7;
 	private LinearLayout linear2;
@@ -80,13 +96,16 @@ public class SginupActivity extends AppCompatActivity {
 	private OnCompleteListener<AuthResult> g_phoneAuthListener;
 	private OnCompleteListener<AuthResult> g_googleSignInListener;
 	
+	private TimerTask file;
+	private DatabaseReference information = _firebase.getReference("information");
+	private ChildEventListener _information_child_listener;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.sginup);
 		initialize(_savedInstanceState);
-		com.google.firebase.FirebaseApp.initializeApp(this);
+		FirebaseApp.initializeApp(this);
 		initializeLogic();
 	}
 	
@@ -111,11 +130,16 @@ public class SginupActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View _view) {
 				if (true && ((edittext2.getText().toString().length() > 5) && (!block && edittext2.getText().toString().equals(edittext3.getText().toString())))) {
+					b.setEnabled(false);
 					g.createUserWithEmailAndPassword(edittext1.getText().toString(), edittext2.getText().toString()).addOnCompleteListener(SginupActivity.this, _g_create_user_listener);
 				}
 				else {
 					SketchwareUtil.showMessage(getApplicationContext(), "Check the Given ✉️ and 🔑 and 📃!!");
 					times++;
+					edittext3.requestFocus();
+					edittext2.requestFocus();
+					edittext1.requestFocus();
+					checkbox1.requestFocus();
 				}
 				if (times == 15) {
 					blocbk.edit().putString("block_reg", "1").commit();
@@ -125,6 +149,18 @@ public class SginupActivity extends AppCompatActivity {
 					a.setData(Uri.parse("https://forms.gle/zH6hxVwVf7KbnY7R6"));
 					startActivity(a);
 				}
+				file = new TimerTask() {
+					@Override
+					public void run() {
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								b.setEnabled(true);
+							}
+						});
+					}
+				};
+				_timer.schedule(file, (int)(5000));
 			}
 		});
 		
@@ -157,6 +193,45 @@ public class SginupActivity extends AppCompatActivity {
 			}
 		});
 		
+		_information_child_listener = new ChildEventListener() {
+			@Override
+			public void onChildAdded(DataSnapshot _param1, String _param2) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				registered = true;
+			}
+			
+			@Override
+			public void onChildChanged(DataSnapshot _param1, String _param2) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				
+			}
+			
+			@Override
+			public void onChildMoved(DataSnapshot _param1, String _param2) {
+				
+			}
+			
+			@Override
+			public void onChildRemoved(DataSnapshot _param1) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				
+			}
+			
+			@Override
+			public void onCancelled(DatabaseError _param1) {
+				final int _errorCode = _param1.getCode();
+				final String _errorMessage = _param1.getMessage();
+				
+			}
+		};
+		information.addChildEventListener(_information_child_listener);
+		
 		g_updateEmailListener = new OnCompleteListener<Void>() {
 			@Override
 			public void onComplete(Task<Void> _param1) {
@@ -180,7 +255,12 @@ public class SginupActivity extends AppCompatActivity {
 			public void onComplete(Task<Void> _param1) {
 				final boolean _success = _param1.isSuccessful();
 				final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : "";
-				
+				if (registered && _success) {
+					a.setClass(getApplicationContext(), LoginActivity.class);
+					a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(a);
+					finish();
+				}
 			}
 		};
 		
@@ -226,11 +306,31 @@ public class SginupActivity extends AppCompatActivity {
 				final boolean _success = _param1.isSuccessful();
 				final String _errorMessage = _param1.getException() != null ? _param1.getException().getMessage() : "";
 				if (_success) {
-					SketchwareUtil.showMessage(getApplicationContext(), "Login Now wih Your Account !!");
-					a.setClass(getApplicationContext(), LoginActivity.class);
-					a.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					startActivity(a);
-					finish();
+					FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+					
+					if (user != null) {
+						    user.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+							        @Override
+							        public void onComplete(@NonNull Task<Void> task) {
+								            
+								        }
+							    });
+					}
+					SketchwareUtil.showMessage(getApplicationContext(), "Verify Your Account!!");
+					map = new HashMap<>();
+					map.put("email", edittext1.getText().toString());
+					map.put("balance", "0.00");
+					String email = edittext1.getText().toString();
+					
+					String username = email.split("@")[0];  
+					
+					
+					DatabaseReference ref = FirebaseDatabase.getInstance()
+					                          .getReference()
+					                          .child("information")
+					                          .child(username);  
+					ref.updateChildren(map);
+					map.clear();
 				}
 				else {
 					SketchwareUtil.showMessage(getApplicationContext(), _errorMessage);
@@ -259,6 +359,7 @@ public class SginupActivity extends AppCompatActivity {
 	private void initializeLogic() {
 		block = false;
 		times = 0;
+		edittext1.setSingleLine(true);
 		linear2.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)58, 0xFFFFFFFF));
 		b.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)58, 0xFF5C6BC0));
 		b1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)58, 0xFF5C6BC0));

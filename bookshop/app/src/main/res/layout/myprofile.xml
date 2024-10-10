@@ -10,14 +10,14 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:padding="35dp"
-		android:background="#E8EAF6"
+		android:background="#7986CB"
 		android:orientation="vertical">
 		<LinearLayout
 			android:id="@+id/linear2"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:padding="8dp"
-			android:background="#FFFFFF"
+			android:padding="20dp"
+			android:background="#3F51B5"
 			android:orientation="vertical">
 			<LinearLayout
 				android:id="@+id/linear6"
@@ -29,8 +29,9 @@
 				android:id="@+id/imageview2"
 				android:layout_width="match_parent"
 				android:layout_height="250dp"
-				android:src="@drawable/default_image"
-				android:scaleType="center" />
+				android:padding="100dp"
+				android:src="@drawable/ic_account_circle_white"
+				android:scaleType="fitCenter" />
 			<LinearLayout
 				android:id="@+id/linear7"
 				android:layout_width="match_parent"
@@ -49,27 +50,26 @@
 					android:layout_height="match_parent"
 					android:padding="8dp"
 					android:gravity="center_vertical"
-					android:text="Name :"
-					android:textSize="12sp"
-					android:textColor="#000000"
+					android:text="Email :"
+					android:textSize="18sp"
+					android:textColor="#FFFFFF"
 					android:layout_gravity="center_horizontal"
 					android:layout_weight="1" />
-				<ImageView
-					android:id="@+id/imageview3"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:src="@drawable/default_image"
-					android:scaleType="center" />
 			</LinearLayout>
 			<EditText
 				android:id="@+id/edittext1"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:padding="8dp"
-				android:textSize="12sp"
-				android:textColor="#000000"
-				android:hint="Edit Text"
-				android:textColorHint="#607D8B" />
+				android:layout_marginLeft="28dp"
+				android:layout_marginRight="5dp"
+				android:paddingLeft="25dp"
+				android:paddingTop="8dp"
+				android:paddingRight="8dp"
+				android:paddingBottom="8dp"
+				android:background="#5C6BC0"
+				android:textSize="16sp"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFFFFF" />
 			<LinearLayout
 				android:id="@+id/linear4"
 				android:layout_width="match_parent"
@@ -83,26 +83,32 @@
 					android:padding="8dp"
 					android:gravity="center_vertical"
 					android:text="Password :"
-					android:textSize="12sp"
-					android:textColor="#000000"
+					android:textSize="18sp"
+					android:textColor="#FFFFFF"
 					android:layout_gravity="center_vertical"
 					android:layout_weight="1" />
 				<ImageView
 					android:id="@+id/imageview4"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:src="@drawable/default_image"
-					android:scaleType="center" />
+					android:layout_width="50dp"
+					android:layout_height="50dp"
+					android:padding="10dp"
+					android:src="@drawable/ic_edit_white"
+					android:scaleType="fitCenter" />
 			</LinearLayout>
 			<EditText
 				android:id="@+id/edittext2"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:padding="8dp"
-				android:textSize="12sp"
-				android:textColor="#000000"
-				android:hint="Edit Text"
-				android:textColorHint="#607D8B" />
+				android:layout_marginLeft="28dp"
+				android:layout_marginRight="5dp"
+				android:paddingLeft="25dp"
+				android:paddingTop="8dp"
+				android:paddingRight="8dp"
+				android:paddingBottom="8dp"
+				android:background="#5C6BC0"
+				android:textSize="16sp"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFFFFF" />
 			<LinearLayout
 				android:id="@+id/linear5"
 				android:layout_width="match_parent"
@@ -116,25 +122,31 @@
 					android:padding="8dp"
 					android:gravity="center_vertical"
 					android:text="Balance :"
-					android:textSize="12sp"
-					android:textColor="#000000"
+					android:textSize="18sp"
+					android:textColor="#FFFFFF"
 					android:layout_weight="1" />
 				<ImageView
 					android:id="@+id/imageview5"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:src="@drawable/default_image"
-					android:scaleType="center" />
+					android:layout_width="50dp"
+					android:layout_height="50dp"
+					android:padding="10dp"
+					android:src="@drawable/ic_edit_white"
+					android:scaleType="fitCenter" />
 			</LinearLayout>
 			<EditText
 				android:id="@+id/edittext3"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:padding="8dp"
-				android:textSize="12sp"
-				android:textColor="#000000"
-				android:hint="Edit Text"
-				android:textColorHint="#607D8B" />
+				android:layout_marginLeft="28dp"
+				android:layout_marginRight="5dp"
+				android:paddingLeft="25dp"
+				android:paddingTop="8dp"
+				android:paddingRight="8dp"
+				android:paddingBottom="8dp"
+				android:background="#5C6BC0"
+				android:textSize="16sp"
+				android:textColor="#FFFFFF"
+				android:textColorHint="#FFFFFF" />
 		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>

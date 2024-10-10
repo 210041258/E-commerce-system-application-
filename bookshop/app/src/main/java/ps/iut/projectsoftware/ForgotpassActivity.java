@@ -1,49 +1,54 @@
 package ps.iut.projectsoftware;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.*;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.animation.*;
 import android.app.*;
-import android.os.*;
-import android.view.*;
-import android.view.View.*;
-import android.widget.*;
 import android.content.*;
+import android.content.Intent;
 import android.content.res.*;
 import android.graphics.*;
+import android.graphics.Typeface;
 import android.graphics.drawable.*;
 import android.media.*;
 import android.net.*;
+import android.net.Uri;
+import android.os.*;
 import android.text.*;
 import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
-import android.view.animation.*;
-import java.io.*;
-import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
-import android.widget.LinearLayout;
-import android.widget.ImageView;
-import android.widget.EditText;
-import android.widget.Button;
-import com.google.android.material.button.*;
-import android.content.Intent;
-import android.net.Uri;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import android.view.*;
 import android.view.View;
-import android.graphics.Typeface;
+import android.view.View.*;
+import android.view.animation.*;
+import android.webkit.*;
+import android.widget.*;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import androidx.annotation.*;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.DialogFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.*;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.regex.*;
+import org.json.*;
 
 public class ForgotpassActivity extends AppCompatActivity {
+	
+	private Timer _timer = new Timer();
 	
 	private FloatingActionButton _fab;
 	
@@ -71,13 +76,14 @@ public class ForgotpassActivity extends AppCompatActivity {
 	private OnCompleteListener<AuthResult> db_phoneAuthListener;
 	private OnCompleteListener<AuthResult> db_googleSignInListener;
 	
+	private TimerTask dj;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.forgotpass);
 		initialize(_savedInstanceState);
-		com.google.firebase.FirebaseApp.initializeApp(this);
+		FirebaseApp.initializeApp(this);
 		initializeLogic();
 	}
 	
@@ -100,11 +106,24 @@ public class ForgotpassActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View _view) {
 				if (!edittext1.getText().toString().equals("")) {
+					b.setEnabled(false);
 					db.sendPasswordResetEmail(edittext1.getText().toString()).addOnCompleteListener(_db_reset_password_listener);
 				}
 				else {
 					SketchwareUtil.showMessage(getApplicationContext(), "Check the Email 📨 !");
 				}
+				dj = new TimerTask() {
+					@Override
+					public void run() {
+						runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								b.setEnabled(true);
+							}
+						});
+					}
+				};
+				_timer.schedule(dj, (int)(5000));
 			}
 		});
 		

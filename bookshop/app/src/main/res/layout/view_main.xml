@@ -14,12 +14,13 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:padding="8dp"
-			android:background="#FFFFFF"
+			android:background="#9FA8DA"
 			android:orientation="horizontal">
 			<ImageView
 				android:id="@+id/imageview1"
-				android:layout_width="50dp"
-				android:layout_height="50dp"
+				android:layout_width="70dp"
+				android:layout_height="70dp"
+				android:padding="20dp"
 				android:src="@drawable/ic_person_black"
 				android:scaleType="fitCenter"
 				android:layout_gravity="left" />
@@ -28,13 +29,15 @@
 				android:layout_width="match_parent"
 				android:layout_height="match_parent"
 				android:padding="8dp"
-				android:orientation="vertical"
+				android:background="#9FA8DA"
+				android:orientation="horizontal"
 				android:weightSum="1"
 				android:layout_weight="1" />
 			<ImageView
 				android:id="@+id/imageview2"
-				android:layout_width="50dp"
-				android:layout_height="50dp"
+				android:layout_width="70dp"
+				android:layout_height="70dp"
+				android:padding="20dp"
 				android:src="@drawable/ic_notifications_black"
 				android:scaleType="fitCenter"
 				android:layout_gravity="right" />
@@ -54,10 +57,40 @@
 				android:background="#E8EAF6"
 				android:orientation="vertical">
 				<LinearLayout
-					android:id="@+id/linear16"
+					android:id="@+id/linear8"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="8dp"
+					android:background="@android:color/transparent"
+					android:orientation="horizontal">
+					<ImageView
+						android:id="@+id/imageview3"
+						android:layout_width="60dp"
+						android:layout_height="60dp"
+						android:padding="10dp"
+						android:src="@drawable/ic_pageview_black"
+						android:scaleType="fitCenter"
+						android:layout_gravity="right" />
+					<EditText
+						android:id="@+id/edittext1"
+						android:layout_width="250dp"
+						android:layout_height="match_parent"
+						android:padding="20dp"
+						android:gravity="left|center_vertical"
+						android:textSize="14sp"
+						android:textStyle="bold"
+						android:textColor="#FFFFFF"
+						android:hint="Book Name or Department Name"
+						android:textColorHint="#607D8B"
+						android:layout_weight="1" />
+				</LinearLayout>
+				<LinearLayout
+					android:id="@+id/cse"
 					android:layout_width="match_parent"
 					android:layout_height="350dp"
-					android:padding="8dp"
+					android:layout_marginTop="50dp"
+					android:layout_marginBottom="50dp"
+					android:padding="15dp"
 					android:background="#0D47A1"
 					android:orientation="vertical">
 					<LinearLayout
@@ -102,47 +135,52 @@
 							android:id="@+id/linear19"
 							android:layout_width="match_parent"
 							android:layout_height="match_parent"
-							android:padding="8dp"
+							android:padding="30dp"
 							android:orientation="horizontal">
 							<ImageView
-								android:id="@+id/imageview24"
-								android:layout_width="match_parent"
+								android:id="@+id/csea"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center"
+								android:scaleType="fitCenter"
 								android:layout_weight="1" />
 							<ImageView
-								android:id="@+id/imageview20"
-								android:layout_width="wrap_content"
+								android:id="@+id/cseb"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview21"
-								android:layout_width="wrap_content"
+								android:id="@+id/csec"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview22"
-								android:layout_width="wrap_content"
+								android:id="@+id/csed"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview23"
-								android:layout_width="wrap_content"
+								android:id="@+id/csee"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 						</LinearLayout>
 					</HorizontalScrollView>
 				</LinearLayout>
 				<LinearLayout
-					android:id="@+id/linear32"
+					android:id="@+id/eee"
 					android:layout_width="match_parent"
 					android:layout_height="350dp"
-					android:padding="8dp"
+					android:layout_marginBottom="50dp"
+					android:padding="15dp"
 					android:background="#FBC02D"
 					android:orientation="vertical">
 					<LinearLayout
@@ -187,47 +225,52 @@
 							android:id="@+id/linear35"
 							android:layout_width="match_parent"
 							android:layout_height="match_parent"
-							android:padding="8dp"
+							android:padding="30dp"
 							android:orientation="horizontal">
 							<ImageView
-								android:id="@+id/imageview40"
-								android:layout_width="match_parent"
+								android:id="@+id/eeea"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center"
+								android:scaleType="fitCenter"
 								android:layout_weight="1" />
 							<ImageView
-								android:id="@+id/imageview41"
-								android:layout_width="wrap_content"
+								android:id="@+id/eeeb"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview42"
-								android:layout_width="wrap_content"
+								android:id="@+id/eeec"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview43"
-								android:layout_width="wrap_content"
+								android:id="@+id/eeed"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
-							<ImageView
-								android:id="@+id/imageview44"
-								android:layout_width="wrap_content"
-								android:layout_height="match_parent"
-								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 						</LinearLayout>
 					</HorizontalScrollView>
+					<LinearLayout
+						android:id="@+id/linear52"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:padding="8dp"
+						android:orientation="horizontal" />
 				</LinearLayout>
 				<LinearLayout
-					android:id="@+id/linear36"
+					android:id="@+id/mpe"
 					android:layout_width="match_parent"
 					android:layout_height="350dp"
-					android:padding="8dp"
+					android:layout_marginBottom="50dp"
+					android:padding="15dp"
 					android:background="#3E2723"
 					android:orientation="vertical">
 					<LinearLayout
@@ -272,47 +315,52 @@
 							android:id="@+id/linear39"
 							android:layout_width="match_parent"
 							android:layout_height="match_parent"
-							android:padding="8dp"
+							android:padding="30dp"
 							android:orientation="horizontal">
 							<ImageView
-								android:id="@+id/imageview45"
-								android:layout_width="match_parent"
+								android:id="@+id/mpea"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center"
+								android:scaleType="fitCenter"
 								android:layout_weight="1" />
 							<ImageView
-								android:id="@+id/imageview46"
-								android:layout_width="wrap_content"
+								android:id="@+id/mpeb"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview47"
-								android:layout_width="wrap_content"
+								android:id="@+id/mpec"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview48"
-								android:layout_width="wrap_content"
+								android:id="@+id/mped"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview49"
-								android:layout_width="wrap_content"
+								android:id="@+id/mpee"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 						</LinearLayout>
 					</HorizontalScrollView>
 				</LinearLayout>
 				<LinearLayout
-					android:id="@+id/linear40"
+					android:id="@+id/cee"
 					android:layout_width="match_parent"
 					android:layout_height="350dp"
-					android:padding="8dp"
+					android:layout_marginBottom="50dp"
+					android:padding="15dp"
 					android:background="#004D40"
 					android:orientation="vertical">
 					<LinearLayout
@@ -357,47 +405,46 @@
 							android:id="@+id/linear43"
 							android:layout_width="match_parent"
 							android:layout_height="match_parent"
-							android:padding="8dp"
+							android:padding="30dp"
 							android:orientation="horizontal">
 							<ImageView
-								android:id="@+id/imageview50"
-								android:layout_width="match_parent"
+								android:id="@+id/ceea"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center"
+								android:scaleType="fitCenter"
 								android:layout_weight="1" />
 							<ImageView
-								android:id="@+id/imageview51"
-								android:layout_width="wrap_content"
+								android:id="@+id/ceeb"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview52"
-								android:layout_width="wrap_content"
+								android:id="@+id/ceec"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview53"
-								android:layout_width="wrap_content"
+								android:id="@+id/ceed"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
-							<ImageView
-								android:id="@+id/imageview54"
-								android:layout_width="wrap_content"
-								android:layout_height="match_parent"
-								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 						</LinearLayout>
 					</HorizontalScrollView>
 				</LinearLayout>
 				<LinearLayout
-					android:id="@+id/linear44"
+					android:id="@+id/btm"
 					android:layout_width="match_parent"
 					android:layout_height="350dp"
-					android:padding="8dp"
+					android:layout_marginBottom="50dp"
+					android:padding="15dp"
 					android:background="#673AB7"
 					android:orientation="vertical">
 					<LinearLayout
@@ -442,47 +489,51 @@
 							android:id="@+id/linear47"
 							android:layout_width="match_parent"
 							android:layout_height="match_parent"
-							android:padding="8dp"
+							android:padding="30dp"
 							android:orientation="horizontal">
 							<ImageView
-								android:id="@+id/imageview55"
-								android:layout_width="match_parent"
+								android:id="@+id/btma"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center"
+								android:scaleType="fitCenter"
 								android:layout_weight="1" />
 							<ImageView
-								android:id="@+id/imageview56"
-								android:layout_width="wrap_content"
+								android:id="@+id/btmb"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview57"
-								android:layout_width="wrap_content"
+								android:id="@+id/btmc"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview58"
-								android:layout_width="wrap_content"
+								android:id="@+id/btmd"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview59"
-								android:layout_width="wrap_content"
+								android:id="@+id/btme"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 						</LinearLayout>
 					</HorizontalScrollView>
 				</LinearLayout>
 				<LinearLayout
-					android:id="@+id/linear48"
+					android:id="@+id/tve"
 					android:layout_width="match_parent"
 					android:layout_height="350dp"
-					android:padding="8dp"
+					android:padding="15dp"
 					android:background="#1B5E20"
 					android:orientation="vertical">
 					<LinearLayout
@@ -527,39 +578,43 @@
 							android:id="@+id/linear51"
 							android:layout_width="match_parent"
 							android:layout_height="match_parent"
-							android:padding="8dp"
+							android:padding="30dp"
 							android:orientation="horizontal">
 							<ImageView
-								android:id="@+id/imageview60"
-								android:layout_width="match_parent"
+								android:id="@+id/tvea"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center"
+								android:scaleType="fitCenter"
 								android:layout_weight="1" />
 							<ImageView
-								android:id="@+id/imageview61"
-								android:layout_width="wrap_content"
+								android:id="@+id/tveb"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview62"
-								android:layout_width="wrap_content"
+								android:id="@+id/tvec"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview63"
-								android:layout_width="wrap_content"
+								android:id="@+id/tved"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
+								android:layout_marginLeft="20dp"
+								android:layout_marginRight="20dp"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 							<ImageView
-								android:id="@+id/imageview64"
-								android:layout_width="wrap_content"
+								android:id="@+id/tvee"
+								android:layout_width="200dp"
 								android:layout_height="match_parent"
 								android:src="@drawable/default_image"
-								android:scaleType="center" />
+								android:scaleType="fitCenter" />
 						</LinearLayout>
 					</HorizontalScrollView>
 				</LinearLayout>
@@ -572,5 +627,5 @@
 		android:layout_height="wrap_content"
 		android:layout_margin="16dp"
 		android:layout_gravity="right|bottom"
-		app:srcCompat="@drawable/ic_local_grocery_store_black" />
+		app:srcCompat="@drawable/ic_shopping_basket_white" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

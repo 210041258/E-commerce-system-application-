@@ -1,46 +1,62 @@
 package ps.iut.projectsoftware;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.*;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.animation.*;
 import android.app.*;
-import android.os.*;
-import android.view.*;
-import android.view.View.*;
-import android.widget.*;
+import android.app.Activity;
 import android.content.*;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.*;
 import android.graphics.*;
+import android.graphics.Typeface;
 import android.graphics.drawable.*;
 import android.media.*;
 import android.net.*;
+import android.net.Uri;
+import android.os.*;
 import android.text.*;
 import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
+import android.view.*;
+import android.view.View;
+import android.view.View.*;
 import android.view.animation.*;
-import java.io.*;
-import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
+import android.webkit.*;
+import android.widget.*;
+import android.widget.EditText;
+import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.ImageView;
-import android.widget.HorizontalScrollView;
 import android.widget.TextView;
-import android.content.Intent;
-import android.net.Uri;
-import android.view.View;
-import android.graphics.Typeface;
+import androidx.annotation.*;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.DialogFragment;
+import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.FirebaseApp;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.regex.*;
+import org.json.*;
 
 public class ViewMainActivity extends AppCompatActivity {
 	
 	private FloatingActionButton _fab;
+	
+	private ArrayList<HashMap<String, Object>> cse_list = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> eee_list = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> cee_list = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> tve_list = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> mpe_list = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> btm_list = new ArrayList<>();
 	
 	private LinearLayout linear6;
 	private ScrollView vscroll1;
@@ -48,87 +64,90 @@ public class ViewMainActivity extends AppCompatActivity {
 	private LinearLayout linear7;
 	private ImageView imageview2;
 	private LinearLayout linear1;
-	private LinearLayout linear16;
-	private LinearLayout linear32;
-	private LinearLayout linear36;
-	private LinearLayout linear40;
-	private LinearLayout linear44;
-	private LinearLayout linear48;
+	private LinearLayout linear8;
+	private LinearLayout cse;
+	private LinearLayout eee;
+	private LinearLayout mpe;
+	private LinearLayout cee;
+	private LinearLayout btm;
+	private LinearLayout tve;
+	private ImageView imageview3;
+	private EditText edittext1;
 	private LinearLayout linear17;
 	private HorizontalScrollView hscroll3;
 	private TextView textview5;
 	private LinearLayout linear18;
 	private TextView textview6;
 	private LinearLayout linear19;
-	private ImageView imageview24;
-	private ImageView imageview20;
-	private ImageView imageview21;
-	private ImageView imageview22;
-	private ImageView imageview23;
+	private ImageView csea;
+	private ImageView cseb;
+	private ImageView csec;
+	private ImageView csed;
+	private ImageView csee;
 	private LinearLayout linear33;
 	private HorizontalScrollView hscroll7;
+	private LinearLayout linear52;
 	private TextView textview13;
 	private LinearLayout linear34;
 	private TextView textview14;
 	private LinearLayout linear35;
-	private ImageView imageview40;
-	private ImageView imageview41;
-	private ImageView imageview42;
-	private ImageView imageview43;
-	private ImageView imageview44;
+	private ImageView eeea;
+	private ImageView eeeb;
+	private ImageView eeec;
+	private ImageView eeed;
 	private LinearLayout linear37;
 	private HorizontalScrollView hscroll8;
 	private TextView textview15;
 	private LinearLayout linear38;
 	private TextView textview16;
 	private LinearLayout linear39;
-	private ImageView imageview45;
-	private ImageView imageview46;
-	private ImageView imageview47;
-	private ImageView imageview48;
-	private ImageView imageview49;
+	private ImageView mpea;
+	private ImageView mpeb;
+	private ImageView mpec;
+	private ImageView mped;
+	private ImageView mpee;
 	private LinearLayout linear41;
 	private HorizontalScrollView hscroll9;
 	private TextView textview17;
 	private LinearLayout linear42;
 	private TextView textview18;
 	private LinearLayout linear43;
-	private ImageView imageview50;
-	private ImageView imageview51;
-	private ImageView imageview52;
-	private ImageView imageview53;
-	private ImageView imageview54;
+	private ImageView ceea;
+	private ImageView ceeb;
+	private ImageView ceec;
+	private ImageView ceed;
 	private LinearLayout linear45;
 	private HorizontalScrollView hscroll10;
 	private TextView textview19;
 	private LinearLayout linear46;
 	private TextView textview20;
 	private LinearLayout linear47;
-	private ImageView imageview55;
-	private ImageView imageview56;
-	private ImageView imageview57;
-	private ImageView imageview58;
-	private ImageView imageview59;
+	private ImageView btma;
+	private ImageView btmb;
+	private ImageView btmc;
+	private ImageView btmd;
+	private ImageView btme;
 	private LinearLayout linear49;
 	private HorizontalScrollView hscroll11;
 	private TextView textview21;
 	private LinearLayout linear50;
 	private TextView textview22;
 	private LinearLayout linear51;
-	private ImageView imageview60;
-	private ImageView imageview61;
-	private ImageView imageview62;
-	private ImageView imageview63;
-	private ImageView imageview64;
+	private ImageView tvea;
+	private ImageView tveb;
+	private ImageView tvec;
+	private ImageView tved;
+	private ImageView tvee;
 	
 	private Intent profile = new Intent();
+	private SharedPreferences a;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.view_main);
 		initialize(_savedInstanceState);
-		com.google.firebase.FirebaseApp.initializeApp(this);
+		FirebaseApp.initializeApp(this);
 		initializeLogic();
 	}
 	
@@ -141,78 +160,81 @@ public class ViewMainActivity extends AppCompatActivity {
 		linear7 = findViewById(R.id.linear7);
 		imageview2 = findViewById(R.id.imageview2);
 		linear1 = findViewById(R.id.linear1);
-		linear16 = findViewById(R.id.linear16);
-		linear32 = findViewById(R.id.linear32);
-		linear36 = findViewById(R.id.linear36);
-		linear40 = findViewById(R.id.linear40);
-		linear44 = findViewById(R.id.linear44);
-		linear48 = findViewById(R.id.linear48);
+		linear8 = findViewById(R.id.linear8);
+		cse = findViewById(R.id.cse);
+		eee = findViewById(R.id.eee);
+		mpe = findViewById(R.id.mpe);
+		cee = findViewById(R.id.cee);
+		btm = findViewById(R.id.btm);
+		tve = findViewById(R.id.tve);
+		imageview3 = findViewById(R.id.imageview3);
+		edittext1 = findViewById(R.id.edittext1);
 		linear17 = findViewById(R.id.linear17);
 		hscroll3 = findViewById(R.id.hscroll3);
 		textview5 = findViewById(R.id.textview5);
 		linear18 = findViewById(R.id.linear18);
 		textview6 = findViewById(R.id.textview6);
 		linear19 = findViewById(R.id.linear19);
-		imageview24 = findViewById(R.id.imageview24);
-		imageview20 = findViewById(R.id.imageview20);
-		imageview21 = findViewById(R.id.imageview21);
-		imageview22 = findViewById(R.id.imageview22);
-		imageview23 = findViewById(R.id.imageview23);
+		csea = findViewById(R.id.csea);
+		cseb = findViewById(R.id.cseb);
+		csec = findViewById(R.id.csec);
+		csed = findViewById(R.id.csed);
+		csee = findViewById(R.id.csee);
 		linear33 = findViewById(R.id.linear33);
 		hscroll7 = findViewById(R.id.hscroll7);
+		linear52 = findViewById(R.id.linear52);
 		textview13 = findViewById(R.id.textview13);
 		linear34 = findViewById(R.id.linear34);
 		textview14 = findViewById(R.id.textview14);
 		linear35 = findViewById(R.id.linear35);
-		imageview40 = findViewById(R.id.imageview40);
-		imageview41 = findViewById(R.id.imageview41);
-		imageview42 = findViewById(R.id.imageview42);
-		imageview43 = findViewById(R.id.imageview43);
-		imageview44 = findViewById(R.id.imageview44);
+		eeea = findViewById(R.id.eeea);
+		eeeb = findViewById(R.id.eeeb);
+		eeec = findViewById(R.id.eeec);
+		eeed = findViewById(R.id.eeed);
 		linear37 = findViewById(R.id.linear37);
 		hscroll8 = findViewById(R.id.hscroll8);
 		textview15 = findViewById(R.id.textview15);
 		linear38 = findViewById(R.id.linear38);
 		textview16 = findViewById(R.id.textview16);
 		linear39 = findViewById(R.id.linear39);
-		imageview45 = findViewById(R.id.imageview45);
-		imageview46 = findViewById(R.id.imageview46);
-		imageview47 = findViewById(R.id.imageview47);
-		imageview48 = findViewById(R.id.imageview48);
-		imageview49 = findViewById(R.id.imageview49);
+		mpea = findViewById(R.id.mpea);
+		mpeb = findViewById(R.id.mpeb);
+		mpec = findViewById(R.id.mpec);
+		mped = findViewById(R.id.mped);
+		mpee = findViewById(R.id.mpee);
 		linear41 = findViewById(R.id.linear41);
 		hscroll9 = findViewById(R.id.hscroll9);
 		textview17 = findViewById(R.id.textview17);
 		linear42 = findViewById(R.id.linear42);
 		textview18 = findViewById(R.id.textview18);
 		linear43 = findViewById(R.id.linear43);
-		imageview50 = findViewById(R.id.imageview50);
-		imageview51 = findViewById(R.id.imageview51);
-		imageview52 = findViewById(R.id.imageview52);
-		imageview53 = findViewById(R.id.imageview53);
-		imageview54 = findViewById(R.id.imageview54);
+		ceea = findViewById(R.id.ceea);
+		ceeb = findViewById(R.id.ceeb);
+		ceec = findViewById(R.id.ceec);
+		ceed = findViewById(R.id.ceed);
 		linear45 = findViewById(R.id.linear45);
 		hscroll10 = findViewById(R.id.hscroll10);
 		textview19 = findViewById(R.id.textview19);
 		linear46 = findViewById(R.id.linear46);
 		textview20 = findViewById(R.id.textview20);
 		linear47 = findViewById(R.id.linear47);
-		imageview55 = findViewById(R.id.imageview55);
-		imageview56 = findViewById(R.id.imageview56);
-		imageview57 = findViewById(R.id.imageview57);
-		imageview58 = findViewById(R.id.imageview58);
-		imageview59 = findViewById(R.id.imageview59);
+		btma = findViewById(R.id.btma);
+		btmb = findViewById(R.id.btmb);
+		btmc = findViewById(R.id.btmc);
+		btmd = findViewById(R.id.btmd);
+		btme = findViewById(R.id.btme);
 		linear49 = findViewById(R.id.linear49);
 		hscroll11 = findViewById(R.id.hscroll11);
 		textview21 = findViewById(R.id.textview21);
 		linear50 = findViewById(R.id.linear50);
 		textview22 = findViewById(R.id.textview22);
 		linear51 = findViewById(R.id.linear51);
-		imageview60 = findViewById(R.id.imageview60);
-		imageview61 = findViewById(R.id.imageview61);
-		imageview62 = findViewById(R.id.imageview62);
-		imageview63 = findViewById(R.id.imageview63);
-		imageview64 = findViewById(R.id.imageview64);
+		tvea = findViewById(R.id.tvea);
+		tveb = findViewById(R.id.tveb);
+		tvec = findViewById(R.id.tvec);
+		tved = findViewById(R.id.tved);
+		tvee = findViewById(R.id.tvee);
+		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
 		
 		imageview1.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -234,6 +256,391 @@ public class ViewMainActivity extends AppCompatActivity {
 			}
 		});
 		
+		imageview3.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", edittext1.getText().toString());
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		textview6.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", textview5.getText().toString());
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		csea.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "A Handbook of Agile Software Craftsmanship");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		cseb.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Operating System Concepts");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		csec.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Computer Networking");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		csed.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Engineering Drawing & Design");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		csee.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Introduction to Algorithms");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		textview14.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", textview13.getText().toString());
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		eeea.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Electrical Engineering: Principles & Application");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		eeeb.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Sedra/Smith Microelectronic Circuits");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		eeec.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Fundamentals of Electric Circuits");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		eeed.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Power System Analysis and Design");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		textview16.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", textview15.getText().toString());
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		mpea.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "University Physics with Modern Physics");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		mpeb.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Advanced Engineering Mathematics");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		mpec.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "The C Programming Language");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		mped.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Chemistry: The Central Science");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		mpee.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Control Systems Engineering");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		textview18.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", textview17.getText().toString());
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		ceea.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Design of Reinforced Concrete");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		ceeb.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Environmental Engineering");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		ceec.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Geotechnical Engineering");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		ceed.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Structural Analysis");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		textview20.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", textview19.getText().toString());
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		btma.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Information Technology for Management");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		btmb.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "The Lean Startup");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		btmc.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Business Model Generation");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		btmd.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Essentials of Business Processes and Information Systems");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		btme.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Technology Strategy for Managers and Entrepreneurs");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		textview22.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", textview21.getText().toString());
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		tvea.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Curriculum Development in Vocational");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		tveb.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Teaching in Further Education");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		tvec.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Teaching and Training Vocational Learners");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		tved.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "Competency Based Education and Training");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
+		tvee.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				profile.setClass(getApplicationContext(), ViewSearchActivity.class);
+				profile.putExtra("key", "The Skillful Teacher");
+				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(profile);
+				finish();
+			}
+		});
+		
 		_fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
@@ -246,6 +653,8 @@ public class ViewMainActivity extends AppCompatActivity {
 	}
 	
 	private void initializeLogic() {
+		edittext1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFFFF, 0xFF9FA8DA));
+		edittext1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview6.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview13.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
@@ -261,6 +670,102 @@ public class ViewMainActivity extends AppCompatActivity {
 		if (Build.VERSION.SDK_INT >= 21) { Window
 			w = this.getWindow();
 			w.setNavigationBarColor(Color.parseColor("#3F51B5")); }
+		
+		Animation animation;
+		        animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+		        animation.setDuration(1000);
+		        cse.startAnimation(animation);
+		        animation = null;
+		
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+		        animation.setDuration(1000);
+		        cee.startAnimation(animation);
+		        animation = null;
+		
+		
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+		        animation.setDuration(1000);
+		       mpe.startAnimation(animation);
+		        animation = null;
+		
+		
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+		        animation.setDuration(1000);
+		        tve.startAnimation(animation);
+		        animation = null;
+		
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+		        animation.setDuration(1000);
+		        btm.startAnimation(animation);
+		        animation = null;
+		
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
+		        animation.setDuration(1000);
+		       eee.startAnimation(animation);
+		        animation = null;
+		cse.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFE3F2FD, 0xFF1976D2));
+		eee.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFDE7, 0xFFFBC02D));
+		mpe.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFD7CCC8, 0xFF5D4037));
+		cee.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFF0F4C3, 0xFFAFB42B));
+		tve.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFE8F5E9, 0xFF388E3C));
+		btm.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFEDE7F6, 0xFF512DA8));
+		cse_list = new Gson().fromJson("[\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.14%20AM.jpeg?alt=media&token=fa443e98-22c3-48fe-85c1-0512c447acf1\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.13%20AM.jpeg?alt=media&token=3341f3f9-32fd-43aa-9176-cf6143373427\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.13%20AM%20(1).jpeg?alt=media&token=3e897635-fe40-4341-807b-650295d4dde8\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.12%20AM.jpeg?alt=media&token=b0218286-6fb2-4d69-9cb6-d0f875bb07b1\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.12%20AM%20(1).jpeg?alt=media&token=0d0b5e7a-2a67-4107-a872-07fa50142e99\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		eee_list = new Gson().fromJson("[\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.27.31%20PM.jpeg?alt=media&token=e7bae42f-2042-4895-a302-5d50f94d42c5\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.28.07%20PM.jpeg?alt=media&token=093c8269-8caa-4490-8a22-0b865630f035\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.28.46%20PM.jpeg?alt=media&token=0e938fbe-783a-4cd9-a2e3-95a708dd5b70\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.29.34%20PM.jpeg?alt=media&token=7addaa76-eb04-4735-b0ad-9bb55f89d598\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.14%20AM%20(1).jpeg?alt=media&token=45da8ae6-5608-4b0c-bd9d-da500719001e\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		cee_list = new Gson().fromJson(" [\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.15%20AM.jpeg?alt=media&token=0f0caa21-ca13-43ab-94b5-52712d7012fb\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.16%20AM%20(1).jpeg?alt=media&token=dcddee96-bff3-442c-a465-5ea15e3d6e80\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.17%20AM.jpeg?alt=media&token=38a65378-a91b-4442-9301-bbb052a66fb4\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.16%20AM.jpeg?alt=media&token=84605282-7778-49ca-8b98-2b826452bb84\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.20.48%20PM.jpeg?alt=media&token=5fc96e81-d324-41b1-911a-f11cbb96198c\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		tve_list = new Gson().fromJson("[\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.17.29%20PM.jpeg?alt=media&token=6630d6ed-29aa-4e67-acfb-f6b142ff4469\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.18.24%20PM.jpeg?alt=media&token=11cc2728-bcbe-451a-beee-b34f4a992636\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.19.04%20PM.jpeg?alt=media&token=a9b40f02-3bfa-421b-b2be-6e06e195ab20\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.19.48%20PM.jpeg?alt=media&token=52a3ec7e-fd50-488f-8cdc-4d83e59c92d5\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.20.48%20PM.jpeg?alt=media&token=5fc96e81-d324-41b1-911a-f11cbb96198c\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		mpe_list = new Gson().fromJson("[\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM%20(1).jpeg?alt=media&token=46d5eda8-84ec-4703-b1c0-30f76e07f465\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM.jpeg?alt=media&token=87cdd866-f7d0-4821-a4bb-9ab48eda3995\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.11%20AM%20(1).jpeg?alt=media&token=25ac852e-6b50-4599-90a0-2914155ab0af\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.11%20AM.jpeg?alt=media&token=a82d1f26-5e12-4f03-802e-fe3d8ebf46db\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.30.43%20PM.jpeg?alt=media&token=aa794bd2-db8b-4828-9245-cb7d1813c3fb\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		btm_list = new Gson().fromJson(" [\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.22.27%20PM.jpeg?alt=media&token=93550f92-8115-49fb-b2ed-6e62c665a3ee\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.23.29%20PM.jpeg?alt=media&token=bb76b245-906c-4a58-b4fc-343ac9f86ace\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.24.24%20PM.jpeg?alt=media&token=f08ce3ef-3274-4717-8fef-c2af27503852\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.25.01%20PM.jpeg?alt=media&token=46aa3a3b-6bda-4019-89b0-a231440652a5\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.25.53%20PM.jpeg?alt=media&token=67f0f119-1829-4218-afc1-d0aff2d91a21\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		Glide.with(getApplicationContext()).load(Uri.parse(cse_list.get((int)0).get("link").toString())).into(csea);
+		// CSE
+		Glide.with(getApplicationContext()).load(Uri.parse(cse_list.get((int)1).get("link").toString())).into(cseb);
+		Glide.with(getApplicationContext()).load(Uri.parse(cse_list.get((int)2).get("link").toString())).into(csec);
+		Glide.with(getApplicationContext()).load(Uri.parse(cse_list.get((int)3).get("link").toString())).into(csed);
+		Glide.with(getApplicationContext()).load(Uri.parse(cse_list.get((int)4).get("link").toString())).into(csee);
+		
+		// EEE
+		Glide.with(getApplicationContext()).load(Uri.parse(eee_list.get((int)0).get("link").toString())).into(eeea);
+		Glide.with(getApplicationContext()).load(Uri.parse(eee_list.get((int)1).get("link").toString())).into(eeeb);
+		Glide.with(getApplicationContext()).load(Uri.parse(eee_list.get((int)2).get("link").toString())).into(eeec);
+		Glide.with(getApplicationContext()).load(Uri.parse(eee_list.get((int)3).get("link").toString())).into(eeed);
+		
+		
+		// BTM
+		Glide.with(getApplicationContext()).load(Uri.parse(btm_list.get((int)0).get("link").toString())).into(btma);
+		Glide.with(getApplicationContext()).load(Uri.parse(btm_list.get((int)1).get("link").toString())).into(btmb);
+		Glide.with(getApplicationContext()).load(Uri.parse(btm_list.get((int)2).get("link").toString())).into(btmc);
+		Glide.with(getApplicationContext()).load(Uri.parse(btm_list.get((int)3).get("link").toString())).into(btmd);
+		Glide.with(getApplicationContext()).load(Uri.parse(btm_list.get((int)4).get("link").toString())).into(btme);
+		
+		// MPE
+		Glide.with(getApplicationContext()).load(Uri.parse(mpe_list.get((int)0).get("link").toString())).into(mpea);
+		Glide.with(getApplicationContext()).load(Uri.parse(mpe_list.get((int)1).get("link").toString())).into(mpeb);
+		Glide.with(getApplicationContext()).load(Uri.parse(mpe_list.get((int)2).get("link").toString())).into(mpec);
+		Glide.with(getApplicationContext()).load(Uri.parse(mpe_list.get((int)3).get("link").toString())).into(mped);
+		Glide.with(getApplicationContext()).load(Uri.parse(mpe_list.get((int)4).get("link").toString())).into(mpee);
+		
+		// TVE
+		Glide.with(getApplicationContext()).load(Uri.parse(tve_list.get((int)0).get("link").toString())).into(tvea);
+		Glide.with(getApplicationContext()).load(Uri.parse(tve_list.get((int)1).get("link").toString())).into(tveb);
+		Glide.with(getApplicationContext()).load(Uri.parse(tve_list.get((int)2).get("link").toString())).into(tvec);
+		Glide.with(getApplicationContext()).load(Uri.parse(tve_list.get((int)3).get("link").toString())).into(tved);
+		Glide.with(getApplicationContext()).load(Uri.parse(tve_list.get((int)4).get("link").toString())).into(tvee);
+		
+		// CEE
+		Glide.with(getApplicationContext()).load(Uri.parse(cee_list.get((int)0).get("link").toString())).into(ceea);
+		Glide.with(getApplicationContext()).load(Uri.parse(cee_list.get((int)1).get("link").toString())).into(ceeb);
+		Glide.with(getApplicationContext()).load(Uri.parse(cee_list.get((int)2).get("link").toString())).into(ceec);
+		Glide.with(getApplicationContext()).load(Uri.parse(cee_list.get((int)3).get("link").toString())).into(ceed);
+		
+		cse.setElevation((float)25);
+		eee.setElevation((float)25);
+		cee.setElevation((float)25);
+		btm.setElevation((float)25);
+		btm.setElevation((float)25);
+		tve.setElevation((float)25);
+		linear8.setElevation((float)25);
+		imageview1.setElevation((float)25);
+		imageview2.setElevation((float)25);
+		linear6.setElevation((float)50);
 	}
 	
 	@Override

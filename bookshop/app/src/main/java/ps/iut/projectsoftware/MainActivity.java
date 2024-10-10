@@ -1,41 +1,42 @@
 package ps.iut.projectsoftware;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.*;
+import android.animation.*;
 import android.app.*;
-import android.os.*;
-import android.view.*;
-import android.view.View.*;
-import android.widget.*;
+import android.app.Activity;
 import android.content.*;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.*;
 import android.graphics.*;
 import android.graphics.drawable.*;
 import android.media.*;
 import android.net.*;
+import android.net.Uri;
+import android.os.*;
 import android.text.*;
 import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
+import android.view.*;
+import android.view.View.*;
 import android.view.animation.*;
-import java.io.*;
-import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
-import android.widget.LinearLayout;
+import android.webkit.*;
+import android.widget.*;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.content.Intent;
-import android.net.Uri;
-import java.util.Timer;
-import java.util.TimerTask;
+import androidx.annotation.*;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.DialogFragment;
+import com.google.firebase.FirebaseApp;
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.regex.*;
+import org.json.*;
 
 public class MainActivity extends AppCompatActivity {
 	
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.main);
 		initialize(_savedInstanceState);
-		com.google.firebase.FirebaseApp.initializeApp(this);
+		FirebaseApp.initializeApp(this);
 		initializeLogic();
 	}
 	
@@ -79,17 +80,25 @@ public class MainActivity extends AppCompatActivity {
 						runOnUiThread(new Runnable() {
 							@Override
 							public void run() {
-								if (a.getString("login", "").equals("")) {
-									as.setClass(getApplicationContext(), LoginActivity.class);
+								if (a.getString("login-ad", "").equals("a")) {
+									as.setClass(getApplicationContext(), AdminActivity.class);
 									as.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 									startActivity(as);
 									finish();
 								}
 								else {
-									as.setClass(getApplicationContext(), ViewMainActivity.class);
-									as.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-									startActivity(as);
-									finish();
+									if (a.getString("login", "").equals("")) {
+										as.setClass(getApplicationContext(), LoginActivity.class);
+										as.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+										startActivity(as);
+										finish();
+									}
+									else {
+										as.setClass(getApplicationContext(), ViewMainActivity.class);
+										as.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+										startActivity(as);
+										finish();
+									}
 								}
 							}
 						});
@@ -110,15 +119,15 @@ public class MainActivity extends AppCompatActivity {
 	
 	private void initializeLogic() {
 		imageview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)50, 0xFFE8EAF6));
-		sb.startRequestNetwork(RequestNetworkController.GET, "https://www.google.com", "google", _sb_request_listener);
-		imageview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)58, 0xFFE8EAF6));
 		if (Build.VERSION.SDK_INT >= 21) { Window
 			w = this.getWindow();
-			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }Animation animation;
-		        animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.slide_in_left);
-		        animation.setDuration(500);
-		        imageview1.startAnimation(animation);
-		        animation = null;
+			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }
+		
+		Animation animation;
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+		animation.setDuration(1500); // Set the duration of the animation to 500 milliseconds
+		imageview1.startAnimation(animation); // Start the animation on the imageview
+		sb.startRequestNetwork(RequestNetworkController.GET, "https://www.google.com", "google", _sb_request_listener);
 	}
 	
 	@Override

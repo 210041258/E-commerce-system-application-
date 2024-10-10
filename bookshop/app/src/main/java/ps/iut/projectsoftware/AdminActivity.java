@@ -1,47 +1,50 @@
 package ps.iut.projectsoftware;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.*;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import android.animation.*;
 import android.app.*;
-import android.os.*;
-import android.view.*;
-import android.view.View.*;
-import android.widget.*;
+import android.app.Activity;
 import android.content.*;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.*;
 import android.graphics.*;
+import android.graphics.Typeface;
 import android.graphics.drawable.*;
 import android.media.*;
 import android.net.*;
+import android.net.Uri;
+import android.os.*;
 import android.text.*;
 import android.text.style.*;
 import android.util.*;
-import android.webkit.*;
-import android.animation.*;
+import android.view.*;
+import android.view.View;
+import android.view.View.*;
 import android.view.animation.*;
-import java.io.*;
-import java.util.*;
-import java.util.regex.*;
-import java.text.*;
-import org.json.*;
+import android.webkit.*;
+import android.widget.*;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.ImageView;
-import android.content.Intent;
-import android.net.Uri;
-import android.app.Activity;
-import android.content.SharedPreferences;
-import android.view.View;
+import androidx.annotation.*;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.DialogFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.FirebaseApp;
+import java.io.*;
+import java.text.*;
+import java.util.*;
+import java.util.regex.*;
+import org.json.*;
 
 public class AdminActivity extends AppCompatActivity {
 	
 	private FloatingActionButton _fab;
 	
 	private LinearLayout linear1;
+	private LinearLayout corner;
 	private TextView textview7;
 	private LinearLayout linear2;
 	private LinearLayout linear3;
@@ -78,7 +81,7 @@ public class AdminActivity extends AppCompatActivity {
 		super.onCreate(_savedInstanceState);
 		setContentView(R.layout.admin);
 		initialize(_savedInstanceState);
-		com.google.firebase.FirebaseApp.initializeApp(this);
+		FirebaseApp.initializeApp(this);
 		initializeLogic();
 	}
 	
@@ -86,6 +89,7 @@ public class AdminActivity extends AppCompatActivity {
 		_fab = findViewById(R.id._fab);
 		
 		linear1 = findViewById(R.id.linear1);
+		corner = findViewById(R.id.corner);
 		textview7 = findViewById(R.id.textview7);
 		linear2 = findViewById(R.id.linear2);
 		linear3 = findViewById(R.id.linear3);
@@ -115,10 +119,64 @@ public class AdminActivity extends AppCompatActivity {
 		textview5 = findViewById(R.id.textview5);
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
 		
+		textview1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				ocm.setClass(getApplicationContext(), AdminmainListviewActivity.class);
+				ocm.putExtra("key", "book");
+				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(ocm);
+				finish();
+			}
+		});
+		
+		textview2.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				ocm.setClass(getApplicationContext(), AdminmainListviewActivity.class);
+				ocm.putExtra("key", "coupon");
+				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(ocm);
+				finish();
+			}
+		});
+		
+		textview3.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				ocm.setClass(getApplicationContext(), AdminmainListviewActivity.class);
+				ocm.putExtra("key", "manager");
+				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(ocm);
+				finish();
+			}
+		});
+		
+		textview4.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				ocm.setClass(getApplicationContext(), AdminAddNotificationActivity.class);
+				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(ocm);
+				finish();
+			}
+		});
+		
+		textview5.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				ocm.setClass(getApplicationContext(), EditbalanceActivity.class);
+				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(ocm);
+				finish();
+			}
+		});
+		
 		_fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				a.edit().putString("login", "").commit();
+				a.edit().putString("login-ad", "").commit();
+				a.edit().putString("email", "").commit();
 				ocm.setClass(getApplicationContext(), LoginActivity.class);
 				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(ocm);
@@ -128,8 +186,23 @@ public class AdminActivity extends AppCompatActivity {
 	}
 	
 	private void initializeLogic() {
+		corner.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)50, (int)10, 0xFF9FA8DA, 0xFF3F51B5));
+		if (Build.VERSION.SDK_INT >= 21) { Window
+			w = this.getWindow();
+			w.setNavigationBarColor(Color.parseColor("#3F51B5")); }
+		textview7.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+		textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+		textview3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+		textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+		textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 	}
 	
+	@Override
+	public void onBackPressed() {
+		SketchwareUtil.showMessage(getApplicationContext(), "See You Nearly 👍🏽");
+		finish();
+	}
 	
 	@Deprecated
 	public void showMessage(String _s) {
