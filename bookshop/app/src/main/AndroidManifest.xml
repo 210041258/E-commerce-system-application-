@@ -157,6 +157,18 @@
 			android:supportsPictureInPicture="true"
 			android:windowSoftInputMode="stateHidden" />
 		<activity
+			android:name=".HistoryOperationActivity"
+			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+			android:hardwareAccelerated="true"
+			android:supportsPictureInPicture="true"
+			android:windowSoftInputMode="stateHidden" />
+		<activity
+			android:name=".ViewPhotoActivity"
+			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+			android:hardwareAccelerated="true"
+			android:supportsPictureInPicture="true"
+			android:windowSoftInputMode="stateHidden" />
+		<activity
 			android:name=".DebugActivity"
 			android:screenOrientation="portrait" />
 		<meta-data

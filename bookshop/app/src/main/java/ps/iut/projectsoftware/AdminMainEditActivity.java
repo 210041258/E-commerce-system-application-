@@ -536,8 +536,9 @@ public class AdminMainEditActivity extends AppCompatActivity {
 		name.setSingleLine(true);
 		copies.setSingleLine(true);
 		price.setSingleLine(true);
-		url.setSingleLine(true);
 		id.setEnabled(false);
+		url.setSingleLine(true);
+		description.setSingleLine(true);
 		if ("TVE".equals(getIntent().getStringExtra("department"))) {
 			spinner2.setSelection((int)(3));
 		}

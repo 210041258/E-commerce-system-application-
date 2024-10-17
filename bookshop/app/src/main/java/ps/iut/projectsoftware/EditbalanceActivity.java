@@ -2,8 +2,10 @@ package ps.iut.projectsoftware;
 
 import android.animation.*;
 import android.app.*;
+import android.app.Activity;
 import android.content.*;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.*;
 import android.graphics.*;
 import android.graphics.Typeface;
@@ -70,6 +72,7 @@ public class EditbalanceActivity extends AppCompatActivity {
 	private Intent content = new Intent();
 	private DatabaseReference information = _firebase.getReference("information");
 	private ChildEventListener _information_child_listener;
+	private SharedPreferences a;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -92,46 +95,62 @@ public class EditbalanceActivity extends AppCompatActivity {
 		edittext2 = findViewById(R.id.edittext2);
 		linear6 = findViewById(R.id.linear6);
 		materialbutton1 = findViewById(R.id.materialbutton1);
+		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
 		
 		materialbutton1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
+				edittext1.setHint(a.getString("email", ""));
 				if (!edittext1.getText().toString().isEmpty() && !edittext2.getText().toString().isEmpty()) {
-					    final String email = edittext1.getText().toString();  // Make email final
-					    final String username = email.split("@")[0];  // Username can also be final
+					    final String email = edittext1.getText().toString();  // Get email from the EditText
+					    final String username = email.split("@")[0].replace(".", "_");  // Extract username and replace dots with underscores
 					    
-					    final DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("information/" + username);  // Make dataRef final
+					    final DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("information/" + username);  // Reference for user data
 					    
+					    // Listener to check and update user data
 					    dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
 						        @Override
 						        public void onDataChange(DataSnapshot snapshot) {
 							            if (snapshot.exists()) {
+								                // Retrieve current balance
 								                String balance = snapshot.child("balance").getValue(String.class);
 								                
 								                if (balance != null) {
+									                    // Update the balance by adding the amount from edittext2
 									                    double newBalance = Double.parseDouble(balance) + Double.parseDouble(edittext2.getText().toString());
 									                    
+									                    // Update the user's balance in the 'information' node
 									                    Map<String, Object> updateData = new HashMap<>();
 									                    updateData.put("email", email);
 									                    updateData.put("balance", String.valueOf(newBalance));
 									                    
-									                    dataRef.setValue(updateData);  // You can now reference dataRef
-									                    SketchwareUtil.showMessage(getApplicationContext(), "Balance updated: " + newBalance);
-									                } else {
-									                    SketchwareUtil.showMessage(getApplicationContext(), "Balance not found.");
-									                }
-								            } else {
-								                SketchwareUtil.showMessage(getApplicationContext(), "No data found. Please check with Customer Center.");
+									                    dataRef.setValue(updateData);  // Update Firebase with new balance
+									                    
+									                    // Construct the message for the 'history/username' node
+									                    String historyMessage = "Email: " + email + ", Added Amount: " + edittext2.getText().toString() + ", New Balance: " + newBalance;
+									                    
+									                    // Prepare data for the 'history/username' node
+									                    Map<String, Object> historyData = new HashMap<>();
+									                    historyData.put("text", historyMessage);
+									                    historyData.put("color", "green");  // Set the color to green for the balance update
+									                    historyData.put("timestamp", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));  // Add timestamp in the desired format
+									                    
+									                    // Save the history message under 'history/username'
+									                    DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("history/" + username);
+									                    historyRef.push().setValue(historyData);  // Push the history message
+									       SketchwareUtil.showMessage(getApplicationContext(), " Balance Added !");  
+									
+									       }
 								            }
 							        }
 						
 						        @Override
-						        public void onCancelled(DatabaseError error) {
-							            SketchwareUtil.showMessage(getApplicationContext(), "Error: " + error.getMessage());
+						        public void onCancelled(DatabaseError databaseError) {
+							            Log.e("FirebaseError", "Database error: " + databaseError.getMessage());
 							        }
 						    });
 				} else {
-					    SketchwareUtil.showMessage(getApplicationContext(), "Please fill in both fields.");
+					    Log.e("InputError", "Email or amount is empty");  // Handle empty inputs
 				}
 			}
 		});
@@ -191,9 +210,21 @@ public class EditbalanceActivity extends AppCompatActivity {
 		materialbutton1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		materialbutton1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)50, (int)10, 0xFF9FA8DA, 0xFF3F51B5));
 		linear3.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)50, (int)10, 0xFF9FA8DA, 0xFF3F51B5));
+		edittext2.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)25, (int)10, 0xFF9FA8DA, 0xFFE8EAF6));
+		edittext1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)25, (int)10, 0xFF9FA8DA, 0xFFE8EAF6));
 		if (Build.VERSION.SDK_INT >= 21) { Window
 			w = this.getWindow();
 			w.setNavigationBarColor(Color.parseColor("#3F51B5")); }
+		
+		Animation animation;
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+		animation.setDuration(700); // Set the duration of the animation to 500 milliseconds
+		edittext1.startAnimation(animation); // Start the animation on the imageview
+		
+		
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+		animation.setDuration(700); // Set the duration of the animation to 500 milliseconds
+		edittext2.startAnimation(animation); // Start the animation on the imageview
 		bo = false;
 	}
 	

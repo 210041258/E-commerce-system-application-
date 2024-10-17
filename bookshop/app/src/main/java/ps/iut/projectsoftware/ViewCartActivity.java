@@ -46,6 +46,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.text.*;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +61,10 @@ public class ViewCartActivity extends AppCompatActivity {
 	
 	private String str = "";
 	private boolean a = false;
+	private HashMap<String, Object> mapp = new HashMap<>();
+	private double totalprivate = 0;
+	private double feesondelivary = 0;
+	private boolean feesondelivarybool = false;
 	
 	private ArrayList<HashMap<String, Object>> map = new ArrayList<>();
 	
@@ -78,17 +83,20 @@ public class ViewCartActivity extends AppCompatActivity {
 	private CheckBox checkbox3;
 	private CheckBox checkbox4;
 	private TextView textview1;
-	private TextView textview2;
+	private TextView feesondelivey;
+	private TextView textview12;
 	private TextView textview5;
 	private CheckBox checkbox1;
 	private CheckBox checkbox2;
 	private TextView textview3;
-	private TextView textview4;
+	private TextView feesonpay;
+	private TextView textview13;
 	private TextView textview9;
 	private EditText edittext1;
 	private TextView textview10;
 	private TextView textview7;
-	private TextView textview8;
+	private TextView total;
+	private TextView textview14;
 	private MaterialButton materialbutton1;
 	private LinearLayout linear12;
 	private ImageView imageview1;
@@ -98,6 +106,7 @@ public class ViewCartActivity extends AppCompatActivity {
 	private Intent eb = new Intent();
 	private TimerTask v;
 	private SharedPreferences cart;
+	private SharedPreferences information;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -124,23 +133,27 @@ public class ViewCartActivity extends AppCompatActivity {
 		checkbox3 = findViewById(R.id.checkbox3);
 		checkbox4 = findViewById(R.id.checkbox4);
 		textview1 = findViewById(R.id.textview1);
-		textview2 = findViewById(R.id.textview2);
+		feesondelivey = findViewById(R.id.feesondelivey);
+		textview12 = findViewById(R.id.textview12);
 		textview5 = findViewById(R.id.textview5);
 		checkbox1 = findViewById(R.id.checkbox1);
 		checkbox2 = findViewById(R.id.checkbox2);
 		textview3 = findViewById(R.id.textview3);
-		textview4 = findViewById(R.id.textview4);
+		feesonpay = findViewById(R.id.feesonpay);
+		textview13 = findViewById(R.id.textview13);
 		textview9 = findViewById(R.id.textview9);
 		edittext1 = findViewById(R.id.edittext1);
 		textview10 = findViewById(R.id.textview10);
 		textview7 = findViewById(R.id.textview7);
-		textview8 = findViewById(R.id.textview8);
+		total = findViewById(R.id.total);
+		textview14 = findViewById(R.id.textview14);
 		materialbutton1 = findViewById(R.id.materialbutton1);
 		linear12 = findViewById(R.id.linear12);
 		imageview1 = findViewById(R.id.imageview1);
 		linear13 = findViewById(R.id.linear13);
 		textview11 = findViewById(R.id.textview11);
 		cart = getSharedPreferences("cart", Activity.MODE_PRIVATE);
+		information = getSharedPreferences("a", Activity.MODE_PRIVATE);
 		
 		checkbox3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
@@ -149,6 +162,11 @@ public class ViewCartActivity extends AppCompatActivity {
 				if (_isChecked) {
 					checkbox4.setChecked(!_isChecked);
 				}
+				if (!feesondelivarybool) {
+					feesondelivary = 1;
+					feesondelivarybool = true;
+				}
+				feesondelivey.setText(String.valueOf(feesondelivary));
 			}
 		});
 		
@@ -159,6 +177,11 @@ public class ViewCartActivity extends AppCompatActivity {
 				if (_isChecked) {
 					checkbox3.setChecked(!_isChecked);
 				}
+				if (!feesondelivarybool) {
+					feesondelivary = 1;
+					feesondelivarybool = true;
+				}
+				feesondelivey.setText(String.valueOf(feesondelivary));
 			}
 		});
 		
@@ -179,6 +202,11 @@ public class ViewCartActivity extends AppCompatActivity {
 				if (_isChecked) {
 					checkbox1.setChecked(!_isChecked);
 				}
+				if (!feesondelivarybool) {
+					feesondelivary = 5;
+					feesondelivarybool = true;
+				}
+				feesondelivey.setText(String.valueOf(feesondelivary));
 			}
 		});
 		
@@ -230,14 +258,14 @@ public class ViewCartActivity extends AppCompatActivity {
 		checkbox3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		checkbox4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
-		textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
+		feesondelivey.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		checkbox1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		checkbox2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		textview3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
-		textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
+		feesonpay.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		textview7.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
-		textview8.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
+		total.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		materialbutton1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		edittext1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		textview9.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
@@ -257,10 +285,37 @@ public class ViewCartActivity extends AppCompatActivity {
 			linear11.setVisibility(View.VISIBLE);
 			linear1.setVisibility(View.GONE);
 		}
+		if (!"".equals(getIntent().getStringExtra("id")) && (!"".equals(getIntent().getStringExtra("name")) && (!"".equals(getIntent().getStringExtra("price")) && (!getIntent().getStringExtra("copy").equals("") && !"".equals(getIntent().getStringExtra("url")))))) {
+			mapp = new HashMap<>();
+			mapp.put("id", getIntent().getStringExtra("id"));
+			mapp.put("name", getIntent().getStringExtra("name"));
+			mapp.put("price", getIntent().getStringExtra("price"));
+			mapp.put("copy", getIntent().getStringExtra("copy"));
+			mapp.put("url", getIntent().getStringExtra("url"));
+			map.add(mapp);
+			mapp.clear();
+			cart.edit().putString("cart", new Gson().toJson(map)).commit();
+			map = new Gson().fromJson(cart.getString("cart", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+			linear11.setVisibility(View.GONE);
+			linear1.setVisibility(View.VISIBLE);
+			listview1.setAdapter(new Listview1Adapter(map));
+			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
+		}
+		checkbox3.setChecked(true);
+		if ((Double.parseDouble(information.getString("balance", "")) > Double.parseDouble(total.getText().toString())) && (Double.parseDouble(information.getString("balance", "")) == Double.parseDouble(total.getText().toString()))) {
+			checkbox1.setChecked(true);
+		}
+		else {
+			checkbox1.setEnabled(false);
+			checkbox2.setChecked(true);
+		}
 	}
 	
 	@Override
 	public void onBackPressed() {
+		if (linear1.getVisibility() == View.VISIBLE) {
+			cart.edit().putString("cart", new Gson().toJson(map)).commit();
+		}
 		eb.setClass(getApplicationContext(), ViewMainActivity.class);
 		eb.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(eb);
@@ -298,11 +353,13 @@ public class ViewCartActivity extends AppCompatActivity {
 			}
 			
 			final LinearLayout linear1 = _view.findViewById(R.id.linear1);
-			final CheckBox checkbox1 = _view.findViewById(R.id.checkbox1);
+			final CheckBox mins = _view.findViewById(R.id.mins);
 			final LinearLayout linear2 = _view.findViewById(R.id.linear2);
 			final LinearLayout linear3 = _view.findViewById(R.id.linear3);
 			final ImageView imageview2 = _view.findViewById(R.id.imageview2);
 			final ImageView imageview1 = _view.findViewById(R.id.imageview1);
+			final LinearLayout linear4 = _view.findViewById(R.id.linear4);
+			final TextView copies = _view.findViewById(R.id.copies);
 			final TextView textview2 = _view.findViewById(R.id.textview2);
 			final TextView boid = _view.findViewById(R.id.boid);
 			final TextView textview4 = _view.findViewById(R.id.textview4);
@@ -312,8 +369,18 @@ public class ViewCartActivity extends AppCompatActivity {
 			
 			boid.setText(map.get((int)_position).get("id").toString());
 			bookname.setText(map.get((int)_position).get("name").toString());
-			price.setText(map.get((int)_position).get("price").toString());
 			Glide.with(getApplicationContext()).load(Uri.parse(map.get((int)_position).get("url").toString())).into(imageview1);
+			price.setText(map.get((int)_position).get("price").toString());
+			copies.setText(map.get((int)_position).get("copy").toString());
+			mins.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton cb, boolean isChecked) {
+					totalprivate = totalprivate + Double.parseDouble(price.getText().toString());
+				}});
+			Animation animation;
+			animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+			animation.setDuration(1500); // Set the duration of the animation to 500 milliseconds
+			linear1.startAnimation(animation); // Start the animation on the imageview
 			
 			return _view;
 		}

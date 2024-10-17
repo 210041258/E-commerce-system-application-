@@ -102,6 +102,15 @@ public class ViewSearchActivity extends AppCompatActivity {
 		linear11 = findViewById(R.id.linear11);
 		tex = findViewById(R.id.tex);
 		
+		listview1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+			@Override
+			public boolean onItemLongClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
+				final int _position = _param3;
+				
+				return true;
+			}
+		});
+		
 		imageview3.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
@@ -477,6 +486,7 @@ public class ViewSearchActivity extends AppCompatActivity {
 			textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 			textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 			price.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			imageview1.setElevation((float)10);
 			
 			return _view;
 		}

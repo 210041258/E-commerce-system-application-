@@ -131,7 +131,7 @@ public class SginupActivity extends AppCompatActivity {
 			public void onClick(View _view) {
 				if (true && ((edittext2.getText().toString().length() > 5) && (!block && edittext2.getText().toString().equals(edittext3.getText().toString())))) {
 					b.setEnabled(false);
-					g.createUserWithEmailAndPassword(edittext1.getText().toString(), edittext2.getText().toString()).addOnCompleteListener(SginupActivity.this, _g_create_user_listener);
+					g.createUserWithEmailAndPassword(edittext1.getText().toString().trim(), edittext2.getText().toString().trim()).addOnCompleteListener(SginupActivity.this, _g_create_user_listener);
 				}
 				else {
 					SketchwareUtil.showMessage(getApplicationContext(), "Check the Given ✉️ and 🔑 and 📃!!");
@@ -320,6 +320,7 @@ public class SginupActivity extends AppCompatActivity {
 					map = new HashMap<>();
 					map.put("email", edittext1.getText().toString());
 					map.put("balance", "0.00");
+					map.put("url", "");
 					String email = edittext1.getText().toString();
 					
 					String username = email.split("@")[0];  

@@ -67,8 +67,8 @@
 						android:id="@+id/imageview3"
 						android:layout_width="60dp"
 						android:layout_height="60dp"
-						android:padding="10dp"
-						android:src="@drawable/ic_pageview_black"
+						android:padding="12dp"
+						android:src="@drawable/ic_search_black"
 						android:scaleType="fitCenter"
 						android:layout_gravity="right" />
 					<EditText

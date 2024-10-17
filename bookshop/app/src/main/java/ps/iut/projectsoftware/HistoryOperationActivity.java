@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.*;
 import android.graphics.*;
+import android.graphics.Typeface;
 import android.graphics.drawable.*;
 import android.media.*;
 import android.net.*;
@@ -40,8 +41,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.text.*;
 import java.util.*;
@@ -52,31 +51,32 @@ import java.util.TimerTask;
 import java.util.regex.*;
 import org.json.*;
 
-public class NotificationActivity extends AppCompatActivity {
+public class HistoryOperationActivity extends AppCompatActivity {
 	
 	private Timer _timer = new Timer();
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
 	
+	private String email = "";
+	
 	private ArrayList<HashMap<String, Object>> map = new ArrayList<>();
 	
 	private LinearLayout linear1;
-	private LinearLayout linear3;
 	private ListView listview1;
 	private LinearLayout linear4;
 	private ImageView imageview1;
 	private LinearLayout linear5;
 	private TextView textview1;
 	
-	private Intent ocm = new Intent();
-	private DatabaseReference notification = _firebase.getReference("notification");
-	private ChildEventListener _notification_child_listener;
-	private SharedPreferences read;
-	private TimerTask comp;
+	private Intent intent = new Intent();
+	private DatabaseReference list = _firebase.getReference("history");
+	private ChildEventListener _list_child_listener;
+	private SharedPreferences a;
+	private TimerTask bs;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
-		setContentView(R.layout.notification);
+		setContentView(R.layout.history_operation);
 		initialize(_savedInstanceState);
 		FirebaseApp.initializeApp(this);
 		initializeLogic();
@@ -84,42 +84,20 @@ public class NotificationActivity extends AppCompatActivity {
 	
 	private void initialize(Bundle _savedInstanceState) {
 		linear1 = findViewById(R.id.linear1);
-		linear3 = findViewById(R.id.linear3);
 		listview1 = findViewById(R.id.listview1);
 		linear4 = findViewById(R.id.linear4);
 		imageview1 = findViewById(R.id.imageview1);
 		linear5 = findViewById(R.id.linear5);
 		textview1 = findViewById(R.id.textview1);
-		read = getSharedPreferences("notification", Activity.MODE_PRIVATE);
+		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
 		
-		_notification_child_listener = new ChildEventListener() {
+		_list_child_listener = new ChildEventListener() {
 			@Override
 			public void onChildAdded(DataSnapshot _param1, String _param2) {
 				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
 				final String _childKey = _param1.getKey();
 				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				notification.addListenerForSingleValueEvent(new ValueEventListener() {
-					@Override
-					public void onDataChange(DataSnapshot _dataSnapshot) {
-						map = new ArrayList<>();
-						try {
-							GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-							for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-								HashMap<String, Object> _map = _data.getValue(_ind);
-								map.add(_map);
-							}
-						}
-						catch (Exception _e) {
-							_e.printStackTrace();
-						}
-						listview1.setAdapter(new Listview1Adapter(map));
-						((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-					}
-					@Override
-					public void onCancelled(DatabaseError _databaseError) {
-					}
-				});
-				read.edit().putString("notification", new Gson().toJson(map)).commit();
+				
 			}
 			
 			@Override
@@ -127,28 +105,7 @@ public class NotificationActivity extends AppCompatActivity {
 				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
 				final String _childKey = _param1.getKey();
 				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				notification.addListenerForSingleValueEvent(new ValueEventListener() {
-					@Override
-					public void onDataChange(DataSnapshot _dataSnapshot) {
-						map = new ArrayList<>();
-						try {
-							GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-							for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-								HashMap<String, Object> _map = _data.getValue(_ind);
-								map.add(_map);
-							}
-						}
-						catch (Exception _e) {
-							_e.printStackTrace();
-						}
-						listview1.setAdapter(new Listview1Adapter(map));
-						((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-					}
-					@Override
-					public void onCancelled(DatabaseError _databaseError) {
-					}
-				});
-				read.edit().putString("notification", new Gson().toJson(map)).commit();
+				
 			}
 			
 			@Override
@@ -161,88 +118,56 @@ public class NotificationActivity extends AppCompatActivity {
 				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
 				final String _childKey = _param1.getKey();
 				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				notification.addListenerForSingleValueEvent(new ValueEventListener() {
-					@Override
-					public void onDataChange(DataSnapshot _dataSnapshot) {
-						map = new ArrayList<>();
-						try {
-							GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-							for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-								HashMap<String, Object> _map = _data.getValue(_ind);
-								map.add(_map);
-							}
-						}
-						catch (Exception _e) {
-							_e.printStackTrace();
-						}
-						listview1.setAdapter(new Listview1Adapter(map));
-						((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-					}
-					@Override
-					public void onCancelled(DatabaseError _databaseError) {
-					}
-				});
-				read.edit().putString("notification", new Gson().toJson(map)).commit();
-				if (0 == map.size()) {
-					listview1.setVisibility(View.GONE);
-					linear4.setVisibility(View.VISIBLE);
-				}
+				
 			}
 			
 			@Override
 			public void onCancelled(DatabaseError _param1) {
 				final int _errorCode = _param1.getCode();
 				final String _errorMessage = _param1.getMessage();
-				SketchwareUtil.showMessage(getApplicationContext(), "Contact with Customer Support ..!");
-				linear4.setVisibility(View.VISIBLE);
+				
 			}
 		};
-		notification.addChildEventListener(_notification_child_listener);
+		list.addChildEventListener(_list_child_listener);
 	}
 	
 	private void initializeLogic() {
 		if (Build.VERSION.SDK_INT >= 21) { Window
 			w = this.getWindow();
-			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }
-		listview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFF1A237E, 0xFFE8EAF6));
-		if (!read.getString("notification", "").equals("")) {
-			map = new Gson().fromJson(read.getString("notification", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
-			listview1.setAdapter(new Listview1Adapter(map));
-			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-		}
-		else {
-			notification.addListenerForSingleValueEvent(new ValueEventListener() {
-				@Override
-				public void onDataChange(DataSnapshot _dataSnapshot) {
-					map = new ArrayList<>();
-					try {
-						GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-						for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-							HashMap<String, Object> _map = _data.getValue(_ind);
-							map.add(_map);
-						}
+			w.setNavigationBarColor(Color.parseColor("#3F51B5")); }
+		        
+		listview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFF3F51B5, 0xFFE8EAF6));
+		email = a.getString("email", "");
+		list.addListenerForSingleValueEvent(new ValueEventListener() {
+			@Override
+			public void onDataChange(DataSnapshot _dataSnapshot) {
+				map = new ArrayList<>();
+				try {
+					GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+					for (DataSnapshot _data : _dataSnapshot.getChildren()) {
+						HashMap<String, Object> _map = _data.getValue(_ind);
+						map.add(_map);
 					}
-					catch (Exception _e) {
-						_e.printStackTrace();
-					}
-					listview1.setAdapter(new Listview1Adapter(map));
-					((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 				}
-				@Override
-				public void onCancelled(DatabaseError _databaseError) {
+				catch (Exception _e) {
+					_e.printStackTrace();
 				}
-			});
-			read.edit().putString("notification", new Gson().toJson(map)).commit();
-		}
-		comp = new TimerTask() {
+				listview1.setAdapter(new Listview1Adapter(map));
+				((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
+			}
+			@Override
+			public void onCancelled(DatabaseError _databaseError) {
+			}
+		});
+		bs = new TimerTask() {
 			@Override
 			public void run() {
 				runOnUiThread(new Runnable() {
 					@Override
 					public void run() {
 						if (map.size() == 0) {
-							listview1.setVisibility(View.GONE);
 							linear4.setVisibility(View.VISIBLE);
+							listview1.setVisibility(View.GONE);
 						}
 						else {
 							listview1.setVisibility(View.VISIBLE);
@@ -252,14 +177,14 @@ public class NotificationActivity extends AppCompatActivity {
 				});
 			}
 		};
-		_timer.schedule(comp, (int)(3500));
+		_timer.schedule(bs, (int)(3500));
 	}
 	
 	@Override
 	public void onBackPressed() {
-		ocm.setClass(getApplicationContext(), ViewMainActivity.class);
-		ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(ocm);
+		intent.setClass(getApplicationContext(), MyprofileActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		startActivity(intent);
 		finish();
 	}
 	public class Listview1Adapter extends BaseAdapter {
@@ -290,19 +215,24 @@ public class NotificationActivity extends AppCompatActivity {
 			LayoutInflater _inflater = getLayoutInflater();
 			View _view = _v;
 			if (_view == null) {
-				_view = _inflater.inflate(R.layout.notificationa, null);
+				_view = _inflater.inflate(R.layout.mess, null);
 			}
 			
 			final LinearLayout linear1 = _view.findViewById(R.id.linear1);
-			final LinearLayout linear4 = _view.findViewById(R.id.linear4);
-			final LinearLayout linear5 = _view.findViewById(R.id.linear5);
-			final TextView timeanddate = _view.findViewById(R.id.timeanddate);
-			final TextView admin_username = _view.findViewById(R.id.admin_username);
+			final TextView textview2 = _view.findViewById(R.id.textview2);
 			final TextView textview3 = _view.findViewById(R.id.textview3);
+			final TextView textview1 = _view.findViewById(R.id.textview1);
 			
-			admin_username.setText(map.get((int)_position).get("username").toString());
-			textview3.setText(map.get((int)_position).get("mess").toString());
-			timeanddate.setText(map.get((int)_position).get("time").toString());
+			if ("red".equals(map.get((int)_position).get("color").toString())) {
+				linear1.setBackgroundColor(0xFFB71C1C);
+			}
+			else {
+				linear1.setBackgroundColor(0xFF1B5E20);
+			}
+			textview1.setText(map.get((int)_position).get("text").toString());
+			textview2.setText(map.get((int)_position).get("timestemp").toString());
+			textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 			Animation animation;
 			animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
 			animation.setDuration(1500); // Set the duration of the animation to 500 milliseconds

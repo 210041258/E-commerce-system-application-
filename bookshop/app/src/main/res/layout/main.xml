@@ -16,7 +16,7 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:padding="50dp"
-			android:src="@drawable/bookshop_1"
+			android:src="@drawable/book_shop_1"
 			android:scaleType="fitCenter"
 			android:layout_gravity="center_horizontal|center_vertical"
 			android:layout_weight="1" />

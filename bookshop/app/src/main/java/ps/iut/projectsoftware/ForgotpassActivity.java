@@ -107,7 +107,7 @@ public class ForgotpassActivity extends AppCompatActivity {
 			public void onClick(View _view) {
 				if (!edittext1.getText().toString().equals("")) {
 					b.setEnabled(false);
-					db.sendPasswordResetEmail(edittext1.getText().toString()).addOnCompleteListener(_db_reset_password_listener);
+					db.sendPasswordResetEmail(edittext1.getText().toString().trim()).addOnCompleteListener(_db_reset_password_listener);
 				}
 				else {
 					SketchwareUtil.showMessage(getApplicationContext(), "Check the Email 📨 !");

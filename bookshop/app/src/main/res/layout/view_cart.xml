@@ -16,7 +16,7 @@
 		<ListView
 			android:id="@+id/listview1"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:padding="30dp"
 			android:background="#FFFFFF"
 			android:choiceMode="none"
@@ -24,7 +24,7 @@
 		<LinearLayout
 			android:id="@+id/linear2"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:paddingLeft="13dp"
 			android:paddingTop="19dp"
 			android:paddingRight="13dp"
@@ -78,11 +78,19 @@
 					android:textSize="12sp"
 					android:textColor="#000000" />
 				<TextView
-					android:id="@+id/textview2"
+					android:id="@+id/feesondelivey"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:padding="8dp"
-					android:text="1.00$"
+					android:text="1.00"
+					android:textSize="12sp"
+					android:textColor="#000000" />
+				<TextView
+					android:id="@+id/textview12"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="8dp"
+					android:text="Taka"
 					android:textSize="12sp"
 					android:textColor="#000000" />
 			</LinearLayout>
@@ -105,7 +113,7 @@
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:padding="8dp"
-					android:text="Online "
+					android:text="Balance "
 					android:textSize="12sp"
 					android:textColor="#000000" />
 				<CheckBox
@@ -132,11 +140,19 @@
 					android:textSize="12sp"
 					android:textColor="#000000" />
 				<TextView
-					android:id="@+id/textview4"
+					android:id="@+id/feesonpay"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:padding="8dp"
-					android:text="1.00 $"
+					android:text="0.00"
+					android:textSize="12sp"
+					android:textColor="#000000" />
+				<TextView
+					android:id="@+id/textview13"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="8dp"
+					android:text="Taka"
 					android:textSize="12sp"
 					android:textColor="#000000" />
 			</LinearLayout>
@@ -188,11 +204,19 @@
 					android:textSize="12sp"
 					android:textColor="#000000" />
 				<TextView
-					android:id="@+id/textview8"
+					android:id="@+id/total"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:padding="8dp"
-					android:text="0.00$"
+					android:text="0.00"
+					android:textSize="12sp"
+					android:textColor="#000000" />
+				<TextView
+					android:id="@+id/textview14"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:padding="8dp"
+					android:text="Taka"
 					android:textSize="12sp"
 					android:textColor="#000000" />
 			</LinearLayout>

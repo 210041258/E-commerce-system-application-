@@ -464,6 +464,10 @@ public class AdminMainHistoryActivity extends AppCompatActivity {
 			final TextView textview5 = _view.findViewById(R.id.textview5);
 			final TextView name = _view.findViewById(R.id.name);
 			
+			Animation animation;
+			animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+			animation.setDuration(700); // Set the duration of the animation to 500 milliseconds
+			linear1.startAnimation(animation); // Start the animation on the imageview
 			textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 			id.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 			textview3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);

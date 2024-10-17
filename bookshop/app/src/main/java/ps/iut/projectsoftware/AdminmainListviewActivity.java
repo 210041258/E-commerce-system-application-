@@ -26,6 +26,7 @@ import android.widget.*;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -50,11 +51,14 @@ import java.text.*;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.*;
 import org.json.*;
 
 public class AdminmainListviewActivity extends AppCompatActivity {
 	
+	private Timer _timer = new Timer();
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
 	
 	private FloatingActionButton _fab;
@@ -67,6 +71,7 @@ public class AdminmainListviewActivity extends AppCompatActivity {
 	
 	private LinearLayout linear1;
 	private LinearLayout linear2;
+	private LinearLayout linear8;
 	private ListView manager;
 	private ListView coupon;
 	private ListView stuff;
@@ -76,13 +81,15 @@ public class AdminmainListviewActivity extends AppCompatActivity {
 	private ImageView imageview1;
 	private LinearLayout linear5;
 	private TextView textview1;
-	private LinearLayout linear6;
+	private ImageView imageview3;
+	private EditText edittext1;
 	
 	private Intent image = new Intent();
 	private AlertDialog.Builder vieworder;
 	private AlertDialog.Builder delete_confirm;
 	private DatabaseReference b = _firebase.getReference("book");
 	private ChildEventListener _b_child_listener;
+	private TimerTask dle;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -98,6 +105,7 @@ public class AdminmainListviewActivity extends AppCompatActivity {
 		
 		linear1 = findViewById(R.id.linear1);
 		linear2 = findViewById(R.id.linear2);
+		linear8 = findViewById(R.id.linear8);
 		manager = findViewById(R.id.manager);
 		coupon = findViewById(R.id.coupon);
 		stuff = findViewById(R.id.stuff);
@@ -107,7 +115,8 @@ public class AdminmainListviewActivity extends AppCompatActivity {
 		imageview1 = findViewById(R.id.imageview1);
 		linear5 = findViewById(R.id.linear5);
 		textview1 = findViewById(R.id.textview1);
-		linear6 = findViewById(R.id.linear6);
+		imageview3 = findViewById(R.id.imageview3);
+		edittext1 = findViewById(R.id.edittext1);
 		vieworder = new AlertDialog.Builder(this);
 		delete_confirm = new AlertDialog.Builder(this);
 		
@@ -120,10 +129,51 @@ public class AdminmainListviewActivity extends AppCompatActivity {
 			}
 		});
 		
+		imageview3.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				// Assuming 'temp' is the original list containing all books
+				List<HashMap<String, Object>> originalList = new ArrayList<>(temp); // Create a copy of the original list
+				
+				// Get the search term from edittext1 and trim it
+				final String searchTerm = edittext1.getText().toString().toLowerCase().trim(); // Convert to lowercase and trim for case-insensitive search
+				
+				// Ensure your ListView named 'book' is visible
+				book.setVisibility(View.VISIBLE); // Ensure the ListView is visible
+				
+				// Create a new list to hold the filtered results
+				List<HashMap<String, Object>> filteredList = new ArrayList<>();
+				
+				try {
+					    if (searchTerm.isEmpty()) {
+						        // If the search term is empty, reset the filteredList to originalList
+						        filteredList.addAll(originalList); // Reset to the original list
+						    } else {
+						        for (HashMap<String, Object> _map : originalList) { // Loop through the original list
+							            // Get the book details for filtering
+							            String bookId = (_map.get("id") != null) ? _map.get("id").toString().toLowerCase().trim() : ""; // Retrieve and lowercase ID
+							            String name = (_map.get("name") != null) ? _map.get("name").toString().toLowerCase().trim() : ""; // Use 'name' for filtering
+							            
+							            // Check if the book id or name matches the search term
+							            if (bookId.contains(searchTerm) || name.contains(searchTerm)) {
+								                filteredList.add(_map); // Add matching book data to the filtered list
+								            }
+							        }
+						    }
+					
+					    
+					    
+					
+				} catch (Exception _e) {
+					    _e.printStackTrace();
+				}
+			}
+		});
+		
 		_fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				vieworder.setTitle("Select Order : ");
+				vieworder.setTitle("Select Request  : ");
 				vieworder.setNeutralButton("History", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface _dialog, int _which) {
@@ -310,19 +360,25 @@ public class AdminmainListviewActivity extends AppCompatActivity {
 		coupon.setVisibility(View.GONE);
 		book.setVisibility(View.GONE);
 		linear2.setVisibility(View.GONE);
+		linear8.setVisibility(View.GONE);
 		if ("staff".equals(getIntent().getStringExtra("key"))) {
+			edittext1.setHint("Stuff email or Name");
 			stuff.setVisibility(View.VISIBLE);
+			linear8.setVisibility(View.VISIBLE);
 		}
 		else {
 			if ("manager".equals(getIntent().getStringExtra("key"))) {
+				edittext1.setHint("Manager Email or Name");
 				manager.setVisibility(View.VISIBLE);
+				linear8.setVisibility(View.VISIBLE);
 			}
 			else {
 				if ("coupon".equals(getIntent().getStringExtra("key"))) {
+					edittext1.setHint("Coupon Id or Date");
+					linear8.setVisibility(View.VISIBLE);
 					coupon.setVisibility(View.VISIBLE);
 				}
 				else {
-					book.setVisibility(View.VISIBLE);
 					b.addListenerForSingleValueEvent(new ValueEventListener() {
 						@Override
 						public void onDataChange(DataSnapshot _dataSnapshot) {
@@ -344,6 +400,27 @@ public class AdminmainListviewActivity extends AppCompatActivity {
 						public void onCancelled(DatabaseError _databaseError) {
 						}
 					});
+					dle = new TimerTask() {
+						@Override
+						public void run() {
+							runOnUiThread(new Runnable() {
+								@Override
+								public void run() {
+									if (temp.size() == 0) {
+										linear2.setVisibility(View.VISIBLE);
+										linear8.setVisibility(View.GONE);
+										book.setVisibility(View.GONE);
+									}
+									else {
+										linear8.setVisibility(View.VISIBLE);
+										book.setVisibility(View.VISIBLE);
+										edittext1.setHint("Book Name or Id");
+									}
+								}
+							});
+						}
+					};
+					_timer.schedule(dle, (int)(5000));
 				}
 			}
 		}
@@ -511,6 +588,10 @@ public class AdminmainListviewActivity extends AppCompatActivity {
 			final TextView textview5 = _view.findViewById(R.id.textview5);
 			final TextView name = _view.findViewById(R.id.name);
 			
+			Animation animation;
+			animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+			animation.setDuration(700); // Set the duration of the animation to 500 milliseconds
+			linear1.startAnimation(animation); // Start the animation on the imageview
 			id.setText(temp.get((int)_position).get("id").toString());
 			name.setText(temp.get((int)_position).get("name").toString());
 			price.setText(temp.get((int)_position).get("price").toString());

@@ -2,9 +2,7 @@ package ps.iut.projectsoftware;
 
 import android.animation.*;
 import android.app.*;
-import android.app.AlertDialog;
 import android.content.*;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.*;
 import android.graphics.*;
@@ -36,20 +34,17 @@ import java.util.*;
 import java.util.regex.*;
 import org.json.*;
 
-public class GatewayActivity extends AppCompatActivity {
+public class ViewPhotoActivity extends AppCompatActivity {
 	
 	private LinearLayout linear1;
-	private WebView webview1;
+	private WebView web;
 	
-	private Intent vh = new Intent();
-	private AlertDialog.Builder dial;
-	private RequestNetwork as;
-	private RequestNetwork.RequestListener _as_request_listener;
+	private Intent intent = new Intent();
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
 		super.onCreate(_savedInstanceState);
-		setContentView(R.layout.gateway);
+		setContentView(R.layout.view_photo);
 		initialize(_savedInstanceState);
 		FirebaseApp.initializeApp(this);
 		initializeLogic();
@@ -57,13 +52,11 @@ public class GatewayActivity extends AppCompatActivity {
 	
 	private void initialize(Bundle _savedInstanceState) {
 		linear1 = findViewById(R.id.linear1);
-		webview1 = findViewById(R.id.webview1);
-		webview1.getSettings().setJavaScriptEnabled(true);
-		webview1.getSettings().setSupportZoom(true);
-		dial = new AlertDialog.Builder(this);
-		as = new RequestNetwork(this);
+		web = findViewById(R.id.web);
+		web.getSettings().setJavaScriptEnabled(true);
+		web.getSettings().setSupportZoom(true);
 		
-		webview1.setWebViewClient(new WebViewClient() {
+		web.setWebViewClient(new WebViewClient() {
 			@Override
 			public void onPageStarted(WebView _param1, String _param2, Bitmap _param3) {
 				final String _url = _param2;
@@ -78,56 +71,40 @@ public class GatewayActivity extends AppCompatActivity {
 				super.onPageFinished(_param1, _param2);
 			}
 		});
-		
-		_as_request_listener = new RequestNetwork.RequestListener() {
-			@Override
-			public void onResponse(String _param1, String _param2, HashMap<String, Object> _param3) {
-				final String _tag = _param1;
-				final String _response = _param2;
-				final HashMap<String, Object> _responseHeaders = _param3;
-				
-			}
-			
-			@Override
-			public void onErrorResponse(String _param1, String _param2) {
-				final String _tag = _param1;
-				final String _message = _param2;
-				vh.setClass(getApplicationContext(), ViewMainActivity.class);
-				vh.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(vh);
-				SketchwareUtil.showMessage(getApplicationContext(), _message);
-				finishAffinity();
-			}
-		};
 	}
 	
 	private void initializeLogic() {
-		as.startRequestNetwork(RequestNetworkController.GET, "https://www.google.com", "google", _as_request_listener);
-		if (Build.VERSION.SDK_INT >= 21) { Window
-			w = this.getWindow();
-			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }
-		dial.setTitle("Which Gateway Preferred?");
-		dial.setPositiveButton("PayPal", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface _dialog, int _which) {
-				
-			}
-		});
-		dial.setNegativeButton("Google Pay", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface _dialog, int _which) {
-				
-			}
-		});
-		dial.create().show();
+		web.loadUrl(getIntent().getStringExtra("url"));
+		web.getSettings().setBuiltInZoomControls(true);
+		web.getSettings().setDisplayZoomControls(false);
+		web.getSettings().setLoadWithOverviewMode(true);
+		web.getSettings().setUseWideViewPort(true);
+		
 	}
 	
 	@Override
 	public void onBackPressed() {
-		vh.setClass(getApplicationContext(), MyprofileActivity.class);
-		vh.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(vh);
-		finish();
+		if ("view_product".equals(getIntent().getStringExtra("back"))) {
+			intent.setClass(getApplicationContext(), ViewProductActivity.class);
+			intent.putExtra("id", getIntent().getStringExtra("id"));
+			intent.putExtra("name", getIntent().getStringExtra("name"));
+			intent.putExtra("description", getIntent().getStringExtra("description"));
+			intent.putExtra("url", getIntent().getStringExtra("url"));
+			intent.putExtra("copies", getIntent().getStringExtra("copies"));
+			intent.putExtra("back", getIntent().getStringExtra("back"));
+			intent.putExtra("price", getIntent().getStringExtra("price"));
+			intent.putExtra("department", getIntent().getStringExtra("department"));
+			intent.putExtra("semester", getIntent().getStringExtra("semester"));
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			finish();
+		}
+		else {
+			intent.setClass(getApplicationContext(), MyprofileActivity.class);
+			intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			startActivity(intent);
+			finish();
+		}
 	}
 	
 	@Deprecated

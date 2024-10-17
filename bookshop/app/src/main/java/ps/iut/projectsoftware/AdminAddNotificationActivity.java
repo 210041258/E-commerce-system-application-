@@ -186,9 +186,21 @@ public class AdminAddNotificationActivity extends AppCompatActivity {
 		materialbutton1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		materialbutton1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)50, (int)10, 0xFFE8EAF6, 0xFF3F51B5));
 		linear3.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)50, (int)10, 0xFF9FA8DA, 0xFF3F51B5));
+		edittext2.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)25, (int)10, 0xFF9FA8DA, 0xFFE8EAF6));
+		edittext1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)25, (int)10, 0xFF9FA8DA, 0xFFE8EAF6));
 		if (Build.VERSION.SDK_INT >= 21) { Window
 			w = this.getWindow();
 			w.setNavigationBarColor(Color.parseColor("#3F51B5")); }
+		
+		Animation animation;
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+		animation.setDuration(700); // Set the duration of the animation to 500 milliseconds
+		edittext1.startAnimation(animation); // Start the animation on the imageview
+		
+		
+		animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+		animation.setDuration(700); // Set the duration of the animation to 500 milliseconds
+		edittext2.startAnimation(animation); // Start the animation on the imageview
 		bo = false;
 	}
 	

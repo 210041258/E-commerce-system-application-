@@ -3,7 +3,9 @@ package ps.iut.projectsoftware;
 import android.animation.*;
 import android.app.*;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.*;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.*;
@@ -34,6 +36,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.*;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -50,18 +53,28 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.*;
 import org.json.*;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class ViewProductActivity extends AppCompatActivity {
 	
 	private Timer _timer = new Timer();
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
 	
+	private FloatingActionButton _fab;
 	private double num = 0;
 	private HashMap<String, Object> map = new HashMap<>();
 	private String email = "";
 	private double copies = 0;
 	private String com = "";
 	private String id = "";
+	private double nu = 0;
+	private double times = 0;
 	
 	private LinearLayout linear9;
 	private ScrollView vscroll1;
@@ -89,6 +102,7 @@ public class ViewProductActivity extends AppCompatActivity {
 	private MaterialButton materialbutton1;
 	private MaterialButton materialbutton2;
 	private TextView textview1;
+	private LinearLayout linear26;
 	private TextView title;
 	private TextView textview2;
 	private TextView price;
@@ -105,6 +119,9 @@ public class ViewProductActivity extends AppCompatActivity {
 	private DatabaseReference book = _firebase.getReference("book");
 	private ChildEventListener _book_child_listener;
 	private TimerTask refresh;
+	private AlertDialog.Builder confirm;
+	private DatabaseReference warning_book = _firebase.getReference("warning_book");
+	private ChildEventListener _warning_book_child_listener;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -116,6 +133,8 @@ public class ViewProductActivity extends AppCompatActivity {
 	}
 	
 	private void initialize(Bundle _savedInstanceState) {
+		_fab = findViewById(R.id._fab);
+		
 		linear9 = findViewById(R.id.linear9);
 		vscroll1 = findViewById(R.id.vscroll1);
 		linear10 = findViewById(R.id.linear10);
@@ -142,6 +161,7 @@ public class ViewProductActivity extends AppCompatActivity {
 		materialbutton1 = findViewById(R.id.materialbutton1);
 		materialbutton2 = findViewById(R.id.materialbutton2);
 		textview1 = findViewById(R.id.textview1);
+		linear26 = findViewById(R.id.linear26);
 		title = findViewById(R.id.title);
 		textview2 = findViewById(R.id.textview2);
 		price = findViewById(R.id.price);
@@ -151,6 +171,31 @@ public class ViewProductActivity extends AppCompatActivity {
 		department = findViewById(R.id.department);
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
 		cart = getSharedPreferences("cart", Activity.MODE_PRIVATE);
+		confirm = new AlertDialog.Builder(this);
+		
+		imageview8.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				move.setClass(getApplicationContext(), ViewPhotoActivity.class);
+				move.putExtra("id", getIntent().getStringExtra("id"));
+				move.putExtra("name", getIntent().getStringExtra("name"));
+				move.putExtra("description", getIntent().getStringExtra("description"));
+				move.putExtra("url", getIntent().getStringExtra("url"));
+				move.putExtra("copies", getIntent().getStringExtra("copies"));
+				move.putExtra("back", getIntent().getStringExtra("back"));
+				move.putExtra("price", getIntent().getStringExtra("price"));
+				move.putExtra("department", getIntent().getStringExtra("department"));
+				move.putExtra("semester", getIntent().getStringExtra("semester"));
+				move.putExtra("back", "view_product"); 
+				
+				
+				
+				        
+				move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(move);
+				finish();
+			}
+		});
 		
 		imageview5.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -181,14 +226,14 @@ public class ViewProductActivity extends AppCompatActivity {
 		materialbutton1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				if (linear11.getVisibility() == View.VISIBLE && (Double.parseDouble(getIntent().getStringExtra("price")) < Double.parseDouble(a.getString("balance", "")))) {
+				if (linear11.getVisibility() == View.VISIBLE) {
 					    // Get the current price and balance as Double
-					    double price = Double.parseDouble(getIntent().getStringExtra("price"));
-					    double balance = Double.parseDouble(a.getString("balance", ""));
-					    
+					    final double price = Double.parseDouble(getIntent().getStringExtra("price"));  // Mark as final
+					    final double balance = Double.parseDouble(a.getString("balance", ""));  // Mark as final
+					
 					    // Retrieve the number of copies from textview5
-					    String numStr = textview5.getText().toString();  // Get the number of copies directly from textview5
-					    final int num;  // Declare num as final
+					    String numStr = textview5.getText().toString();
+					    final int num;
 					
 					    // Check if numStr is not null or empty and parse it
 					    if (numStr != null && !numStr.isEmpty()) {
@@ -199,79 +244,98 @@ public class ViewProductActivity extends AppCompatActivity {
 						    }
 					
 					    // Calculate the total price for all copies
-					    double totalPrice = price * num;  // Use num instead of currentCopies
+					    final double totalPrice = price * num;  // Mark as final
 					
-					    // Subtract the total price from the balance and update shared preferences
-					    double updatedBalance = balance - totalPrice;
-					    a.edit().putString("balance", String.valueOf(updatedBalance)).commit();
-					    
-					    email = a.getString("email", "");
+					    // Check if the user has enough balance
+					    if (balance < totalPrice) {
+						        SketchwareUtil.showMessage(getApplicationContext(), "Insufficient balance.");
+						        return;  // Stop if the balance is not enough
+						    }
 					
-					    final String username = email.split("@")[0];  // Username is final
-					
-					    final DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("information/" + username);
-					
-					    // Update user information in Firebase
-					    dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
-						        @Override
-						        public void onDataChange(DataSnapshot snapshot) {
-							            if (snapshot.exists()) {
-								                // Retrieve balance as a String, then parse it as Double
-								                String balanceStr = snapshot.child("balance").getValue(String.class);
-								
-								                if (balanceStr != null) {
-									                    Double balance = Double.parseDouble(balanceStr);  // Convert to Double
-									
-									                    Map<String, Object> updateData = new HashMap<>();
-									                    updateData.put("email", email);
-									                    updateData.put("balance", a.getString("balance", ""));  // Keep balance as String for shared preferences
-									
-									                    // Update the balance in Firebase
-									                    dataRef.setValue(updateData);
-									                } else {
-									                    SketchwareUtil.showMessage(getApplicationContext(), "Customer Center.");
-									                }
-								            } else {
-								                SketchwareUtil.showMessage(getApplicationContext(), "No data found. Please check with Customer Center.");
-								            }
-							        }
-						
-						        @Override
-						        public void onCancelled(DatabaseError error) {
-							            SketchwareUtil.showMessage(getApplicationContext(), "Error: " + error.getMessage());
-							        }
-						    });
-					
-					    // Update book copies
-					    String bookId = getIntent().getStringExtra("id"); // Get book ID from intent
-					
+					    // Now check if there are enough copies of the book available
+					    String bookId = getIntent().getStringExtra("id");
 					    final DatabaseReference bookRef = FirebaseDatabase.getInstance().getReference("book").child(bookId);
 					
-					    // Listener to decrease book copies in Firebase
+					    // Listener to check book availability in Firebase
 					    bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
 						        @Override
 						        public void onDataChange(DataSnapshot snapshot) {
 							            if (snapshot.exists()) {
-								                // Retrieve copies as a String, then parse it as Integer
 								                String copiesStr = snapshot.child("copies").getValue(String.class);
 								
 								                if (copiesStr != null) {
-									                    Integer copiesInFirebase = Integer.parseInt(copiesStr);  // Convert to Integer
+									                    final int copiesInFirebase = Integer.parseInt(copiesStr);  // Mark as final
 									
-									                    int newCopies = copiesInFirebase - num;  // Subtract num (the number of copies the user wants)
-									
-									                    // Ensure that newCopies is not negative
-									                    if (newCopies < 0) {
-										                        newCopies = 0;
+									                    // Check if there are enough copies available
+									                    if (copiesInFirebase < num) {
+										                        SketchwareUtil.showMessage(getApplicationContext(), "Not enough copies available.");
+										                        return;  // Stop if not enough copies are available
 										                    }
 									
-									                    // Update the new copies count in Firebase
-									                    bookRef.child("copies").setValue(String.valueOf(newCopies));  // Save back as String
+									                    // If there are enough copies and the balance is sufficient, show confirmation dialog
+									                    AlertDialog.Builder confirm = new AlertDialog.Builder(ViewProductActivity.this);  // Use the correct activity name
+									                    confirm.setTitle("Do you want to confirm?");
+									                    confirm.setMessage("You will spend: " + num + " books, Total price: " + totalPrice + " Taka,\nName of the book: " + title.getText().toString());
+									                    confirm.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+										                        @Override
+										                        public void onClick(DialogInterface _dialog, int _which) {
+											                            // Subtract the total price from the balance and update shared preferences
+											                            double updatedBalance = balance - totalPrice;
+											                            a.edit().putString("balance", String.valueOf(updatedBalance)).commit();
+											
+											                            // Update user balance in Firebase
+											                            final String email = a.getString("email", "");
+											                            final String username = email.split("@")[0];
+											                            final DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference("information/" + username);
+											
+											                            dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+												                                @Override
+												                                public void onDataChange(DataSnapshot snapshot) {
+													                                    if (snapshot.exists()) {
+														                                        Map<String, Object> updateData = new HashMap<>();
+														                                        updateData.put("email", email);
+														                                        updateData.put("balance", a.getString("balance", ""));
+														                                        dataRef.setValue(updateData);
+														                                    } else {
+														                                        SketchwareUtil.showMessage(getApplicationContext(), "No data found. Please check with Customer Center.");
+														                                    }
+													                                }
+												
+												                                @Override
+												                                public void onCancelled(DatabaseError error) {
+													                                    SketchwareUtil.showMessage(getApplicationContext(), "Error: " + error.getMessage());
+													                                }
+												                            });
+											
+											                            // Update the number of copies in Firebase
+											                            int newCopies = copiesInFirebase - num;
+											                            bookRef.child("copies").setValue(String.valueOf(newCopies));
+											
+											                            // Proceed to the next activity after updating
+											                            Intent move = new Intent(getApplicationContext(), OrderproofActivity.class);
+											                            move.putExtra("orderid", getIntent().getStringExtra("id"));
+											                            move.putExtra("orderno", String.valueOf((int) (SketchwareUtil.getRandom(100, 10000))));
+											                            move.putExtra("orderprice", String.valueOf(totalPrice));
+											                            move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+											                            startActivity(move);
+											                            finish();
+											                        }
+										                    });
+									
+									                    confirm.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+										                        @Override
+										                        public void onClick(DialogInterface _dialog, int _which) {
+											                            // User cancelled the action, no further steps
+											                        }
+										                    });
+									
+									                    confirm.create().show();  // Show the confirmation dialog
+									
 									                } else {
-									                    SketchwareUtil.showMessage(getApplicationContext(), "No copies data available in Firebase.");
+									                    SketchwareUtil.showMessage(getApplicationContext(), "No copies data available.");
 									                }
 								            } else {
-								                SketchwareUtil.showMessage(getApplicationContext(), "Book not found in Firebase.");
+								                SketchwareUtil.showMessage(getApplicationContext(), "Book not found.");
 								            }
 							        }
 						
@@ -280,19 +344,6 @@ public class ViewProductActivity extends AppCompatActivity {
 							            SketchwareUtil.showMessage(getApplicationContext(), "Error: " + error.getMessage());
 							        }
 						    });
-					
-					    // Proceed to the next activity after updating the balance and book copies
-					    Intent move = new Intent(getApplicationContext(), OrderproofActivity.class);
-					    move.putExtra("orderid", getIntent().getStringExtra("id"));
-					    move.putExtra("orderno", String.valueOf((int) (SketchwareUtil.getRandom(100, 10000))));
-					
-					    // Add the total price to the move intent
-					    move.putExtra("orderprice", String.valueOf(totalPrice));  // Pass the total price
-					
-					    move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					    startActivity(move);
-					    finish();
-					
 				} else {
 					    SketchwareUtil.showMessage(getApplicationContext(), "Check Balance!!");
 				}
@@ -307,9 +358,36 @@ public class ViewProductActivity extends AppCompatActivity {
 				move.putExtra("name", getIntent().getStringExtra("name"));
 				move.putExtra("url", getIntent().getStringExtra("url"));
 				move.putExtra("price", String.valueOf((long)(Double.parseDouble(textview5.getText().toString()) * Double.parseDouble(getIntent().getStringExtra("price")))));
+				move.putExtra("copy", String.valueOf((long)(Double.parseDouble(textview5.getText().toString()))));
 				move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(move);
 				finish();
+			}
+		});
+		
+		_fab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				if (nu >= 14 && nu <= 26) {
+						nu = nu + 4;
+						times++;
+				}
+				
+				department.setTextSize((int)nu);
+				semester.setTextSize((int)nu);
+				price.setTextSize((int)nu);
+				description.setTextSize((int)nu);
+				textview1.setTextSize((int)nu);
+				textview2.setTextSize((int)nu);
+				textview11.setTextSize((int)nu);
+				textview13.setTextSize((int)nu);
+				textview9.setTextSize((int)nu);
+				title.setTextSize((int)nu);
+				
+				if (times >= 3) {
+						times = 0;
+						nu = 14;
+				}
 			}
 		});
 		
@@ -390,6 +468,45 @@ public class ViewProductActivity extends AppCompatActivity {
 			}
 		};
 		book.addChildEventListener(_book_child_listener);
+		
+		_warning_book_child_listener = new ChildEventListener() {
+			@Override
+			public void onChildAdded(DataSnapshot _param1, String _param2) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				
+			}
+			
+			@Override
+			public void onChildChanged(DataSnapshot _param1, String _param2) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				
+			}
+			
+			@Override
+			public void onChildMoved(DataSnapshot _param1, String _param2) {
+				
+			}
+			
+			@Override
+			public void onChildRemoved(DataSnapshot _param1) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				
+			}
+			
+			@Override
+			public void onCancelled(DatabaseError _param1) {
+				final int _errorCode = _param1.getCode();
+				final String _errorMessage = _param1.getMessage();
+				
+			}
+		};
+		warning_book.addChildEventListener(_warning_book_child_listener);
 	}
 	
 	private void initializeLogic() {
@@ -427,16 +544,78 @@ public class ViewProductActivity extends AppCompatActivity {
 			linear25.setVisibility(View.VISIBLE);
 			linear11.setVisibility(View.GONE);
 			linear13.setVisibility(View.GONE);
+			final String bookId = getIntent().getStringExtra("orderid"); // Assuming "orderid" is the book id
+			
+			// Get the current timestamp to use as the key
+			final String timestampKey = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
+			
+			// Get the Firebase reference for the "warning_book" path
+			final DatabaseReference warningRef = FirebaseDatabase.getInstance().getReference("warning_book");
+			
+			// Clear the existing warning_book data
+			warningRef.setValue(new HashMap<String, String>())
+			    .addOnCompleteListener(new OnCompleteListener<Void>() {
+				        @Override
+				        public void onComplete(Task<Void> task) {
+					            // Check if the specific book ID exists after clearing
+					            warningRef.addListenerForSingleValueEvent(new ValueEventListener() {
+						                @Override
+						                public void onDataChange(DataSnapshot dataSnapshot) {
+							                    boolean bookExists = false;
+							
+							                    // Iterate through the values to check for the book ID
+							                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+								                        String existingBookId = snapshot.getValue(String.class);
+								                        if (existingBookId != null && existingBookId.equals(bookId)) {
+									                            bookExists = true;
+									                            break; // Exit the loop if the book ID is found
+									                        }
+								                    }
+							
+							                    // Proceed to add the book ID if it doesn't exist
+							                    if (!bookExists) {
+								                        warningRef.child(timestampKey).setValue(bookId);
+								                    }
+							                }
+						
+						                @Override
+						                public void onCancelled(DatabaseError databaseError) {
+							                    // Handle possible errors
+							                }
+						            });
+					        }
+				    });
 		}
+		imageview8.setElevation((float)10);
+		if (!"".equals(cart.getString("size", ""))) {
+			nu = Double.parseDouble(cart.getString("size", ""));
+			times = 3;
+		}
+		else {
+			nu = 14;
+			times = 0;
+		}
+		department.setTextSize((int)nu);
+		semester.setTextSize((int)nu);
+		price.setTextSize((int)nu);
+		description.setTextSize((int)nu);
+		textview1.setTextSize((int)nu);
+		textview2.setTextSize((int)nu);
+		textview11.setTextSize((int)nu);
+		textview13.setTextSize((int)nu);
+		textview9.setTextSize((int)nu);
+		title.setTextSize((int)nu);
 	}
 	
 	@Override
 	public void onBackPressed() {
+		cart.edit().putString("size", String.valueOf((long)(nu))).commit();
 		move.setClass(getApplicationContext(), ViewMainActivity.class);
 		move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(move);
 		finish();
 	}
+	
 	
 	@Deprecated
 	public void showMessage(String _s) {

@@ -766,6 +766,44 @@ public class ViewMainActivity extends AppCompatActivity {
 		imageview1.setElevation((float)25);
 		imageview2.setElevation((float)25);
 		linear6.setElevation((float)50);
+		// Set elevations for CSE
+		cseb.setElevation(25f);
+		csec.setElevation(25f);
+		csed.setElevation(25f);
+		csee.setElevation(25f);
+		
+		// Set elevations for EEE
+		eeea.setElevation(25f);
+		eeeb.setElevation(25f);
+		eeec.setElevation(25f);
+		eeed.setElevation(25f);
+		
+		// Set elevations for BTM
+		btma.setElevation(25f);
+		btmb.setElevation(25f);
+		btmc.setElevation(25f);
+		btmd.setElevation(25f);
+		btme.setElevation(25f);
+		
+		// Set elevations for MPE
+		mpea.setElevation(25f);
+		mpeb.setElevation(25f);
+		mpec.setElevation(25f);
+		mped.setElevation(25f);
+		mpee.setElevation(25f);
+		
+		// Set elevations for TVE
+		tvea.setElevation(25f);
+		tveb.setElevation(25f);
+		tvec.setElevation(25f);
+		tved.setElevation(25f);
+		tvee.setElevation(25f);
+		
+		// Set elevations for CEE
+		ceea.setElevation(25f);
+		ceeb.setElevation(25f);
+		ceec.setElevation(25f);
+		ceed.setElevation(25f);
 	}
 	
 	@Override

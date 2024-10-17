@@ -1,152 +1,164 @@
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/_coordinator"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:orientation="vertical">
+	android:layout_height="match_parent">
 	<LinearLayout
-		android:id="@+id/linear1"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:padding="35dp"
-		android:background="#7986CB"
 		android:orientation="vertical">
 		<LinearLayout
-			android:id="@+id/linear2"
+			android:id="@+id/linear1"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"
-			android:padding="20dp"
-			android:background="#3F51B5"
+			android:padding="35dp"
+			android:background="#7986CB"
 			android:orientation="vertical">
 			<LinearLayout
-				android:id="@+id/linear6"
+				android:id="@+id/linear2"
 				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:padding="8dp"
-				android:orientation="horizontal" />
-			<ImageView
-				android:id="@+id/imageview2"
-				android:layout_width="match_parent"
-				android:layout_height="250dp"
-				android:padding="100dp"
-				android:src="@drawable/ic_account_circle_white"
-				android:scaleType="fitCenter" />
-			<LinearLayout
-				android:id="@+id/linear7"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:padding="8dp"
-				android:orientation="horizontal" />
-			<LinearLayout
-				android:id="@+id/linear3"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:padding="8dp"
-				android:orientation="horizontal">
-				<TextView
-					android:id="@+id/textview1"
+				android:layout_height="match_parent"
+				android:padding="20dp"
+				android:background="#3F51B5"
+				android:orientation="vertical">
+				<LinearLayout
+					android:id="@+id/linear6"
 					android:layout_width="match_parent"
-					android:layout_height="match_parent"
+					android:layout_height="wrap_content"
 					android:padding="8dp"
-					android:gravity="center_vertical"
-					android:text="Email :"
-					android:textSize="18sp"
-					android:textColor="#FFFFFF"
-					android:layout_gravity="center_horizontal"
-					android:layout_weight="1" />
-			</LinearLayout>
-			<EditText
-				android:id="@+id/edittext1"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="28dp"
-				android:layout_marginRight="5dp"
-				android:paddingLeft="25dp"
-				android:paddingTop="8dp"
-				android:paddingRight="8dp"
-				android:paddingBottom="8dp"
-				android:background="#5C6BC0"
-				android:textSize="16sp"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFFFFF" />
-			<LinearLayout
-				android:id="@+id/linear4"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:padding="8dp"
-				android:orientation="horizontal">
-				<TextView
-					android:id="@+id/textview2"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
-					android:padding="8dp"
-					android:gravity="center_vertical"
-					android:text="Password :"
-					android:textSize="18sp"
-					android:textColor="#FFFFFF"
-					android:layout_gravity="center_vertical"
-					android:layout_weight="1" />
+					android:orientation="horizontal" />
 				<ImageView
-					android:id="@+id/imageview4"
-					android:layout_width="50dp"
-					android:layout_height="50dp"
-					android:padding="10dp"
-					android:src="@drawable/ic_edit_white"
+					android:id="@+id/imageview2"
+					android:layout_width="match_parent"
+					android:layout_height="250dp"
+					android:padding="15dp"
+					android:src="@drawable/book_shop_1"
 					android:scaleType="fitCenter" />
-			</LinearLayout>
-			<EditText
-				android:id="@+id/edittext2"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="28dp"
-				android:layout_marginRight="5dp"
-				android:paddingLeft="25dp"
-				android:paddingTop="8dp"
-				android:paddingRight="8dp"
-				android:paddingBottom="8dp"
-				android:background="#5C6BC0"
-				android:textSize="16sp"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFFFFF" />
-			<LinearLayout
-				android:id="@+id/linear5"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:padding="8dp"
-				android:orientation="horizontal">
-				<TextView
-					android:id="@+id/textview3"
-					android:layout_width="wrap_content"
-					android:layout_height="match_parent"
+				<LinearLayout
+					android:id="@+id/linear7"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
 					android:padding="8dp"
-					android:gravity="center_vertical"
-					android:text="Balance :"
-					android:textSize="18sp"
+					android:orientation="horizontal" />
+				<LinearLayout
+					android:id="@+id/linear3"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="8dp"
+					android:orientation="horizontal">
+					<TextView
+						android:id="@+id/textview1"
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:padding="8dp"
+						android:gravity="center_vertical"
+						android:text="Email :"
+						android:textSize="18sp"
+						android:textColor="#FFFFFF"
+						android:layout_gravity="center_horizontal"
+						android:layout_weight="1" />
+				</LinearLayout>
+				<EditText
+					android:id="@+id/edittext1"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="28dp"
+					android:layout_marginRight="5dp"
+					android:paddingLeft="25dp"
+					android:paddingTop="8dp"
+					android:paddingRight="8dp"
+					android:paddingBottom="8dp"
+					android:background="#5C6BC0"
+					android:textSize="16sp"
 					android:textColor="#FFFFFF"
-					android:layout_weight="1" />
-				<ImageView
-					android:id="@+id/imageview5"
-					android:layout_width="50dp"
-					android:layout_height="50dp"
-					android:padding="10dp"
-					android:src="@drawable/ic_edit_white"
-					android:scaleType="fitCenter" />
+					android:textColorHint="#FFFFFF" />
+				<LinearLayout
+					android:id="@+id/linear4"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="8dp"
+					android:orientation="horizontal">
+					<TextView
+						android:id="@+id/textview2"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:padding="8dp"
+						android:gravity="center_vertical"
+						android:text="Password :"
+						android:textSize="18sp"
+						android:textColor="#FFFFFF"
+						android:layout_gravity="center_vertical"
+						android:layout_weight="1" />
+					<ImageView
+						android:id="@+id/imageview4"
+						android:layout_width="50dp"
+						android:layout_height="50dp"
+						android:padding="10dp"
+						android:src="@drawable/ic_edit_white"
+						android:scaleType="fitCenter" />
+				</LinearLayout>
+				<EditText
+					android:id="@+id/edittext2"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="28dp"
+					android:layout_marginRight="5dp"
+					android:paddingLeft="25dp"
+					android:paddingTop="8dp"
+					android:paddingRight="8dp"
+					android:paddingBottom="8dp"
+					android:background="#5C6BC0"
+					android:textSize="16sp"
+					android:textColor="#FFFFFF"
+					android:textColorHint="#FFFFFF" />
+				<LinearLayout
+					android:id="@+id/linear5"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:padding="8dp"
+					android:orientation="horizontal">
+					<TextView
+						android:id="@+id/textview3"
+						android:layout_width="wrap_content"
+						android:layout_height="match_parent"
+						android:padding="8dp"
+						android:gravity="center_vertical"
+						android:text="Balance :"
+						android:textSize="18sp"
+						android:textColor="#FFFFFF"
+						android:layout_weight="1" />
+					<ImageView
+						android:id="@+id/imageview5"
+						android:layout_width="50dp"
+						android:layout_height="50dp"
+						android:padding="10dp"
+						android:src="@drawable/ic_edit_white"
+						android:scaleType="fitCenter" />
+				</LinearLayout>
+				<EditText
+					android:id="@+id/edittext3"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="28dp"
+					android:layout_marginRight="5dp"
+					android:paddingLeft="25dp"
+					android:paddingTop="8dp"
+					android:paddingRight="8dp"
+					android:paddingBottom="8dp"
+					android:background="#5C6BC0"
+					android:textSize="16sp"
+					android:textColor="#FFFFFF"
+					android:textColorHint="#FFFFFF" />
 			</LinearLayout>
-			<EditText
-				android:id="@+id/edittext3"
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="28dp"
-				android:layout_marginRight="5dp"
-				android:paddingLeft="25dp"
-				android:paddingTop="8dp"
-				android:paddingRight="8dp"
-				android:paddingBottom="8dp"
-				android:background="#5C6BC0"
-				android:textSize="16sp"
-				android:textColor="#FFFFFF"
-				android:textColorHint="#FFFFFF" />
 		</LinearLayout>
 	</LinearLayout>
-</LinearLayout>
+	<com.google.android.material.floatingactionbutton.FloatingActionButton
+		android:id="@+id/_fab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="16dp"
+		android:layout_gravity="right|bottom"
+		app:srcCompat="@drawable/ic_history_white" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

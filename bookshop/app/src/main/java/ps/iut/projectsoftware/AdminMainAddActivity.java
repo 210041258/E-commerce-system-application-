@@ -434,7 +434,7 @@ public class AdminMainAddActivity extends AppCompatActivity {
 	private void initializeLogic() {
 		name.setSingleLine(true);
 		copies.setSingleLine(true);
-		description.setSingleLine(false);
+		description.setSingleLine(true);
 		id.setSingleLine(true);
 		price.setSingleLine(true);
 		url.setSingleLine(true);
@@ -496,6 +496,7 @@ public class AdminMainAddActivity extends AppCompatActivity {
 		department.add((int)(5), "BTM");
 		spinner2.setAdapter(new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_dropdown_item, department));
 		((ArrayAdapter)spinner2.getAdapter()).notifyDataSetChanged();
+		linear2.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)50, (int)10, 0xFFFFFFFF, 0xFFE8EAF6));
 	}
 	
 	@Override

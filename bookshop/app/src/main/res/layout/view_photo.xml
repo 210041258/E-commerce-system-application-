@@ -9,13 +9,11 @@
 		android:id="@+id/linear1"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
-		android:padding="25dp"
-		android:background="#C5CAE9"
+		android:background="@android:color/transparent"
 		android:orientation="vertical">
 		<WebView
-			android:id="@+id/webview1"
+			android:id="@+id/web"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:background="#E8EAF6" />
+			android:layout_height="match_parent" />
 	</LinearLayout>
 </LinearLayout>

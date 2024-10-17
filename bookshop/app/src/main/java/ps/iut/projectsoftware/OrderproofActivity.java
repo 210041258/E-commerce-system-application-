@@ -153,52 +153,75 @@ public class OrderproofActivity extends AppCompatActivity {
 		if (Build.VERSION.SDK_INT >= 21) { Window
 			w = this.getWindow();
 			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }
-		String Email = a.getString("email", "");
-		String key = Email.split("@")[0];
+		String email = a.getString("email", "");
+		String username = email.split("@")[0].replace(".", "_"); // Replace dots with underscores to make it Firebase-safe
 		
-		// Get the order number
+		// Get the order number from the intent (directly call it whenever needed)
 		String orderno = getIntent().getStringExtra("orderno");
+		if (orderno == null) {
+			    // If the order number isn't in the intent, generate a default one
+			    orderno = String.valueOf((int) (SketchwareUtil.getRandom(100, 10000)));
+		}
 		
 		// Create the nested map for order details (under orderno)
-		Map<String, Object> orderDetails = new HashMap<>();
+		final Map<String, Object> orderDetails = new HashMap<>();
 		orderDetails.put("orderid", getIntent().getStringExtra("orderid"));
-		orderDetails.put("orderprice", getIntent().getStringExtra("orderprice"));
+		orderDetails.put("orderprice", getIntent().getStringExtra("orderprice")); // Ensure orderprice is in the intent
 		
-		// Create the main map
-		final Map<String, Object> map = new HashMap<>();
-		map.put("email", Email);
-		map.put(orderno, orderDetails); // ordno as key with nested details
-		
-		// Firebase reference
+		// Firebase reference under "contact/username"
 		final DatabaseReference ref = FirebaseDatabase.getInstance()
 		                          .getReference()
 		                          .child("contact")
-		                          .child(key);
+		                          .child(username);  // Use the username as the key for contact
 		
-		// Fetch existing data and update
+		// Fetch existing data from "contact/username" and update
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
 			    @Override
 			    public void onDataChange(DataSnapshot dataSnapshot) {
+				        Map<String, Object> existingData = new HashMap<>();
+				
 				        if (dataSnapshot.exists()) {
-					            // Get the existing map
-					            Map<String, Object> existingData = (Map<String, Object>) dataSnapshot.getValue();
-					            // Merge existing data with new data
-					            existingData.putAll(map);
-					            
-					            // Update the data in Firebase
-					            ref.updateChildren(existingData);
-					        } else {
-					            // If it doesn't exist, just update with the new data
-					            ref.updateChildren(map);
+					            // Get the existing data as a map
+					            existingData = (Map<String, Object>) dataSnapshot.getValue();
 					        }
+				
+				        // If existingData is null, initialize it
+				        if (existingData == null) {
+					            existingData = new HashMap<>();
+					        }
+				
+				        // Use getIntent().getStringExtra("orderno") directly in put()
+				        existingData.put(getIntent().getStringExtra("orderno"), orderDetails);  // Use orderno directly
+				        
+				        // Update the data in Firebase
+				        ref.updateChildren(existingData);
 				    }
 			
 			    @Override
 			    public void onCancelled(DatabaseError databaseError) {
-				        // Handle possible errors.
+				        // Handle possible errors
 				        Log.e("FirebaseError", "Error while updating data: " + databaseError.getMessage());
 				    }
 		});
+		
+		// Construct the message using the order number and price
+		String orderMessage = "Order no. " + (getIntent().getStringExtra("orderno") != null ? getIntent().getStringExtra("orderno") : orderno) 
+		                      + " Spent " + getIntent().getStringExtra("orderprice") + " Book id : " + getIntent().getStringExtra("orderid");
+		
+		// Prepare a single map to send to Firebase under the "history/username" path
+		Map<String, Object> historyData = new HashMap<>();
+		historyData.put("orderno", getIntent().getStringExtra("orderno"));  // Include orderno in the history map
+		historyData.put("text", orderMessage);
+		historyData.put("color", "red");  // Add color as "red" to the history map
+		
+		// Get the current date and time
+		String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
+		historyData.put("timestamp", currentDateTime);  // Add timestamp to historyData
+		
+		// Get a reference to the history path for the user (under "history/username")
+		// Use push() to create a unique key for each history entry
+		DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("history/" + username);
+		historyRef.push().setValue(historyData);  // Use push() to add a unique key for each entry
 	}
 	
 	@Override

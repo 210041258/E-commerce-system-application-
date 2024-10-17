@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 					SketchwareUtil.showMessage(getApplicationContext(), "Wait Logging In ..");
 					b1.setEnabled(false);
 					a.edit().putString("email", edittext1.getText().toString()).commit();
-					ag.signInWithEmailAndPassword(edittext1.getText().toString(), edittext2.getText().toString()).addOnCompleteListener(LoginActivity.this, _ag_sign_in_listener);
+					ag.signInWithEmailAndPassword(edittext1.getText().toString().trim(), edittext2.getText().toString().trim()).addOnCompleteListener(LoginActivity.this, _ag_sign_in_listener);
 				}
 				else {
 					SketchwareUtil.showMessage(getApplicationContext(), "Check the Email and Password ?");
