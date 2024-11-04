@@ -1,0 +1,47 @@
+body {
+    background-color: #280063;
+    color: white;
+    font-family: sans-serif;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.rounded-corners {
+    border-radius: 20px;
+}
+
+.list-group-item {
+    cursor: pointer;
+}
+
+.list-group-item:hover {
+    background-color: #e9ecef;
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
+
+
+/* Style for the logout button */
+#logoutBtn {
+    transition: all 0.3s ease;
+}
+
+#logoutBtn:hover {
+    background-color: #dc3545; /* Darker red on hover */
+    transform: scale(1.05);
+}
