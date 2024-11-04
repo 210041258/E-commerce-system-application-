@@ -57,3 +57,9 @@ The development follows the **Agile Scrum Methodology**, ensuring flexibility an
 
 ## License
 This project is open source and available under the [MIT License](LICENSE).
+
+
+
+
+## Updates 
+UI : admin on th hover of the png  
