@@ -45,9 +45,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -59,7 +62,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.ValueEventListener;
+
+import com.google.gson.reflect.TypeToken;
+import com.bumptech.glide.Glide;
+import java.util.ArrayList;
+import java.util.HashMap;
+import com.google.gson.Gson;
+
 
 public class ViewProductActivity extends AppCompatActivity {
 	
@@ -75,6 +85,22 @@ public class ViewProductActivity extends AppCompatActivity {
 	private String id = "";
 	private double nu = 0;
 	private double times = 0;
+	private double index = 0;
+	private double selected = 0;
+	private boolean inserted = false;
+	private HashMap<String, Object> mapadditionally = new HashMap<>();
+	private boolean bool_favourite = false;
+	private boolean bool_faviourte = false;
+	private boolean bool_wishlist = false;
+	private String str1 = "";
+	private String str2 = "";
+	
+	private ArrayList<HashMap<String, Object>> lm = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> listmap = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> temp = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> items = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> listmap2 = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> tempp = new ArrayList<>();
 	
 	private LinearLayout linear9;
 	private ScrollView vscroll1;
@@ -88,12 +114,19 @@ public class ViewProductActivity extends AppCompatActivity {
 	private LinearLayout linear19;
 	private LinearLayout linear23;
 	private LinearLayout linear24;
+	private LinearLayout linear28;
+	private LinearLayout linear29;
 	private LinearLayout linear22;
 	private TextView textview9;
 	private TextView description;
+	private LinearLayout linear33;
+	private LinearLayout linear32;
 	private ImageView imageview8;
+	private ImageView imageview9;
+	private LinearLayout linear27;
 	private ImageView imageview7;
 	private TextView textview14;
+	private ImageView imageview10;
 	private TextView textview4;
 	private LinearLayout linear14;
 	private ImageView imageview5;
@@ -110,18 +143,27 @@ public class ViewProductActivity extends AppCompatActivity {
 	private TextView semester;
 	private TextView textview13;
 	private TextView department;
+	private TextView textview15;
+	private TextView textview16;
+	private TextView textview17;
+	private TextView textview18;
+	private TextView textview20;
+	private LinearLayout linear37;
+	private ImageView csea;
+	private LinearLayout linear34;
+	private ImageView csec;
+	private LinearLayout linear36;
 	
 	private SharedPreferences a;
 	private Intent move = new Intent();
 	private SharedPreferences cart;
-	private DatabaseReference information = _firebase.getReference("information");
-	private ChildEventListener _information_child_listener;
 	private DatabaseReference book = _firebase.getReference("book");
 	private ChildEventListener _book_child_listener;
 	private TimerTask refresh;
 	private AlertDialog.Builder confirm;
-	private DatabaseReference warning_book = _firebase.getReference("warning_book");
-	private ChildEventListener _warning_book_child_listener;
+	private SharedPreferences related;
+	private Intent ocm = new Intent();
+	private SharedPreferences favorite;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -147,12 +189,19 @@ public class ViewProductActivity extends AppCompatActivity {
 		linear19 = findViewById(R.id.linear19);
 		linear23 = findViewById(R.id.linear23);
 		linear24 = findViewById(R.id.linear24);
+		linear28 = findViewById(R.id.linear28);
+		linear29 = findViewById(R.id.linear29);
 		linear22 = findViewById(R.id.linear22);
 		textview9 = findViewById(R.id.textview9);
 		description = findViewById(R.id.description);
+		linear33 = findViewById(R.id.linear33);
+		linear32 = findViewById(R.id.linear32);
 		imageview8 = findViewById(R.id.imageview8);
+		imageview9 = findViewById(R.id.imageview9);
+		linear27 = findViewById(R.id.linear27);
 		imageview7 = findViewById(R.id.imageview7);
 		textview14 = findViewById(R.id.textview14);
+		imageview10 = findViewById(R.id.imageview10);
 		textview4 = findViewById(R.id.textview4);
 		linear14 = findViewById(R.id.linear14);
 		imageview5 = findViewById(R.id.imageview5);
@@ -169,9 +218,28 @@ public class ViewProductActivity extends AppCompatActivity {
 		semester = findViewById(R.id.semester);
 		textview13 = findViewById(R.id.textview13);
 		department = findViewById(R.id.department);
+		textview15 = findViewById(R.id.textview15);
+		textview16 = findViewById(R.id.textview16);
+		textview17 = findViewById(R.id.textview17);
+		textview18 = findViewById(R.id.textview18);
+		textview20 = findViewById(R.id.textview20);
+		linear37 = findViewById(R.id.linear37);
+		csea = findViewById(R.id.csea);
+		linear34 = findViewById(R.id.linear34);
+		csec = findViewById(R.id.csec);
+		linear36 = findViewById(R.id.linear36);
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
 		cart = getSharedPreferences("cart", Activity.MODE_PRIVATE);
 		confirm = new AlertDialog.Builder(this);
+		related = getSharedPreferences("related_json", Activity.MODE_PRIVATE);
+		favorite = getSharedPreferences("favorite", Activity.MODE_PRIVATE);
+		
+		linear25.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				
+			}
+		});
 		
 		imageview8.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -194,6 +262,168 @@ public class ViewProductActivity extends AppCompatActivity {
 				move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(move);
 				finish();
+			}
+		});
+		
+		imageview9.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				move.setClass(getApplicationContext(), ViewPhotoActivity.class);
+				move.putExtra("id", getIntent().getStringExtra("id"));
+				move.putExtra("name", getIntent().getStringExtra("name"));
+				move.putExtra("description", getIntent().getStringExtra("description"));
+				move.putExtra("url", getIntent().getStringExtra("url"));
+				move.putExtra("copies", getIntent().getStringExtra("copies"));
+				move.putExtra("back", getIntent().getStringExtra("back"));
+				
+				move.putExtra("edition", getIntent().getStringExtra("edition"));
+				move.putExtra("author", getIntent().getStringExtra("author"));
+				move.putExtra("copy_preview", getIntent().getStringExtra("copy_preview"));
+				
+				move.putExtra("price", getIntent().getStringExtra("price"));
+				move.putExtra("department", getIntent().getStringExtra("department"));
+				move.putExtra("semester", getIntent().getStringExtra("semester"));
+				move.putExtra("back", "view_product"); 
+				        
+				move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(move);
+				finish();
+			}
+		});
+		
+		imageview7.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				// Toggle favorite status
+				if (!bool_faviourte) {
+					    // Check if item with the same ID is already in listmap
+					    boolean isAlreadyInserted = false;
+					    final String itemId = getIntent().getStringExtra("id");
+					
+					    for (HashMap<String, Object> item : listmap) {
+						        if (itemId.equals(item.get("id"))) {
+							            isAlreadyInserted = true;
+							            break;
+							        }
+						    }
+					
+					    if (!isAlreadyInserted) {
+						        // Set favorite icon to filled
+						        imageview7.setImageResource(R.drawable.ic_favorite_white);
+						
+						        // Create a new map to store the item details
+						        HashMap<String, Object> map = new HashMap<>();
+						
+						        // Add item details from intent extras to the map
+						        if (itemId != null) map.put("id", itemId);
+						        if (getIntent().getStringExtra("name") != null) map.put("name", getIntent().getStringExtra("name"));
+						        if (getIntent().getStringExtra("description") != null) map.put("description", getIntent().getStringExtra("description"));
+						        if (getIntent().getStringExtra("copies") != null) map.put("copies", getIntent().getStringExtra("copies"));
+						        if (getIntent().getStringExtra("author") != null) map.put("author", getIntent().getStringExtra("author"));
+						        if (getIntent().getStringExtra("edition") != null) map.put("edition", getIntent().getStringExtra("edition"));
+						        if (getIntent().getStringExtra("price") != null) map.put("price", getIntent().getStringExtra("price"));
+						        if (getIntent().getStringExtra("semester") != null) map.put("semester", getIntent().getStringExtra("semester"));
+						        if (getIntent().getStringExtra("copy_preview") != null) map.put("copy_preview", getIntent().getStringExtra("copy_preview"));
+						        if (getIntent().getStringExtra("department") != null) map.put("department", getIntent().getStringExtra("department"));
+						        if (getIntent().getStringExtra("url") != null) map.put("url", getIntent().getStringExtra("url"));
+						
+						        // Add the map to the listmap
+						        listmap.add(map);
+						
+						        // Update favorite status
+						        bool_faviourte = true;
+						        inserted = true;
+						    }
+				} else {
+					    // Set favorite icon to outline
+					    imageview7.setImageResource(R.drawable.ic_favorite_outline_white);
+					
+					    // Get the ID from the TextView text
+					    final String textViewId = getIntent().getStringExtra("id");
+					
+					    // Iterate and remove matching items
+					    for (Iterator<HashMap<String, Object>> iterator = listmap.iterator(); iterator.hasNext();) {
+						        HashMap<String, Object> item = iterator.next();
+						        if (textViewId.equals(item.get("id"))) {
+							            iterator.remove();
+							        }
+						    }
+					
+					    // Update favorite status
+					    bool_faviourte = false;
+					    inserted = false;
+				}
+				if (new Gson().toJson(listmap).equals("[]")) {
+					favorite.edit().putString("favorite", "").commit();
+				}
+			}
+		});
+		
+		imageview10.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				// Toggle favorite status
+				if (!bool_wishlist) {
+					    // Check if item with the same ID is already in listmap2
+					    boolean isAlreadyInserted = false;
+					    final String itemId = getIntent().getStringExtra("id");
+					
+					    for (HashMap<String, Object> item : listmap2) {
+						        if (itemId.equals(item.get("id"))) {
+							            isAlreadyInserted = true;
+							            break;
+							        }
+						    }
+					
+					    if (!isAlreadyInserted) {
+						        // Set favorite icon to filled
+						        imageview10.setImageResource(R.drawable.ic_bookmark_white);
+						
+						        // Create a new map to store the item details
+						        HashMap<String, Object> map = new HashMap<>();
+						
+						        // Add item details from intent extras to the map
+						        if (itemId != null) map.put("id", itemId);
+						        if (getIntent().getStringExtra("name") != null) map.put("name", getIntent().getStringExtra("name"));
+						        if (getIntent().getStringExtra("description") != null) map.put("description", getIntent().getStringExtra("description"));
+						        if (getIntent().getStringExtra("copies") != null) map.put("copies", getIntent().getStringExtra("copies"));
+						        if (getIntent().getStringExtra("author") != null) map.put("author", getIntent().getStringExtra("author"));
+						        if (getIntent().getStringExtra("edition") != null) map.put("edition", getIntent().getStringExtra("edition"));
+						        if (getIntent().getStringExtra("price") != null) map.put("price", getIntent().getStringExtra("price"));
+						        if (getIntent().getStringExtra("semester") != null) map.put("semester", getIntent().getStringExtra("semester"));
+						        if (getIntent().getStringExtra("copy_preview") != null) map.put("copy_preview", getIntent().getStringExtra("copy_preview"));
+						        if (getIntent().getStringExtra("department") != null) map.put("department", getIntent().getStringExtra("department"));
+						        if (getIntent().getStringExtra("url") != null) map.put("url", getIntent().getStringExtra("url"));
+						
+						        // Add the map to the listmap
+						        listmap2.add(map);
+						
+						        // Update favorite status
+						        bool_wishlist = true;
+						        inserted = true;
+						    }
+				} else {
+					    // Set favorite icon to outline
+					    imageview10.setImageResource(R.drawable.ic_bookmark_outline_white);
+					
+					    // Get the ID from the TextView text
+					    final String textViewId = getIntent().getStringExtra("id");
+					
+					    // Iterate and remove matching items
+					    for (Iterator<HashMap<String, Object>> iterator = listmap2.iterator(); iterator.hasNext();) {
+						        HashMap<String, Object> item = iterator.next();
+						        if (textViewId.equals(item.get("id"))) {
+							            iterator.remove();
+							        }
+						    }
+					
+					    // Update favorite status
+					    bool_wishlist = false;
+					    inserted = false;
+				}
+				if (new Gson().toJson(listmap2).equals("[]")) {
+					favorite.edit().putString("wishlist", "").commit();
+				}
 			}
 		});
 		
@@ -353,14 +583,69 @@ public class ViewProductActivity extends AppCompatActivity {
 		materialbutton2.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
+				mapadditionally = new HashMap<>();
+				
+				if (getIntent().getStringExtra("id") != null) 
+				    mapadditionally.put("id", getIntent().getStringExtra("id"));
+				if (getIntent().getStringExtra("name") != null) 
+				    mapadditionally.put("name", getIntent().getStringExtra("name"));
+				if (getIntent().getStringExtra("description") != null) 
+				    mapadditionally.put("description", getIntent().getStringExtra("description"));
+				if (getIntent().getStringExtra("copies") != null) 
+				    mapadditionally.put("available_copies", getIntent().getStringExtra("copies"));
+				if (getIntent().getStringExtra("author") != null) 
+				    mapadditionally.put("author", getIntent().getStringExtra("author"));
+				if (getIntent().getStringExtra("edition") != null) 
+				    mapadditionally.put("edition", getIntent().getStringExtra("edition"));
+				if (getIntent().getStringExtra("price") != null) 
+				    mapadditionally.put("price", getIntent().getStringExtra("price"));
+				if (getIntent().getStringExtra("semester") != null) 
+				    mapadditionally.put("semester", getIntent().getStringExtra("semester"));
+				if (getIntent().getStringExtra("copy_preview") != null) 
+				    mapadditionally.put("copy_preview", getIntent().getStringExtra("copy_preview"));
+				if (getIntent().getStringExtra("department") != null) 
+				    mapadditionally.put("department", getIntent().getStringExtra("department"));
+				if (getIntent().getStringExtra("url") != null) 
+				    mapadditionally.put("url", getIntent().getStringExtra("url"));
+				
+				// Calculate "total_price" and "copies" if "price" is non-null and "textview5" has a valid value
+				try {
+					    double price = Double.parseDouble(getIntent().getStringExtra("price"));
+					    double copies = Double.parseDouble(textview5.getText().toString());
+					    mapadditionally.put("total_price", String.valueOf((long)(copies * price)));
+					    mapadditionally.put("copies", String.valueOf((long)copies));
+				} catch (NumberFormatException | NullPointerException e) {
+					    // Handle or log the exception if needed
+				}
+				
+				items.add(items.size(), mapadditionally);
+				cart.edit().putString("cart", new Gson().toJson(items)).commit();
+				
 				move.setClass(getApplicationContext(), ViewCartActivity.class);
-				move.putExtra("id", getIntent().getStringExtra("id"));
-				move.putExtra("name", getIntent().getStringExtra("name"));
-				move.putExtra("url", getIntent().getStringExtra("url"));
-				move.putExtra("price", String.valueOf((long)(Double.parseDouble(textview5.getText().toString()) * Double.parseDouble(getIntent().getStringExtra("price")))));
-				move.putExtra("copy", String.valueOf((long)(Double.parseDouble(textview5.getText().toString()))));
 				move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(move);
+				finish();
+			}
+		});
+		
+		csea.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				ocm.setClass(getApplicationContext(), ViewSearchActivity.class);
+				ocm.putExtra("key", str1);
+				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(ocm);
+				finish();
+			}
+		});
+		
+		csec.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				ocm.setClass(getApplicationContext(), ViewSearchActivity.class);
+				ocm.putExtra("key", str2);
+				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(ocm);
 				finish();
 			}
 		});
@@ -390,45 +675,6 @@ public class ViewProductActivity extends AppCompatActivity {
 				}
 			}
 		});
-		
-		_information_child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		information.addChildEventListener(_information_child_listener);
 		
 		_book_child_listener = new ChildEventListener() {
 			@Override
@@ -468,48 +714,20 @@ public class ViewProductActivity extends AppCompatActivity {
 			}
 		};
 		book.addChildEventListener(_book_child_listener);
-		
-		_warning_book_child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		warning_book.addChildEventListener(_warning_book_child_listener);
 	}
 	
 	private void initializeLogic() {
+		if (!"".equals(cart.getString("cart", ""))) {
+			items = new Gson().fromJson(cart.getString("cart", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		}
+		bool_faviourte = false;
+		if (!"".equals(favorite.getString("favorite", ""))) {
+			listmap = new Gson().fromJson(favorite.getString("favorite", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		}
+		str1 = "";
+		str2 = "";
+		bool_wishlist = false;
+		
 		final int num =1;
 		
 		if (Build.VERSION.SDK_INT >= 21) { Window
@@ -526,6 +744,8 @@ public class ViewProductActivity extends AppCompatActivity {
 		price.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview9.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview14.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+		textview16.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+		textview18.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		materialbutton2.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFFFF, 0xFF3F51B5));
 		materialbutton1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFFFF, 0xFF3F51B5));
 		linear10.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFFFF, 0xFF3F51B5));
@@ -535,6 +755,69 @@ public class ViewProductActivity extends AppCompatActivity {
 		price.setText(getIntent().getStringExtra("price"));
 		semester.setText(getIntent().getStringExtra("semester"));
 		department.setText(getIntent().getStringExtra("department"));
+		linear32.setVisibility(View.GONE);
+		linear33.setVisibility(View.GONE);
+		if ("CSE".equals(getIntent().getStringExtra("department").trim().toUpperCase())) {
+			linear32.setVisibility(View.VISIBLE);
+			linear33.setVisibility(View.VISIBLE);
+			tempp = new Gson().fromJson("[\n    { \"text\":\"A Handbook of Agile Software Craftsmanship\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.14%20AM.jpeg?alt=media&token=fa443e98-22c3-48fe-85c1-0512c447acf1\" },\n    { \"text\":\"Operating System Concepts\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.13%20AM.jpeg?alt=media&token=3341f3f9-32fd-43aa-9176-cf6143373427\" },\n    { \"text\":\"Computer Networking\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.13%20AM%20(1).jpeg?alt=media&token=3e897635-fe40-4341-807b-650295d4dde8\" },\n    { \"text\":\"Engineering Drawing & Design\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.12%20AM.jpeg?alt=media&token=b…\" }\n]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		}
+		else {
+			if ("EEE".equals(getIntent().getStringExtra("department").trim().toUpperCase())) {
+				linear33.setVisibility(View.VISIBLE);
+				linear32.setVisibility(View.VISIBLE);
+				tempp = new Gson().fromJson("[\n    { \"text\":\"Electrical Engineering: Principles & Application\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.27.31%20PM.jpeg?alt=media&token=e7bae42f-2042-4895-a302-5d50f94d42c5\" },\n    { \"text\":\"Sedra/Smith Microelectronic Circuits\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.28.07%20PM.jpeg?alt=media&token=093c8269-8caa-4490-8a22-0b865630f035\" },\n    { \"text\":\"Fundamentals of Electric Circuits\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.28.46%20PM.jpeg?alt=media&token=0e938fbe-783a-4cd9-a2e3-95a708dd5b70\" },\n    { \"text\":\"Power System Analysis and Design\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.29.34%20PM.jpeg?alt=media&token=7addaa76-eb04-4735-b0ad-9bb55f89d598\" },\n    { \"text\":\"Engineering Mechanics: Dynamics\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.14%20AM%20(1).jpeg?alt=media&token=45da8ae6-5608-4b0c-bd9d-da500719001e\" }\n]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+			}
+			else {
+				if ("MPE".equals(getIntent().getStringExtra("department").trim().toUpperCase())) {
+					linear33.setVisibility(View.VISIBLE);
+					linear32.setVisibility(View.VISIBLE);
+					tempp = new Gson().fromJson("[\n    { \"text\":\"University Physics with Modern Physics\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM%20(1).jpeg?alt=media&token=46d5eda8-84ec-4703-b1c0-30f76e07f465\" },\n    { \"text\":\"Advanced Engineering Mathematics\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM.jpeg?alt=media&token=87cdd866-f7d0-4821-a4bb-9ab48eda3995\" },\n    { \"text\":\"The C Programming Language\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.11%20AM%20(1).jpeg?alt=media&token=25ac852e-6b50-4599-90a0-2914155ab0af\" },\n    { \"text\":\"Chemistry: The Central Science\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.11%20AM.jpeg?alt=media&token=a82d1f26-5e12-4f03-802e-fe3d8ebf46db\" },\n    { \"text\":\"Control Systems Engineering\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.30.43%20PM.jpeg?alt=media&token=aa794bd2-db8b-4828-9245-cb7d1813c3fb\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+				}
+				else {
+					if ("TVE".equals(getIntent().getStringExtra("department").trim().toUpperCase())) {
+						linear33.setVisibility(View.VISIBLE);
+						linear32.setVisibility(View.VISIBLE);
+						tempp = new Gson().fromJson("[\n    { \"text\":\"Curriculum Development in Vocational\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.17.29%20PM.jpeg?alt=media&token=6630d6ed-29aa-4e67-acfb-f6b142ff4469\" },\n    { \"text\":\"Teaching in Further Education\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.18.24%20PM.jpeg?alt=media&token=11cc2728-bcbe-451a-beee-b34f4a992636\" },\n    { \"text\":\"Teaching and Training Vocational Learners\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.19.04%20PM.jpeg?alt=media&token=a9b40f02-3bfa-421b-b2be-6e06e195ab20\" },\n    { \"text\":\"Competency Based Education and Training\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.19.48%20PM.jpeg?alt=media&token=52a3ec7…\" }\n]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+					}
+					else {
+						if ("CEE".equals(getIntent().getStringExtra("department").trim().toUpperCase())) {
+							linear33.setVisibility(View.VISIBLE);
+							linear32.setVisibility(View.VISIBLE);
+							tempp = new Gson().fromJson("[\n    { \"text\":\"Design of Reinforced Concret=\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.15%20AM.jpeg?alt=media&token=0f0caa21-ca13-43ab-94b5-52712d7012fb\" },\n    { \"text\":\"Environmental Engineering\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.16%20AM%20(1).jpeg?alt=media&token=dcddee96-bff3-442c-a465-5ea15e3d6e80\" },\n    { \"text\":\"Geotechnical Engineering\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.17%20AM.jpeg?alt=media&token=38a65378-a91b-4442-9301-bbb052a66fb4\" },\n    { \"text\":\"Structural Analysis\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.16%20AM.jpeg?alt=media&token=8…\" }\n]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+						}
+						else {
+							linear33.setVisibility(View.VISIBLE);
+							linear32.setVisibility(View.VISIBLE);
+							tempp = new Gson().fromJson("[\n    { \"text\":\"Information Technology for Management\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.22.27%20PM.jpeg?alt=media&token=93550f92-8115-49fb-b2ed-6e62c665a3ee\" },\n    { \"text\":\"The Lean Startup\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.23.29%20PM.jpeg?alt=media&token=bb76b245-906c-4a58-b4fc-343ac9f86ace\" },\n    { \"text\":\"Business Model Generation\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.24.24%20PM.jpeg?alt=media&token=f08ce3ef-3274-4717-8fef-c2af27503852\" },\n    { \"text\":\"Essentials of Business Processes and Information Systems\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.25.01%20PM.jpeg?alt=media&token=46aa3a3b-6bda-4019-89b0-a231440652a5\" },\n    { \"text\":\"Technology Strategy for Managers and Entrepreneurs\",\"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.25.53%20PM.jpeg?alt=media&token=67f0f119-1829-4218-afc1-d0aff2d91a21\" }\n]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+						}
+					}
+				}
+			}
+		}
+		int index = 0;
+		int selected = 0;
+		
+		for (int _repeat796 = 0; _repeat796 < 3; _repeat796++) {
+			    String currentUrl = tempp.get(index).get("link").toString();
+			    String text = tempp.get(index).get("text").toString();  // Retrieve the 'text' value
+			    
+			    if (!getIntent().getStringExtra("url").equals(currentUrl) && selected < 2) {
+				        // Load images based on 'selected' value
+				        if (selected == 0) {
+					            Glide.with(getApplicationContext()).load(Uri.parse(currentUrl)).into(csea);
+					            str1 =  text;  // Store the text value
+					        } else if (selected == 1) {
+					            Glide.with(getApplicationContext()).load(Uri.parse(currentUrl)).into(csec);
+					           str2= text;  // Store the text value
+					        }
+				        selected++;
+				    }
+			    index++;
+		}
+		textview16.setText(getIntent().getStringExtra("author"));
+		textview18.setText(getIntent().getStringExtra("edition"));
+		//copies & id
 		imageview8.setElevation((float)25);
 		if (0 < Double.parseDouble(getIntent().getStringExtra("copies"))) {
 			linear11.setVisibility(View.VISIBLE);
@@ -544,47 +827,25 @@ public class ViewProductActivity extends AppCompatActivity {
 			linear25.setVisibility(View.VISIBLE);
 			linear11.setVisibility(View.GONE);
 			linear13.setVisibility(View.GONE);
-			final String bookId = getIntent().getStringExtra("orderid"); // Assuming "orderid" is the book id
-			
-			// Get the current timestamp to use as the key
-			final String timestampKey = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault()).format(new Date());
-			
-			// Get the Firebase reference for the "warning_book" path
-			final DatabaseReference warningRef = FirebaseDatabase.getInstance().getReference("warning_book");
-			
-			// Clear the existing warning_book data
-			warningRef.setValue(new HashMap<String, String>())
-			    .addOnCompleteListener(new OnCompleteListener<Void>() {
-				        @Override
-				        public void onComplete(Task<Void> task) {
-					            // Check if the specific book ID exists after clearing
-					            warningRef.addListenerForSingleValueEvent(new ValueEventListener() {
-						                @Override
-						                public void onDataChange(DataSnapshot dataSnapshot) {
-							                    boolean bookExists = false;
-							
-							                    // Iterate through the values to check for the book ID
-							                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-								                        String existingBookId = snapshot.getValue(String.class);
-								                        if (existingBookId != null && existingBookId.equals(bookId)) {
-									                            bookExists = true;
-									                            break; // Exit the loop if the book ID is found
-									                        }
-								                    }
-							
-							                    // Proceed to add the book ID if it doesn't exist
-							                    if (!bookExists) {
-								                        warningRef.child(timestampKey).setValue(bookId);
-								                    }
-							                }
-						
-						                @Override
-						                public void onCancelled(DatabaseError databaseError) {
-							                    // Handle possible errors
-							                }
-						            });
-					        }
-				    });
+			if (!"".equals(favorite.getString("wishlist", ""))) {
+				listmap2 = new Gson().fromJson(favorite.getString("wishlist", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+			}
+			index = 0;
+			for(int _repeat763 = 0; _repeat763 < (int)(listmap2.size()); _repeat763++) {
+				if (listmap2.get((int)index).get("id").toString().equals(getIntent().getStringExtra("id"))) {
+					bool_wishlist = true;
+				}
+				else {
+					bool_wishlist = false;
+				}
+				index++;
+			}
+			if (bool_wishlist) {
+				imageview10.setImageResource(R.drawable.ic_bookmark_white);
+			}
+			else {
+				imageview10.setImageResource(R.drawable.ic_bookmark_outline_white);
+			}
 		}
 		imageview8.setElevation((float)10);
 		if (!"".equals(cart.getString("size", ""))) {
@@ -605,11 +866,29 @@ public class ViewProductActivity extends AppCompatActivity {
 		textview13.setTextSize((int)nu);
 		textview9.setTextSize((int)nu);
 		title.setTextSize((int)nu);
+		index = 0;
+		for(int _repeat739 = 0; _repeat739 < (int)(listmap.size()); _repeat739++) {
+			if (listmap.get((int)index).get("id").toString().equals(getIntent().getStringExtra("id"))) {
+				bool_faviourte = true;
+			}
+			else {
+				bool_faviourte = false;
+			}
+			index++;
+		}
+		if (bool_faviourte) {
+			imageview7.setImageResource(R.drawable.ic_favorite_white);
+		}
+		else {
+			imageview7.setImageResource(R.drawable.ic_favorite_outline_white);
+		}
 	}
 	
 	@Override
 	public void onBackPressed() {
 		cart.edit().putString("size", String.valueOf((long)(nu))).commit();
+		favorite.edit().putString("favorite", new Gson().toJson(listmap)).commit();
+		favorite.edit().putString("wishlist", new Gson().toJson(listmap2)).commit();
 		move.setClass(getApplicationContext(), ViewMainActivity.class);
 		move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(move);

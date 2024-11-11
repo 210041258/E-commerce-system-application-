@@ -2,8 +2,10 @@ package ps.iut.projectsoftware;
 
 import android.animation.*;
 import android.app.*;
+import android.app.Activity;
 import android.content.*;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.*;
 import android.graphics.*;
 import android.graphics.Typeface;
@@ -51,26 +53,36 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.*;
 import org.json.*;
+import com.google.gson.Gson;
 
 public class ViewSearchActivity extends AppCompatActivity {
 	
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
+	
+	private String onetofour = "";
+	private String selectedKeyword = "";
 	
 	private ArrayList<String> str = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> onit = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> map = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> searched_map = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> sorted = new ArrayList<>();
+	private ArrayList<String> ls2 = new ArrayList<>();
+	private ArrayList<String> keywordsListMap = new ArrayList<>();
+	private ArrayList<String> keywordsList = new ArrayList<>();
 	
 	private LinearLayout linear9;
 	private LinearLayout linear8;
 	private LinearLayout linear6;
+	private LinearLayout linear14;
 	private LinearLayout linear10;
 	private ListView listview1;
 	private ImageView imageview3;
 	private EditText edittext1;
+	private ImageView imageview5;
 	private TextView textview1;
 	private Spinner spinner1;
+	private Spinner spinner2;
 	private ImageView imageview4;
 	private LinearLayout linear11;
 	private TextView tex;
@@ -78,6 +90,7 @@ public class ViewSearchActivity extends AppCompatActivity {
 	private Intent ocm = new Intent();
 	private DatabaseReference book = _firebase.getReference("book");
 	private ChildEventListener _book_child_listener;
+	private SharedPreferences related;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -92,24 +105,19 @@ public class ViewSearchActivity extends AppCompatActivity {
 		linear9 = findViewById(R.id.linear9);
 		linear8 = findViewById(R.id.linear8);
 		linear6 = findViewById(R.id.linear6);
+		linear14 = findViewById(R.id.linear14);
 		linear10 = findViewById(R.id.linear10);
 		listview1 = findViewById(R.id.listview1);
 		imageview3 = findViewById(R.id.imageview3);
 		edittext1 = findViewById(R.id.edittext1);
+		imageview5 = findViewById(R.id.imageview5);
 		textview1 = findViewById(R.id.textview1);
 		spinner1 = findViewById(R.id.spinner1);
+		spinner2 = findViewById(R.id.spinner2);
 		imageview4 = findViewById(R.id.imageview4);
 		linear11 = findViewById(R.id.linear11);
 		tex = findViewById(R.id.tex);
-		
-		listview1.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
-				final int _position = _param3;
-				
-				return true;
-			}
-		});
+		related = getSharedPreferences("related_json", Activity.MODE_PRIVATE);
 		
 		imageview3.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -126,57 +134,72 @@ public class ViewSearchActivity extends AppCompatActivity {
 						    @Override
 						    public void onDataChange(DataSnapshot _dataSnapshot) {
 							        sorted = new ArrayList<>();
+							        List<Map<String, String>> keywordsListMap = new ArrayList<>();  // List to store keywords with "text" as key and keyword as value
+							
 							        for (DataSnapshot _data : _dataSnapshot.getChildren()) {
 								            HashMap<String, Object> _map = (HashMap<String, Object>) _data.getValue();
 								
 								            // Convert values to lowercase for case-insensitive searching
-								            
 								            String name = (_map.get("name") != null) ? _map.get("name").toString().toLowerCase() : "";
-								            String id = (_map.get("id") != null) ? _map.get("id").toString().toLowerCase() : ""; // Retrieve and lowercase ID
+								            String id = (_map.get("id") != null) ? _map.get("id").toString().toLowerCase() : "";
 								            String department = (_map.get("department") != null) ? _map.get("department").toString().toLowerCase() : "";
 								
 								            // Add to sorted list if search key is found in name, description, department, or id
-								            if ( name.contains(searchKey) || department.contains(searchKey) || id.contains(searchKey)) {
+								            if (name.contains(searchKey) || department.contains(searchKey) || id.contains(searchKey)) {
 									                sorted.add(_map);
+									
+									                // Assuming 'keywords' is a nested map or list inside each book's map
+									                Object keywordsObject = _map.get("keywords");
+									
+									                if (keywordsObject instanceof HashMap) {
+										                    HashMap<String, Object> keywords = (HashMap<String, Object>) keywordsObject;
+										
+										                    // Check if keywords are available
+										                    if (!keywords.isEmpty()) {
+											                        // Iterate over the keywords
+											                        for (Map.Entry<String, Object> entry : keywords.entrySet()) {
+												                            // Create a map for each keyword with the "text" key
+												                            Map<String, String> keywordMap = new HashMap<>();
+												                            keywordMap.put("text", entry.getValue().toString());
+												                            keywordsListMap.add(keywordMap);
+												                        }
+											                    }
+										                } else if (keywordsObject instanceof ArrayList) {
+										                    // Handle the case where keywords is an ArrayList
+										                    ArrayList<Object> keywordsList = (ArrayList<Object>) keywordsObject;
+										
+										                    // For each keyword in the list, create a map with "text" as the key
+										                    for (Object keyword : keywordsList) {
+											                        Map<String, String> keywordMap = new HashMap<>();
+											                        keywordMap.put("text", keyword.toString());
+											                        keywordsListMap.add(keywordMap);
+											                    }
+										                }
 									            }
 								        }
 							
-							        // Check if sorted list is not empty
+							        // Check if the keywords list has been populated
+							        if (!keywordsListMap.isEmpty()) {
+								            // Extract just the "text" values for the spinner
+								            List<String> keywordTexts = new ArrayList<>();
+								            for (Map<String, String> keywordMap : keywordsListMap) {
+									                keywordTexts.add(keywordMap.get("text"));
+									            }
+								
+								            // Set up the spinner with the keywords
+								            ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewSearchActivity.this, android.R.layout.simple_spinner_item, keywordTexts);
+								            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+								            spinner2.setAdapter(adapter);
+								        } else {
+								            // Handle case where no keywords are found
+								            Toast.makeText(ViewSearchActivity.this, "No keywords found.", Toast.LENGTH_SHORT).show();
+								        }
+							
+							        // Handle sorted list for display
 							        if (sorted.size() > 0) {
-								            // Set adapter and update the list initially with unsorted data
 								            listview1.setAdapter(new Listview1Adapter(sorted));
 								            ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-								
-								            // Sort the list by semester ascending by default
-								            Collections.sort(sorted, new Comparator<HashMap<String, Object>>() {
-									                @Override
-									                public int compare(HashMap<String, Object> a, HashMap<String, Object> b) {
-										                    // Assuming "semester" is stored as a String and we need to parse it to an Integer
-										                    int semesterA;
-										                    int semesterB;
-										
-										                    // Attempt to parse semester values as integers
-										                    try {
-											                        semesterA = Integer.parseInt(a.get("semester").toString());
-											                    } catch (NumberFormatException e) {
-											                        semesterA = 0; // Default value for parsing error
-											                    }
-										
-										                    try {
-											                        semesterB = Integer.parseInt(b.get("semester").toString());
-											                    } catch (NumberFormatException e) {
-											                        semesterB = 0; // Default value for parsing error
-											                    }
-										
-										                    // Compare the numeric values
-										                    return Integer.compare(semesterA, semesterB);
-										                }
-									            });
-								
-								            // Notify the adapter after sorting
-								            ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
 								        } else {
-								            // Handle empty search result
 								            linear10.setVisibility(View.VISIBLE);
 								            listview1.setVisibility(View.GONE);
 								        }
@@ -193,6 +216,15 @@ public class ViewSearchActivity extends AppCompatActivity {
 					listview1.setVisibility(View.VISIBLE);
 					linear10.setVisibility(View.GONE);
 				}
+			}
+		});
+		
+		imageview5.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				linear14.setVisibility(View.VISIBLE);
+				spinner2.setVisibility(View.VISIBLE);
+				
 			}
 		});
 		
@@ -241,6 +273,19 @@ public class ViewSearchActivity extends AppCompatActivity {
 							        }
 						    });
 				}
+			}
+			
+			@Override
+			public void onNothingSelected(AdapterView<?> _param1) {
+				
+			}
+		});
+		
+		spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> _param1, View _param2, int _param3, long _param4) {
+				final int _position = _param3;
+				
 			}
 			
 			@Override
@@ -323,57 +368,62 @@ public class ViewSearchActivity extends AppCompatActivity {
 				    @Override
 				    public void onDataChange(DataSnapshot _dataSnapshot) {
 					        sorted = new ArrayList<>();
+					        List<String> keywordsList = new ArrayList<>();  // List to store keywords as strings
+					
 					        for (DataSnapshot _data : _dataSnapshot.getChildren()) {
 						            HashMap<String, Object> _map = (HashMap<String, Object>) _data.getValue();
 						
 						            // Convert values to lowercase for case-insensitive searching
-						            
 						            String name = (_map.get("name") != null) ? _map.get("name").toString().toLowerCase() : "";
-						            String id = (_map.get("id") != null) ? _map.get("id").toString().toLowerCase() : ""; // Retrieve and lowercase ID
+						            String id = (_map.get("id") != null) ? _map.get("id").toString().toLowerCase() : "";
 						            String department = (_map.get("department") != null) ? _map.get("department").toString().toLowerCase() : "";
 						
 						            // Add to sorted list if search key is found in name, description, department, or id
-						            if ( name.contains(searchKey) || department.contains(searchKey) || id.contains(searchKey)) {
+						            if (name.contains(searchKey) || department.contains(searchKey) || id.contains(searchKey)) {
 							                sorted.add(_map);
+							
+							                // Assuming 'keywords' is a nested map or list inside each book's map
+							                Object keywordsObject = _map.get("keywords");
+							
+							                if (keywordsObject instanceof HashMap) {
+								                    HashMap<String, Object> keywords = (HashMap<String, Object>) keywordsObject;
+								
+								                    // Check if keywords are available
+								                    if (!keywords.isEmpty()) {
+									                        // Iterate over the keywords and add them to the list
+									                        for (Map.Entry<String, Object> entry : keywords.entrySet()) {
+										                            keywordsList.add(entry.getValue().toString());
+										                        }
+									                    }
+								                } else if (keywordsObject instanceof ArrayList) {
+								                    // Handle the case where keywords is an ArrayList
+								                    ArrayList<Object> keywordsListObject = (ArrayList<Object>) keywordsObject;
+								
+								                    // Add each keyword in the list to the keywordsList
+								                    for (Object keyword : keywordsListObject) {
+									                        keywordsList.add(keyword.toString());
+									                    }
+								                }
 							            }
 						        }
 					
-					        // Check if sorted list is not empty
+					        // Check if the keywords list has been populated
+					        if (!keywordsList.isEmpty()) {
+						            // Handle the populated keywords list if necessary
+						
+						spinner2.setAdapter(new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_dropdown_item,keywordsList ));
+							((ArrayAdapter)spinner2.getAdapter()).notifyDataSetChanged();
+						
+						        } else {
+						            // Handle case where no keywords are found
+						            Toast.makeText(ViewSearchActivity.this, "No keywords found.", Toast.LENGTH_SHORT).show();
+						        }
+					
+					        // Handle sorted list for display
 					        if (sorted.size() > 0) {
-						            // Set adapter and update the list initially with unsorted data
 						            listview1.setAdapter(new Listview1Adapter(sorted));
 						            ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-						
-						            // Sort the list by semester ascending by default
-						            Collections.sort(sorted, new Comparator<HashMap<String, Object>>() {
-							                @Override
-							                public int compare(HashMap<String, Object> a, HashMap<String, Object> b) {
-								                    // Assuming "semester" is stored as a String and we need to parse it to an Integer
-								                    int semesterA;
-								                    int semesterB;
-								
-								                    // Attempt to parse semester values as integers
-								                    try {
-									                        semesterA = Integer.parseInt(a.get("semester").toString());
-									                    } catch (NumberFormatException e) {
-									                        semesterA = 0; // Default value for parsing error
-									                    }
-								
-								                    try {
-									                        semesterB = Integer.parseInt(b.get("semester").toString());
-									                    } catch (NumberFormatException e) {
-									                        semesterB = 0; // Default value for parsing error
-									                    }
-								
-								                    // Compare the numeric values
-								                    return Integer.compare(semesterA, semesterB);
-								                }
-							            });
-						
-						            // Notify the adapter after sorting
-						            ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
 						        } else {
-						            // Handle empty search result
 						            linear10.setVisibility(View.VISIBLE);
 						            listview1.setVisibility(View.GONE);
 						        }
@@ -387,9 +437,11 @@ public class ViewSearchActivity extends AppCompatActivity {
 					        Toast.makeText(getApplicationContext(), "Database error: " + _databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 					    }
 			});
-			linear10.setVisibility(View.GONE);
 			listview1.setVisibility(View.VISIBLE);
+			linear10.setVisibility(View.GONE);
 		}
+		linear14.setVisibility(View.GONE);
+		
 	}
 	
 	@Override
@@ -399,6 +451,7 @@ public class ViewSearchActivity extends AppCompatActivity {
 		startActivity(ocm);
 		finish();
 	}
+	
 	public class Listview1Adapter extends BaseAdapter {
 		
 		ArrayList<HashMap<String, Object>> _data;
@@ -440,45 +493,69 @@ public class ViewSearchActivity extends AppCompatActivity {
 			final TextView textview5 = _view.findViewById(R.id.textview5);
 			final TextView price = _view.findViewById(R.id.price);
 			
-			Animation animation;
-			animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
-			animation.setDuration(900); // Set the duration of the animation to 500 milliseconds
-			linear1.startAnimation(animation); 
+			imageview1.setElevation((float)10);
+			// Apply fade-in animation to the LinearLayout
+			Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+			animation.setDuration(900); // Set animation duration to 900 milliseconds
+			linear1.startAnimation(animation);
 			
 			// Setting text and loading image for the selected item
-			semester.setText(sorted.get((int) _position).get("semester").toString());
-			
-			
-			price.setText(sorted.get((int) _position).get("price").toString());
-			
-			
-			
+			semester.setText(sorted.get(_position).get("semester").toString());
+			price.setText(sorted.get(_position).get("price").toString());
 			
 			// Set onClickListener for the image view
 			imageview1.setOnClickListener(new View.OnClickListener() {
 				    @Override
 				    public void onClick(View _view) {
+					        // Intent to navigate to the ViewProductActivity
 					        Intent ocm = new Intent(getApplicationContext(), ViewProductActivity.class);
-					        // Put extra data to the next activity
-					        ocm.putExtra("id", sorted.get((int) _position).get("id").toString());
-					        ocm.putExtra("name", sorted.get((int) _position).get("name").toString());
-					        ocm.putExtra("description", sorted.get((int) _position).get("description").toString());
-					        ocm.putExtra("url", sorted.get((int) _position).get("url").toString()); 
 					
-					ocm.putExtra("copies", sorted.get((int) _position).get("copies").toString()); 
+					        // Retrieve values with null checks
+					        String id = sorted.get(_position).get("id") != null ? sorted.get(_position).get("id").toString() : "";
+					        String name = sorted.get(_position).get("name") != null ? sorted.get(_position).get("name").toString() : "";
+					        String description = sorted.get(_position).get("description") != null ? sorted.get(_position).get("description").toString() : "";
+					        String url = sorted.get(_position).get("url") != null ? sorted.get(_position).get("url").toString() : "";
+					        String copies = sorted.get(_position).get("copies") != null ? sorted.get(_position).get("copies").toString() : "";
+					        String copyPreview = sorted.get(_position).get("copy_preview") != null ? sorted.get(_position).get("copy_preview").toString() : "";
+					        String author = sorted.get(_position).get("author") != null ? sorted.get(_position).get("author").toString() : "";
+					        String edition = sorted.get(_position).get("edition") != null ? sorted.get(_position).get("edition").toString() : "";
+					        String price = sorted.get(_position).get("price") != null ? sorted.get(_position).get("price").toString() : "";
+					        String department = sorted.get(_position).get("department") != null ? sorted.get(_position).get("department").toString() : "";
+					        String semester = sorted.get(_position).get("semester") != null ? sorted.get(_position).get("semester").toString() : "";
 					
-					
-					        ocm.putExtra("price", sorted.get((int) _position).get("price").toString());
-					        ocm.putExtra("copies", sorted.get((int) _position).get("copies").toString());
-					        ocm.putExtra("department", sorted.get((int) _position).get("department").toString());
-					        ocm.putExtra("semester", sorted.get((int) _position).get("semester").toString());
-					        
-					        // Clear the activity stack before starting the new activity
-					        ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					        
-					        // Start the new activity
-					        startActivity(ocm);
-					        finish(); // Finish the current activity
+					        // Check if all required values are non-empty
+					        if (!id.isEmpty() && !name.isEmpty() && !description.isEmpty() && !url.isEmpty() && !copies.isEmpty() && 
+					            !copyPreview.isEmpty() && !author.isEmpty() && !edition.isEmpty() && !price.isEmpty() && 
+					            !department.isEmpty() && !semester.isEmpty()) {
+						            
+						            // Add values to intent
+						            ocm.putExtra("id", id);
+						            ocm.putExtra("name", name);
+						            ocm.putExtra("description", description);
+						            ocm.putExtra("url", url);
+						            ocm.putExtra("copies", copies);
+						            ocm.putExtra("copy_preview", copyPreview);
+						            ocm.putExtra("author", author);
+						            ocm.putExtra("edition", edition);
+						            ocm.putExtra("price", price);
+						            ocm.putExtra("department", department);
+						            ocm.putExtra("semester", semester);
+						            ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+						            
+						            // Start activity and finish current
+						            startActivity(ocm);
+						            finish();
+						        } else {
+						            // Log missing data for debugging
+						            Log.e("ViewProductActivity", "Some data is missing for this item: " +
+						                "id=" + id + ", name=" + name + ", description=" + description + ", url=" + url +
+						                ", copies=" + copies + ", copy_preview=" + copyPreview + ", author=" + author +
+						                ", edition=" + edition + ", price=" + price + ", department=" + department +
+						                ", semester=" + semester);
+						            
+						            // Show a toast message to the user
+						            Toast.makeText(getApplicationContext(), "Some data is missing for this item.", Toast.LENGTH_SHORT).show();
+						        }
 					    }
 			});
 			Glide.with(getApplicationContext()).load(Uri.parse(sorted.get((int)_position).get("url").toString())).into(imageview1);
@@ -486,7 +563,6 @@ public class ViewSearchActivity extends AppCompatActivity {
 			textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 			textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 			price.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
-			imageview1.setElevation((float)10);
 			
 			return _view;
 		}

@@ -24,7 +24,7 @@
 			android:id="@+id/progressbar1"
 			android:layout_width="match_parent"
 			android:layout_height="70dp"
-			android:padding="8dp"
+			android:layout_marginBottom="20dp"
 			android:indeterminate="false"
 			style="?android:progressBarStyle" />
 	</LinearLayout>

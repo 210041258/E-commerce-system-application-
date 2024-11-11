@@ -66,6 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
 	
 	private SharedPreferences a;
 	private Intent ocm = new Intent();
+	private SharedPreferences favorite;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -101,6 +102,7 @@ public class ProfileActivity extends AppCompatActivity {
 		linear17 = findViewById(R.id.linear17);
 		textview4 = findViewById(R.id.textview4);
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
+		favorite = getSharedPreferences("favorite", Activity.MODE_PRIVATE);
 		
 		textview1.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -138,6 +140,8 @@ public class ProfileActivity extends AppCompatActivity {
 				a.edit().putString("login", "").commit();
 				a.edit().putString("email", "").commit();
 				a.edit().putString("balance", "").commit();
+				favorite.edit().putString("favorite", "").commit();
+				favorite.edit().putString("wishlist", "").commit();
 				ocm.setClass(getApplicationContext(), LoginActivity.class);
 				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(ocm);

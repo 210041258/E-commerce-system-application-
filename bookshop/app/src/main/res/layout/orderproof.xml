@@ -67,7 +67,7 @@
 			android:layout_height="wrap_content"
 			android:padding="8dp"
 			android:gravity="center_horizontal|center_vertical"
-			android:text="We will Contact with you to confirm the Book Delivery at two to three days 🚚"
+			android:text="We will Contact with you to confirm the Book Delivery location and time at two to three days 🚚"
 			android:textSize="16sp"
 			android:textStyle="bold"
 			android:textColor="#FFFFFF" />

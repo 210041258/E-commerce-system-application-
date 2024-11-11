@@ -196,6 +196,13 @@ public class AdminActivity extends AppCompatActivity {
 		textview3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+		SketchwareUtil.showMessage(getApplicationContext(), "Blocked Action ..");
+		a.edit().putString("login-ad", "").commit();
+		a.edit().putString("email", "").commit();
+		ocm.setClass(getApplicationContext(), LoginActivity.class);
+		ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(ocm);
+		finish();
 	}
 	
 	@Override

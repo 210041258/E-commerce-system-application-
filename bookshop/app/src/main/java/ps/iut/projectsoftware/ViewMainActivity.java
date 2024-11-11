@@ -50,6 +50,8 @@ import org.json.*;
 public class ViewMainActivity extends AppCompatActivity {
 	
 	private FloatingActionButton _fab;
+	private boolean new_notif = false;
+	private double index = 0;
 	
 	private ArrayList<HashMap<String, Object>> cse_list = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> eee_list = new ArrayList<>();
@@ -57,6 +59,7 @@ public class ViewMainActivity extends AppCompatActivity {
 	private ArrayList<HashMap<String, Object>> tve_list = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> mpe_list = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> btm_list = new ArrayList<>();
+	private ArrayList<String> liststring = new ArrayList<>();
 	
 	private LinearLayout linear6;
 	private ScrollView vscroll1;
@@ -141,6 +144,8 @@ public class ViewMainActivity extends AppCompatActivity {
 	
 	private Intent profile = new Intent();
 	private SharedPreferences a;
+	private SharedPreferences related;
+	private SharedPreferences cart;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -235,6 +240,8 @@ public class ViewMainActivity extends AppCompatActivity {
 		tved = findViewById(R.id.tved);
 		tvee = findViewById(R.id.tvee);
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
+		related = getSharedPreferences("related_json", Activity.MODE_PRIVATE);
+		cart = getSharedPreferences("cart", Activity.MODE_PRIVATE);
 		
 		imageview1.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -243,6 +250,14 @@ public class ViewMainActivity extends AppCompatActivity {
 				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(profile);
 				finish();
+			}
+		});
+		
+		imageview2.setOnLongClickListener(new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View _view) {
+				
+				return true;
 			}
 		});
 		
@@ -264,6 +279,13 @@ public class ViewMainActivity extends AppCompatActivity {
 				profile.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(profile);
 				finish();
+			}
+		});
+		
+		edittext1.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				
 			}
 		});
 		
@@ -653,8 +675,6 @@ public class ViewMainActivity extends AppCompatActivity {
 	}
 	
 	private void initializeLogic() {
-		edittext1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFFFF, 0xFF9FA8DA));
-		edittext1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview6.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview13.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
@@ -715,6 +735,12 @@ public class ViewMainActivity extends AppCompatActivity {
 		tve_list = new Gson().fromJson("[\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.17.29%20PM.jpeg?alt=media&token=6630d6ed-29aa-4e67-acfb-f6b142ff4469\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.18.24%20PM.jpeg?alt=media&token=11cc2728-bcbe-451a-beee-b34f4a992636\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.19.04%20PM.jpeg?alt=media&token=a9b40f02-3bfa-421b-b2be-6e06e195ab20\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.19.48%20PM.jpeg?alt=media&token=52a3ec7e-fd50-488f-8cdc-4d83e59c92d5\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.20.48%20PM.jpeg?alt=media&token=5fc96e81-d324-41b1-911a-f11cbb96198c\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 		mpe_list = new Gson().fromJson("[\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM%20(1).jpeg?alt=media&token=46d5eda8-84ec-4703-b1c0-30f76e07f465\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM.jpeg?alt=media&token=87cdd866-f7d0-4821-a4bb-9ab48eda3995\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.11%20AM%20(1).jpeg?alt=media&token=25ac852e-6b50-4599-90a0-2914155ab0af\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.11%20AM.jpeg?alt=media&token=a82d1f26-5e12-4f03-802e-fe3d8ebf46db\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.30.43%20PM.jpeg?alt=media&token=aa794bd2-db8b-4828-9245-cb7d1813c3fb\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 		btm_list = new Gson().fromJson(" [\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.22.27%20PM.jpeg?alt=media&token=93550f92-8115-49fb-b2ed-6e62c665a3ee\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.23.29%20PM.jpeg?alt=media&token=bb76b245-906c-4a58-b4fc-343ac9f86ace\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.24.24%20PM.jpeg?alt=media&token=f08ce3ef-3274-4717-8fef-c2af27503852\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.25.01%20PM.jpeg?alt=media&token=46aa3a3b-6bda-4019-89b0-a231440652a5\" },\n    { \"link\": \"https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.25.53%20PM.jpeg?alt=media&token=67f0f119-1829-4218-afc1-d0aff2d91a21\" }\n  ]", new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+		related.edit().putString("cse", new Gson().toJson(cse_list)).commit();
+		related.edit().putString("eee", new Gson().toJson(eee_list)).commit();
+		related.edit().putString("mpe", new Gson().toJson(mpe_list)).commit();
+		related.edit().putString("btm", new Gson().toJson(btm_list)).commit();
+		related.edit().putString("tve", new Gson().toJson(tve_list)).commit();
+		related.edit().putString("cee", new Gson().toJson(cee_list)).commit();
 		Glide.with(getApplicationContext()).load(Uri.parse(cse_list.get((int)0).get("link").toString())).into(csea);
 		// CSE
 		Glide.with(getApplicationContext()).load(Uri.parse(cse_list.get((int)1).get("link").toString())).into(cseb);
@@ -804,6 +830,15 @@ public class ViewMainActivity extends AppCompatActivity {
 		ceeb.setElevation(25f);
 		ceec.setElevation(25f);
 		ceed.setElevation(25f);
+		_fab.hide();
+		if (!"".equals(cart.getString("cart", ""))) {
+			_fab.show();
+		}
+		new_notif = false;
+		
+		if (new_notif) {
+			imageview2.setImageResource(R.drawable.ic_email_black);
+		}
 	}
 	
 	@Override

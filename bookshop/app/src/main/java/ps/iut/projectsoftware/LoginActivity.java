@@ -52,11 +52,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.*;
 import org.json.*;
+import com.google.gson.Gson;
 
 public class LoginActivity extends AppCompatActivity {
 	
@@ -68,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
 	private double login_req = 0;
 	private double aa = 0;
 	private String extracted = "";
+	
+	private ArrayList<HashMap<String, Object>> temp = new ArrayList<>();
 	
 	private LinearLayout linear1;
 	private LinearLayout linear2;
@@ -99,6 +103,10 @@ public class LoginActivity extends AppCompatActivity {
 	private DatabaseReference information = _firebase.getReference("information");
 	private ChildEventListener _information_child_listener;
 	private AlertDialog.Builder comp;
+	private SharedPreferences cart;
+	private SharedPreferences favorite;
+	private SharedPreferences orders;
+	private SharedPreferences read;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -124,6 +132,10 @@ public class LoginActivity extends AppCompatActivity {
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
 		ag = FirebaseAuth.getInstance();
 		comp = new AlertDialog.Builder(this);
+		cart = getSharedPreferences("cart", Activity.MODE_PRIVATE);
+		favorite = getSharedPreferences("favorite", Activity.MODE_PRIVATE);
+		orders = getSharedPreferences("orders", Activity.MODE_PRIVATE);
+		read = getSharedPreferences("notification", Activity.MODE_PRIVATE);
 		
 		b1.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -330,20 +342,27 @@ public class LoginActivity extends AppCompatActivity {
 									// Split the email to get the username (before the '@' symbol)
 									String username = email.split("@")[0];  // Get the part before the '@'
 									
-									// Construct the node path
-									String nodePath = "information/" + username;  // Specify your node path
+									String email2 = a.getString("email", "").replace(".", "_").replace("@", "_");
+									
+									String subPath_cart = "inter_user/" + email2 + "/data/cart";
+									String subPath_myorder = "inter_user/" + email2 + "/data/myorder";
+									String subPath_myfavorite = "inter_user/" + email2 +"/data/myfavorite";
+									String subPath_notification = "inter_user/" + email2 + "/data/notification";
+									String subPath_wishlist = "inter_user/" + email2 + "/data/wishlist";
+									String subPath_history = "inter_user/" + email2 + "/data/history";
+									
+									// Construct node paths for each section
+									String nodePath = "information/" + username;
 									
 									
+									// Reference to main information path
 									DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(nodePath);
-									
 									
 									dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
 										    @Override
 										    public void onDataChange(DataSnapshot snapshot) {
 											        if (snapshot.exists()) {
-												            
 												            a.edit().putString("balance", snapshot.child("balance").getValue(String.class)).commit();   
-												            
 												        } else {
 												            SketchwareUtil.showMessage(getApplicationContext(), "Not Finding any data for you. Check Customer Center");
 												        }
@@ -351,7 +370,92 @@ public class LoginActivity extends AppCompatActivity {
 										
 										    @Override
 										    public void onCancelled(DatabaseError error) {
-											        SketchwareUtil.showMessage(getApplicationContext(), "Error: " + error.getMessage());
+											        Log.e("FirebaseError", error.getMessage());
+											    }
+									});
+									
+									// Function to save data to SharedPreferences
+									DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference(subPath_cart);
+									cartRef.addListenerForSingleValueEvent(new ValueEventListener() {
+										    @Override
+										    public void onDataChange(DataSnapshot snapshot) {
+											        Object temp = snapshot.exists() ? snapshot.getValue() : "";
+											        if (snapshot.exists()) {
+												            cart.edit().putString("cart", new Gson().toJson(temp)).commit();
+												        }
+											    }
+										
+										    @Override
+										    public void onCancelled(DatabaseError error) {
+											        Log.e("FirebaseError", error.getMessage());
+											    }
+									});
+									
+									// Handle myorder
+									DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference(subPath_myorder);
+									orderRef.addListenerForSingleValueEvent(new ValueEventListener() {
+										    @Override
+										    public void onDataChange(DataSnapshot snapshot) {
+											        if (snapshot.exists()) {
+												            Object temp = snapshot.getValue();
+												            orders.edit().putString("orders", new Gson().toJson(temp)).commit();
+												        } 
+											    }
+										
+										    @Override
+										    public void onCancelled(DatabaseError error) {
+											        Log.e("FirebaseError", error.getMessage());
+											    }
+									});
+									
+									// Handle myfavorite
+									DatabaseReference favoriteRef = FirebaseDatabase.getInstance().getReference(subPath_myfavorite);
+									favoriteRef.addListenerForSingleValueEvent(new ValueEventListener() {
+										    @Override
+										    public void onDataChange(DataSnapshot snapshot) {
+											        Object temp = snapshot.exists() ? snapshot.getValue() : "";
+											        if (snapshot.exists()) {
+												            favorite.edit().putString("favorite", new Gson().toJson(temp)).commit();
+												        } 
+											    }
+										
+										    @Override
+										    public void onCancelled(DatabaseError error) {
+											        Log.e("FirebaseError", error.getMessage());
+											    }
+									});
+									
+									// Handle notification
+									DatabaseReference notificationRef = FirebaseDatabase.getInstance().getReference(subPath_notification);
+									notificationRef.addListenerForSingleValueEvent(new ValueEventListener() {
+										    @Override
+										    public void onDataChange(DataSnapshot snapshot) {
+											        Object temp = snapshot.exists() ? snapshot.getValue() : "";
+											        if (snapshot.exists()) {
+												            read.edit().putString("notification", new Gson().toJson(temp)).commit();
+												        }
+											    }
+										
+										    @Override
+										    public void onCancelled(DatabaseError error) {
+											        Log.e("FirebaseError", error.getMessage());
+											    }
+									});
+									
+									// Handle wishlist
+									DatabaseReference wishlistRef = FirebaseDatabase.getInstance().getReference(subPath_wishlist);
+									wishlistRef.addListenerForSingleValueEvent(new ValueEventListener() {
+										    @Override
+										    public void onDataChange(DataSnapshot snapshot) {
+											        Object temp = snapshot.exists() ? snapshot.getValue() : "";
+											        if (snapshot.exists()) {
+												            favorite.edit().putString("wishlist", new Gson().toJson(temp)).commit();
+												        }
+											    }
+										
+										    @Override
+										    public void onCancelled(DatabaseError error) {
+											        Log.e("FirebaseError", error.getMessage());
 											    }
 									});
 									a.edit().putString("login", "a").commit();
@@ -371,20 +475,27 @@ public class LoginActivity extends AppCompatActivity {
 							// Split the email to get the username (before the '@' symbol)
 							String username = email.split("@")[0];  // Get the part before the '@'
 							
-							// Construct the node path
-							String nodePath = "information/" + username;  // Specify your node path
+							String email2 = a.getString("email", "").replace(".", "_").replace("@", "_");
+							
+							String subPath_cart = "inter_user/" + email2 + "/data/cart";
+							String subPath_myorder = "inter_user/" + email2 + "/data/myorder";
+							String subPath_myfavorite = "inter_user/" + email2 +"/data/myfavorite";
+							String subPath_notification = "inter_user/" + email2 + "/data/notification";
+							String subPath_wishlist = "inter_user/" + email2 + "/data/wishlist";
+							String subPath_history = "inter_user/" + email2 + "/data/history";
+							
+							// Construct node paths for each section
+							String nodePath = "information/" + username;
 							
 							
+							// Reference to main information path
 							DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(nodePath);
-							
 							
 							dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
 								    @Override
 								    public void onDataChange(DataSnapshot snapshot) {
 									        if (snapshot.exists()) {
-										            
 										            a.edit().putString("balance", snapshot.child("balance").getValue(String.class)).commit();   
-										            
 										        } else {
 										            SketchwareUtil.showMessage(getApplicationContext(), "Not Finding any data for you. Check Customer Center");
 										        }
@@ -392,7 +503,92 @@ public class LoginActivity extends AppCompatActivity {
 								
 								    @Override
 								    public void onCancelled(DatabaseError error) {
-									        SketchwareUtil.showMessage(getApplicationContext(), "Error: " + error.getMessage());
+									        Log.e("FirebaseError", error.getMessage());
+									    }
+							});
+							
+							// Function to save data to SharedPreferences
+							DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference(subPath_cart);
+							cartRef.addListenerForSingleValueEvent(new ValueEventListener() {
+								    @Override
+								    public void onDataChange(DataSnapshot snapshot) {
+									        Object temp = snapshot.exists() ? snapshot.getValue() : "";
+									        if (snapshot.exists()) {
+										            cart.edit().putString("cart", new Gson().toJson(temp)).commit();
+										        }
+									    }
+								
+								    @Override
+								    public void onCancelled(DatabaseError error) {
+									        Log.e("FirebaseError", error.getMessage());
+									    }
+							});
+							
+							// Handle myorder
+							DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference(subPath_myorder);
+							orderRef.addListenerForSingleValueEvent(new ValueEventListener() {
+								    @Override
+								    public void onDataChange(DataSnapshot snapshot) {
+									        if (snapshot.exists()) {
+										            Object temp = snapshot.getValue();
+										            orders.edit().putString("orders", new Gson().toJson(temp)).commit();
+										        } 
+									    }
+								
+								    @Override
+								    public void onCancelled(DatabaseError error) {
+									        Log.e("FirebaseError", error.getMessage());
+									    }
+							});
+							
+							// Handle myfavorite
+							DatabaseReference favoriteRef = FirebaseDatabase.getInstance().getReference(subPath_myfavorite);
+							favoriteRef.addListenerForSingleValueEvent(new ValueEventListener() {
+								    @Override
+								    public void onDataChange(DataSnapshot snapshot) {
+									        Object temp = snapshot.exists() ? snapshot.getValue() : "";
+									        if (snapshot.exists()) {
+										            favorite.edit().putString("favorite", new Gson().toJson(temp)).commit();
+										        } 
+									    }
+								
+								    @Override
+								    public void onCancelled(DatabaseError error) {
+									        Log.e("FirebaseError", error.getMessage());
+									    }
+							});
+							
+							// Handle notification
+							DatabaseReference notificationRef = FirebaseDatabase.getInstance().getReference(subPath_notification);
+							notificationRef.addListenerForSingleValueEvent(new ValueEventListener() {
+								    @Override
+								    public void onDataChange(DataSnapshot snapshot) {
+									        Object temp = snapshot.exists() ? snapshot.getValue() : "";
+									        if (snapshot.exists()) {
+										            read.edit().putString("notification", new Gson().toJson(temp)).commit();
+										        }
+									    }
+								
+								    @Override
+								    public void onCancelled(DatabaseError error) {
+									        Log.e("FirebaseError", error.getMessage());
+									    }
+							});
+							
+							// Handle wishlist
+							DatabaseReference wishlistRef = FirebaseDatabase.getInstance().getReference(subPath_wishlist);
+							wishlistRef.addListenerForSingleValueEvent(new ValueEventListener() {
+								    @Override
+								    public void onDataChange(DataSnapshot snapshot) {
+									        Object temp = snapshot.exists() ? snapshot.getValue() : "";
+									        if (snapshot.exists()) {
+										            favorite.edit().putString("wishlist", new Gson().toJson(temp)).commit();
+										        }
+									    }
+								
+								    @Override
+								    public void onCancelled(DatabaseError error) {
+									        Log.e("FirebaseError", error.getMessage());
 									    }
 							});
 							a.edit().putString("login", "a").commit();
@@ -460,6 +656,7 @@ public class LoginActivity extends AppCompatActivity {
 		SketchwareUtil.showMessage(getApplicationContext(), "We will Be Waiting you Next time !");
 		finish();
 	}
+	
 	
 	@Deprecated
 	public void showMessage(String _s) {

@@ -74,7 +74,7 @@ public class ViewPhotoActivity extends AppCompatActivity {
 	}
 	
 	private void initializeLogic() {
-		web.loadUrl(getIntent().getStringExtra("url"));
+		web.loadUrl(getIntent().getStringExtra("copy_preview"));
 		web.getSettings().setBuiltInZoomControls(true);
 		web.getSettings().setDisplayZoomControls(false);
 		web.getSettings().setLoadWithOverviewMode(true);

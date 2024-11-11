@@ -41,6 +41,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.text.*;
 import java.util.*;
@@ -59,6 +61,7 @@ public class HistoryOperationActivity extends AppCompatActivity {
 	private String email = "";
 	
 	private ArrayList<HashMap<String, Object>> map = new ArrayList<>();
+	private ArrayList<HashMap<String, Object>> listmap = new ArrayList<>();
 	
 	private LinearLayout linear1;
 	private ListView listview1;
@@ -72,6 +75,7 @@ public class HistoryOperationActivity extends AppCompatActivity {
 	private ChildEventListener _list_child_listener;
 	private SharedPreferences a;
 	private TimerTask bs;
+	private SharedPreferences history;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -90,6 +94,7 @@ public class HistoryOperationActivity extends AppCompatActivity {
 		linear5 = findViewById(R.id.linear5);
 		textview1 = findViewById(R.id.textview1);
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
+		history = getSharedPreferences("history", Activity.MODE_PRIVATE);
 		
 		_list_child_listener = new ChildEventListener() {
 			@Override
@@ -137,28 +142,16 @@ public class HistoryOperationActivity extends AppCompatActivity {
 			w.setNavigationBarColor(Color.parseColor("#3F51B5")); }
 		        
 		listview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFF3F51B5, 0xFFE8EAF6));
+		linear4.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFF3F51B5, 0xFFE8EAF6));
 		email = a.getString("email", "");
-		list.addListenerForSingleValueEvent(new ValueEventListener() {
-			@Override
-			public void onDataChange(DataSnapshot _dataSnapshot) {
-				map = new ArrayList<>();
-				try {
-					GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-					for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-						HashMap<String, Object> _map = _data.getValue(_ind);
-						map.add(_map);
-					}
-				}
-				catch (Exception _e) {
-					_e.printStackTrace();
-				}
-				listview1.setAdapter(new Listview1Adapter(map));
-				((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-			}
-			@Override
-			public void onCancelled(DatabaseError _databaseError) {
-			}
-		});
+		if (!history.getString("history", "").equals("")) {
+			listmap = new Gson().fromJson(history.getString("history", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+			listview1.setAdapter(new Listview1Adapter(listmap));
+			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
+		}
+		else {
+			
+		}
 		bs = new TimerTask() {
 			@Override
 			public void run() {
@@ -178,6 +171,7 @@ public class HistoryOperationActivity extends AppCompatActivity {
 			}
 		};
 		_timer.schedule(bs, (int)(3500));
+		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 	}
 	
 	@Override

@@ -34,7 +34,7 @@
 					android:id="@+id/imageview1"
 					android:layout_width="match_parent"
 					android:layout_height="250dp"
-					android:src="@drawable/default_image"
+					android:src="@drawable/book_shop_1"
 					android:scaleType="centerInside" />
 				<LinearLayout
 					android:id="@+id/linear5"

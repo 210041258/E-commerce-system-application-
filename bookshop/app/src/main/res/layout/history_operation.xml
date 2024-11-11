@@ -48,7 +48,7 @@
 				android:layout_height="wrap_content"
 				android:padding="8dp"
 				android:gravity="center_horizontal"
-				android:text="No Deposit or Withdrawal forn your account 😕 .."
+				android:text="No Deposit or Withdrawal from your account 😕 .."
 				android:textSize="18sp"
 				android:textColor="#FFFFFF" />
 		</LinearLayout>
