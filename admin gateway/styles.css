@@ -1,29 +1,40 @@
+/* Body styling */
 body {
-    background-color: #280063;
-    color: white;
-    font-family: sans-serif;
+    background-color: #280063;  /* Deep purple background */
+    color: white;  /* White text for good contrast */
+    font-family: 'Helvetica Neue', sans-serif;  /* Smooth sans-serif font */
+    font-size: 16px;  /* Slightly larger text */
+    line-height: 1.5;  /* Better line spacing for readability */
 }
 
+/* Container with some margin and padding */
 .container {
-    margin-top: 20px;
+    margin-top: 30px;
+    padding: 20px;
 }
 
+/* Rounded corners for elements */
 .rounded-corners {
     border-radius: 20px;
 }
 
+/* Styling for list items, with hover effects */
 .list-group-item {
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .list-group-item:hover {
-    background-color: #e9ecef;
+    background-color: #e9ecef; /* Light gray on hover */
+    transform: scale(1.02); /* Slight zoom effect */
 }
 
+/* Table responsiveness */
 .table-responsive {
     overflow-x: auto;
 }
 
+/* Fade-out animation */
 @keyframes fadeOut {
     from {
         opacity: 1;
@@ -34,14 +45,96 @@ body {
     }
 }
 
-
-
-/* Style for the logout button */
+/* Logout Button styling */
 #logoutBtn {
     transition: all 0.3s ease;
+    background-color: #d12d4f; /* Default red background */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 #logoutBtn:hover {
-    background-color: #dc3545; /* Darker red on hover */
-    transform: scale(1.05);
+    background-color: #d9293b;  /* Darker red on hover */
+    transform: scale(1.05);  /* Subtle zoom effect */
+}
+
+/* Styling for the table */
+.table {
+    width: 100%;
+    border-radius: 10px;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;  /* Light border for table cells */
+}
+
+.table th {
+    background-color: #f8f9fa;
+    color: #333;
+    font-weight: bold;
+}
+
+.table td {
+    background-color: #fff;
+    color: #333;
+}
+
+.table tr:hover {
+    background-color: #f1f1f1;  /* Light gray on row hover */
+}
+
+/* Search box styling */
+#searchBox {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px solid #ced4da;
+    font-size: 16px;
+}
+
+#searchBox:focus {
+    outline: none;
+    border-color: #280063; /* Purple border on focus */
+}
+
+/* Add a subtle shadow to input fields */
+input.form-control {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Customizing the 'Add Balance' button */
+#addBalanceBtn {
+    background-color: #28a745;  /* Green background */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+    transition: all 0.5s ease;
+}
+
+#addBalanceBtn:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05);  /* Subtle zoom effect */
+}
+
+/* Responsive Table Styling for smaller screens */
+@media (max-width: 768px) {
+    .table th, .table td {
+        padding: 10px;
+    }
+
+    #searchBox {
+        width: 100%;
+        margin: 10px 0;
+    }
 }

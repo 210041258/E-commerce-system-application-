@@ -30,26 +30,159 @@ async function handleLogout() {
     }
 }
 
-document.querySelectorAll('.list-group-item').forEach(item => {
-    item.addEventListener('click', () => {
-        switch (item.id) {
-            case 'bookViewBtn':
-                renderBookManagement();
-                break;
-            case 'couponViewBtn':
-                renderCouponManagement();
-                break;
-            case 'notificationBtn':
-                renderNotification();
-                break;
-            case 'addBalanceBtn':
-                renderAddBalance();
-                break;
-            default:
-                console.warn('No handler for this button:', item.id);
-        }
+window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.list-group-item').forEach(item => {
+        item.addEventListener('click', () => {
+            switch (item.id) {
+                case 'bookViewBtn':
+                    renderBookManagement();
+                    break;
+                case 'couponViewBtn':
+                    renderCouponManagement();
+                    break;
+                case 'notificationBtn':
+                    renderNotification();
+                    break;
+                case 'addBalanceBtn':
+                    renderAddBalance();
+                    break;
+                case 'contactbtn':
+                    contactbtn1();
+                    break;
+                default:
+                    console.warn('No handler for this button:', item.id);
+            }
+        });
     });
 });
+
+
+
+function contactbtn1() {
+    // Clear the content area
+    const contentArea = document.getElementById('content-area');
+    contentArea.innerHTML = "";
+
+    // Add a title for the page
+    const title = document.createElement("h2");
+    title.textContent = "Email List Management - Confirmation Page";
+    contentArea.appendChild(title);
+
+    loadContacts();
+}
+
+function renderContactsTable(listMaps, contentArea) {
+    let html = `
+        <br>
+        <div id="search-container" class="mt-3" style="text-align: center;">
+            <input type="text" id="searchBox" class="form-control" placeholder="Search by Username..." 
+                   style="max-width: 400px; margin: 0 auto; border-radius: 25px; padding: 10px;" aria-label="Search by Username"/>
+           <br> <button id="searchBtn" onclick="filterTable()" class="btn btn-primary" style="border-radius: 25px; padding: 10px; margin-left: 10px;" aria-label="Search">
+                Search
+            </button>
+        </div>
+        <br><br>
+        <table border="1" cellpadding="10" cellspacing="0" style="width: 100%;">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>List Map ID</th>
+                    <th>Order ID</th>
+                    <th>Order Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></br>
+    `;
+
+    for (const email in listMaps) {
+        const maps = listMaps[email];
+
+        for (const mapId in maps) {
+            const map = maps[mapId];
+
+            html += `
+                <tr>
+                    <td>${email}</td>
+                    <td>${mapId}</td>
+                    <td>${map.orderid}</td>
+                    <td>${map.orderprice}</td>
+                    <td>
+                        <button onclick="confirmDelete('${email}', '${mapId}')" aria-label="Confirm & Delete">Confirm & Delete</button>
+                    </td>
+                </tr>
+            `;
+        }
+    }
+
+    html += `
+            </tbody>
+        </table>
+    `;
+
+    contentArea.innerHTML = html;
+}
+window.filterTable= filterTable;
+window.confirmDelete= confirmDelete;
+
+function filterTable() {
+    const searchValue = document.getElementById('searchBox').value.toLowerCase();
+    const tableRows = document.querySelectorAll('#tableBody tr');
+
+    tableRows.forEach(row => {
+        const username = row.cells[0].textContent.toLowerCase();
+        row.style.display = username.includes(searchValue) ? '' : 'none';
+    });
+
+    // Keep search term active (optional improvement)
+    setTimeout(() => {
+        loadContacts(searchValue);
+    }, 10000);
+}
+
+
+async function loadContacts() {
+    const contentArea = document.getElementById('content-area');
+    contentArea.innerHTML = '<h3>Loading Email List Maps...</h3>';
+
+    try {
+        // Reference to 'contact' node in the database
+        const contactsRef = dbRef(database, 'contact');
+        const snapshot = await get(contactsRef);
+
+        if (snapshot.exists()) {
+            const contacts = snapshot.val();
+            renderContactsTable(contacts, contentArea);
+        } else {
+            contentArea.innerHTML = '<p>No contacts found in the database.</p>';
+        }
+    } catch (error) {
+        console.error("Error loading contacts:", error);
+        contentArea.innerHTML = '<p>Error loading contacts. Please try again later.</p>';
+        
+        // Optional: Provide a button to retry loading contacts
+        const retryButton = document.createElement('button');
+        retryButton.innerText = 'Retry';
+        retryButton.onclick = loadContacts; // Bind the retry function
+        contentArea.appendChild(retryButton);
+    }
+}
+
+async function confirmDelete(email, mapId) {
+    const confirmation = confirm(`Are you sure you want to delete the list map ${mapId} for ${email}?`);
+    if (confirmation) {
+        try {
+            const mapRef = dbRef(database, `contact/${email}/${mapId}`);
+            await remove(mapRef);
+            alert(`List map ${mapId} for ${email} deleted successfully.`);
+            loadContacts(); // Refresh the list after deletion
+        } catch (error) {
+            console.error("Error deleting list map:", error);
+            alert("Failed to delete the list map. Please try again.");
+        }
+    }
+}
+
 
 function renderBookManagement() {
     contentArea.innerHTML = `
@@ -59,7 +192,7 @@ function renderBookManagement() {
         <button id="searchBookBtn" class="btn btn-primary mb-3">Search Book</button>
         <button id="historyBookBtn" class="btn btn-primary mb-3">View History</button>
         <div id="searchContainer" class="mb-3" style="display: none;">
-            <input type="text" id="searchInput" class="form-control" placeholder="Search by ID, Name, or Author">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search by ID, Name, or Author , or Department">
         </div>
         <div id="bookList" style="display: none;">
             <div class="table-responsive">
@@ -116,7 +249,7 @@ function renderBooks(books, tableBody) {
             <td>${book.keywords.join(', ')}</td>
             <td>${book.author}</td>
             <td>${book.edition}</td>
-            <td><a href="${book.pdf_preview_link}" target="_blank">Preview</a></td>
+            <td><a href="${book.copy_preview}" target="_blank">Preview</a></td>
             <td>
                 <button class="btn btn-sm btn-danger" onclick="deleteBook('${book.id}')">Delete</button>
                 <button class="btn btn-sm btn-warning" onclick="handleEditBook('${book.id}')">Edit</button>
@@ -220,8 +353,8 @@ function renderAddBookForm() {
                 <input type="text" class="form-control" id="bookEdition" required>
             </div>
             <div class="mb-3">
-                <label for="pdfPreviewLink" class="form-label">PDF Preview Link</label>
-                <input type="text" class="form-control" id="pdfPreviewLink" required>
+                <label for="copy_preview" class="form-label">PDF Preview Link</label>
+                <input type="text" class="form-control" id="copy_preview" required>
             </div>
             <button type="submit" class="btn btn-primary">Add Book</button>
             <button type="button" class="btn btn-secondary" id="cancelAddBookBtn">Cancel</button>
@@ -249,7 +382,7 @@ async function handleAddBook(event) {
     const bookKeywords = document.getElementById('bookKeywords').value.split(',').map(keyword => keyword.trim());
     const bookAuthor = document.getElementById('bookAuthor').value;
     const bookEdition = document.getElementById('bookEdition').value;
-    const pdfPreviewLink = document.getElementById('pdfPreviewLink').value;
+    const copy_preview = document.getElementById('copy_preview').value;
 
 
     try {
@@ -277,7 +410,7 @@ async function handleAddBook(event) {
             keywords: bookKeywords,
             author: bookAuthor,
             edition: bookEdition,
-            pdf_preview_link: pdfPreviewLink
+            copy_preview: copy_preview
         };
 
         // Add the new book to Firebase
@@ -404,7 +537,7 @@ function toggleHistoryView() {
 }
 
 function handleSearchBook() {
-    const searchValue = document.getElementById('searchInput').value.toLowerCase();
+    const searchValue = document.getElementById('searchInput').value.toLowerCase().trim();
     const bookTableBody = document.getElementById('bookTableBody');
     searchContainer.style.display = 'block';
     bookList.style.display = 'block';
@@ -421,9 +554,14 @@ function handleSearchBook() {
     get(booksRef).then(snapshot => {
         if (snapshot.exists()) {
             const booksArray = snapshot.val();
+            setTimeout(() => {
+                document.getElementById('searchInput').value = "";
+            
+                bookTableBody.appendChild(noBooksMessage);
+            }, 10000);
             const filteredBooks = Object.values(booksArray).filter(book => 
                 book.name.toLowerCase().includes(searchValue) || 
-                book.id.toLowerCase().includes(searchValue)
+                book.id.toLowerCase().includes(searchValue)||book.department.toLowerCase().includes(searchValue)
             );
 
             bookTableBody.innerHTML = ''; // Clear the previous search results
@@ -501,8 +639,8 @@ async function handleEditBook(bookId) {
                 <input type="text" class="form-control" id="bookEdition" value="${book.edition}">
             </div>
             <div class="mb-3">
-                <label for="pdfPreviewLink" class="form-label">PDF Preview Link</label>
-                <input type="text" class="form-control" id="pdfPreviewLink" value="${book.pdf_preview_link}">
+                <label for="copy_preview" class="form-label">PDF Preview Link</label>
+                <input type="text" class="form-control" id="copy_preview" value="${book.copy_preview}">
             </div>
             <button type="submit" class="btn btn-primary">Save Changes</button>
             <button type="button" class="btn btn-secondary" onclick="renderBookManagement()">Cancel</button>
@@ -548,8 +686,8 @@ async function handleUpdateBook(event, bookId) {
     const bookKeywords = document.getElementById('bookKeywords').value.split(',').map(keyword => keyword.trim());
     const bookAuthor = document.getElementById('bookAuthor').value;
     const bookEdition = document.getElementById('bookEdition').value;
-    const pdfPreviewLink = document.getElementById('pdfPreviewLink').value;
-
+    const copy_preview = document.getElementById('copy_preview').value;
+    
     try {
         const bookRef = dbRef(database, `book/${bookId}`);
         const snapshot = await get(bookRef);
@@ -567,7 +705,7 @@ async function handleUpdateBook(event, bookId) {
             keywords: bookKeywords,
             author: bookAuthor,
             edition: bookEdition,
-            pdf_preview_link: pdfPreviewLink
+            copy_preview: copy_preview
         };
 
         await set(bookRef, updatedBook);
@@ -894,8 +1032,11 @@ async function handleAddNotification(event) {
         };
 
         // Reference to the notifications list in the database
-        const notificationsRef = dbRef(database, 'notifications'); // Adjust path as necessary
+        const sanitizedEmail = notificationEmail.split('.')[0];
 
+        // Reference to the notifications list in the database
+        const notificationsRef = dbRef(database, `notifications/${sanitizedEmail}`);
+    
         // Push the new notification to the list
         const newNotificationRef = push(notificationsRef); // Use push to generate a unique key for each notification
         await set(newNotificationRef, notificationData); // Store the new notification object

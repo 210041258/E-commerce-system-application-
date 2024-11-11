@@ -5,15 +5,15 @@ import { getDatabase } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-
 import { getStorage } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-storage.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBsDin-lyVTkxBNsbVf6FbIH6ye3lBwPIU",
-    authDomain: "test453453-bd269.firebaseapp.com",
-    databaseURL: "https://test453453-bd269-default-rtdb.firebaseio.com",
-    projectId: "test453453-bd269",
-    storageBucket: "test453453-bd269.firebasestorage.app",
-    messagingSenderId: "504507710871",
-    appId: "1:504507710871:web:684dc4bbd054e4cea8d8d2",
-    measurementId: "G-0DPH5DQKJ9"
-  };
+  apiKey: "AIzaSyCzT77IureChCmwMkYq45oMVpmNTJgXYUw",
+  authDomain: "iutianbookshop.firebaseapp.com",
+  databaseURL: "https://iutianbookshop-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "iutianbookshop",
+  storageBucket: "iutianbookshop.appspot.com",
+  messagingSenderId: "300755004711",
+  appId: "1:300755004711:web:fb9a9033b13b016cc78d02",
+  measurementId: "G-64VGT3VT75"
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
