@@ -1032,10 +1032,10 @@ async function handleAddNotification(event) {
         };
 
         // Reference to the notifications list in the database
-        const sanitizedEmail = notificationEmail.split('.')[0];
+        const sanitizedEmail = notificationEmail.replace(".", "_").replace("@", "_");
 
         // Reference to the notifications list in the database
-        const notificationsRef = dbRef(database, `notifications/${sanitizedEmail}`);
+        const notificationsRef = dbRef(database, `inter_user/${sanitizedEmail}/data/notifications`);
     
         // Push the new notification to the list
         const newNotificationRef = push(notificationsRef); // Use push to generate a unique key for each notification
