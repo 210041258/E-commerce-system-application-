@@ -23,3 +23,5 @@
 
 #### 5- the gateway after accessing it , you can play the role of the admin as managment things simple like that 
 
+![db information](https://github.com/210041258/E-commerce-system-application-/blob/main/admin%20gateway/Screenshots/db.png)
+![mobile admin pin](https://github.com/210041258/E-commerce-system-application-/blob/main/admin%20gateway/Screenshots/mobile_that_time.jpeg)
