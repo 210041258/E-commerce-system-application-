@@ -1,4 +1,4 @@
-# University Bookshop Android App
+# University Bookshop Android App (Readme.me respected to the course obj.)
 
 ## Project Overview
 This project, developed by the **PALESTINE Supporter Team**, aims to create a user-friendly **Android App** for a university bookshop. The current bookshop lacks an efficient digital platform, leading to accessibility and user-experience challenges. The app will improve access, browsing, and purchasing options for students and staff, with features such as a catalog, search functionality, and a secure payment gateway.
@@ -59,7 +59,3 @@ The development follows the **Agile Scrum Methodology**, ensuring flexibility an
 This project is open source and available under the [MIT License](LICENSE).
 
 
-
-
-## Updates 
-UI : admin on th hover of the png  
