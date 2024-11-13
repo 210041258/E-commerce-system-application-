@@ -27,13 +27,13 @@
 ##### 5- product on also implicait calling on the search view  , (the product view : loading photos with json links on searching view implicitly calling with index searching with differant link on the view  for the related book branch (i can also to assgin the depatment of the book and make it on the same view of the listview of the search view after the sorting if he did sorting , at that moment i can insure what he thinking about as variable and stored to show him the product each time ,cart creating the map and set it to the db interface , buy btons approcah with after cretation and insert the map to the list map ) ,open the address pdf in my own page desgined with inter-domain-requests webview in java , also there is on faviourite and wishlist locally stored and on the db stored but on the session storing the db and loading it we don't wont to store to the db until he end the session by the main class )
 
 
-# 3- user information page
+#### 4- user information page
 ##### 1- myprofile page (contines password-hidden text (one click-reset enabled) , email , balance , histoy of the operation with local stored on shrehed preferacne and on the end stored in the db as the all and also all of them are laoded at the first logging in time (this is floating btn ))
 ##### 2- order page with same strucuture of my arrtchutre on the desgine of the connection once in time of the end of the session termination process of the class
 ##### 3- faviourte and wishlist page (same gernarl artichure in the system desgin)
 ##### 4- logout page (loging out and also storing the data implicitly calling the same class after clearing the data session information )
 
-#### admin operations (after sgining up/in or forgot password):
+# admin operations (after sgining up/in or forgot password):
 
 > note in my system desgin the system provide one email means one person can and only inside the system login in , and the approch of the implemntion of the code is simple on the integrantion of the interfaces to code it
 > by ai tools can gernate the same syntax of the code the strucure is depending in the secutity and complexity of the algorithms over the time simulation purpose
