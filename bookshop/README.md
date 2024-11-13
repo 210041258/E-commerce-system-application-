@@ -2,6 +2,7 @@
 # Book Shop Simple Operation Interaction with multi interfaces 
 
 ## on summary (on java) : 
+## on summary of the gui , gui is perfect eoungh to insure the completness of the operation and spend the extra time to be comfortable in the project of all the view 
 ### the operation inside the applciation done with this strucuture 
 #### two types one is user and admin (staff,managers) (same conditions)
 # user operations (after sgining up/in or forgot password):
