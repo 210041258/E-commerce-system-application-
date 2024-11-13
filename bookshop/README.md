@@ -33,16 +33,16 @@
 ##### 3- faviourte and wishlist page (same gernarl artichure in the system desgin)
 ##### 4- logout page (loging out and also storing the data implicitly calling the same class after clearing the data session information )
 
-# admin operations (after sgining up/in or forgot password):
+#### admin operations (after sgining up/in or forgot password):
 
 > note in my system desgin the system provide one email means one person can and only inside the system login in , and the approch of the implemntion of the code is simple on the integrantion of the interfaces to code it
 > by ai tools can gernate the same syntax of the code the strucure is depending in the secutity and complexity of the algorithms over the time simulation purpose
 
 
-## the code is desgined with perfectizm of teh ai-tools approcah over the time of the usage of the ai and created on the quality time approcah 
-## as i am ai-enginer i cna insure the efficent working approchs in all of the inside that code not that gernal code on the just sturucure 
-## the geranliztion is not in my systems desgined !!
-## you can check the size of the java applciation size !!
+#### the code is desgined with perfectizm of teh ai-tools approcah over the time of the usage of the ai and created on the quality time approcah 
+##### as i am ai-enginer i cna insure the efficent working approchs in all of the inside that code not that gernal code on the just sturucure 
+##### the geranliztion is not in my systems desgined !!
+##### you can check the size of the java applciation size !!
 
 
 
