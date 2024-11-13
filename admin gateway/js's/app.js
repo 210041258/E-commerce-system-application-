@@ -6,7 +6,7 @@ const contentArea = document.getElementById('content-area');
 // Add this to your app.js
 onAuthStateChanged(auth, (user) => {
     if (!user) {
-        window.location.href = 'index.html';
+        window.location.href = '../index.html';
     }
 });
 

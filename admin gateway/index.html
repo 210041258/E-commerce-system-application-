@@ -4,103 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IUTIAN Book Shop</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js's/loginin_session_sec.js"></script>
+    <link rel="stylesheet" href="css's/login.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="shortcut icon" href="a.png" type="image/x-icon">
-    <style>
-      
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            background-color: #280063; /* Dark purple background */
-             font-family: 'Playfair Display', serif;
-
-
-        }
-
-
-        .form-floating > label {
-    position: relative;
-    top: 0.5rem; /* Adjust vertical alignment */
-    left: 1rem;  /* Adjust horizontal position */
-    z-index: 1;  /* Ensure label is on top of input text */
-    pointer-events: none; /* Prevent label from interfering with input */
-}
-.form-floating > .form-control{
-    padding-left: 1.6rem;
-
-}
-
-
-        .card {
-            border: none; /* Remove default card border */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-        }
-
-        .card-header {
-            background-color: #6A0DAD; /* Darker purple header */
-            color: white;
-            border-bottom: none; /* Remove header border */
-            border-top-left-radius: 10px; /* Round top corners of the card */
-             border-top-right-radius: 10px;
-
-
-        }
-
-        .logo-container {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .logo {
-            max-width: 200px;
-            height: auto;
-            border-radius:10px ;
-        }
-        .btn-primary {
-            background-color: #6A0DAD; /* Purple button */
-            border-color: #6A0DAD; /* Purple button border */
-            font-family: 'Playfair Display', serif;
-        }
-        /* Playfair Display font */
-        h2, .btn, label, .form-control::placeholder{ /* Apply Playfair font to headings, button and form elements*/
-          font-family: 'Playfair Display', serif;
-        }
-
-        .form-control:hover {
-            border-color: #6A0DAD; /* Purple border on hover */
-            box-shadow: 0 0 5px rgba(106, 13, 173, 0.5); /* Subtle purple shadow */
-        }
-
-        .btn-primary:hover {
-            background-color: #4b0082; /* Darker purple on hover */
-            border-color: #4b0082; /* Darker purple border */
-        }
-        .card {
-            animation: fadeInUp 1s ease; /* Add animation to the card */
-        }
-
-        @keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-        display: none; /* Hide the element after animation completes */
-    }
-}
-        @keyframes fadeInUp { /* Define the fadeInUp animation */
-            from {
-                opacity: 0;
-                transform: translateY(20px); /* Start slightly below */
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);    /* End in normal position */
-            }
-        }
-    </style>
+    <link rel="shortcut icon" href="photos/a.png" type="image/x-icon">
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
@@ -112,7 +20,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                       <div class="logo-container"> <img src="a.png" alt="Your Logo" class="logo"></div>
+                       <div class="logo-container"> <img src="photos/a.png" alt="Your Logo" class="logo"></div>
                        <h2 class="text-center mb-4">Admin Login</h2>
                        <form id="loginForm">
                         <div class="row mb-3">
@@ -137,99 +45,6 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 
-        const firebaseConfig = {
-  apiKey: "AIzaSyCzT77IureChCmwMkYq45oMVpmNTJgXYUw",
-  authDomain: "iutianbookshop.firebaseapp.com",
-  databaseURL: "https://iutianbookshop-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "iutianbookshop",
-  storageBucket: "iutianbookshop.appspot.com",
-  messagingSenderId: "300755004711",
-  appId: "1:300755004711:web:fb9a9033b13b016cc78d02",
-  measurementId: "G-64VGT3VT75"
-};
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth();
-
-        const loginForm = document.getElementById('loginForm');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const errorMessage = document.getElementById('error-message');
-
-        loginForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-
-            const email = emailInput.value;
-            const password = passwordInput.value;
-
-            if (!email || !password) {
-                errorMessage.textContent = "Please fill in all fields.";
-                errorMessage.style.display = "block";
-                return;
-            }
-
-            signInWithEmailAndPassword(auth, email, password)
-                .then((userCredential) => {
-                    const card = document.querySelector('.card'); // Select the card element
-            card.style.animation = 'fadeOut 0.3s ease forwards'; // Apply fade-out animation
-
-            setTimeout(() => {
-                window.location.href = "dashboard.html"; // Redirect after animation completes
-            }, 300);
-                })
-                .catch((error) => {
-                    const errorCode = error.code;
-            let errorMessageText = "Login failed. Please try again."; // More user-friendly default
-
-            switch (errorCode) {
-    case 'auth/wrong-password':
-        errorMessageText = "Incorrect password.";
-        break;
-    case 'auth/user-not-found':
-        errorMessageText = "Account not found. Please check your email or sign up.";
-        break;
-    case 'auth/too-many-requests':
-        errorMessageText = "Account temporarily blocked due to too many login attempts. Try again later.";
-        break;
-    case 'auth/user-disabled':
-        errorMessageText = "This account has been disabled. Please contact support.";
-        break;
-    case 'auth/invalid-email':
-        errorMessageText = "Invalid email format.";
-        break;
-
-    case 'auth/email-already-in-use': // If the user tries to sign up with an existing email during signup
-        errorMessageText = "This email is already in use. Please log in or use a different email.";
-        break;
-    case 'auth/operation-not-allowed': // If email/password authentication isn't enabled
-        errorMessageText = "Email/password login is not enabled for this project.  Please contact support."; // Or redirect
-        break;
-
-
-
-    default: 
-        errorMessageText = "Login failed. Please try again."; // Generic fallback message.
-}
-
-            errorMessage.textContent = errorMessageText;
-            errorMessage.style.display = "block";
-                });
-                
-                setTimeout(() => {
-                errorMessage.textContent = "";
-                errorMessage.style.display = "none";
-            }, 9000); // 5000 milliseconds = 5 seconds
-        
-                
-
-                
-        });
-    </script>
 </body>
 </html>
