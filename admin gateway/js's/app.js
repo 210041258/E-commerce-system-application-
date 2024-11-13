@@ -10,6 +10,20 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
+// ONBACK CHANGE THE URL TO AVOID ANY PIN SESSION GRANTED ACCESS 
+window.onload = function() {
+    const url = new URL(window.location.href);
+    
+    // Check if there is a 'pin' parameter
+    if (url.searchParams.has('pin')) {
+      // Remove 'pin' parameter from URL
+      url.searchParams.delete('pin');
+      
+      // Replace the current state with a new URL without 'pin'
+      window.history.replaceState({}, document.title, url.pathname);
+    }
+  };
+
 
 // Add this to your existing code
 document.getElementById('logoutBtn').addEventListener('click', handleLogout);
