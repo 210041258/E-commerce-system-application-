@@ -23,5 +23,10 @@
 
 #### 5- the gateway after accessing it , you can play the role of the admin as managment things simple like that 
 
+#### 6- managment have a conneciton with all branchs of the user data and interfaces of the applications i provide the photo screenshots for that 
+
 ![db information](https://github.com/210041258/E-commerce-system-application-/blob/main/admin%20gateway/Screenshots/db.png)
+
 ![mobile admin pin](https://github.com/210041258/E-commerce-system-application-/blob/main/admin%20gateway/Screenshots/mobile_that_time.jpeg)
+
+![website admins](https://github.com/210041258/E-commerce-system-application-/blob/main/admin%20gateway/Screenshots/Screenshot%202024-11-15%20022438.png)
