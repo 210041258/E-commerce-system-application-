@@ -17,7 +17,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getDatabase(app);
+const database = getDatabase(app);
 
 // Start PIN Validation on Page Load
 document.addEventListener('DOMContentLoaded', () => {
@@ -29,11 +29,19 @@ const loginForm = document.getElementById('loginForm');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const errorMessage = document.getElementById('error-message');
+const hashedPinsRef = ref(database, 'hpin');
 
 // Login Form Submission
-loginForm.addEventListener('submit', (event) => {
-    event.preventDefault();
+loginForm.addEventListener('submit', async (event) => {
+    event.preventDefault();  // Prevent form from submitting until checks are done
 
+    const ipBlocked = await isIpBlocked();  // Await the IP block check
+    if (ipBlocked) {
+        alert("Access blocked due to multiple failed attempts.");
+        return;  // Stop the form submission if the IP is blocked
+    }
+    
+    // Proceed with the rest of the login process
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
 
@@ -42,85 +50,126 @@ loginForm.addEventListener('submit', (event) => {
         return;
     }
 
-    signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-            const card = document.querySelector('.card');
-            card.style.animation = 'fadeOut 0.3s ease forwards';
-            setTimeout(() => {
-                window.location.href = "../html's/dashboard.html";
-            }, 300);
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            let errorMessageText;
-
-            switch (errorCode) {
-                case 'auth/wrong-password':
-                    errorMessageText = "Incorrect password.";
-                    break;
-                case 'auth/user-not-found':
-                    errorMessageText = "Account not found. Please check your email or sign up.";
-                    break;
-                case 'auth/too-many-requests':
-                    errorMessageText = "Account temporarily blocked due to too many login attempts. Try again later.";
-                    break;
-                case 'auth/user-disabled':
-                    errorMessageText = "This account has been disabled. Please contact support.";
-                    break;
-                case 'auth/invalid-email':
-                    errorMessageText = "Invalid email format.";
-                    break;
-                default:
-                    errorMessageText = "Login failed. Please try again.";
-            }
-
-            alert(errorMessageText);
-        });
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        // On success, proceed with redirect
+        const card = document.querySelector('.card');
+        card.style.animation = 'fadeOut 0.3s ease forwards';
+        setTimeout(() => {
+            window.location.href = "../html's/dashboard.html";
+        }, 300);
+    } catch (error) {
+        handleLoginError(error);  // Refactor error handling into a function
+    }
 });
 
-// Function to Get PIN from Firebase Database
-async function getPinFromFirebase() {
-    const pinRef = ref(db, 'pin');
+function handleLoginError(error) {
+    const errorCode = error.code;
+    let errorMessageText;
+
+    switch (errorCode) {
+        case 'auth/wrong-password':
+            errorMessageText = "Incorrect password.";
+            break;
+        case 'auth/user-not-found':
+            errorMessageText = "Account not found. Please check your email or sign up.";
+            break;
+        case 'auth/too-many-requests':
+            errorMessageText = "Account temporarily blocked due to too many login attempts. Try again later.";
+            break;
+        case 'auth/user-disabled':
+            errorMessageText = "This account has been disabled. Please contact support.";
+            break;
+        case 'auth/invalid-email':
+            errorMessageText = "Invalid email format.";
+            break;
+        default:
+            errorMessageText = "Login failed. Please try again.";
+    }
+
+    alert(errorMessageText);
+}
+
+
+
+function getHashedPinFromUrl() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get("pin") || "";
+}
+
+async function getStoredHashedPin() {
     try {
-        const snapshot = await get(pinRef);
-        if (snapshot.exists()) {
-            const pin = snapshot.val();
-            return pin;
-        } else {
-            return null;
-        }
+        const snapshot = await get(hashedPinsRef);
+        return snapshot.exists() ? snapshot.val() : null;
     } catch (error) {
-        alert(`Error retrieving PIN: ${error.message}`);
+        console.error("Error retrieving hashed PIN:", error);
         return null;
     }
 }
 
-// Function to Get PIN from URL
-function getPinFromUrl() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlPin = urlParams.get("pin") || "";
-    return urlPin;
+// Validate PIN on page load
+async function validatePinAndRedirect() {
+    const urlHashedPin = getHashedPinFromUrl();
+    const storedHashedPin = await getStoredHashedPin();
+    if (urlHashedPin && urlHashedPin === storedHashedPin) {
+        console.log("Access granted. PIN verified.");
+        startCheckingBlockedIp();
+    } else {
+        console.error("Access Denied: Invalid PIN.");
+        alert("Invalid PIN. Redirecting to preindex...");
+        setTimeout(() => {
+            window.location.href = "../html's/preindex.html";
+        }, 1000);
+    }
 }
 
-// Validate PIN and Redirect if Mismatch
-async function validatePinAndRedirect() {
-    const urlPin = getPinFromUrl();
-    const storedPin = await getPinFromFirebase();
-
-    if (!urlPin || !storedPin) {
-        alert("Access Denied: Invalid or missing PIN. Redirecting...");
-        setTimeout(() => {
-            window.location.href = "../html's/preindex.html";
-        }, 3000);
-        return;
+async function getUserIp() {
+    try {
+        const response = await fetch("https://api.ipify.org?format=json");
+        const data = await response.json();
+        return data.ip;
+    } catch (error) {
+        console.error("Error fetching IP:", error);
+        return null;
     }
+}
 
-    if (urlPin === storedPin) {
-        alert("PIN matched. Access granted.");
-    } else {
-        alert("PIN mismatch detected. Redirecting to preindex.html.");
-        setTimeout(() => {
-            window.location.href = "../html's/preindex.html";
-        }, 3000);
-    }
+async function isIpBlocked() {
+    const userIp = await getUserIp();
+    if (!userIp) return false;
+
+    // Check Firebase if this IP is blocked
+    const blockedIpRef = ref(database, `ip/blocked/admin/gateway/${sanitizeIpForFirebase(userIp)}`);
+    const snapshot = await get(blockedIpRef);
+    return snapshot.exists();  // If the IP exists in Firebase, it is blocked
+}
+
+function sanitizeIpForFirebase(ip) {
+    return ip.replace(/[./]/g, "_");  // Replace all periods and slashes with underscores
+}
+
+
+
+
+// Periodically check if the user's IP is blocked
+function startCheckingBlockedIp() {
+    const intervalId = setInterval(async () => {
+        const ipBlocked = await isIpBlocked(); // Check if IP is blocked
+        if (ipBlocked === true) {
+            console.log("IP is blocked. Stopping further checks.");
+            clearInterval(intervalId);  // Stop the interval if IP is blocked
+
+            // Disable the login button
+            const loginButton = document.querySelector("button[type='submit'].btn.btn-primary");
+            if (loginButton) {
+                loginButton.disabled = true;  // Disable the button
+                loginButton.style.backgroundColor = "#ccc";  // Optional: change button color to indicate it's disabled
+                loginButton.style.cursor = "not-allowed";  // Optional: change cursor style to not-allowed
+            }
+
+            alert("Access blocked due to multiple failed attempts.");
+        } else {
+            console.log("IP is not blocked. Continuing checks...");
+        }
+    }, 5000);  // Check every 5 seconds
 }
