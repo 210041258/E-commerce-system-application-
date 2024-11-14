@@ -28,7 +28,111 @@ body {
     background-color: #e9ecef; /* Light gray on hover */
     transform: scale(1.02); /* Slight zoom effect */
 }
+  /* Styling the content area */
+  #content-area {
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #d09f9f;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out; /* Animation on load */
+  }
 
+  /* Fade-in animation for smooth appearance */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  #content-area {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  }
+  /* Styling the table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    animation: slideIn 0.5s ease-in-out;
+  }
+
+  @keyframes slideIn {
+    0% {
+      transform: translateX(-50%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+  }
+
+  th {
+    background-color: #4CAF50; /* Green background for header */
+    color: white;
+    font-weight: bold;
+  }
+
+  td {
+    background-color: #fff;
+    color: #333;
+    animation: fadeIn 1s ease-in-out;
+  }
+
+  /* Button styling */
+  button {
+    width: 45%;
+    padding: 10px 0;
+    margin: 5px 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background-color: #4CAF50;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+    animation: fadeInUp 0.5s ease-in-out;
+  }
+
+  button:hover {
+    background-color: #388E3C;
+  }
+
+  /* Fade-in animation with upward movement */
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Input textbox styling */
+  .styled-input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    font-size: 16px;
+    animation: fadeIn 1s ease-in-out;
+  }
 /* Table responsiveness */
 .table-responsive {
     overflow-x: auto;

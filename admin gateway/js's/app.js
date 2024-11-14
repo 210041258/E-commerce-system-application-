@@ -45,23 +45,41 @@ async function handleLogout() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
+    const contentArea = document.getElementById('content-area');
+
     document.querySelectorAll('.list-group-item').forEach(item => {
         item.addEventListener('click', () => {
             switch (item.id) {
                 case 'bookViewBtn':
+                    contentArea.style.display = 'block'; // Hide content area initially
+                    
                     renderBookManagement();
                     break;
                 case 'couponViewBtn':
+                    contentArea.style.display = 'block'; // Hide content area initially
+
                     renderCouponManagement();
                     break;
                 case 'notificationBtn':
+                    contentArea.style.display = 'block'; // Hide content area initially
+                
                     renderNotification();
                     break;
                 case 'addBalanceBtn':
+                    contentArea.style.display = 'block'; // Hide content area initially
+
                     renderAddBalance();
                     break;
                 case 'contactbtn':
+                    contentArea.style.display = 'block'; // Hide content area initially
+
                     contactbtn1();
+                    break;
+
+                case 'tracker':
+                    contentArea.style.display = 'block'; // Hide content area initially
+
+                    tracker();
                     break;
                 default:
                     console.warn('No handler for this button:', item.id);
@@ -70,8 +88,340 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function tracker() {
+    const contentArea = document.getElementById('content-area');
+    contentArea.innerHTML = ''; // Clear previous content
+    
+    // Create a styled input box for email
+    const inputBox = document.createElement("input");
+    inputBox.type = "text";
+    inputBox.placeholder = "Enter your email address...";
+    inputBox.className = "styled-input";
+    
+    const submitButton = document.createElement("button");
+    submitButton.textContent = "Track User";
+    submitButton.onclick = () => {
+      const email = inputBox.value.trim();
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    
+      if (!email || !emailPattern.test(email)) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+  
+      const firebaseKey = email.replace(/[@.]/g, "_");
+      const username = email.split("@")[0];
+      
+      // Reference to 'information'
+      const dbRef = ref(database, 'information/' + username);
+  
+      // Clear content area
+      contentArea.innerHTML = '';
+  
+      // Fetch user data
+      get(dbRef).then((snapshot) => {
+        if (snapshot.exists()) {
+          const userData = snapshot.val();
+  
+          const table = document.createElement("table");
+          table.innerHTML = `
+            <tr>
+              <th>Email</th>
+              <th>Balance</th>
+            </tr>
+            <tr>
+              <td>${userData.email}</td>
+              <td>${userData.balance || 'N/A'}</td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <button onclick="showHistory('${firebaseKey}')">History</button>
+                <button onclick="showNotifications('${firebaseKey}')">Notifications</button>
+                <button onclick="showMyOrder('${firebaseKey}')">Order</button>
+                <button onclick="showWishlist('${firebaseKey}')">Wishlist</button>
+              </td>
+            </tr>
+          `;
+  
+          contentArea.appendChild(table);
+        } else {
+          alert("User not found.");
+          contentArea.innerHTML = '<p>No user data available.</p>';
+        }
+      }).catch((error) => {
+        console.error("Error fetching user data:", error);
+        contentArea.innerHTML = '<p>Error loading user data.</p>';
+      });
+    };
+  
+    // Append input and button to the content area
+    contentArea.appendChild(inputBox);
+    contentArea.appendChild(submitButton);
+  }
+
+  
+  window.showHistory = showHistory;
+  window.showNotifications = showNotifications;
+  window.showWishlist = showWishlist;
+  window.showMyOrder = showMyOrder;
+  // Placeholder functions for actions (replace with your actual logic)
 
 
+
+  async function showHistory(firebaseKey) {
+    const contentArea = document.getElementById('content-area');
+    contentArea.innerHTML = `<h3>User History</h3>`;
+  
+    // Reference to the history data in Firebase
+    const historyRef = ref(database, `inter_user/${firebaseKey}/data/history`);
+  
+    try {
+      // Fetch history data from Firebase
+      const snapshot = await get(historyRef);
+  
+      if (snapshot.exists()) {
+        const historyData = snapshot.val();
+        const list = document.createElement("ul");
+        list.style.listStyleType = 'none';
+  
+        // Iterate over history data and await book details
+        for (const key in historyData) {
+          if (historyData.hasOwnProperty(key)) {
+            const record = historyData[key];
+            const color = record.color || '#FFFFFF';
+  
+            const listItem = document.createElement("li");
+            listItem.style.backgroundColor = color;
+            listItem.style.color = 'white';
+            listItem.style.padding = '10px';
+            listItem.style.margin = '5px 0';
+            listItem.style.borderRadius = '5px';
+  
+            // Extract and await the book details
+            const details = await extractBookDetails(record.text);
+  
+            // Set the inner HTML of the list item
+            listItem.innerHTML = `
+              <strong>Order No:</strong> ${record.orderno || 'N/A'} <br>
+              <strong>Text:</strong> ${record.text || 'N/A'} <br>
+              <strong>Timestamp:</strong> ${record.timestamp || 'N/A'} <br>
+              <strong>Book Details:</strong> ${details || 'N/A'} <br>
+            `;
+            list.appendChild(listItem);
+          }
+        }
+  
+        contentArea.appendChild(list);
+      } else {
+        alert("No history found for this user.");
+        contentArea.innerHTML = '<p>No history data available.</p>';
+      }
+    } catch (error) {
+      console.error("Error fetching history:", error);
+      contentArea.innerHTML = `<p>Error loading history data.</p>`;
+    }
+  }
+
+// Helper function to extract book details from record text (returns a Promise)
+async function extractBookDetails(text) {
+    const bookIdMatch = text.match(/Book id\s*:\s*(\d+)/);
+    if (bookIdMatch) {
+      const bookId = bookIdMatch[1];
+      try {
+        const bookDetails = await showBook(bookId);
+        return bookDetails;
+      } catch (error) {
+        console.error(`Failed to fetch book details for ID ${bookId}:`, error);
+        return 'Book details not found';
+      }
+    }
+    return 'N/A';
+  }
+  function showBook(bookId) {
+    return new Promise((resolve, reject) => {
+      const booksRef = ref(database, 'book');
+  
+      get(booksRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const booksData = snapshot.val();
+            const bookData = booksData[bookId];
+  
+            if (bookData) {
+              const bookDetails = `
+               <br> <strong>Title:</strong> ${bookData.name || 'N/A'}<br>
+                <strong>Author:</strong> ${bookData.author || 'N/A'}<br>
+                <strong>Edition:</strong> ${bookData.edition || 'N/A'}<br>
+                <strong>Department:</strong> ${bookData.department || 'N/A'}<br>
+                <strong>Semester:</strong> ${bookData.semester || 'N/A'}<br>
+                <strong>Price:</strong> ${bookData.price || 'N/A'}<br>
+              `;
+              resolve(bookDetails);
+            } else {
+              reject('Book not found');
+            }
+          } else {
+            reject('No books data found');
+          }
+        })
+        .catch((error) => {
+          reject('Error loading book data: ' + error);
+        });
+    });
+  }
+
+  function showNotifications(firebaseKey) {
+    const contentArea = document.getElementById('content-area');
+    contentArea.innerHTML = `<h3>User Notifications</h3>`;
+  
+    // Reference to the notifications data in Firebase
+    const notificationsRef = ref(database, `inter_user/${firebaseKey}/notification`);
+  
+    // Fetch notifications data from Firebase
+    get(notificationsRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const notificationsData = snapshot.val();
+          const list = document.createElement("ul");
+          list.style.listStyleType = 'none';
+  
+          // Iterate over notification data
+          for (const key in notificationsData) {
+            if (notificationsData.hasOwnProperty(key)) {
+              const notification = notificationsData[key];
+  
+              const listItem = document.createElement("li");
+              listItem.style.backgroundColor = '#333';
+              listItem.style.color = 'white';
+              listItem.style.padding = '10px';
+              listItem.style.margin = '5px 0';
+              listItem.style.borderRadius = '5px';
+  
+              // Set the content of the list item
+              listItem.innerHTML = `
+                <strong>Title:</strong> ${notification.title || 'No Title'} <br>
+                <strong>Message:</strong> ${notification.message || 'No Message'} <br>
+                <strong>Sender Email:</strong> ${notification.senderEmail || 'Unknown'} <br>
+                <strong>Timestamp:</strong> ${notification.timestamp || 'N/A'} <br>
+              `;
+  
+              list.appendChild(listItem);
+            }
+          }
+  
+          // Append the generated list to the content area
+          contentArea.appendChild(list);
+        } else {
+          alert("No notifications found for this user.");
+          contentArea.innerHTML = '<p>No notifications available.</p>';
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching notifications:", error);
+        contentArea.innerHTML = `<p>Error loading notifications data.</p>`;
+      });
+  }
+  
+function showMyOrder(firebaseKey) {
+  const contentArea = document.getElementById('content-area');
+  contentArea.innerHTML = `<h3>User Orders</h3>`;
+
+  // Reference to the myorder data in Firebase
+  const ordersRef = ref(database, `inter_user/${firebaseKey}/data/myorder`);
+
+  // Fetch order data from Firebase
+  get(ordersRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const ordersData = snapshot.val();
+        const list = document.createElement("ul");
+        list.style.listStyleType = 'none';
+
+        // Iterate over orders data
+        Object.keys(ordersData).forEach((orderId) => {
+          const order = ordersData[orderId];
+
+          const listItem = document.createElement("li");
+          listItem.style.backgroundColor = '#444';
+          listItem.style.color = 'white';
+          listItem.style.padding = '10px';
+          listItem.style.margin = '5px 0';
+          listItem.style.borderRadius = '5px';
+
+          // Display order information
+          listItem.innerHTML = `
+            <strong>Order ID:</strong> ${order.orderid || 'N/A'} <br>
+            <strong>Order Price:</strong> ${order.orderprice || 'N/A'} <br>
+          `;
+
+          list.appendChild(listItem);
+        });
+
+        // Append the generated list to the content area
+        contentArea.appendChild(list);
+      } else {
+        alert("No orders found for this user.");
+        contentArea.innerHTML = '<p>No order data available.</p>';
+      }
+    })
+    .catch((error) => {
+      console.error("Error fetching orders:", error);
+      contentArea.innerHTML = `<p>Error loading order data.</p>`;
+    });
+}
+
+  
+function showWishlist(firebaseKey) {
+    const contentArea = document.getElementById('content-area');
+    contentArea.innerHTML = `<h3>User Wishlist</h3>`;
+  
+    // Reference to the wishlist data in Firebase
+    const wishlistRef = ref(database, `inter_user/${firebaseKey}/data/wishlist`);
+  
+    // Fetch wishlist data from Firebase
+    get(wishlistRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const wishlistData = snapshot.val();
+          const list = document.createElement("ul");
+          list.style.listStyleType = 'none';
+  
+          // Iterate over wishlist items
+          wishlistData.forEach((book) => {
+            const listItem = document.createElement("li");
+            listItem.style.backgroundColor = '#444';
+            listItem.style.color = 'white';
+            listItem.style.padding = '10px';
+            listItem.style.margin = '5px 0';
+            listItem.style.borderRadius = '5px';
+  
+            // Display book information
+            listItem.innerHTML = `
+              <strong>Title:</strong> ${book.name || 'N/A'} <br>
+              <strong>Author:</strong> ${book.author || 'N/A'} <br>
+              <strong>Edition:</strong> ${book.edition || 'N/A'} <br>
+              <strong>Department:</strong> ${book.department || 'N/A'} <br>
+              <strong>Semester:</strong> ${book.semester || 'N/A'} <br>
+              <strong>Price:</strong> ${book.price || 'N/A'} <br>
+              <a href="${book.copy_preview || '#'}" target="_blank">Preview</a>
+            `;
+  
+            list.appendChild(listItem);
+          });
+  
+          // Append the generated list to the content area
+          contentArea.appendChild(list);
+        } else {
+          alert("No wishlist found for this user.");
+          contentArea.innerHTML = '<p>No wishlist data available.</p>';
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching wishlist:", error);
+        contentArea.innerHTML = `<p>Error loading wishlist data.</p>`;
+      });
+  }
+  
 function contactbtn1() {
     // Clear the content area
     const contentArea = document.getElementById('content-area');
@@ -233,7 +583,7 @@ function renderBookManagement() {
             </div>
         </div>
         <div id="historyContainer" style="display: none;">
-            <h3>Action History</h3>
+            </br><h3>Action History</h3>
             <ul id="historyList" class="list-group"></ul>
         </div>
     `;
@@ -997,69 +1347,129 @@ async function handleAddCoupon(event) {
     }
   }
 
-// Functions to handle Notifications
+// Function to render Add Notification form
 function renderAddNotificationForm() {
     contentArea.innerHTML = `
-    <h2>Add Notification</h2>
-    <form id="addNotificationForm">
-        <div class="mb-3">
-            <label for="notificationTitle" class="form-label">Title</label>
-            <input type="text" class="form-control" id="notificationTitle" required>
-        </div>
-        <div class="mb-3">
-            <label for="notificationMessage" class="form-label">Message</label>
-            <textarea class="form-control" id="notificationMessage" required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="notificationEmail" class="form-label">User Email</label> <input type="email" class="form-control" id="notificationEmail">
-        </div>
-        <button type="submit" class="btn btn-primary">Send Notification</button>
-    </form>
-`;
-    document.getElementById('addNotificationForm').addEventListener('submit', handleAddNotification);
+        <h2>Add Notification</h2>
+        <form id="addNotificationForm">
+            <div class="mb-3">
+                <label for="notificationTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="notificationTitle" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="notificationMessage" class="form-label">Message</label>
+                <textarea class="form-control" id="notificationMessage" required></textarea>
+            </div>
+            
+            <div class="mb-3">
+                <label for="notificationChannel" class="form-label">Select Notification Channel</label>
+                <select class="form-control" id="notificationChannel" required>
+                    <option value="" disabled selected>Select Channel</option>
+                    <option value="oneUser">One User</option>
+                    <option value="allUsers">All Users</option>
+                    <option value="wishlistUsers">Wishlist Users</option>
+                </select>
+            </div>
+            
+            <!-- User Email Field (Visible for One User Option) -->
+            <div class="mb-3" id="userEmailField" style="display: none;">
+                <label for="notificationEmail" class="form-label">User Email</label>
+                <input type="email" class="form-control" id="notificationEmail">
+            </div>
 
+            <!-- Book ID Field (Visible for Wishlist Users Option) -->
+            <div class="mb-3" id="bookIdField" style="display: none;">
+                <label for="bookId" class="form-label">Book ID</label>
+                <input type="text" class="form-control" id="bookId" placeholder="Enter Book ID">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Send Notification</button>
+        </form>
+    `;
+
+    document.getElementById("addNotificationForm").addEventListener("submit", handleAddNotification);
+
+    // Re-attach change event listener
+    const notificationChannel = document.getElementById("notificationChannel");
+    const userEmailField = document.getElementById("userEmailField");
+    const notificationEmail = document.getElementById("notificationEmail");
+    const bookIdField = document.getElementById("bookIdField");
+    const bookIdInput = document.getElementById("bookId");
+
+    // Event listener to show/hide fields based on selected channel
+    notificationChannel.addEventListener("change", function () {
+        if (notificationChannel.value === "oneUser") {
+            userEmailField.style.display = "block";
+            notificationEmail.required = true;
+            bookIdField.style.display = "none";
+            bookIdInput.required = false;
+        } else if (notificationChannel.value === "wishlistUsers") {
+            userEmailField.style.display = "none";
+            notificationEmail.required = false;
+            bookIdField.style.display = "block";
+            bookIdInput.required = true;
+        } else {
+            userEmailField.style.display = "none";
+            notificationEmail.required = false;
+            bookIdField.style.display = "none";
+            bookIdInput.required = false;
+        }
+    });
 }
 
-
-  
 async function handleAddNotification(event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+    event.preventDefault(); // Prevent default form submission
 
     // Gather values from form fields
     const notificationTitle = document.getElementById('notificationTitle').value.trim();
     const notificationMessage = document.getElementById('notificationMessage').value.trim();
+    const notificationChannel = document.getElementById('notificationChannel').value;
     const notificationEmail = document.getElementById('notificationEmail').value.trim();
+    const bookId = document.getElementById('bookId')?.value.trim(); // Only for wishlist users
+    const senderEmail = "admin@bookshop.iut"; // Replace with your logic to get the sender email
 
-    // Basic validation to ensure required fields are filled
-    if (!notificationTitle || !notificationMessage) {
-        alert("Title and message are required.");
-        return;
-    }
+    // Prepare notification object
+    const notificationData = {
+        title: notificationTitle,
+        message: notificationMessage,
+        senderEmail: senderEmail, // Add the sender's email
+        timestamp: new Date().toISOString(),
+    };
 
     try {
-        // Create the notification object
-        const notificationData = {
-            title: notificationTitle,
-            message: notificationMessage,
-            email: notificationEmail || null, // Optional email
-            timestamp: new Date().toISOString(), // Add a timestamp for tracking
-        };
+        switch (notificationChannel) {
+            case "oneUser":
+                // Validate email input
+                if (!notificationEmail) {
+                    alert("Please provide a user email.");
+                    return;
+                }
+                await sendNotificationToUser(notificationEmail, notificationData);
+                alert('Notification sent to the specific user.');
+                break;
 
-        // Reference to the notifications list in the database
-        const sanitizedEmail = notificationEmail.replace(".", "_").replace("@", "_");
+            case "allUsers":
+                await sendNotificationToAllUsers(notificationData);
+                alert('Notification sent to all users.');
+                break;
 
-        // Reference to the notifications list in the database
-        const notificationsRef = dbRef(database, `inter_user/${sanitizedEmail}/data/notification`);
-    
-        // Push the new notification to the list
-        const newNotificationRef = push(notificationsRef); // Use push to generate a unique key for each notification
-        await set(newNotificationRef, notificationData); // Store the new notification object
+            case "wishlistUsers":
+                // Validate book ID input
+                if (!bookId) {
+                    alert("Please provide a Book ID.");
+                    return;
+                }
+                await sendNotificationToWishlistUsers(bookId, notificationData);
+                alert('Notification sent to users with the specified wishlist item.');
+                break;
 
+            default:
+                alert("Please select a valid notification channel.");
+                return;
+        }
 
-        // Success feedback to the user
-        alert('Notification sent successfully.');
-
-        // Optionally, clear the form after submission
+        // Optionally, clear the form after successful submission
         document.getElementById('addNotificationForm').reset();
 
     } catch (error) {
@@ -1068,8 +1478,70 @@ async function handleAddNotification(event) {
     }
 }
 
+function sanitizeEmail(email) {
+    // Replaces "." and "@" to prevent Firebase path issues
+    return email.replace(/\./g, "_").replace(/@/g, "_");
+}
 
+async function sendNotificationToAllUsers(notificationData) {
+    const usersRef = dbRef(database, 'information');
+    const snapshot = await get(usersRef);
+    const users = snapshot.val(); // Load users from the given format
 
+    if (users) {
+        for (const username in users) {
+            const userEmail = users[username].email;
+            
+            if (userEmail) {
+                const sanitizedEmail = sanitizeEmail(userEmail);
+                const notificationsRef = dbRef(database, `inter_user/${sanitizedEmail}/notification`);
+                const newNotificationRef = push(notificationsRef);
+                await set(newNotificationRef, notificationData);
+            }
+        }
+    } else {
+        console.log("No users found in the database.");
+    }
+}
+
+async function sendNotificationToUser(email, notificationData) {
+    const sanitizedEmail = sanitizeEmail(email);
+    const notificationsRef = dbRef(database, `inter_user/${sanitizedEmail}/notification`);
+    const newNotificationRef = push(notificationsRef);
+    await set(newNotificationRef, notificationData);
+    console.log(`Notification sent to user: ${email}`);
+}
+
+async function sendNotificationToWishlistUsers(bookId, notificationData) {
+    const usersRef = dbRef(database, 'inter_user');
+    const snapshot = await get(usersRef);
+    const users = snapshot.val(); // Load users from the given structure
+    const count =0;
+    if (users) {
+        for (const emailKey in users) {
+            const wishlistRef = dbRef(database, `inter_user/${emailKey}/data/wishlist`);
+            const wishlistSnapshot = await get(wishlistRef);
+            const wishlist = wishlistSnapshot.val();
+
+            // Check if the user's wishlist contains the specified Book ID
+            if (wishlist) {
+                const hasBookInWishlist = Object.values(wishlist).some(item => item.id === bookId);
+                if (hasBookInWishlist) {
+                    count++;
+                    const notificationsRef = dbRef(database, `inter_user/${emailKey}/notification`);
+                    const newNotificationRef = push(notificationsRef);
+                    await set(newNotificationRef, notificationData);
+                }
+            }
+        }
+        if(count !== 0 ){
+            alert(`Notification sent to users with Book ID: ${bookId} in their wishlist.`);        
+        }
+    } else {
+        console.log("No users found with wishlist items.");
+    }
+
+}
 
 
 async function handleAddBalance(event) {
