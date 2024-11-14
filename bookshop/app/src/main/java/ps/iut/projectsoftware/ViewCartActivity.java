@@ -51,7 +51,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.io.*;
 import java.text.*;
 import java.util.*;
@@ -66,7 +65,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import com.google.gson.reflect.TypeToken;
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ViewCartActivity extends AppCompatActivity {
 	
@@ -84,6 +88,7 @@ public class ViewCartActivity extends AppCompatActivity {
 	private boolean discounted = false;
 	private double number = 0;
 	private boolean boo = false;
+	private String email = "";
 	
 	private ArrayList<HashMap<String, Object>> map = new ArrayList<>();
 	
@@ -494,6 +499,7 @@ public class ViewCartActivity extends AppCompatActivity {
 		cuppon = false;
 		discounted = false;
 		number = 0;
+		email = information.getString("email", "");
 		if (Build.VERSION.SDK_INT >= 21) { Window
 			w = this.getWindow();
 			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }
@@ -517,15 +523,23 @@ public class ViewCartActivity extends AppCompatActivity {
 		linear2.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFE8EAF6, 0xFFE8EAF6));
 		listview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFE8EAF6, 0xFFE8EAF6));
 		button1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)0, 0xFFE8EAF6, 0xFF1A237E));
-		if (!"".equals(cart.getString("cart", ""))) {
-			map = new Gson().fromJson(cart.getString("cart", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
-			listview1.setAdapter(new Listview1Adapter(map));
-			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-		}
-		else {
-			
-		}
 		checkbox4.setChecked(true);
+		if (!cart.getString("cart", "").equals("")) {
+			    // Deserialize JSON data from SharedPreferences to map
+			    map = new Gson().fromJson(cart.getString("cart", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
+			
+			    // Set up ListView adapter
+			    listview1.setAdapter(new Listview1Adapter(map));
+			    ((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
+			
+			    // Modify email and set Firebase path
+			    String email2 = email.replace("@", "_").replace(".", "_");
+			    String subPath_cart = "inter_user/" + email2 + "/data/cart";
+			
+			    // Push data to Firebase
+			    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference(subPath_cart);
+			    databaseRef.setValue(map);
+		}
 		if ((Double.parseDouble(information.getString("balance", "")) == Double.parseDouble(total.getText().toString())) || (Double.parseDouble(information.getString("balance", "")) > Double.parseDouble(total.getText().toString()))) {
 			checkbox2.setChecked(true);
 		}
@@ -533,19 +547,14 @@ public class ViewCartActivity extends AppCompatActivity {
 			checkbox2.setEnabled(false);
 			checkbox1.setChecked(true);
 		}
-		if (new Gson().toJson(map).equals("[]")) {
-			cart.edit().putString("cart", "").commit();
-		}
 		feesondelivarybool = false;
 	}
 	
 	@Override
 	public void onBackPressed() {
 		cart.edit().putString("cart", new Gson().toJson(map)).commit();
-		if (new Gson().toJson(map).equals("[]")) {
-			cart.edit().putString("cart", "").commit();
-		}
 		eb.setClass(getApplicationContext(), ViewMainActivity.class);
+		eb.putExtra("gate", "");
 		eb.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(eb);
 		finish();
@@ -610,9 +619,16 @@ public class ViewCartActivity extends AppCompatActivity {
 				    public void onClick(View _view) {
 					        // Get the price of the item to be deleted
 					        double priceValue = 0;
+					String email2 = email.replace("@", "_").replace(".", "_");
+					    String subPath_cart = "inter_user/" + email2 + "/data/cart";
+					
+					
+					    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference(subPath_cart);
+					    databaseRef.setValue(map);
 					        try {
 						            priceValue = Double.parseDouble(map.get((int)_position).get("price").toString()) * 
 						                        Double.parseDouble(map.get((int)_position).get("copies").toString());
+						
 						        } catch (NumberFormatException e) {
 						            // Handle error if needed
 						        }
@@ -661,9 +677,6 @@ public class ViewCartActivity extends AppCompatActivity {
 						        }
 					    }
 			});
-			if (new Gson().toJson(map).equals("[]")) {
-				cart.edit().putString("cart", "").commit();
-			}
 			
 			return _view;
 		}

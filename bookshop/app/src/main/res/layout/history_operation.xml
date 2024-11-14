@@ -50,7 +50,8 @@
 				android:gravity="center_horizontal"
 				android:text="No Deposit or Withdrawal from your account 😕 .."
 				android:textSize="18sp"
-				android:textColor="#FFFFFF" />
+				android:textStyle="bold"
+				android:textColor="#3F51B5" />
 		</LinearLayout>
 	</LinearLayout>
 </LinearLayout>

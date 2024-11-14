@@ -42,7 +42,7 @@
 					android:layout_width="70dp"
 					android:layout_height="70dp"
 					android:padding="15dp"
-					android:src="@drawable/ic_notifications_black"
+					android:src="@drawable/ic_notifications_none_white"
 					android:scaleType="fitCenter" />
 				<LinearLayout
 					android:id="@+id/linear5"

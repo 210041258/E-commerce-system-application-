@@ -95,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
 									}
 									else {
 										as.setClass(getApplicationContext(), ViewMainActivity.class);
+										as.putExtra("gate", "yes");
 										as.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 										startActivity(as);
 										finish();

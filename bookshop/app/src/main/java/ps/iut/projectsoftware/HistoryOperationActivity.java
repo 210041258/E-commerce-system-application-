@@ -52,6 +52,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.*;
 import org.json.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HistoryOperationActivity extends AppCompatActivity {
 	
@@ -144,34 +149,20 @@ public class HistoryOperationActivity extends AppCompatActivity {
 		listview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFF3F51B5, 0xFFE8EAF6));
 		linear4.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFF3F51B5, 0xFFE8EAF6));
 		email = a.getString("email", "");
+		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		if (!history.getString("history", "").equals("")) {
 			listmap = new Gson().fromJson(history.getString("history", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 			listview1.setAdapter(new Listview1Adapter(listmap));
 			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 		}
-		else {
-			
+		if (listmap.size() == 0) {
+			linear4.setVisibility(View.VISIBLE);
+			listview1.setVisibility(View.GONE);
 		}
-		bs = new TimerTask() {
-			@Override
-			public void run() {
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						if (map.size() == 0) {
-							linear4.setVisibility(View.VISIBLE);
-							listview1.setVisibility(View.GONE);
-						}
-						else {
-							listview1.setVisibility(View.VISIBLE);
-							linear4.setVisibility(View.GONE);
-						}
-					}
-				});
-			}
-		};
-		_timer.schedule(bs, (int)(3500));
-		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+		else {
+			listview1.setVisibility(View.VISIBLE);
+			linear4.setVisibility(View.GONE);
+		}
 	}
 	
 	@Override
@@ -181,6 +172,7 @@ public class HistoryOperationActivity extends AppCompatActivity {
 		startActivity(intent);
 		finish();
 	}
+	
 	public class Listview1Adapter extends BaseAdapter {
 		
 		ArrayList<HashMap<String, Object>> _data;

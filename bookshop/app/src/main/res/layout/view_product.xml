@@ -393,7 +393,8 @@
 						android:id="@+id/linear32"
 						android:layout_width="match_parent"
 						android:layout_height="match_parent"
-						android:padding="30dp"
+						android:layout_margin="10dp"
+						android:padding="5dp"
 						android:background="#FFFFFF"
 						android:orientation="vertical">
 						<LinearLayout
@@ -407,7 +408,7 @@
 							android:layout_width="match_parent"
 							android:layout_height="200dp"
 							android:layout_margin="10dp"
-							android:padding="10dp"
+							android:padding="7dp"
 							android:src="@drawable/default_image"
 							android:scaleType="fitCenter"
 							android:layout_weight="1" />
@@ -422,7 +423,7 @@
 							android:layout_width="match_parent"
 							android:layout_height="200dp"
 							android:layout_margin="10dp"
-							android:padding="10dp"
+							android:padding="7dp"
 							android:src="@drawable/default_image"
 							android:scaleType="fitCenter" />
 						<LinearLayout

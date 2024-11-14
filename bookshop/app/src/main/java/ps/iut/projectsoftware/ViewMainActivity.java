@@ -46,12 +46,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.*;
 import org.json.*;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 public class ViewMainActivity extends AppCompatActivity {
 	
 	private FloatingActionButton _fab;
 	private boolean new_notif = false;
 	private double index = 0;
+	private String email = "";
 	
 	private ArrayList<HashMap<String, Object>> cse_list = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> eee_list = new ArrayList<>();
@@ -146,6 +157,10 @@ public class ViewMainActivity extends AppCompatActivity {
 	private SharedPreferences a;
 	private SharedPreferences related;
 	private SharedPreferences cart;
+	private SharedPreferences orders;
+	private SharedPreferences favorite;
+	private SharedPreferences read;
+	private SharedPreferences history;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -242,6 +257,10 @@ public class ViewMainActivity extends AppCompatActivity {
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
 		related = getSharedPreferences("related_json", Activity.MODE_PRIVATE);
 		cart = getSharedPreferences("cart", Activity.MODE_PRIVATE);
+		orders = getSharedPreferences("orders", Activity.MODE_PRIVATE);
+		favorite = getSharedPreferences("favorite", Activity.MODE_PRIVATE);
+		read = getSharedPreferences("notification", Activity.MODE_PRIVATE);
+		history = getSharedPreferences("history", Activity.MODE_PRIVATE);
 		
 		imageview1.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -675,6 +694,7 @@ public class ViewMainActivity extends AppCompatActivity {
 	}
 	
 	private void initializeLogic() {
+		email = a.getString("email", "");
 		textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview6.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview13.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
@@ -782,6 +802,163 @@ public class ViewMainActivity extends AppCompatActivity {
 		Glide.with(getApplicationContext()).load(Uri.parse(cee_list.get((int)2).get("link").toString())).into(ceec);
 		Glide.with(getApplicationContext()).load(Uri.parse(cee_list.get((int)3).get("link").toString())).into(ceed);
 		
+		if (!getIntent().getStringExtra("gate").equals("")) {
+			// Split the email to get the username (before the '@' symbol)
+			String username = email.split("@")[0];  // Get the part before the '@'
+			String email2 = a.getString("email", "").replace(".", "_").replace("@", "_");
+			
+			// Define Firebase paths based on the email
+			String subPath_cart = "inter_user/" + email2 + "/data/cart";
+			String subPath_myorder = "inter_user/" + email2 + "/data/myorder";
+			String subPath_myfavorite = "inter_user/" + email2 + "/data/myfavorite";
+			String subPath_notification = "inter_user/" + email2 + "/data/notification";
+			String subPath_wishlist = "inter_user/" + email2 + "/data/wishlist";
+			String subPath_history = "inter_user/" + email2 + "/data/history";
+			String nodePath = "information/" + username;
+			
+			// Reference to the main information path
+			DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(nodePath);
+			dataRef.addListenerForSingleValueEvent(new ValueEventListener() {
+				    @Override
+				    public void onDataChange(DataSnapshot snapshot) {
+					        if (snapshot.exists()) {
+						            a.edit().putString("balance", snapshot.child("balance").getValue(String.class)).commit();
+						        } else {
+						            SketchwareUtil.showMessage(getApplicationContext(), "No data found. Check Customer Center.");
+						        }
+					    }
+				
+				    @Override
+				    public void onCancelled(DatabaseError error) {
+					        Log.e("FirebaseError", error.getMessage());
+					    }
+			});
+			
+			// Save data for each path only if data exists
+			
+			// Cart data
+			FirebaseDatabase.getInstance().getReference(subPath_cart).addListenerForSingleValueEvent(new ValueEventListener() {
+				    @Override
+				    public void onDataChange(DataSnapshot snapshot) {
+					        if (snapshot.exists()) {
+						            try {
+							                String json = new Gson().toJson(snapshot.getValue());
+							                cart.edit().putString("cart", json).commit();
+							            } catch (JsonSyntaxException e) {
+							                Log.e("JsonError", "Data format error for cart", e);
+							            }
+						        }
+					    }
+				
+				    @Override
+				    public void onCancelled(DatabaseError error) {
+					        Log.e("FirebaseError", error.getMessage());
+					    }
+			});
+			
+			// Orders data
+			FirebaseDatabase.getInstance().getReference(subPath_myorder).addListenerForSingleValueEvent(new ValueEventListener() {
+				    @Override
+				    public void onDataChange(DataSnapshot snapshot) {
+					        if (snapshot.exists()) {
+						            try {
+							                String json = new Gson().toJson(snapshot.getValue());
+							                orders.edit().putString("orders", json).commit();
+							            } catch (JsonSyntaxException e) {
+							                Log.e("JsonError", "Data format error for orders", e);
+							            }
+						        }
+					    }
+				
+				    @Override
+				    public void onCancelled(DatabaseError error) {
+					        Log.e("FirebaseError", error.getMessage());
+					    }
+			});
+			
+			// Favorite data
+			FirebaseDatabase.getInstance().getReference(subPath_myfavorite).addListenerForSingleValueEvent(new ValueEventListener() {
+				    @Override
+				    public void onDataChange(DataSnapshot snapshot) {
+					        if (snapshot.exists()) {
+						            try {
+							                String json = new Gson().toJson(snapshot.getValue());
+							                favorite.edit().putString("favorite", json).commit();
+							            } catch (JsonSyntaxException e) {
+							                Log.e("JsonError", "Data format error for favorite", e);
+							            }
+						        }
+					    }
+				
+				    @Override
+				    public void onCancelled(DatabaseError error) {
+					        Log.e("FirebaseError", error.getMessage());
+					    }
+			});
+			
+			// Notification data
+			FirebaseDatabase.getInstance().getReference(subPath_notification).addListenerForSingleValueEvent(new ValueEventListener() {
+				    @Override
+				    public void onDataChange(DataSnapshot snapshot) {
+					        if (snapshot.exists()) {
+						            try {
+							                String json = new Gson().toJson(snapshot.getValue());
+							                read.edit().putString("notification", json).commit();
+							            } catch (JsonSyntaxException e) {
+							                Log.e("JsonError", "Data format error for notification", e);
+							            }
+						        }
+					    }
+				
+				    @Override
+				    public void onCancelled(DatabaseError error) {
+					        Log.e("FirebaseError", error.getMessage());
+					    }
+			});
+			
+			// Wishlist data
+			FirebaseDatabase.getInstance().getReference(subPath_wishlist).addListenerForSingleValueEvent(new ValueEventListener() {
+				    @Override
+				    public void onDataChange(DataSnapshot snapshot) {
+					        if (snapshot.exists()) {
+						            try {
+							                String json = new Gson().toJson(snapshot.getValue());
+							                favorite.edit().putString("wishlist", json).commit();
+							            } catch (JsonSyntaxException e) {
+							                Log.e("JsonError", "Data format error for wishlist", e);
+							            }
+						        }
+					    }
+				
+				    @Override
+				    public void onCancelled(DatabaseError error) {
+					        Log.e("FirebaseError", error.getMessage());
+					    }
+			});
+			
+			// History data
+			FirebaseDatabase.getInstance().getReference(subPath_history).addListenerForSingleValueEvent(new ValueEventListener() {
+				    @Override
+				    public void onDataChange(DataSnapshot snapshot) {
+					        if (snapshot.exists()) {
+						            try {
+							                String json = new Gson().toJson(snapshot.getValue());
+							                history.edit().putString("history", json).commit();
+							            } catch (JsonSyntaxException e) {
+							                Log.e("JsonError", "Data format error for history", e);
+							            }
+						        }
+					    }
+				
+				    @Override
+				    public void onCancelled(DatabaseError error) {
+					        Log.e("FirebaseError", error.getMessage());
+					    }
+			});
+		}
+		else {
+			
+		}
 		cse.setElevation((float)25);
 		eee.setElevation((float)25);
 		cee.setElevation((float)25);
@@ -843,9 +1020,84 @@ public class ViewMainActivity extends AppCompatActivity {
 	
 	@Override
 	public void onBackPressed() {
+		// Split the email to get the username (before the '@' symbol)
+		String username = email.split("@")[0];  // Get the part before the '@'
+		
+		// Replace the email's special characters for path safety
+		String email2 = a.getString("email", "").replace(".", "_").replace("@", "_");
+		
+		// Define paths for various data
+		String subPath_cart = "inter_user/" + email2 + "/data/cart";
+		String subPath_myorder = "inter_user/" + email2 + "/data/myorder";
+		String subPath_myfavorite = "inter_user/" + email2 + "/data/myfavorite";
+		String subPath_notification = "inter_user/" + email2 + "/data/notification";
+		String subPath_wishlist = "inter_user/" + email2 + "/data/wishlist";
+		String subPath_history = "inter_user/" + email2 + "/data/history";
+		
+		// Construct node paths for each section
+		String nodePath = "information/" + username;
+		
+		// Reference to main information path
+		DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(nodePath);
+		DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference(subPath_cart);
+		DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference(subPath_myorder);
+		DatabaseReference favoriteRef = FirebaseDatabase.getInstance().getReference(subPath_myfavorite);
+		DatabaseReference notificationRef = FirebaseDatabase.getInstance().getReference(subPath_notification);
+		DatabaseReference wishlistRef = FirebaseDatabase.getInstance().getReference(subPath_wishlist);
+		DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference(subPath_history);
+		
+		// Push SharedPreferences data back to Firebase
+		// Push balance data back to Firebase
+		String balance = a.getString("balance", "");
+		if (balance != null && !balance.isEmpty()) {
+			    dataRef.child("balance").setValue(balance);
+		}
+		
+		// Push cart data back to Firebase
+		String cartData = cart.getString("cart", "");
+		if (cartData != null && !cartData.isEmpty()) {
+			    Object cartObject = new Gson().fromJson(cartData, Object.class);
+			    cartRef.setValue(cartObject);
+		}
+		
+		// Push myorder data back to Firebase
+		String orderData = orders.getString("orders", "");
+		if (orderData != null && !orderData.isEmpty()) {
+			    Object orderObject = new Gson().fromJson(orderData, Object.class);
+			    orderRef.setValue(orderObject);
+		}
+		
+		// Push myfavorite data back to Firebase
+		String favoriteData = favorite.getString("favorite", "");
+		if (favoriteData != null && !favoriteData.isEmpty()) {
+			    Object favoriteObject = new Gson().fromJson(favoriteData, Object.class);
+			    favoriteRef.setValue(favoriteObject);
+		}
+		
+		// Push notification data back to Firebase
+		String notificationData = read.getString("notification", "");
+		if (notificationData != null && !notificationData.isEmpty()) {
+			    Object notificationObject = new Gson().fromJson(notificationData, Object.class);
+			    notificationRef.setValue(notificationObject);
+		}
+		
+		// Push wishlist data back to Firebase
+		String wishlistData = favorite.getString("wishlist", "");
+		if (wishlistData != null && !wishlistData.isEmpty()) {
+			    Object wishlistObject = new Gson().fromJson(wishlistData, Object.class);
+			    wishlistRef.setValue(wishlistObject);
+		}
+		
+		// Push history data back to Firebase
+		String historyData = history.getString("history", "");
+		if (historyData != null && !historyData.isEmpty()) {
+			    Object historyObject = new Gson().fromJson(historyData, Object.class);
+			    historyRef.setValue(historyObject);
+		}
 		SketchwareUtil.showMessage(getApplicationContext(), "See you Next Time ! 😄");
 		finishAffinity();
 	}
+	
 	
 	@Deprecated
 	public void showMessage(String _s) {

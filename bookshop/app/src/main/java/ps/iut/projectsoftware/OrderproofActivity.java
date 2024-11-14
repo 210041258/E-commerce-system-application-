@@ -46,12 +46,33 @@ import java.util.*;
 import java.util.HashMap;
 import java.util.regex.*;
 import org.json.*;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import android.util.Log;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class OrderproofActivity extends AppCompatActivity {
 	
 	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
 	
 	private HashMap<String, Object> map = new HashMap<>();
+	private ArrayList<Map<String, Object>> listmap = new ArrayList<>();
 	
 	private LinearLayout linear1;
 	private LinearLayout linear3;
@@ -69,6 +90,8 @@ public class OrderproofActivity extends AppCompatActivity {
 	private DatabaseReference contact = _firebase.getReference("contact_mission");
 	private ChildEventListener _contact_child_listener;
 	private SharedPreferences a;
+	private SharedPreferences orders;
+	private SharedPreferences history;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -92,6 +115,8 @@ public class OrderproofActivity extends AppCompatActivity {
 		linear6 = findViewById(R.id.linear6);
 		button1 = findViewById(R.id.button1);
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
+		orders = getSharedPreferences("orders", Activity.MODE_PRIVATE);
+		history = getSharedPreferences("history", Activity.MODE_PRIVATE);
 		
 		button1.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -154,13 +179,13 @@ public class OrderproofActivity extends AppCompatActivity {
 			w = this.getWindow();
 			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }
 		String email = a.getString("email", "");
-		String username = email.split("@")[0].replace(".", "_"); // Replace dots with underscores to make it Firebase-safe
-		
+		String username = email.split("@")[0]; // Replace dots with underscores to make it Firebase-safe
+		String email2 = email.replace("@", "_"). replace(".","_");
 		// Get the order number from the intent (directly call it whenever needed)
 		String orderno = getIntent().getStringExtra("orderno");
 		if (orderno == null) {
-			    // If the order number isn't in the intent, generate a default one
-			    orderno = String.valueOf((int) (SketchwareUtil.getRandom(100, 10000)));
+				    // If the order number isn't in the intent, generate a default one
+				    orderno = String.valueOf((int) (SketchwareUtil.getRandom(100, 10000)));
 		}
 		
 		// Create the nested map for order details (under orderno)
@@ -176,33 +201,40 @@ public class OrderproofActivity extends AppCompatActivity {
 		
 		// Fetch existing data from "contact/username" and update
 		ref.addListenerForSingleValueEvent(new ValueEventListener() {
-			    @Override
-			    public void onDataChange(DataSnapshot dataSnapshot) {
-				        Map<String, Object> existingData = new HashMap<>();
+				    @Override
+				    public void onDataChange(DataSnapshot dataSnapshot) {
+						        Map<String, Object> existingData = new HashMap<>();
+						
+						        if (dataSnapshot.exists()) {
+								            // Get the existing data as a map
+								            existingData = (Map<String, Object>) dataSnapshot.getValue();
+								        }
+						
+						        // If existingData is null, initialize it
+						        if (existingData == null) {
+								            existingData = new HashMap<>();
+								        }
+						
+						        // Use getIntent().getStringExtra("orderno") directly in put()
+						        existingData.put(getIntent().getStringExtra("orderno"), orderDetails);  // Use orderno directly
+						        
+						        // Update the data in Firebase
+						        ref.updateChildren(existingData);
+						    }
 				
-				        if (dataSnapshot.exists()) {
-					            // Get the existing data as a map
-					            existingData = (Map<String, Object>) dataSnapshot.getValue();
-					        }
-				
-				        // If existingData is null, initialize it
-				        if (existingData == null) {
-					            existingData = new HashMap<>();
-					        }
-				
-				        // Use getIntent().getStringExtra("orderno") directly in put()
-				        existingData.put(getIntent().getStringExtra("orderno"), orderDetails);  // Use orderno directly
-				        
-				        // Update the data in Firebase
-				        ref.updateChildren(existingData);
-				    }
-			
-			    @Override
-			    public void onCancelled(DatabaseError databaseError) {
-				        // Handle possible errors
-				        Log.e("FirebaseError", "Error while updating data: " + databaseError.getMessage());
-				    }
+				    @Override
+				    public void onCancelled(DatabaseError databaseError) {
+						        // Handle possible errors
+						        Log.e("FirebaseError", "Error while updating data: " + databaseError.getMessage());
+						    }
 		});
+		
+		// Firebase reference for myorders under "inter_user/email2/data/myorders"
+		DatabaseReference myOrdersRef = FirebaseDatabase.getInstance()
+		                           .getReference("inter_user/" + email2 + "/data/myorder");
+		
+		// Use push() to create a unique key for each myorder entry
+		myOrdersRef.push().setValue(orderDetails);
 		
 		// Construct the message using the order number and price
 		String orderMessage = "Order no. " + (getIntent().getStringExtra("orderno") != null ? getIntent().getStringExtra("orderno") : orderno) 
@@ -220,8 +252,11 @@ public class OrderproofActivity extends AppCompatActivity {
 		
 		// Get a reference to the history path for the user (under "history/username")
 		// Use push() to create a unique key for each history entry
-		DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("history/" + username);
+		
+		
+		DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference("inter_user/" + email2+"/data/history");
 		historyRef.push().setValue(historyData);  // Use push() to add a unique key for each entry
+		
 	}
 	
 	@Override
@@ -231,6 +266,7 @@ public class OrderproofActivity extends AppCompatActivity {
 		startActivity(intent);
 		finish();
 	}
+	
 	
 	@Deprecated
 	public void showMessage(String _s) {

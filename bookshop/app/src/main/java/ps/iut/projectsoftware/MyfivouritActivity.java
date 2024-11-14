@@ -49,7 +49,12 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.*;
 import org.json.*;
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MyfivouritActivity extends AppCompatActivity {
 	
@@ -113,15 +118,13 @@ public class MyfivouritActivity extends AppCompatActivity {
 			@Override
 			public void onClick(DialogInterface _dialog, int _which) {
 				if (!favorite.getString("favorite", "").equals("")) {
-					linear2.setVisibility(View.GONE);
-					listview1.setVisibility(View.VISIBLE);
 					map = new Gson().fromJson(favorite.getString("favorite", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 					listview1.setAdapter(new Listview1Adapter(map));
 					((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-				}
-				else {
-					linear2.setVisibility(View.VISIBLE);
-					listview1.setVisibility(View.GONE);
+					if (0 == map.size()) {
+						listview1.setVisibility(View.GONE);
+						linear2.setVisibility(View.VISIBLE);
+					}
 				}
 			}
 		});
@@ -129,34 +132,21 @@ public class MyfivouritActivity extends AppCompatActivity {
 			@Override
 			public void onClick(DialogInterface _dialog, int _which) {
 				if (!favorite.getString("wishlist", "").equals("")) {
-					linear2.setVisibility(View.GONE);
-					listview1.setVisibility(View.VISIBLE);
 					map = new Gson().fromJson(favorite.getString("wishlist", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 					listview1.setAdapter(new Listview1Adapter(map));
 					((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
-				}
-				else {
-					linear2.setVisibility(View.VISIBLE);
-					listview1.setVisibility(View.GONE);
+					if (0 == map.size()) {
+						listview1.setVisibility(View.GONE);
+						linear2.setVisibility(View.VISIBLE);
+					}
 				}
 			}
 		});
 		dialog.create().show();
-		itemselection = new TimerTask() {
-			@Override
-			public void run() {
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						if (item) {
-							linear2.setVisibility(View.VISIBLE);
-							listview1.setVisibility(View.GONE);
-						}
-					}
-				});
-			}
-		};
-		_timer.schedule(itemselection, (int)(1000));
+		if (item) {
+			linear2.setVisibility(View.VISIBLE);
+			listview1.setVisibility(View.GONE);
+		}
 	}
 	
 	@Override

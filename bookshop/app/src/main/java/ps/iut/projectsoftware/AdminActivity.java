@@ -3,7 +3,9 @@ package ps.iut.projectsoftware;
 import android.animation.*;
 import android.app.*;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.*;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.*;
@@ -33,19 +35,33 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
+import com.google.firebase.database.ValueEventListener;
 import java.io.*;
 import java.text.*;
 import java.util.*;
+import java.util.HashMap;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.regex.*;
 import org.json.*;
+
 
 public class AdminActivity extends AppCompatActivity {
+	
+	private Timer _timer = new Timer();
+	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
 	
 	private FloatingActionButton _fab;
 	
 	private LinearLayout linear1;
 	private LinearLayout corner;
-	private TextView textview7;
+	private LinearLayout linear19;
 	private LinearLayout linear2;
 	private LinearLayout linear3;
 	private LinearLayout linear4;
@@ -57,6 +73,9 @@ public class AdminActivity extends AppCompatActivity {
 	private LinearLayout linear10;
 	private LinearLayout linear11;
 	private LinearLayout linear18;
+	private ImageView imageview6;
+	private TextView textview7;
+	private TextView textview9;
 	private ImageView imageview1;
 	private LinearLayout linear12;
 	private TextView textview1;
@@ -75,6 +94,10 @@ public class AdminActivity extends AppCompatActivity {
 	
 	private Intent ocm = new Intent();
 	private SharedPreferences a;
+	private AlertDialog.Builder dialog;
+	private TimerTask timer;
+	private DatabaseReference pin = _firebase.getReference("pin");
+	private ChildEventListener _pin_child_listener;
 	
 	@Override
 	protected void onCreate(Bundle _savedInstanceState) {
@@ -90,7 +113,7 @@ public class AdminActivity extends AppCompatActivity {
 		
 		linear1 = findViewById(R.id.linear1);
 		corner = findViewById(R.id.corner);
-		textview7 = findViewById(R.id.textview7);
+		linear19 = findViewById(R.id.linear19);
 		linear2 = findViewById(R.id.linear2);
 		linear3 = findViewById(R.id.linear3);
 		linear4 = findViewById(R.id.linear4);
@@ -102,6 +125,9 @@ public class AdminActivity extends AppCompatActivity {
 		linear10 = findViewById(R.id.linear10);
 		linear11 = findViewById(R.id.linear11);
 		linear18 = findViewById(R.id.linear18);
+		imageview6 = findViewById(R.id.imageview6);
+		textview7 = findViewById(R.id.textview7);
+		textview9 = findViewById(R.id.textview9);
 		imageview1 = findViewById(R.id.imageview1);
 		linear12 = findViewById(R.id.linear12);
 		textview1 = findViewById(R.id.textview1);
@@ -118,57 +144,108 @@ public class AdminActivity extends AppCompatActivity {
 		linear17 = findViewById(R.id.linear17);
 		textview5 = findViewById(R.id.textview5);
 		a = getSharedPreferences("a", Activity.MODE_PRIVATE);
+		dialog = new AlertDialog.Builder(this);
+		
+		imageview6.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View _view) {
+				FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+				DatabaseReference refreshPinRef = firebaseDatabase.getReference("refresh_pin");
+				
+				// Set refresh_pin to true
+				refreshPinRef.setValue(true);
+				
+				
+				DatabaseReference pinRef = firebaseDatabase.getReference("pin");
+				
+				
+				
+				pinRef.addListenerForSingleValueEvent(new ValueEventListener() {
+					    @Override
+					    public void onDataChange(DataSnapshot dataSnapshot) {
+						        String storedPin = "";  // Declare the variable within the method for local use
+						
+						        if (dataSnapshot.exists()) {
+							            storedPin = dataSnapshot.getValue(String.class);
+							
+							            if (storedPin != null) {
+								                textview9.setText(storedPin);  
+								            } else {
+								                textview9.setText("No PIN found");  // Handle the case where the data isn't a string
+								            }
+							        } else {
+							            textview9.setText("No PIN found in database");  // Handle the case where data doesn't exist
+							        }
+						    }
+					
+					    @Override
+					    public void onCancelled(DatabaseError databaseError) {
+						        // Log or handle errors here
+						    }
+				});
+			}
+		});
 		
 		textview1.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				ocm.setClass(getApplicationContext(), AdminmainListviewActivity.class);
-				ocm.putExtra("key", "book");
-				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(ocm);
-				finish();
+				if (false) {
+					ocm.setClass(getApplicationContext(), AdminmainListviewActivity.class);
+					ocm.putExtra("key", "book");
+					ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(ocm);
+					finish();
+				}
 			}
 		});
 		
 		textview2.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				ocm.setClass(getApplicationContext(), AdminmainListviewActivity.class);
-				ocm.putExtra("key", "coupon");
-				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(ocm);
-				finish();
+				if (false) {
+					ocm.setClass(getApplicationContext(), AdminmainListviewActivity.class);
+					ocm.putExtra("key", "coupon");
+					ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(ocm);
+					finish();
+				}
 			}
 		});
 		
 		textview3.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				ocm.setClass(getApplicationContext(), AdminmainListviewActivity.class);
-				ocm.putExtra("key", "manager");
-				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(ocm);
-				finish();
+				if (false) {
+					ocm.setClass(getApplicationContext(), AdminmainListviewActivity.class);
+					ocm.putExtra("key", "manager");
+					ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(ocm);
+					finish();
+				}
 			}
 		});
 		
 		textview4.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				ocm.setClass(getApplicationContext(), AdminAddNotificationActivity.class);
-				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(ocm);
-				finish();
+				if (false) {
+					ocm.setClass(getApplicationContext(), AdminAddNotificationActivity.class);
+					ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(ocm);
+					finish();
+				}
 			}
 		});
 		
 		textview5.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View _view) {
-				ocm.setClass(getApplicationContext(), EditbalanceActivity.class);
-				ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(ocm);
-				finish();
+				if (false) {
+					ocm.setClass(getApplicationContext(), EditbalanceActivity.class);
+					ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(ocm);
+					finish();
+				}
 			}
 		});
 		
@@ -183,6 +260,72 @@ public class AdminActivity extends AppCompatActivity {
 				finish();
 			}
 		});
+		
+		_pin_child_listener = new ChildEventListener() {
+			@Override
+			public void onChildAdded(DataSnapshot _param1, String _param2) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				
+			}
+			
+			@Override
+			public void onChildChanged(DataSnapshot _param1, String _param2) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+				DatabaseReference pinRef = firebaseDatabase.getReference("pin");
+				
+				String secretKey = "asdasd";  // Assuming you will use it later in your logic
+				
+				pinRef.addListenerForSingleValueEvent(new ValueEventListener() {
+					    @Override
+					    public void onDataChange(DataSnapshot dataSnapshot) {
+						        String storedPin = "";  // Declare the variable within the method for local use
+						
+						        if (dataSnapshot.exists()) {
+							            storedPin = dataSnapshot.getValue(String.class);
+							
+							            if (storedPin != null) {
+								                textview9.setText(storedPin);  
+								            } else {
+								                textview9.setText("No PIN found");  // Handle the case where the data isn't a string
+								            }
+							        } else {
+							            textview9.setText("No PIN found in database");  // Handle the case where data doesn't exist
+							        }
+						    }
+					
+					    @Override
+					    public void onCancelled(DatabaseError databaseError) {
+						        // Log or handle errors here
+						    }
+				});
+			}
+			
+			@Override
+			public void onChildMoved(DataSnapshot _param1, String _param2) {
+				
+			}
+			
+			@Override
+			public void onChildRemoved(DataSnapshot _param1) {
+				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
+				final String _childKey = _param1.getKey();
+				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
+				
+			}
+			
+			@Override
+			public void onCancelled(DatabaseError _param1) {
+				final int _errorCode = _param1.getCode();
+				final String _errorMessage = _param1.getMessage();
+				
+			}
+		};
+		pin.addChildEventListener(_pin_child_listener);
 	}
 	
 	private void initializeLogic() {
@@ -190,19 +333,53 @@ public class AdminActivity extends AppCompatActivity {
 		if (Build.VERSION.SDK_INT >= 21) { Window
 			w = this.getWindow();
 			w.setNavigationBarColor(Color.parseColor("#3F51B5")); }
+		
+		
 		textview7.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
-		SketchwareUtil.showMessage(getApplicationContext(), "Blocked Action ..");
-		a.edit().putString("login-ad", "").commit();
-		a.edit().putString("email", "").commit();
-		ocm.setClass(getApplicationContext(), LoginActivity.class);
-		ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(ocm);
-		finish();
+		timer = new TimerTask() {
+			@Override
+			public void run() {
+				runOnUiThread(new Runnable() {
+					@Override
+					public void run() {
+						FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+						DatabaseReference pinRef = firebaseDatabase.getReference("pin");
+						
+						
+						
+						pinRef.addListenerForSingleValueEvent(new ValueEventListener() {
+							    @Override
+							    public void onDataChange(DataSnapshot dataSnapshot) {
+								        String storedPin = "";  // Declare the variable within the method for local use
+								
+								        if (dataSnapshot.exists()) {
+									            storedPin = dataSnapshot.getValue(String.class);
+									
+									            if (storedPin != null) {
+										                textview9.setText(storedPin);  
+										            } else {
+										                textview9.setText("No PIN found");  // Handle the case where the data isn't a string
+										            }
+									        } else {
+									            textview9.setText("No PIN found in database");  // Handle the case where data doesn't exist
+									        }
+								    }
+							
+							    @Override
+							    public void onCancelled(DatabaseError databaseError) {
+								        // Log or handle errors here
+								    }
+						});
+					}
+				});
+			}
+		};
+		_timer.scheduleAtFixedRate(timer, (int)(000), (int)(6000));
 	}
 	
 	@Override
@@ -210,6 +387,7 @@ public class AdminActivity extends AppCompatActivity {
 		SketchwareUtil.showMessage(getApplicationContext(), "See You Nearly 👍🏽");
 		finish();
 	}
+	
 	
 	@Deprecated
 	public void showMessage(String _s) {

@@ -52,6 +52,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.*;
 import org.json.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class NotificationActivity extends AppCompatActivity {
 	
@@ -156,26 +161,28 @@ public class NotificationActivity extends AppCompatActivity {
 			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }
 		listview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFF1A237E, 0xFFE8EAF6));
 		linear4.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFE8EAF6, 0xFF1A237E));
+		email = a.getString("email", "");
+		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		if (!read.getString("notification", "").equals("")) {
 			listmap = new Gson().fromJson(read.getString("notification", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
 			listview1.setAdapter(new Listview1Adapter(listmap));
 			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 		}
-		else {
-			email = a.getString("email", "");
-			listview1.setAdapter(new Listview1Adapter(listmap));
-			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
+		if (0 == listmap.size()) {
+			listview1.setVisibility(View.GONE);
+			linear4.setVisibility(View.VISIBLE);
 		}
-		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 	}
 	
 	@Override
 	public void onBackPressed() {
 		ocm.setClass(getApplicationContext(), ViewMainActivity.class);
+		ocm.putExtra("gate", "");
 		ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(ocm);
 		finish();
 	}
+	
 	public class Listview1Adapter extends BaseAdapter {
 		
 		ArrayList<HashMap<String, Object>> _data;

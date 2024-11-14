@@ -53,6 +53,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.*;
 import org.json.*;
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MyorderActivity extends AppCompatActivity {
 	
@@ -173,40 +178,26 @@ sort the element depending on the Status of the order "status" as "on completed"
 			listview1.setAdapter(new Listview1Adapter(listmap));
 			((BaseAdapter)listview1.getAdapter()).notifyDataSetChanged();
 		}
-		else {
-			
+		if (listmap.size() == 0) {
+			cretae.setTitle("No Data !!");
+			cretae.setMessage("There is No orders 😕 !");
+			cretae.setPositiveButton("Return", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface _dialog, int _which) {
+					ocm.setClass(getApplicationContext(), ProfileActivity.class);
+					ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					startActivity(ocm);
+					finish();
+				}
+			});
+			cretae.setNeutralButton("Ignore", new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface _dialog, int _which) {
+					
+				}
+			});
+			cretae.create().show();
 		}
-		timer = new TimerTask() {
-			@Override
-			public void run() {
-				runOnUiThread(new Runnable() {
-					@Override
-					public void run() {
-						if (list.size() == 0) {
-							cretae.setTitle("No Data !!");
-							cretae.setMessage("There is No orders 😕 !");
-							cretae.setPositiveButton("Return", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface _dialog, int _which) {
-									ocm.setClass(getApplicationContext(), ProfileActivity.class);
-									ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-									startActivity(ocm);
-									finish();
-								}
-							});
-							cretae.setNeutralButton("Ignore", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface _dialog, int _which) {
-									
-								}
-							});
-							cretae.create().show();
-						}
-					}
-				});
-			}
-		};
-		_timer.schedule(timer, (int)(3000));
 		materialbutton1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)58, 0xFF3F51B5));
 		materialbutton2.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)58, 0xFF3F51B5));
 		materialbutton3.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)58, 0xFF3F51B5));
@@ -219,6 +210,7 @@ sort the element depending on the Status of the order "status" as "on completed"
 		startActivity(ocm);
 		finish();
 	}
+	
 	public class Listview1Adapter extends BaseAdapter {
 		
 		ArrayList<HashMap<String, Object>> _data;
@@ -259,8 +251,8 @@ sort the element depending on the Status of the order "status" as "on completed"
 			final TextView textview3 = _view.findViewById(R.id.textview3);
 			final TextView stutus = _view.findViewById(R.id.stutus);
 			
-			no.setText(listmap.get((int)_position).get("orderno").toString());
-			stutus.setText(listmap.get((int)_position).get("status").toString());
+			no.setText(listmap.get((int)_position).get("orderid").toString());
+			stutus.setText(listmap.get((int)_position).get("orderprice").toString());
 			
 			return _view;
 		}

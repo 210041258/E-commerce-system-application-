@@ -353,9 +353,6 @@ public class ViewProductActivity extends AppCompatActivity {
 					    bool_faviourte = false;
 					    inserted = false;
 				}
-				if (new Gson().toJson(listmap).equals("[]")) {
-					favorite.edit().putString("favorite", "").commit();
-				}
 			}
 		});
 		
@@ -420,9 +417,6 @@ public class ViewProductActivity extends AppCompatActivity {
 					    // Update favorite status
 					    bool_wishlist = false;
 					    inserted = false;
-				}
-				if (new Gson().toJson(listmap2).equals("[]")) {
-					favorite.edit().putString("wishlist", "").commit();
 				}
 			}
 		});
@@ -749,6 +743,7 @@ public class ViewProductActivity extends AppCompatActivity {
 		materialbutton2.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFFFF, 0xFF3F51B5));
 		materialbutton1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFFFF, 0xFF3F51B5));
 		linear10.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFFFF, 0xFF3F51B5));
+		linear32.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFFFFFFF, 0xFF3F51B5));
 		Glide.with(getApplicationContext()).load(Uri.parse(getIntent().getStringExtra("url"))).into(imageview8);
 		description.setText(getIntent().getStringExtra("description"));
 		title.setText(getIntent().getStringExtra("name"));
@@ -889,7 +884,8 @@ public class ViewProductActivity extends AppCompatActivity {
 		cart.edit().putString("size", String.valueOf((long)(nu))).commit();
 		favorite.edit().putString("favorite", new Gson().toJson(listmap)).commit();
 		favorite.edit().putString("wishlist", new Gson().toJson(listmap2)).commit();
-		move.setClass(getApplicationContext(), ViewMainActivity.class);
+		move.setClass(getApplicationContext(), ViewSearchActivity.class);
+		move.putExtra("key", getIntent().getStringExtra("department"));
 		move.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(move);
 		finish();

@@ -164,6 +164,7 @@ public class ProfileActivity extends AppCompatActivity {
 	@Override
 	public void onBackPressed() {
 		ocm.setClass(getApplicationContext(), ViewMainActivity.class);
+		ocm.putExtra("gate", "");
 		ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		startActivity(ocm);
 		finish();
