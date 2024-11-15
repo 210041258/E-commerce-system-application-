@@ -32,4 +32,4 @@
 ![website admins](https://github.com/210041258/E-commerce-system-application-/blob/main/admin%20gateway/Screenshots/Screenshot%202024-11-15%20022438.png)
 
 
-![video inrotduction ](https://youtu.be/MSdKpZuxwxw?si=MjJ4Pv92w6cCizb2)
+[![Watch the video](https://img.youtube.com/vi/MSdKpZuxwxw/0.jpg)](https://www.youtube.com/watch?v=MSdKpZuxwxw)
