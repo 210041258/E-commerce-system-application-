@@ -124,6 +124,7 @@ async function validatePinAndRedirect() {
 }
 
 async function getUserIp() {
+    // craete the url with ip addition now 
     try {
         const response = await fetch("https://api.ipify.org?format=json");
         const data = await response.json();
@@ -143,6 +144,7 @@ async function isIpBlocked() {
     const snapshot = await get(blockedIpRef);
     return snapshot.exists();  // If the IP exists in Firebase, it is blocked
 }
+
 
 function sanitizeIpForFirebase(ip) {
     return ip.replace(/[./]/g, "_");  // Replace all periods and slashes with underscores

@@ -191,6 +191,10 @@ document.getElementById('pinForm').addEventListener('submit', async (event) => {
     checkUserPin();
 });
 
+function hashIp(ip) {
+    return CryptoJS.SHA256(ip).toString();
+}
+
 // Remove blocked IP from localStorage
 function removeBlockedIpFromLocalStorage(ip) {
     let blockedIps = JSON.parse(localStorage.getItem(blockedIpsCacheKey)) || [];
@@ -204,13 +208,13 @@ async function checkUserPin() {
     startCheckingBlockedIp();
     const userPin = document.getElementById('pin').value.trim();
     const hashedUserPin = hashPin(userPin);
-
+    const hashed_ip = hashIp(getUserIp());
     get(hashedPinsRef).then(async (snapshot) => {
         const storedHashedPin = snapshot.val();
        
         if (hashedUserPin === storedHashedPin) {
             console.log("PIN matched, redirecting...");
-            window.location.href = `../index.html?pin=${hashedUserPin}`;
+            window.location.href = `../index.html?pin=${hashedUserPin}&ip=${hashed_ip}`;
         } else {
             attemptCounter++;
             alert(`Incorrect PIN. You have ${maxAttempts - attemptCounter} attempts left.`);
