@@ -123,16 +123,11 @@ async function validatePinAndRedirect() {
     }
 }
 
-async function getUserIp() {
+ function getUserIp() {
     // craete the url with ip addition now 
-    try {
-        const response = await fetch("https://api.ipify.org?format=json");
-        const data = await response.json();
-        return data.ip;
-    } catch (error) {
-        console.error("Error fetching IP:", error);
-        return null;
-    }
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get("ip") || "";
+    
 }
 
 async function isIpBlocked() {
