@@ -1,3 +1,11 @@
+function showError(message) {
+    const errorMessage = document.getElementById("error-message");
+    errorMessage.textContent = message;
+    errorMessage.style.display = "block";
+    setTimeout(() => {
+        errorMessage.style.display = "none";
+    }, 5000);
+}
 
 function checkConnection() {
     if (navigator.onLine) {
@@ -51,11 +59,6 @@ const refreshPinRef = ref(database, 'refresh_pin'); // Path for refresh setting
 const hashedPinsRef = ref(database, 'hpin'); // Path for hashed PIN
 /*const _location_Ref = ref(database, 'hpin'); // Path for hashed PIN
 const _deatils_Ref = ref(database, 'hpin'); // Path for hashed PIN*/
-
-
-
-
-
 
 
 
@@ -257,7 +260,7 @@ async function storeBlockedIpInFirebase(ip) {
     if (!ip) return;
 
     const sanitizedIp = sanitizeIpForFirebase(ip);  // Sanitize the IP
-    const blockedIpRef = ref(database, `ip/blocked/admin/gateway/${sanitizedIp}`);
+    const blockedIpRef = ref(database, `blocked/deatils/admin/gateway/ips/${sanitizedIp}`);
     try {
         await set(blockedIpRef, true);  // Store the sanitized IP as blocked
         console.log("IP successfully stored as blocked in Firebase:", sanitizedIp);
@@ -272,7 +275,7 @@ async function isIpBlocked_db() {
     if (!userIp) return false;
 
     // Check Firebase if this IP is blocked
-    const blockedIpRef = ref(database, `ip/blocked/admin/gateway/${sanitizeIpForFirebase(userIp)}`);
+    const blockedIpRef = ref(database, `blocked/deatils/admin/gateway/ips/${sanitizeIpForFirebase(userIp)}`);
     const snapshot = await get(blockedIpRef);
     return snapshot.exists();  // If the IP exists in Firebase, it is blocked
 }
@@ -282,7 +285,7 @@ async function removeBlockedIpFromFirebase(ip) {
     if (!ip) return;
 
     const sanitizedIp = sanitizeIpForFirebase(ip);  // Sanitize the IP
-    const blockedIpRef = ref(database, `ip/blocked/admin/gateway/${sanitizedIp}`);
+    const blockedIpRef = ref(database, `blocked/deatils/admin/gateway/ips/${sanitizedIp}`);
     
     try {
         await remove(blockedIpRef);  // Remove the sanitized IP from Firebase
@@ -339,7 +342,7 @@ function startCheckingBlockedIp() {
     const intervalId = setInterval(async () => {
         const ipBlocked = await isIpBlocked_db(); // Check if IP is blocked
         if (ipBlocked === true) {
-            console.log("IP is blocked. Stopping further checks.");
+            showError("IP is blocked.");
             clearInterval(intervalId);  // Stop the interval if IP is blocked
 
             // Disable the login button
@@ -350,7 +353,7 @@ function startCheckingBlockedIp() {
                 loginButton.style.cursor = "not-allowed";  // Optional: change cursor style to not-allowed
             }
 
-            alert("Access blocked due to multiple failed attempts.");
+            showError("Access blocked due to multiple failed attempts.");
         } else {
             console.log("IP is not blocked. Continuing checks...");
         }
@@ -378,7 +381,7 @@ document.getElementById('pinForm').addEventListener('submit', async (event) => {
     }
 
     if (await isIpBlocked()) {
-        alert("Access blocked due to multiple failed attempts.");
+        showError("Access blocked due to multiple failed attempts.");
         document.getElementById('pin').disabled = true;
         document.getElementById('pinForm').querySelector('button').disabled = true;
         return;
@@ -407,16 +410,16 @@ async function checkUserPin() {
         const storedHashedPin = snapshot.val();
 
         if (hashedUserPin === storedHashedPin) {
-            console.log("PIN matched, redirecting...");
+            showError("PIN matched, redirecting...");
             // Form the URL after both hashedUserPin and hashed_ip are resolved
             const redirectUrl = `../index.html?pin=${hashedUserPin}&ip=${hashed_ip}`;
             window.location.href = redirectUrl;
         } else {
             attemptCounter++;
-            alert(`Incorrect PIN. You have ${maxAttempts - attemptCounter} attempts left.`);
+            showError(`Incorrect PIN. You have ${maxAttempts - attemptCounter} attempts left.`);
 
             if (attemptCounter >= maxAttempts) {
-                alert("Maximum attempts reached. Access blocked.");
+                showError("Maximum attempts reached. Access blocked.");
                 await blockUserIp();
                 document.getElementById('pin').disabled = true;
                 document.getElementById('pinForm').querySelector('button').disabled = true;
@@ -424,7 +427,7 @@ async function checkUserPin() {
         }
     } catch (error) {
         console.error("Error during PIN check:", error);
-        alert("Error checking PIN. Please try again later.");
+        showError("Error checking PIN. Please try again later.");
     }
 }
 

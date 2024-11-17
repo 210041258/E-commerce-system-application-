@@ -1,3 +1,11 @@
+function showError(message) {
+    const errorMessage = document.getElementById("error-message");
+    errorMessage.textContent = message;
+    errorMessage.style.display = "block";
+    setTimeout(() => {
+        errorMessage.style.display = "none";
+    }, 5000);
+}
 
 
 function checkConnection() {
@@ -9,7 +17,7 @@ function checkConnection() {
 }
 
 
-setInterval(checkConnection, 5000);
+setInterval(checkConnection, 500);
 
 
 window.addEventListener('online', () => {
@@ -70,7 +78,7 @@ loginForm.addEventListener('submit', async (event) => {
 
     const ipBlocked = await isIpBlocked();  // Await the IP block check
     if (ipBlocked) {
-        alert("Access blocked due to multiple failed attempts.");
+        showError("Access blocked due to multiple failed attempts.");
         return;  // Stop the form submission if the IP is blocked
     }
     
@@ -79,7 +87,7 @@ loginForm.addEventListener('submit', async (event) => {
     const password = passwordInput.value.trim();
 
     if (!email || !password) {
-        alert("Please fill in all fields.");
+        showError("Please fill in all fields.");
         return;
     }
 
@@ -87,7 +95,7 @@ loginForm.addEventListener('submit', async (event) => {
         await signInWithEmailAndPassword(auth, email, password);
         // On success, proceed with redirect
         const card = document.querySelector('.card');
-        card.style.animation = 'fadeOut 0.3s ease forwards';
+        card.style.animation = 'fadeOut 0.9s ease forwards';
         setTimeout(() => {
             window.location.href = "../html's/dashboard.html";
         }, 300);
@@ -166,11 +174,9 @@ async function validatePinAndRedirect() {
     const urlHashedPin = getHashedPinFromUrl();
     const storedHashedPin = await getStoredHashedPin();
     if (urlHashedPin && urlHashedPin === storedHashedPin) {
-        console.log("Access granted. PIN verified.");
         startCheckingBlockedIp();
     } else {
-        console.error("Access Denied: Invalid PIN.");
-        alert("Invalid PIN. Redirecting to preindex...");
+        showError("Invalid PIN. Redirecting to preindex...");
         setTimeout(() => {
             window.location.href = "../html's/preindex.html";
         }, 1000);
@@ -189,7 +195,7 @@ async function isIpBlocked() {
     if (!userIp) return false;
 
     // Check Firebase if this IP is blocked
-    const blockedIpRef = ref(database, `ip/blocked/admin/gateway/${sanitizeIpForFirebase(userIp)}`);
+    const blockedIpRef = ref(database, `blocked/deatils/admin/gateway/ips/${sanitizeIpForFirebase(userIp)}`);
     const snapshot = await get(blockedIpRef);
     return snapshot.exists();  // If the IP exists in Firebase, it is blocked
 }
@@ -218,7 +224,12 @@ function startCheckingBlockedIp() {
                 loginButton.style.cursor = "not-allowed";  // Optional: change cursor style to not-allowed
             }
 
-            alert("Access blocked due to multiple failed attempts.");
+            showError("Access blocked due to multiple failed attempts.");
+            
+            setTimeout(() => {
+                showError("Invalid PIN. Redirecting to preindex...");
+                window.location.href = "../html's/preindex.html";
+            }, 7000);
         } else {
             console.log("IP is not blocked. Continuing checks...");
         }

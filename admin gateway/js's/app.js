@@ -8,7 +8,7 @@ function checkConnection() {
 }
 
 
-setInterval(checkConnection, 5000);
+setInterval(checkConnection, 500);
 
 
 window.addEventListener('online', () => {
