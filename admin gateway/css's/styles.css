@@ -5,8 +5,12 @@ body {
     font-family: 'Helvetica Neue', sans-serif;  /* Smooth sans-serif font */
     font-size: 16px;  /* Slightly larger text */
     line-height: 1.5;  /* Better line spacing for readability */
-}
+    -webkit-text-size-adjust: 100%;
 
+}
+th {
+  text-align: -webkit-match-parent;
+}
 /* Container with some margin and padding */
 .container {
     margin-top: 30px;

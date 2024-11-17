@@ -195,7 +195,7 @@ async function isIpBlocked() {
     if (!userIp) return false;
 
     // Check Firebase if this IP is blocked
-    const blockedIpRef = ref(database, `blocked/deatils/admin/gateway/ips/${sanitizeIpForFirebase(userIp)}`);
+    const blockedIpRef = ref(database, `blocked/details/admin/gateway/ips/${sanitizeIpForFirebase(userIp)}`);
     const snapshot = await get(blockedIpRef);
     return snapshot.exists();  // If the IP exists in Firebase, it is blocked
 }

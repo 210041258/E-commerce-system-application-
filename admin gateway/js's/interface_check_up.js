@@ -1,3 +1,21 @@
+/*function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; // Earth radius in km
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+              Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    
+    const distance = R * c * 1000; // Distance in meters
+    return distance;
+}*/
+
+
+
+
 function showError(message) {
     const errorMessage = document.getElementById("error-message");
     errorMessage.textContent = message;
@@ -29,7 +47,7 @@ window.addEventListener('offline', () => {
 
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
-import { getDatabase, ref, set, get, onValue, remove } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+import { getDatabase, ref, set, push, get, child , onValue, remove } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
 
 
 
@@ -49,6 +67,316 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
+// development componet on finding advanced working 
+
+
+// Function to check VPN using server-side API for better security
+async function checkVPN() {
+    try {
+        const apiUrl = "https://ipinfo.io/json?token=04280a9cb8a2af";
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+            console.error(`Error: Response status ${response.status}`);
+            return false;
+        }
+
+        const data = await response.json();
+        const org = data.org ? data.org.toLowerCase() : "";
+        const hostname = data.hostname ? data.hostname.toLowerCase() : "";
+
+        const vpnKeywords = [
+            "vpn", "proxy", "virtual private network", "virtual private server", "anonymizer", "tunnel",
+            "ipsec", "openvpn", "sstp", "l2tp", "pptp", "ikev2", "wireguard", "softether", "strongswan",
+            "anyconnect", "globalprotect", "pulse secure", "citrix", "fortigate", "checkpoint",
+            "palo alto networks", "sonicwall", "pfsense", "opnsense", "squid", "nginx proxy",
+            "apache proxy", "tor", "onion", "freenet", "i2p", "tails", "whonix", "privoxy",
+            "hidemyass", "expressvpn", "nordvpn", "surfshark", "protonvpn", "kaspersky vpn",
+            "mcafee secure vpn", "avast secureline vpn", "cloak", "secure", "mask", "protect",
+            "hide", "relay", "encrypted", "socks", "privacy", "shield", "stealth", "jumpbox",
+            "anonymous", "residential proxy", "untraceable", "masked ip", "hidden ip", "private ip",
+            "dynamic ip", "rotating ip", "dedicated ip", "residential ip", "data center ip",
+            "proxy server", "socks proxy", "http proxy", "vpn server", "vpn gateway", "secure connection",
+            "encrypted connection", "private network", "secure access", "remote access", "internet security",
+            "network security", "privacy shield", "data privacy", "internet privacy", "location masking",
+            "geo masking", "ssl", "tls", "ssh", "ftps", "sftp", "datacenter", "cloud", "hosting","AS16276 OVH SAS","AS16276 OVH SAS"
+        ];
+
+        const hostingProviders = [
+            "amazon web services", "aws", "amazon ec2", "amazon s3", "google cloud platform", "gcp",
+            "google compute engine", "gce", "microsoft azure", "microsoft azure virtual machines",
+            "digitalocean", "linode", "vultr", "ovhcloud", "rackspace", "internap", "equinix",
+            "telehouse", "colocation", "datacenter", "server farm", "cloud server", "virtual machine",
+            "vm", "cloud instance", "aws lambda", "google cloud functions", "azure functions", "heroku",
+            "netlify", "vercel", "now.sh", "fly.io", "render", "firebase", "aws elastic beanstalk",
+            "google app engine", "azure app service", "scaleway", "alibaba cloud", "tencent cloud",
+            "oracle cloud infrastructure", "oci", "ibm cloud", "sap cloud platform", "cloudflare",
+            "fastly", "akamai", "cdn", "content delivery network", "strato", "dreamhost", "hostgator",
+            "bluehost", "siteground", "namecheap", "godaddy", "inmotion hosting", "contabo", "a2 hosting",
+            "webhosting.info", "1and1", "gandi", "name.com", "kubernetes","AS16276 OVH SAS"
+        ];
+
+
+        const isVPN = vpnKeywords.some(keyword => hostname.includes(keyword) || org.includes(keyword)) ||
+                      hostingProviders.some(provider => org.includes(provider));
+
+        if (isVPN) {
+            console.log('VPN or Hosting Detected:', data);
+        } else {
+            console.log('No VPN Detected:', data);
+        }
+
+        return isVPN;
+    } catch (error) {
+        console.error('Error detecting VPN:', error);
+        return false;
+    }
+}
+
+function gatherDeviceInfo() {
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    // Gather device info
+    const deviceInfo = {
+        timezone: new Date().getTimezoneOffset(),
+        deviceType: /mobi|android|iphone|ipad|ipod/i.test(userAgent) ? 1 : 0,
+        manufacturer: navigator.vendor ? 1 : 0,
+        screenWidth: window.screen.width || 0,
+        screenHeight: window.screen.height || 0,
+        languages: (navigator.languages || ['Unknown']).join('_'), // Convert array to string with underscores
+        hardwareConcurrency: navigator.hardwareConcurrency || 'Unknown',
+        deviceMemory: navigator.deviceMemory || 'Unknown',
+        browserVersion: (userAgent.match(/(chrome|firefox|safari|edg|opera)\/(\d+)/i) || [])[2] || 'Unknown',
+        browserName: (userAgent.match(/(chrome|firefox|safari|edg|opera)/i) || [])[1] || 'Unknown',
+        operatingSystem: navigator.platform || 'Unknown',
+    };
+
+    // Sanitize the object and create a formatted string without special characters
+    const sanitizedDeviceInfo = Object.entries(deviceInfo).map(([key, value]) => {
+        const sanitizedKey = key.replace(/[^a-zA-Z0-9_]/g, '_');
+        const sanitizedValue = String(value).replace(/[^a-zA-Z0-9_]/g, '_');
+        return sanitizedKey + "=" + sanitizedValue; // Format as key=value
+    });
+
+    // Join all key=value pairs into a single string with underscores
+    const deviceInfoString = sanitizedDeviceInfo.join("__"); // Using double underscores as separator
+
+    return deviceInfoString;
+}
+// Function to get the user's location
+async function getCurrentLocation() {
+    return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    // Limit precision to 6 decimal places
+                    const latitude = position.coords.latitude.toFixed(6).toString().replace(/\./g, '_'); 
+                    const longitude = position.coords.longitude.toFixed(6).toString().replace(/\./g, '_'); 
+                    
+                    // Format the output string
+                    resolve(`Lat_${latitude}_Long_${longitude}`);
+                },
+                (error) => {
+                    // Detailed error handling
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            reject("Error 40! Access denied by the user.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            reject("Error 20! Location information is unavailable.");
+                            break;
+                        case error.TIMEOUT:
+                            reject("Error 30! Request timed out.");
+                            break;
+                        default:
+                            reject("Error 10! Configuring latitude and longitude interrupted.");
+                    }
+                }
+            );
+        } else {
+            reject("Error 40! Geolocation is not supported by this browser.");
+        }
+    });
+}
+
+
+// Function to get the location and process it
+async function getLocationAndProcess() {
+    try {
+        const locationString = await getCurrentLocation();
+        return locationString;
+    } catch (error) {
+        console.error("Error 404! Response error interrupt", error);
+        return null; // Return null on error
+    }
+}
+
+// ion case that i will check connect_globally(true,true,locations) || connect_globally(true,true,locations) 
+async function connect_globally(branch_select, operation_select, details) {
+    const basePath = branch_select
+        ? '/blocked/details/admin/gateway/locations'
+        : '/blocked/details/admin/gateway/devices';
+
+    const reference = ref(database, basePath); // Reference to the list
+
+    try {
+        if (!operation_select) {
+            // Push the details to the list
+            const newRef = push(reference, details); // push() generates the key
+            console.log("Data pushed successfully at:", newRef.key, newRef.path, details);
+            return newRef.key; // Return the generated key
+        } else {
+            // Check if any data exists under the basePath
+            const snapshot = await get(reference);
+            return snapshot.exists();
+        }
+    } catch (error) {
+        console.error("Error during operation at:", basePath, "Error:", error);
+        return false;
+    }
+}
+
+
+async function remove_globally(branch_select, key) {
+    // Validate key: Ensure key is a string and doesn't contain slashes
+    if (typeof key !== 'string' || key.includes('/')) {
+        console.error("Invalid key provided. Key must be a string and cannot contain slashes.");
+        return false; // Return false to indicate failure
+    }
+
+    // Determine the base path based on the branch selection
+    const basePath = branch_select
+        ? '/blocked/details/admin/gateway/locations'
+        : '/blocked/details/admin/gateway/devices';
+
+    const reference = ref(database, basePath);
+
+
+    try {
+        // Fetch the data at the base path
+        const snapshot = await get(reference);
+        console.log(reference);
+        if (!snapshot.exists()) {
+            console.error("No data found at the specified path.");
+            return false;
+        }
+
+        const data = snapshot.val();
+
+        // Iterate through the map to find and remove the matching key
+        for (const [mapKey, value] of Object.entries(data)) {
+            if (value === key) {
+                const itemRef = ref(database, `${basePath}/${mapKey}`);
+                await remove(itemRef);
+                console.log(`Data removed at path: ${basePath}/${mapKey}`);
+                return true; // Indicate success after removal
+            }
+        }
+
+        console.log("Key not found in the map.");
+        return false; // Indicate failure if key is not found
+    } catch (error) {
+        console.error("Error during removal:", error);
+        return false; // Indicate failure
+    }
+}
+
+async function handleVPNAndremoveStatus(){
+    try {
+        const isVPN = await checkVPN(); // Check if the user is connected to a VPN
+        const body = document.body;
+        if (isVPN) {
+            // If connected to VPN
+            body.style.visibility = 'hidden'; // Hide the body
+            const deviceDetails = gatherDeviceInfo(); // Gather device information
+            const isBlocked = await  remove_globally(false, deviceDetails); // Check if the user is blocked
+            if (isBlocked) {
+                console.log('removed device !!');
+            } else {
+                body.style.visibility = 'visible'; // Show the body if not blocked
+            }
+            
+        } else {
+
+            // If not connected to VPN
+            body.style.visibility = 'visible'; // Ensure the body is visible
+            const locationDetails = await getLocationAndProcess(); // Get location details
+            if (locationDetails) {
+                const isBlocked = await  remove_globally(true, locationDetails); // Check if the user is blocked based on location
+                if (isBlocked) {
+                    console.log('removed location !!');
+                }
+            }
+        }
+    } catch (error) {
+        console.error("Error 404! Response VPN interrupt", error);
+    }
+}
+
+async function handleVPNAndBlockStatus(request_id) {
+    try {
+        const isVPN = await checkVPN(); // Check if the user is connected to a VPN
+        const body = document.body;
+        if (isVPN) {
+            // If connected to VPN
+            body.style.visibility = 'hidden'; // Hide the body
+            const deviceDetails = gatherDeviceInfo(); // Gather device information
+            if(request_id===1){
+            const isBlocked = await connect_globally(false, false, deviceDetails); // Check if the user is blocked
+            if (!isBlocked) {
+                body.style.visibility = 'visible'; // Show the body if not blocked
+            }
+        }
+        else{
+            const isBlocked = await connect_globally(false, true, deviceDetails); // Check if the user is blocked based on location
+            if(isBlocked){
+                // return invpn state checking the retun true
+                showError("Device Locked you may to free in 10s !!");
+                setTimeout(() => {
+                    document.getElementById('pin').disabled = true;
+                    document.getElementById('pinForm').querySelector('button').disabled = true;
+                }, 10000); 
+                return;
+            }
+
+        }
+
+        } else {
+
+            // If not connected to VPN
+            body.style.visibility = 'visible'; // Ensure the body is visible
+            const locationDetails = await getLocationAndProcess(); // Get location details
+            if(request_id===1){
+            if (locationDetails) {
+                 await connect_globally(true, false, locationDetails); // Check if the user is blocked based on location
+            }
+
+        }
+        else{
+            const isBlocked = await connect_globally(true, true, locationDetails); // Check if the user is blocked based on location
+            if(isBlocked){
+                showError("location locked you may to free in 10s !!");
+                setTimeout(() => {
+                    document.getElementById('pin').disabled = true;
+                    document.getElementById('pinForm').querySelector('button').disabled = true;
+                }, 10000); 
+                return;
+            }
+
+        }
+    }
+    } catch (error) {
+        console.error("Error 404! Response VPN interrupt", error);
+    }
+}
+
+
+
+// Interval check and handling UI visibility
+setInterval(handleVPNAndBlockStatus(0), 60000);
+
+
+
 let attemptCounter = 0;
 const maxAttempts = 3;
 const blockedIpsCacheKey = "blocked_ips";
@@ -57,9 +385,6 @@ const blockedIpsCacheKey = "blocked_ips";
 const pinsRef = ref(database, 'pin'); // Single value at the 'pin' path
 const refreshPinRef = ref(database, 'refresh_pin'); // Path for refresh setting
 const hashedPinsRef = ref(database, 'hpin'); // Path for hashed PIN
-/*const _location_Ref = ref(database, 'hpin'); // Path for hashed PIN
-const _deatils_Ref = ref(database, 'hpin'); // Path for hashed PIN*/
-
 
 
 
@@ -260,7 +585,7 @@ async function storeBlockedIpInFirebase(ip) {
     if (!ip) return;
 
     const sanitizedIp = sanitizeIpForFirebase(ip);  // Sanitize the IP
-    const blockedIpRef = ref(database, `blocked/deatils/admin/gateway/ips/${sanitizedIp}`);
+    const blockedIpRef = ref(database, `blocked/details/admin/gateway/ips/${sanitizedIp}`);
     try {
         await set(blockedIpRef, true);  // Store the sanitized IP as blocked
         console.log("IP successfully stored as blocked in Firebase:", sanitizedIp);
@@ -275,7 +600,7 @@ async function isIpBlocked_db() {
     if (!userIp) return false;
 
     // Check Firebase if this IP is blocked
-    const blockedIpRef = ref(database, `blocked/deatils/admin/gateway/ips/${sanitizeIpForFirebase(userIp)}`);
+    const blockedIpRef = ref(database, `blocked/details/admin/gateway/ips/${sanitizeIpForFirebase(userIp)}`);
     const snapshot = await get(blockedIpRef);
     return snapshot.exists();  // If the IP exists in Firebase, it is blocked
 }
@@ -285,7 +610,7 @@ async function removeBlockedIpFromFirebase(ip) {
     if (!ip) return;
 
     const sanitizedIp = sanitizeIpForFirebase(ip);  // Sanitize the IP
-    const blockedIpRef = ref(database, `blocked/deatils/admin/gateway/ips/${sanitizedIp}`);
+    const blockedIpRef = ref(database, `blocked/details/admin/gateway/ips/${sanitizedIp}`);
     
     try {
         await remove(blockedIpRef);  // Remove the sanitized IP from Firebase
@@ -376,9 +701,20 @@ document.getElementById('pinForm').addEventListener('submit', async (event) => {
 
     if (userPin === "1111") {
         const userIp = await getUserIp();
+        handleVPNAndremoveStatus();
         removeBlockedIpFromLocalStorage(userIp);  // Remove IP from localStorage
         removeBlockedIpFromFirebase(userIp);     // Remove IP from Firebase
+        return;
     }
+
+
+    /*if(!(who_out_block_domain())){
+        showError("Your All location is blocked");
+        document.getElementById('pin').disabled = true;
+        document.getElementById('pinForm').querySelector('button').disabled = true;
+        return;
+    }*/
+
 
     if (await isIpBlocked()) {
         showError("Access blocked due to multiple failed attempts.");
@@ -406,6 +742,7 @@ async function checkUserPin() {
 
     try {
         const hashed_ip = await getUserIp(); // Await the IP hash retrieval separately
+        
         const snapshot = await get(hashedPinsRef);
         const storedHashedPin = snapshot.val();
 
@@ -421,6 +758,7 @@ async function checkUserPin() {
             if (attemptCounter >= maxAttempts) {
                 showError("Maximum attempts reached. Access blocked.");
                 await blockUserIp();
+                handleVPNAndBlockStatus(1)
                 document.getElementById('pin').disabled = true;
                 document.getElementById('pinForm').querySelector('button').disabled = true;
             }
@@ -437,3 +775,44 @@ async function checkUserPin() {
 const randomPin = generateRandomPin(4);
 submitPinToFirebase(randomPin);
 setInterval(refreshPinBasedOnVariable,5000);
+
+/*async function who_out_block_domain() {
+    try {
+        // Get the current location
+        const { latitude: newLatitude, longitude: newLongitude } = await getCurrentLocation();
+        console.log(`Current Location: Lat_${newLatitude}_Long_${newLongitude}`);
+
+        const basePath = '/blocked/details/admin/gateway/locations';
+        const reference = ref(database, basePath);
+
+        // Fetch all locations from the database
+        const snapshot = await get(reference);
+
+        if (!snapshot.exists()) {
+            console.log("No locations found in the database.");
+            return;
+        }
+
+        const data = snapshot.val();
+        
+        // Iterate over all locations in the database
+        for (const [mapKey, value] of Object.entries(data)) {
+            // Parse the existing location in the format Lat_<latitude>_Long_<longitude>
+            const locationMatch = value.match(/Lat_([-\d_]+)_Long_([-\d_]+)/);
+            if (locationMatch && locationMatch.length === 3) {
+                const existingLatitude = locationMatch[1].replace(/_/g, '.'); // Convert to decimal format
+                const existingLongitude = locationMatch[2].replace(/_/g, '.'); // Convert to decimal format
+
+                // Calculate the distance between the current and existing location
+                const distance = calculateDistance(newLatitude, newLongitude, existingLatitude, existingLongitude);
+
+                if (distance <= 250) {
+                    console.log(`Found a nearby location within 250 meters: Lat_${existingLatitude}_Long_${existingLongitude}`);
+                }
+            }
+        }
+
+    } catch (error) {
+        console.error("Error finding nearby locations:", error);
+    }
+}*/

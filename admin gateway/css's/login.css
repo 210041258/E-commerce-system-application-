@@ -6,10 +6,13 @@
             min-height: 100vh;
             background-color: #280063; /* Dark purple background */
              font-family: 'Playfair Display', serif;
+             -webkit-text-size-adjust: 100%;
 
 
         }
-
+        th {
+            text-align: -webkit-match-parent;
+        }
 
         .form-floating > label {
     position: relative;
