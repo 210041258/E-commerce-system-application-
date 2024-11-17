@@ -1,5 +1,29 @@
+
+function checkConnection() {
+    if (navigator.onLine) {
+        document.body.style.visibility = 'visible';
+    } else {
+        document.body.style.visibility = 'hidden';
+    }
+}
+
+
+setInterval(checkConnection, 500);
+
+
+window.addEventListener('online', () => {
+    document.body.style.visibility = 'visible';
+});
+
+window.addEventListener('offline', () => {
+    document.body.style.visibility = 'hidden';
+});
+
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
 import { getDatabase, ref, set, get, onValue, remove } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+
+
 
 // Firebase config
 const firebaseConfig = {
@@ -25,13 +49,118 @@ const blockedIpsCacheKey = "blocked_ips";
 const pinsRef = ref(database, 'pin'); // Single value at the 'pin' path
 const refreshPinRef = ref(database, 'refresh_pin'); // Path for refresh setting
 const hashedPinsRef = ref(database, 'hpin'); // Path for hashed PIN
+/*const _location_Ref = ref(database, 'hpin'); // Path for hashed PIN
+const _deatils_Ref = ref(database, 'hpin'); // Path for hashed PIN*/
+
+
+
+
+
+
+
+
 
 function hashPin(pin) {
     return CryptoJS.SHA256(pin).toString();
 }
 
+function containsCommonSubPattern(pin) {
+    // Check for repeating digits (like '11', '22', etc.)
+    for (let i = 0; i < pin.length - 1; i++) {
+        if (pin[i] === pin[i + 1]) {
+            return true;
+        }
+    }
+    
+    // Check for sequential increasing or decreasing numbers
+    for (let i = 0; i < pin.length - 1; i++) {
+        if (parseInt(pin[i]) + 1 === parseInt(pin[i + 1]) ||
+            parseInt(pin[i]) - 1 === parseInt(pin[i + 1])) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// Function to select the keyboard layout
+// Function to select the keyboard layout with a weighted preference for STANDARD
+function selectKeyboardLayout() {
+    // Define available layouts
+    const layouts = {
+        STANDARD: [
+            [7, 8, 9],
+            [4, 5, 6],
+            [1, 2,3]
+        ],
+        MIRRORED: [
+            [1, 2, 3],
+            [4, 5, 6],
+            [7, 8, 9]
+        ],
+        LINEAR: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    };
+
+    // Define weights for each layout selection
+    const layoutWeights = {
+        STANDARD: 0.5, // 70% chance
+        MIRRORED: 0.25, // 15% chance
+        LINEAR: 0.70 // 15% chance
+    };
+
+    // Create an array for weighted random selection
+    const weightedLayouts = [];
+    for (const [key, weight] of Object.entries(layoutWeights)) {
+        const count = Math.round(weight * 100);
+        for (let i = 0; i < count; i++) {
+            weightedLayouts.push(key);
+        }
+    }
+
+    // Randomly select a layout based on the weighted array
+    const selectedKey = weightedLayouts[Math.floor(Math.random() * weightedLayouts.length)];
+
+    // Return the selected layout
+    return layouts[selectedKey];
+}
+
+
+// Function to check if the digit is too close to the previous one based on the selected layout
+function isTooCloseOnSelectedLayout(prevDigit, nextDigit, selectedLayout) {
+    // Linear layout case
+    if (Array.isArray(selectedLayout) && selectedLayout.length === 9) {
+        const prevIndex = selectedLayout.indexOf(prevDigit);
+        const nextIndex = selectedLayout.indexOf(nextDigit);
+        const distance = Math.abs(prevIndex - nextIndex);
+        return distance < 2; // True if digits are too close
+    }
+
+    // For 3x3 grid layouts (STANDARD, MIRRORED)
+    function getPosition(digit, layout) {
+        for (let row = 0; row < 3; row++) {
+            for (let col = 0; col < 3; col++) {
+                if (layout[row][col] === digit) {
+                    return { row, col };
+                }
+            }
+        }
+        return null;
+    }
+
+    const prevPos = getPosition(prevDigit, selectedLayout);
+    const nextPos = getPosition(nextDigit, selectedLayout);
+    if (!prevPos || !nextPos) return false;
+
+    const distance = Math.abs(prevPos.row - nextPos.row) + Math.abs(prevPos.col - nextPos.col);
+    return distance > 2;
+}
+
 // Function to generate a random PIN (adjust length as needed)
 function generateRandomPin(length = 4) {
+    
+    const selectedLayout = selectKeyboardLayout();
+
+
     // List of common PIN patterns to avoid
     const commonPatterns = new Set([
         // Repeated Digits
@@ -73,15 +202,23 @@ function generateRandomPin(length = 4) {
 
     let pin;
 
-    // Generate a new PIN until it's not in the list of common patterns
     do {
         pin = '';
-        for (let i = 0; i < length; i++) {
-            pin += Math.floor(Math.random() * 10); // Generate a random digit from 0-9
-        }
-    } while (commonPatterns.has(pin));
+        let prevDigit = null;
 
-    return pin;
+        for (let i = 0; i < length; i++) {
+            let newDigit;
+            do {
+                newDigit = Math.floor(Math.random() * 9) + 1; // Generate digit from 1 to 9
+            } while (newDigit === prevDigit || isTooCloseOnSelectedLayout(prevDigit, newDigit, selectedLayout));
+
+            pin += newDigit;
+            prevDigit = newDigit;
+        }
+    } while (commonPatterns.has(pin) || containsCommonSubPattern(pin));
+    
+    
+   return pin;
 }
 
 
@@ -217,12 +354,21 @@ function startCheckingBlockedIp() {
         } else {
             console.log("IP is not blocked. Continuing checks...");
         }
-    }, 5000);  // Check every 5 seconds
+    }, 10000);  // Check every 5 seconds
+}
+
+function toggleSubmitButtonTemporarily(submitButton) {
+    submitButton.disabled = true; // Disable the button
+    setTimeout(() => {
+        submitButton.disabled = false; // Re-enable the button after 2 seconds
+    }, 1500); // 2000ms (2 seconds) delay
 }
 
 // Form submission to check user input against stored PIN
 document.getElementById('pinForm').addEventListener('submit', async (event) => {
     event.preventDefault();
+    const submitButton = document.getElementById('pinForm').querySelector('button');
+    toggleSubmitButtonTemporarily(submitButton);
     const userPin = document.getElementById('pin').value.trim();
 
     if (userPin === "1111") {
@@ -287,4 +433,4 @@ async function checkUserPin() {
 // Initial setup for random PIN
 const randomPin = generateRandomPin(4);
 submitPinToFirebase(randomPin);
-refreshPinBasedOnVariable();
+setInterval(refreshPinBasedOnVariable,5000);

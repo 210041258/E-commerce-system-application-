@@ -1,6 +1,30 @@
+
+function checkConnection() {
+    if (navigator.onLine) {
+        document.body.style.visibility = 'visible';
+    } else {
+        document.body.style.visibility = 'hidden';
+    }
+}
+
+
+setInterval(checkConnection, 5000);
+
+
+window.addEventListener('online', () => {
+    document.body.style.visibility = 'visible';
+});
+
+window.addEventListener('offline', () => {
+    document.body.style.visibility = 'hidden';
+});
+
 import { auth, database, storage } from './firebaseConfig.js';
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-auth.js";
 import { ref as dbRef,ref,push, set, get, update, remove } from "https://www.gstatic.com/firebasejs/9.21.0/firebase-database.js";
+
+
+
 
 const contentArea = document.getElementById('content-area');
 // Add this to your app.js

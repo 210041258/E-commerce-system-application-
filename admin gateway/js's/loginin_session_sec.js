@@ -1,6 +1,29 @@
+
+
+function checkConnection() {
+    if (navigator.onLine) {
+        document.body.style.visibility = 'visible';
+    } else {
+        document.body.style.visibility = 'hidden';
+    }
+}
+
+
+setInterval(checkConnection, 5000);
+
+
+window.addEventListener('online', () => {
+    document.body.style.visibility = 'visible';
+});
+
+window.addEventListener('offline', () => {
+    document.body.style.visibility = 'hidden';
+});
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-auth.js";
 import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.19.1/firebase-database.js";
+
 
 // Primary Firebase Config
 const firebaseConfig = {
@@ -31,8 +54,18 @@ const passwordInput = document.getElementById('password');
 const errorMessage = document.getElementById('error-message');
 const hashedPinsRef = ref(database, 'hpin');
 
+
+function toggleSubmitButtonTemporarily(submitButton) {
+    submitButton.disabled = true; // Disable the button
+    setTimeout(() => {
+        submitButton.disabled = false; // Re-enable the button after 2 seconds
+    }, 3000); // 2000ms (2 seconds) delay
+}
+
 // Login Form Submission
 loginForm.addEventListener('submit', async (event) => {
+    const submitButton = loginForm.querySelector('button');
+    toggleSubmitButtonTemporarily(submitButton);
     event.preventDefault();  // Prevent form from submitting until checks are done
 
     const ipBlocked = await isIpBlocked();  // Await the IP block check
@@ -83,11 +116,32 @@ function handleLoginError(error) {
         case 'auth/invalid-email':
             errorMessageText = "Invalid email format.";
             break;
+        case 'auth/operation-not-allowed':
+            errorMessageText = "The operation is not allowed. Please contact support.";
+            break;
+        case 'auth/weak-password':
+            errorMessageText = "The password is too weak. Please choose a stronger password.";
+            break;
+        case 'auth/email-already-in-use':
+            errorMessageText = "This email address is already in use. Try logging in instead.";
+            break;
+        case 'auth/invalid-api-key':
+            errorMessageText = "Invalid API key. Please check your Firebase project configuration.";
+            break;
         default:
             errorMessageText = "Login failed. Please try again.";
     }
 
-    alert(errorMessageText);
+    // Display the error message
+    if (errorMessage) {
+        errorMessage.style.display = 'block'; // Make the error message visible
+        errorMessage.textContent = errorMessageText; // Set the text of the error message
+
+        // Hide the error message after 4500ms (4.5 seconds)
+        setTimeout(() => {
+            errorMessage.style.display = 'none'; // Hide the error message after the timeout
+        }, 4500);
+    }
 }
 
 
