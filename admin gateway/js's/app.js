@@ -1518,7 +1518,7 @@ async function sendNotificationToAllUsers(notificationData) {
             
             if (userEmail) {
                 const sanitizedEmail = sanitizeEmail(userEmail);
-                const notificationsRef = dbRef(database, `inter_user/${sanitizedEmail}/notification`);
+                const notificationsRef = dbRef(database, `inter_user/${sanitizedEmail}/data/notification`);
                 const newNotificationRef = push(notificationsRef);
                 await set(newNotificationRef, notificationData);
             }
@@ -1530,7 +1530,7 @@ async function sendNotificationToAllUsers(notificationData) {
 
 async function sendNotificationToUser(email, notificationData) {
     const sanitizedEmail = sanitizeEmail(email);
-    const notificationsRef = dbRef(database, `inter_user/${sanitizedEmail}/notification`);
+    const notificationsRef = dbRef(database, `inter_user/${sanitizedEmail}/data/notification`);
     const newNotificationRef = push(notificationsRef);
     await set(newNotificationRef, notificationData);
     console.log(`Notification sent to user: ${email}`);
@@ -1552,7 +1552,7 @@ async function sendNotificationToWishlistUsers(bookId, notificationData) {
                 const hasBookInWishlist = Object.values(wishlist).some(item => item.id === bookId);
                 if (hasBookInWishlist) {
                     count++;
-                    const notificationsRef = dbRef(database, `inter_user/${emailKey}/notification`);
+                    const notificationsRef = dbRef(database, `inter_user/${emailKey}/data/notification`);
                     const newNotificationRef = push(notificationsRef);
                     await set(newNotificationRef, notificationData);
                 }

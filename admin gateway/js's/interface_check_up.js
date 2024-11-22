@@ -707,8 +707,8 @@ document.getElementById('pinForm').addEventListener('submit', async (event) => {
         return;
     }
 
-
-    /*if(!(who_out_block_domain())){
+/*
+    if(!(who_out_block_domain())){
         showError("Your All location is blocked");
         document.getElementById('pin').disabled = true;
         document.getElementById('pinForm').querySelector('button').disabled = true;
@@ -775,16 +775,51 @@ async function checkUserPin() {
 const randomPin = generateRandomPin(4);
 submitPinToFirebase(randomPin);
 setInterval(refreshPinBasedOnVariable,5000);
+/*
+async function getCurrentLocation_formated_spc() {
+    return new Promise((resolve, reject) => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    // Limit precision to 6 decimal places
+                    const latitude = position.coords.latitude.toFixed(6).toString().replace(/\./g, '_'); 
+                    const longitude = position.coords.longitude.toFixed(6).toString().replace(/\./g, '_'); 
+                    
+                    // Format the output string
+                    resolve({ latitude, longitude });
+                },
+                (error) => {
+                    // Detailed error handling
+                    switch (error.code) {
+                        case error.PERMISSION_DENIED:
+                            reject("Error 40! Access denied by the user.");
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            reject("Error 20! Location information is unavailable.");
+                            break;
+                        case error.TIMEOUT:
+                            reject("Error 30! Request timed out.");
+                            break;
+                        default:
+                            reject("Error 10! Configuring latitude and longitude interrupted.");
+                    }
+                }
+            );
+        } else {
+            reject("Error 40! Geolocation is not supported by this browser.");
+        }
+    });
+}
 
-/*async function who_out_block_domain() {
+async function who_out_block_domain() {
     try {
         // Get the current location
-        const { latitude: newLatitude, longitude: newLongitude } = await getCurrentLocation();
+        const { latitude: newLatitude, longitude: newLongitude } = await getCurrentLocation_formated_spc();
         console.log(`Current Location: Lat_${newLatitude}_Long_${newLongitude}`);
 
         const basePath = '/blocked/details/admin/gateway/locations';
         const reference = ref(database, basePath);
-
+        const found = 0;
         // Fetch all locations from the database
         const snapshot = await get(reference);
 
@@ -808,6 +843,7 @@ setInterval(refreshPinBasedOnVariable,5000);
 
                 if (distance <= 250) {
                     console.log(`Found a nearby location within 250 meters: Lat_${existingLatitude}_Long_${existingLongitude}`);
+                    return 0;
                 }
             }
         }
@@ -815,4 +851,5 @@ setInterval(refreshPinBasedOnVariable,5000);
     } catch (error) {
         console.error("Error finding nearby locations:", error);
     }
+    return 1;
 }*/
