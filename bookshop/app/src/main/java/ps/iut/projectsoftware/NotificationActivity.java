@@ -34,13 +34,6 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.*;
@@ -61,7 +54,6 @@ import java.util.HashMap;
 public class NotificationActivity extends AppCompatActivity {
 	
 	private Timer _timer = new Timer();
-	private FirebaseDatabase _firebase = FirebaseDatabase.getInstance();
 	
 	private String email = "";
 	
@@ -79,8 +71,6 @@ public class NotificationActivity extends AppCompatActivity {
 	private Intent ocm = new Intent();
 	private SharedPreferences read;
 	private SharedPreferences a;
-	private DatabaseReference notifications = _firebase.getReference("notifications");
-	private ChildEventListener _notifications_child_listener;
 	private TimerTask v;
 	
 	@Override
@@ -114,45 +104,6 @@ public class NotificationActivity extends AppCompatActivity {
 				
 			}
 		});
-		
-		_notifications_child_listener = new ChildEventListener() {
-			@Override
-			public void onChildAdded(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildChanged(DataSnapshot _param1, String _param2) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onChildMoved(DataSnapshot _param1, String _param2) {
-				
-			}
-			
-			@Override
-			public void onChildRemoved(DataSnapshot _param1) {
-				GenericTypeIndicator<HashMap<String, Object>> _ind = new GenericTypeIndicator<HashMap<String, Object>>() {};
-				final String _childKey = _param1.getKey();
-				final HashMap<String, Object> _childValue = _param1.getValue(_ind);
-				
-			}
-			
-			@Override
-			public void onCancelled(DatabaseError _param1) {
-				final int _errorCode = _param1.getCode();
-				final String _errorMessage = _param1.getMessage();
-				
-			}
-		};
-		notifications.addChildEventListener(_notifications_child_listener);
 	}
 	
 	private void initializeLogic() {
@@ -161,7 +112,6 @@ public class NotificationActivity extends AppCompatActivity {
 			w.setNavigationBarColor(Color.parseColor("#E8EAF6")); }
 		listview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFF1A237E, 0xFFE8EAF6));
 		linear4.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b, int c, int d) { this.setCornerRadius(a); this.setStroke(b, c); this.setColor(d); return this; } }.getIns((int)58, (int)10, 0xFFE8EAF6, 0xFF1A237E));
-		email = a.getString("email", "");
 		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
 		if (!read.getString("notification", "").equals("")) {
 			listmap = new Gson().fromJson(read.getString("notification", ""), new TypeToken<ArrayList<HashMap<String, Object>>>(){}.getType());
@@ -176,6 +126,9 @@ public class NotificationActivity extends AppCompatActivity {
 	
 	@Override
 	public void onBackPressed() {
+		read.edit().putString("notification", new Gson().toJson(listmap)).commit();
+		String jsn = listmap == null ? "null" : new Gson().toJson(listmap);
+		read.edit().putString("notification", jsn).apply();
 		ocm.setClass(getApplicationContext(), ViewMainActivity.class);
 		ocm.putExtra("gate", "");
 		ocm.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -219,11 +172,13 @@ public class NotificationActivity extends AppCompatActivity {
 			final LinearLayout linear5 = _view.findViewById(R.id.linear5);
 			final TextView timeanddate = _view.findViewById(R.id.timeanddate);
 			final TextView admin_username = _view.findViewById(R.id.admin_username);
-			final TextView textview3 = _view.findViewById(R.id.textview3);
+			final TextView title = _view.findViewById(R.id.title);
+			final TextView message = _view.findViewById(R.id.message);
 			
-			admin_username.setText(map.get((int)_position).get("title").toString());
-			textview3.setText(map.get((int)_position).get("message").toString());
+			title.setText(map.get((int)_position).get("title").toString());
+			message.setText(map.get((int)_position).get("message").toString());
 			timeanddate.setText(map.get((int)_position).get("timestamp").toString());
+			admin_username.setText(map.get((int)_position).get("senderEmail").toString());
 			Animation animation;
 			animation = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
 			animation.setDuration(1500); // Set the duration of the animation to 500 milliseconds

@@ -807,6 +807,7 @@ public class ViewMainActivity extends AppCompatActivity {
 			String username = email.split("@")[0];  // Get the part before the '@'
 			String email2 = a.getString("email", "").replace(".", "_").replace("@", "_");
 			
+			
 			// Define Firebase paths based on the email
 			String subPath_cart = "inter_user/" + email2 + "/data/cart";
 			String subPath_myorder = "inter_user/" + email2 + "/data/myorder";
@@ -1016,84 +1017,35 @@ public class ViewMainActivity extends AppCompatActivity {
 		if (new_notif) {
 			imageview2.setImageResource(R.drawable.ic_email_black);
 		}
+		try {
+			    // Initialize the file to write to
+			    File file = new File(getApplicationContext().getExternalFilesDir(null), "combined_data.txt");
+			    FileOutputStream fos = new FileOutputStream(file);
+			
+			    // Retrieve the JSON data from SharedPreferences
+			    String historyData = history.getString("history", "");
+			    String wishlistData = favorite.getString("wishlist", "");
+			    String notificationData = read.getString("notification", "");
+			    String favoriteData = favorite.getString("favorite", "");
+			    String ordersData = orders.getString("orders", "");
+			
+			    // Write each SharedPreferences entry (JSON data) directly to the file
+			    fos.write(("History Data (JSON):\n" + historyData + "\n\n").getBytes());
+			    fos.write(("Wishlist Data (JSON):\n" + wishlistData + "\n\n").getBytes());
+			    fos.write(("Notification Data (JSON):\n" + notificationData + "\n\n").getBytes());
+			    fos.write(("Favorite Data (JSON):\n" + favoriteData + "\n\n").getBytes());
+			    fos.write(("Orders Data (JSON):\n" + ordersData + "\n\n").getBytes());
+			
+			    // Close the file output stream
+			    fos.close();
+			    Log.d("FileWrite", "Successfully wrote to combined_data.txt");
+		} catch (IOException e) {
+			    Log.e("FileError", "Error writing to file combined_data.txt", e);
+		}
 	}
 	
 	@Override
 	public void onBackPressed() {
-		// Split the email to get the username (before the '@' symbol)
-		String username = email.split("@")[0];  // Get the part before the '@'
-		
-		// Replace the email's special characters for path safety
-		String email2 = a.getString("email", "").replace(".", "_").replace("@", "_");
-		
-		// Define paths for various data
-		String subPath_cart = "inter_user/" + email2 + "/data/cart";
-		String subPath_myorder = "inter_user/" + email2 + "/data/myorder";
-		String subPath_myfavorite = "inter_user/" + email2 + "/data/myfavorite";
-		String subPath_notification = "inter_user/" + email2 + "/data/notification";
-		String subPath_wishlist = "inter_user/" + email2 + "/data/wishlist";
-		String subPath_history = "inter_user/" + email2 + "/data/history";
-		
-		// Construct node paths for each section
-		String nodePath = "information/" + username;
-		
-		// Reference to main information path
-		DatabaseReference dataRef = FirebaseDatabase.getInstance().getReference(nodePath);
-		DatabaseReference cartRef = FirebaseDatabase.getInstance().getReference(subPath_cart);
-		DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference(subPath_myorder);
-		DatabaseReference favoriteRef = FirebaseDatabase.getInstance().getReference(subPath_myfavorite);
-		DatabaseReference notificationRef = FirebaseDatabase.getInstance().getReference(subPath_notification);
-		DatabaseReference wishlistRef = FirebaseDatabase.getInstance().getReference(subPath_wishlist);
-		DatabaseReference historyRef = FirebaseDatabase.getInstance().getReference(subPath_history);
-		
-		// Push SharedPreferences data back to Firebase
-		// Push balance data back to Firebase
-		String balance = a.getString("balance", "");
-		if (balance != null && !balance.isEmpty()) {
-			    dataRef.child("balance").setValue(balance);
-		}
-		
-		// Push cart data back to Firebase
-		String cartData = cart.getString("cart", "");
-		if (cartData != null && !cartData.isEmpty()) {
-			    Object cartObject = new Gson().fromJson(cartData, Object.class);
-			    cartRef.setValue(cartObject);
-		}
-		
-		// Push myorder data back to Firebase
-		String orderData = orders.getString("orders", "");
-		if (orderData != null && !orderData.isEmpty()) {
-			    Object orderObject = new Gson().fromJson(orderData, Object.class);
-			    orderRef.setValue(orderObject);
-		}
-		
-		// Push myfavorite data back to Firebase
-		String favoriteData = favorite.getString("favorite", "");
-		if (favoriteData != null && !favoriteData.isEmpty()) {
-			    Object favoriteObject = new Gson().fromJson(favoriteData, Object.class);
-			    favoriteRef.setValue(favoriteObject);
-		}
-		
-		// Push notification data back to Firebase
-		String notificationData = read.getString("notification", "");
-		if (notificationData != null && !notificationData.isEmpty()) {
-			    Object notificationObject = new Gson().fromJson(notificationData, Object.class);
-			    notificationRef.setValue(notificationObject);
-		}
-		
-		// Push wishlist data back to Firebase
-		String wishlistData = favorite.getString("wishlist", "");
-		if (wishlistData != null && !wishlistData.isEmpty()) {
-			    Object wishlistObject = new Gson().fromJson(wishlistData, Object.class);
-			    wishlistRef.setValue(wishlistObject);
-		}
-		
-		// Push history data back to Firebase
-		String historyData = history.getString("history", "");
-		if (historyData != null && !historyData.isEmpty()) {
-			    Object historyObject = new Gson().fromJson(historyData, Object.class);
-			    historyRef.setValue(historyObject);
-		}
 		SketchwareUtil.showMessage(getApplicationContext(), "See you Next Time ! 😄");
 		finishAffinity();
 	}

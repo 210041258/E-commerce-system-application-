@@ -65,6 +65,7 @@ public class ViewSearchActivity extends AppCompatActivity {
 	private String selectedKeyword = "";
 	private ValueEventListener valueEventListener;
 	private String strqr = "";
+	private boolean isUserSelection;
 	
 	private ArrayList<String> str = new ArrayList<>();
 	private ArrayList<HashMap<String, Object>> onit = new ArrayList<>();
@@ -74,6 +75,7 @@ public class ViewSearchActivity extends AppCompatActivity {
 	private ArrayList<String> ls2 = new ArrayList<>();
 	private ArrayList<String> keywordsListMap = new ArrayList<>();
 	private ArrayList<String> keywordsList = new ArrayList<>();
+	private ArrayList<String> keywordTexts = new ArrayList<>();
 	
 	private LinearLayout linear9;
 	private LinearLayout linear8;
@@ -146,101 +148,134 @@ public class ViewSearchActivity extends AppCompatActivity {
 				else {
 					final String searchKey = getIntent().getStringExtra("key").toLowerCase(); // Search Key
 					
-					    // Remove any previous listener to ensure a fresh search request
-					    if (valueEventListener != null) {
-						        book.removeEventListener(valueEventListener);
-						    }
+					// Remove any previous listener to ensure a fresh search request
+					if (valueEventListener != null) {
+						    book.removeEventListener(valueEventListener);
+					}
 					
-					    valueEventListener = new ValueEventListener() {
-						        @Override
-						        public void onDataChange(DataSnapshot _dataSnapshot) {
-							            // Clear data at the start
-							            sorted.clear();
-							            List<Map<String, String>> keywordsListMap = new ArrayList<>();  // List to store keywords with "text" as key and keyword as value
+					valueEventListener = new ValueEventListener() {
+						    @Override
+						    public void onDataChange(DataSnapshot _dataSnapshot) {
+							        // Clear data at the start
+							        sorted.clear();
+							        List<Map<String, String>> keywordsListMap = new ArrayList<>();  // List to store keywords with "text" as key and keyword as value
 							
-							            for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-								                HashMap<String, Object> _map = (HashMap<String, Object>) _data.getValue();
+							        // Iterate over the database children (each book/document)
+							        for (DataSnapshot _data : _dataSnapshot.getChildren()) {
+								            HashMap<String, Object> _map = (HashMap<String, Object>) _data.getValue();
 								
-								                // Convert values to lowercase for case-insensitive searching
-								                String name = (_map.get("name") != null) ? _map.get("name").toString().toLowerCase() : "";
-								                String id = (_map.get("id") != null) ? _map.get("id").toString().toLowerCase() : "";
-								                String department = (_map.get("department") != null) ? _map.get("department").toString().toLowerCase() : "";
+								            // Convert values to lowercase for case-insensitive searching
+								            String name = (_map.get("name") != null) ? _map.get("name").toString().toLowerCase() : "";
+								            String id = (_map.get("id") != null) ? _map.get("id").toString().toLowerCase() : "";
+								            String department = (_map.get("department") != null) ? _map.get("department").toString().toLowerCase() : "";
+								            String author = (_map.get("author") != null) ? _map.get("author").toString().toLowerCase() : "";
 								
-								String author = (_map.get("author") != null) ? _map.get("author").toString().toLowerCase() : "";
+								            // Check if the search key matches any of the basic fields
+								            boolean containsSearchKey = name.contains(searchKey) || id.contains(searchKey) || department.contains(searchKey) || author.contains(searchKey);
 								
-								                // Add to sorted list if search key is found in name, description, department, or id
-								                if (name.contains(searchKey) || department.contains(searchKey) || id.contains(searchKey)||department.contains(searchKey)) {
-									                    sorted.add(_map);
+								            // Check for the keyword matches inside the "keywords" field
+								            Object keywordsObject = _map.get("keywords");
+								
+								            if (keywordsObject instanceof HashMap) {
+									                HashMap<String, Object> keywords = (HashMap<String, Object>) keywordsObject;
 									
-									                    // Assuming 'keywords' is a nested map or list inside each book's map
-									                    Object keywordsObject = _map.get("keywords");
+									                // Iterate over the keywords and check if any matches the search key
+									                for (Map.Entry<String, Object> entry : keywords.entrySet()) {
+										                    if (entry.getValue().toString().toLowerCase().contains(searchKey)) {
+											                        containsSearchKey = true;  // Set true if any keyword matches
+											                        Map<String, String> keywordMap = new HashMap<>();
+											                        keywordMap.put("text", entry.getValue().toString());
+											                        keywordsListMap.add(keywordMap);
+											                    }
+										                }
+									            } else if (keywordsObject instanceof ArrayList) {
+									                ArrayList<Object> keywordsList = (ArrayList<Object>) keywordsObject;
 									
-									                    if (keywordsObject instanceof HashMap) {
-										                        HashMap<String, Object> keywords = (HashMap<String, Object>) keywordsObject;
-										
-										                        // Check if keywords are available
-										                        if (!keywords.isEmpty()) {
-											                            // Iterate over the keywords
-											                            for (Map.Entry<String, Object> entry : keywords.entrySet()) {
-												                                // Create a map for each keyword with the "text" key
-												                                Map<String, String> keywordMap = new HashMap<>();
-												                                keywordMap.put("text", entry.getValue().toString());
-												                                keywordsListMap.add(keywordMap);
-												                            }
-											                        }
-										                    } else if (keywordsObject instanceof ArrayList) {
-										                        // Handle the case where keywords is an ArrayList
-										                        ArrayList<Object> keywordsList = (ArrayList<Object>) keywordsObject;
-										
-										                        // For each keyword in the list, create a map with "text" as the key
-										                        for (Object keyword : keywordsList) {
-											                            Map<String, String> keywordMap = new HashMap<>();
-											                            keywordMap.put("text", keyword.toString());
-											                            keywordsListMap.add(keywordMap);
-											                        }
-										                    }
-									                }
-								            }
-							
-							            // Check if the keywords list has been populated
-							            if (!keywordsListMap.isEmpty()) {
-								                // Extract just the "text" values for the spinner
-								                List<String> keywordTexts = new ArrayList<>();
-								                for (Map<String, String> keywordMap : keywordsListMap) {
-									                    keywordTexts.add(keywordMap.get("text"));
-									                }
+									                // Iterate over the list of keywords and check for a match
+									                for (Object keyword : keywordsList) {
+										                    if (keyword.toString().toLowerCase().contains(searchKey)) {
+											                        containsSearchKey = true;  // Set true if any keyword matches
+											                        Map<String, String> keywordMap = new HashMap<>();
+											                        keywordMap.put("text", keyword.toString());
+											                        keywordsListMap.add(keywordMap);
+											                    }
+										                }
+									            }
 								
-								                // Set up the spinner with the keywords
-								                ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewSearchActivity.this, android.R.layout.simple_spinner_item, keywordTexts);
-								                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-								                spinner2.setAdapter(adapter);
-								            } else {
-								                // Handle case where no keywords are found
-								                Toast.makeText(ViewSearchActivity.this, "No keywords found.", Toast.LENGTH_SHORT).show();
-								            }
+								            // If the search key is found in any of the fields or keywords, add to sorted list
+								            if (containsSearchKey) {
+									                sorted.add(_map);
+									            }
+								        }
 							
-							            // Handle sorted list for display
-							            if (sorted.size() > 0) {
-								                listview1.setAdapter(new Listview1Adapter(sorted));
-								                ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-								            } else {
-								                linear10.setVisibility(View.VISIBLE);
-								                listview1.setVisibility(View.GONE);
-								            }
-							        }
+							        // Check if the keywords list has been populated
+							        if (!keywordsListMap.isEmpty()) {
+								            // Extract just the "text" values for the spinner
+								            List<String> keywordTexts = new ArrayList<>();
+								            for (Map<String, String> keywordMap : keywordsListMap) {
+									                keywordTexts.add(keywordMap.get("text"));
+									            }
+								
+								            // Set up the spinner with the keywords
+								            ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewSearchActivity.this, android.R.layout.simple_spinner_item, keywordTexts);
+								            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+								            spinner2.setAdapter(adapter);
+								        } else {
+								            // Handle case where no keywords are found
+								            
+								        }
+							
+							        // Handle sorted list for display
+							        if (sorted.size() > 0) {
+								            listview1.setAdapter(new Listview1Adapter(sorted));
+								            ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
+								        } else {
+								            linear10.setVisibility(View.VISIBLE);
+								            listview1.setVisibility(View.GONE);
+								        }
+							    }
 						
-						        @Override
-						        public void onCancelled(DatabaseError _databaseError) {
-							            // Handle Firebase error
-							            linear10.setVisibility(View.VISIBLE);
-							            listview1.setVisibility(View.GONE);
-							            Toast.makeText(getApplicationContext(), "Database error: " + _databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-							        }
-						    };
+						    @Override
+						    public void onCancelled(DatabaseError _databaseError) {
+							        // Handle Firebase error
+							        linear10.setVisibility(View.VISIBLE);
+							        listview1.setVisibility(View.GONE);
+							        Toast.makeText(getApplicationContext(), "Database error: " + _databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+							    }
+					};
 					
-					    // Add a fresh listener for each search
-					    book.addListenerForSingleValueEvent(valueEventListener);
+					// Add a fresh listener for each search
+					book.addListenerForSingleValueEvent(valueEventListener);
 					
+					
+					// Inside the onDataChange method, after setting up the spinner
+					// Flag to track whether an item has been selected by the user
+					
+					
+					// Inside the onDataChange method, after setting up the spinner
+					spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+						    @Override
+						    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+							        // Only proceed if the user selected an item, not if it's the default selection
+							        if (isUserSelection) {
+								            // Get the selected keyword
+								            String selectedKeyword = parentView.getItemAtPosition(position).toString().toLowerCase();
+								
+								            // Create an Intent to navigate to ViewSearchActivity
+								            Intent ocm = new Intent(getApplicationContext(), ViewSearchActivity.class);
+								            ocm.putExtra("key", selectedKeyword);  // Pass the selected keyword as an extra
+								            startActivity(ocm);  // Start the new activity
+								            finish();  // Optionally, finish the current activity if you don't want to return to it
+								        }
+							        // Set isUserSelection to true after the first item is selected
+							        isUserSelection = true;
+							    }
+						
+						    @Override
+						    public void onNothingSelected(AdapterView<?> parentView) {
+							        // Handle case where no item is selected, if needed
+							    }
+					});
 					listview1.setVisibility(View.VISIBLE);
 					linear10.setVisibility(View.GONE);
 				}
@@ -408,101 +443,135 @@ public class ViewSearchActivity extends AppCompatActivity {
 		else {
 			final String searchKey = getIntent().getStringExtra("key").toLowerCase(); // Search Key
 			
-			    // Remove any previous listener to ensure a fresh search request
-			    if (valueEventListener != null) {
-				        book.removeEventListener(valueEventListener);
-				    }
+			// Remove any previous listener to ensure a fresh search request
+			if (valueEventListener != null) {
+				    book.removeEventListener(valueEventListener);
+			}
 			
-			    valueEventListener = new ValueEventListener() {
-				        @Override
-				        public void onDataChange(DataSnapshot _dataSnapshot) {
-					            // Clear data at the start
-					            sorted.clear();
-					            List<Map<String, String>> keywordsListMap = new ArrayList<>();  // List to store keywords with "text" as key and keyword as value
+			valueEventListener = new ValueEventListener() {
+				    @Override
+				    public void onDataChange(DataSnapshot _dataSnapshot) {
+					        // Clear data at the start
+					        sorted.clear();
+					        List<Map<String, String>> keywordsListMap = new ArrayList<>();  // List to store keywords with "text" as key and keyword as value
 					
-					            for (DataSnapshot _data : _dataSnapshot.getChildren()) {
-						                HashMap<String, Object> _map = (HashMap<String, Object>) _data.getValue();
+					        // Iterate over the database children (each book/document)
+					        for (DataSnapshot _data : _dataSnapshot.getChildren()) {
+						            HashMap<String, Object> _map = (HashMap<String, Object>) _data.getValue();
 						
-						                // Convert values to lowercase for case-insensitive searching
-						                String name = (_map.get("name") != null) ? _map.get("name").toString().toLowerCase() : "";
-						                String id = (_map.get("id") != null) ? _map.get("id").toString().toLowerCase() : "";
-						                String department = (_map.get("department") != null) ? _map.get("department").toString().toLowerCase() : "";
+						            // Convert values to lowercase for case-insensitive searching
+						            String name = (_map.get("name") != null) ? _map.get("name").toString().toLowerCase() : "";
+						            String id = (_map.get("id") != null) ? _map.get("id").toString().toLowerCase() : "";
+						            String department = (_map.get("department") != null) ? _map.get("department").toString().toLowerCase() : "";
+						            String author = (_map.get("author") != null) ? _map.get("author").toString().toLowerCase() : "";
 						
-						String author = (_map.get("author") != null) ? _map.get("author").toString().toLowerCase() : "";
+						            // Check if the search key matches any of the basic fields
+						            boolean containsSearchKey = name.contains(searchKey) || id.contains(searchKey) || department.contains(searchKey) || author.contains(searchKey);
 						
-						                // Add to sorted list if search key is found in name, description, department, or id
-						                if (name.contains(searchKey) || department.contains(searchKey) || id.contains(searchKey)||department.contains(searchKey)) {
-							                    sorted.add(_map);
+						            // Check for the keyword matches inside the "keywords" field
+						            Object keywordsObject = _map.get("keywords");
+						
+						            if (keywordsObject instanceof HashMap) {
+							                HashMap<String, Object> keywords = (HashMap<String, Object>) keywordsObject;
 							
-							                    // Assuming 'keywords' is a nested map or list inside each book's map
-							                    Object keywordsObject = _map.get("keywords");
+							                // Iterate over the keywords and check if any matches the search key
+							                for (Map.Entry<String, Object> entry : keywords.entrySet()) {
+								                    if (entry.getValue().toString().toLowerCase().contains(searchKey)) {
+									                        containsSearchKey = true;  // Set true if any keyword matches
+									                        Map<String, String> keywordMap = new HashMap<>();
+									                        keywordMap.put("text", entry.getValue().toString());
+									                        keywordsListMap.add(keywordMap);
+									                    }
+								                }
+							            } else if (keywordsObject instanceof ArrayList) {
+							                ArrayList<Object> keywordsList = (ArrayList<Object>) keywordsObject;
 							
-							                    if (keywordsObject instanceof HashMap) {
-								                        HashMap<String, Object> keywords = (HashMap<String, Object>) keywordsObject;
-								
-								                        // Check if keywords are available
-								                        if (!keywords.isEmpty()) {
-									                            // Iterate over the keywords
-									                            for (Map.Entry<String, Object> entry : keywords.entrySet()) {
-										                                // Create a map for each keyword with the "text" key
-										                                Map<String, String> keywordMap = new HashMap<>();
-										                                keywordMap.put("text", entry.getValue().toString());
-										                                keywordsListMap.add(keywordMap);
-										                            }
-									                        }
-								                    } else if (keywordsObject instanceof ArrayList) {
-								                        // Handle the case where keywords is an ArrayList
-								                        ArrayList<Object> keywordsList = (ArrayList<Object>) keywordsObject;
-								
-								                        // For each keyword in the list, create a map with "text" as the key
-								                        for (Object keyword : keywordsList) {
-									                            Map<String, String> keywordMap = new HashMap<>();
-									                            keywordMap.put("text", keyword.toString());
-									                            keywordsListMap.add(keywordMap);
-									                        }
-								                    }
-							                }
-						            }
-					
-					            // Check if the keywords list has been populated
-					            if (!keywordsListMap.isEmpty()) {
-						                // Extract just the "text" values for the spinner
-						                List<String> keywordTexts = new ArrayList<>();
-						                for (Map<String, String> keywordMap : keywordsListMap) {
-							                    keywordTexts.add(keywordMap.get("text"));
-							                }
+							                // Iterate over the list of keywords and check for a match
+							                for (Object keyword : keywordsList) {
+								                    if (keyword.toString().toLowerCase().contains(searchKey)) {
+									                        containsSearchKey = true;  // Set true if any keyword matches
+									                        Map<String, String> keywordMap = new HashMap<>();
+									                        keywordMap.put("text", keyword.toString());
+									                        keywordsListMap.add(keywordMap);
+									                    }
+								                }
+							            }
 						
-						                // Set up the spinner with the keywords
-						                ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewSearchActivity.this, android.R.layout.simple_spinner_item, keywordTexts);
-						                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-						                spinner2.setAdapter(adapter);
-						            } else {
-						                // Handle case where no keywords are found
-						                Toast.makeText(ViewSearchActivity.this, "No keywords found.", Toast.LENGTH_SHORT).show();
-						            }
+						            // If the search key is found in any of the fields or keywords, add to sorted list
+						            if (containsSearchKey) {
+							                sorted.add(_map);
+							            }
+						        }
 					
-					            // Handle sorted list for display
-					            if (sorted.size() > 0) {
-						                listview1.setAdapter(new Listview1Adapter(sorted));
-						                ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
-						            } else {
-						                linear10.setVisibility(View.VISIBLE);
-						                listview1.setVisibility(View.GONE);
-						            }
-					        }
+					        // Check if the keywords list has been populated
+					        if (!keywordsListMap.isEmpty()) {
+						            // Extract just the "text" values for the spinner
+						            List<String> keywordTexts = new ArrayList<>();
+						            for (Map<String, String> keywordMap : keywordsListMap) {
+							                keywordTexts.add(keywordMap.get("text"));
+							            }
+						
+						            // Set up the spinner with the keywords
+						            ArrayAdapter<String> adapter = new ArrayAdapter<>(ViewSearchActivity.this, android.R.layout.simple_spinner_item, keywordTexts);
+						            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+						            spinner2.setAdapter(adapter);
+						        } else {
+						            // Handle case where no keywords are found
+						            
+						        }
+					
+					        // Handle sorted list for display
+					        if (sorted.size() > 0) {
+						            listview1.setAdapter(new Listview1Adapter(sorted));
+						            ((BaseAdapter) listview1.getAdapter()).notifyDataSetChanged();
+						        } else {
+						            linear10.setVisibility(View.VISIBLE);
+						            listview1.setVisibility(View.GONE);
+						        }
+					    }
 				
-				        @Override
-				        public void onCancelled(DatabaseError _databaseError) {
-					            // Handle Firebase error
-					            linear10.setVisibility(View.VISIBLE);
-					            listview1.setVisibility(View.GONE);
-					            Toast.makeText(getApplicationContext(), "Database error: " + _databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-					        }
-				    };
+				    @Override
+				    public void onCancelled(DatabaseError _databaseError) {
+					        // Handle Firebase error
+					        linear10.setVisibility(View.VISIBLE);
+					        listview1.setVisibility(View.GONE);
+					        Toast.makeText(getApplicationContext(), "Database error: " + _databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+					    }
+			};
 			
-			    // Add a fresh listener for each search
-			    book.addListenerForSingleValueEvent(valueEventListener);
+			// Add a fresh listener for each search
+			book.addListenerForSingleValueEvent(valueEventListener);
 			
+			
+			// Inside the onDataChange method, after setting up the spinner
+			
+			// Flag to track whether an item has been selected by the user
+			
+			
+			// Inside the onDataChange method, after setting up the spinner
+			spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+				    @Override
+				    public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+					        // Only proceed if the user selected an item, not if it's the default selection
+					        if (isUserSelection) {
+						            // Get the selected keyword
+						            String selectedKeyword = parentView.getItemAtPosition(position).toString().toLowerCase();
+						
+						            // Create an Intent to navigate to ViewSearchActivity
+						            Intent ocm = new Intent(getApplicationContext(), ViewSearchActivity.class);
+						            ocm.putExtra("key", selectedKeyword);  // Pass the selected keyword as an extra
+						            startActivity(ocm);  // Start the new activity
+						            finish();  // Optionally, finish the current activity if you don't want to return to it
+						        }
+					        // Set isUserSelection to true after the first item is selected
+					        isUserSelection = true;
+					    }
+				
+				    @Override
+				    public void onNothingSelected(AdapterView<?> parentView) {
+					        // Handle case where no item is selected, if needed
+					    }
+			});
 			listview1.setVisibility(View.VISIBLE);
 			linear10.setVisibility(View.GONE);
 		}

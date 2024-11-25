@@ -53,6 +53,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.gson.Gson;
 import java.io.*;
 import java.text.*;
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,6 +90,13 @@ public class ViewCartActivity extends AppCompatActivity {
 	private double number = 0;
 	private boolean boo = false;
 	private String email = "";
+	private boolean fouren = false;
+	private boolean threeen = false;
+	private String onthree = "";
+	private double sumonsectionone = 0;
+	private boolean oneen = false;
+	private boolean twoen = false;
+	private double secondsection = 0;
 	
 	private ArrayList<HashMap<String, Object>> map = new ArrayList<>();
 	
@@ -98,8 +106,6 @@ public class ViewCartActivity extends AppCompatActivity {
 	private LinearLayout linear2;
 	private LinearLayout linear3;
 	private LinearLayout linear5;
-	private LinearLayout linear6;
-	private LinearLayout linear7;
 	private LinearLayout linear8;
 	private LinearLayout linear10;
 	private LinearLayout linear9;
@@ -109,12 +115,6 @@ public class ViewCartActivity extends AppCompatActivity {
 	private TextView textview1;
 	private TextView feesondelivey;
 	private TextView textview12;
-	private TextView textview5;
-	private CheckBox checkbox2;
-	private CheckBox checkbox1;
-	private TextView textview3;
-	private TextView feesonpay;
-	private TextView textview13;
 	private TextView textview9;
 	private EditText edittext1;
 	private Button button1;
@@ -146,8 +146,6 @@ public class ViewCartActivity extends AppCompatActivity {
 		linear2 = findViewById(R.id.linear2);
 		linear3 = findViewById(R.id.linear3);
 		linear5 = findViewById(R.id.linear5);
-		linear6 = findViewById(R.id.linear6);
-		linear7 = findViewById(R.id.linear7);
 		linear8 = findViewById(R.id.linear8);
 		linear10 = findViewById(R.id.linear10);
 		linear9 = findViewById(R.id.linear9);
@@ -157,12 +155,6 @@ public class ViewCartActivity extends AppCompatActivity {
 		textview1 = findViewById(R.id.textview1);
 		feesondelivey = findViewById(R.id.feesondelivey);
 		textview12 = findViewById(R.id.textview12);
-		textview5 = findViewById(R.id.textview5);
-		checkbox2 = findViewById(R.id.checkbox2);
-		checkbox1 = findViewById(R.id.checkbox1);
-		textview3 = findViewById(R.id.textview3);
-		feesonpay = findViewById(R.id.feesonpay);
-		textview13 = findViewById(R.id.textview13);
 		textview9 = findViewById(R.id.textview9);
 		edittext1 = findViewById(R.id.edittext1);
 		button1 = findViewById(R.id.button1);
@@ -172,6 +164,18 @@ public class ViewCartActivity extends AppCompatActivity {
 		materialbutton1 = findViewById(R.id.materialbutton1);
 		cart = getSharedPreferences("cart", Activity.MODE_PRIVATE);
 		information = getSharedPreferences("a", Activity.MODE_PRIVATE);
+		
+		listview1.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView abs, int _scrollState) {
+				
+			}
+			
+			@Override
+			public void onScroll(AbsListView abs, int _firstVisibleItem, int _visibleItemCount, int _totalItemCount) {
+				
+			}
+		});
 		
 		listview1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
@@ -200,19 +204,23 @@ public class ViewCartActivity extends AppCompatActivity {
 			public void onCheckedChanged(CompoundButton _param1, boolean _param2) {
 				final boolean _isChecked = _param2;
 				if (_isChecked) {
-					    if (!feesondelivarybool) {
-						        // Reset other checkboxes and any previous delivery fee
-						        checkbox3.setChecked(false);
-						        checkbox1.setChecked(false);
-						        total.setText(String.valueOf(Double.parseDouble(total.getText().toString()) - feesondelivary));
-						        
-						        // Set new delivery fee
-						        feesondelivary = 1.00;
-						        feesondelivarybool = true;
-						        feesondelivey.setText("1.00");
-						        total.setText(String.valueOf(Double.parseDouble(total.getText().toString()) + feesondelivary));
-						    }
+					checkbox3.setChecked(false);
+					if (threeen) {
+						sumonsectionone = sumonsectionone - 50;
+						threeen = false;
+						feesondelivey.setText(String.valueOf(Double.parseDouble(feesondelivey.getText().toString()) - 50));
+						total.setText(String.valueOf(Double.parseDouble(total.getText().toString()) - 50));
+					}
+					else {
+						sumonsectionone = sumonsectionone + 50;
+						feesondelivey.setText(String.valueOf(sumonsectionone + Double.parseDouble(feesondelivey.getText().toString())));
+						total.setText(String.valueOf(sumonsectionone + Double.parseDouble(total.getText().toString())));
+					}
 				}
+				else {
+					checkbox3.setChecked(true);
+				}
+				fouren = true;
 			}
 		});
 		
@@ -227,66 +235,24 @@ public class ViewCartActivity extends AppCompatActivity {
 			@Override
 			public void onCheckedChanged(CompoundButton _param1, boolean _param2) {
 				final boolean _isChecked = _param2;
-				// Delivery Premium
-				if (_isChecked && !checkbox4.isChecked() && !checkbox1.isChecked()) {
-					    if (!feesondelivarybool || feesondelivary != 10.00) {
-						        // Reset other checkboxes and any previous delivery fee
-						        checkbox4.setChecked(false);
-						        checkbox1.setChecked(false);
-						        total.setText(String.valueOf(Double.parseDouble(total.getText().toString()) - feesondelivary));
-						
-						        // Set new delivery fee
-						        feesondelivary = 10.00;
-						        feesondelivarybool = true;
-						        feesondelivey.setText("10.00");
-						        total.setText(String.valueOf(Double.parseDouble(total.getText().toString()) + feesondelivary));
-						    }
-				}
-			}
-		});
-		
-		checkbox2.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				
-			}
-		});
-		
-		checkbox2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton _param1, boolean _param2) {
-				final boolean _isChecked = _param2;
 				if (_isChecked) {
-					    checkbox2.setChecked(false);  // Only toggle the checkbox, no fees to apply or remove
+					checkbox4.setChecked(false);
+					if (fouren) {
+						sumonsectionone = 50 + sumonsectionone;
+						fouren = false;
+						feesondelivey.setText(String.valueOf(Double.parseDouble(feesondelivey.getText().toString()) + 50));
+						total.setText(String.valueOf(Double.parseDouble(total.getText().toString()) + 50));
+					}
+					else {
+						sumonsectionone = sumonsectionone + 100;
+						feesondelivey.setText(String.valueOf(sumonsectionone + Double.parseDouble(feesondelivey.getText().toString())));
+						total.setText(String.valueOf(sumonsectionone + Double.parseDouble(total.getText().toString())));
+					}
 				}
-			}
-		});
-		
-		checkbox1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-			@Override
-			public void onCheckedChanged(CompoundButton _param1, boolean _param2) {
-				final boolean _isChecked = _param2;
-				if (_isChecked && !checkbox4.isChecked() && !checkbox3.isChecked()) {
-					    if (!feesondelivarybool || feesondelivary != 100.00) {
-						        // Reset other checkboxes and any previous delivery fee
-						        checkbox4.setChecked(false);
-						        checkbox3.setChecked(false);
-						        total.setText(String.valueOf(Double.parseDouble(total.getText().toString()) - feesondelivary));
-						
-						        // Set new delivery fee
-						        feesondelivary = 100.00;
-						        feesondelivarybool = true;
-						        feesondelivey.setText("100.00");
-						        total.setText(String.valueOf(Double.parseDouble(total.getText().toString()) + feesondelivary));
-						    }
+				else {
+					checkbox4.setChecked(true);
 				}
-			}
-		});
-		
-		feesonpay.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View _view) {
-				
+				threeen = true;
 			}
 		});
 		
@@ -447,7 +413,15 @@ public class ViewCartActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View _view) {
 				if (!(0 == number)) {
-					
+					if ((checkbox3.isChecked() || checkbox4.isChecked()) && (true || true)) {
+						if ((Double.parseDouble(information.getString("balance", "")) == Double.parseDouble(total.getText().toString())) || (Double.parseDouble(information.getString("balance", "")) > Double.parseDouble(total.getText().toString()))) {
+							
+						}
+						else {
+							SketchwareUtil.showMessage(getApplicationContext(), "you can the products to your wishlist because the balance not enough !");
+							materialbutton1.setEnabled(false);
+						}
+					}
 				}
 				else {
 					SketchwareUtil.showMessage(getApplicationContext(), "you need to select one item at least !!");
@@ -498,6 +472,7 @@ public class ViewCartActivity extends AppCompatActivity {
 	private void initializeLogic() {
 		cuppon = false;
 		discounted = false;
+		sumonsectionone = 0;
 		number = 0;
 		email = information.getString("email", "");
 		if (Build.VERSION.SDK_INT >= 21) { Window
@@ -508,11 +483,6 @@ public class ViewCartActivity extends AppCompatActivity {
 		checkbox3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		textview1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		feesondelivey.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
-		textview5.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
-		checkbox2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
-		checkbox1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
-		textview3.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
-		feesonpay.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		textview7.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		total.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
 		materialbutton1.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/legel.ttf"), 1);
@@ -540,19 +510,13 @@ public class ViewCartActivity extends AppCompatActivity {
 			    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference(subPath_cart);
 			    databaseRef.setValue(map);
 		}
-		if ((Double.parseDouble(information.getString("balance", "")) == Double.parseDouble(total.getText().toString())) || (Double.parseDouble(information.getString("balance", "")) > Double.parseDouble(total.getText().toString()))) {
-			checkbox2.setChecked(true);
-		}
-		else {
-			checkbox2.setEnabled(false);
-			checkbox1.setChecked(true);
-		}
-		feesondelivarybool = false;
 	}
 	
 	@Override
 	public void onBackPressed() {
 		cart.edit().putString("cart", new Gson().toJson(map)).commit();
+		String jsn = map == null ? "null" : new Gson().toJson(map);
+		cart.edit().putString("cart", jsn).apply();
 		eb.setClass(getApplicationContext(), ViewMainActivity.class);
 		eb.putExtra("gate", "");
 		eb.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -612,34 +576,37 @@ public class ViewCartActivity extends AppCompatActivity {
 			bookname.setText(map.get((int)_position).get("name") != null ? map.get((int)_position).get("name").toString() : "");
 			Glide.with(getApplicationContext()).load(Uri.parse(map.get((int)_position).get("url") != null ? map.get((int)_position).get("url").toString() : "")).into(imageview1);
 			price.setText(map.get((int)_position).get("price") != null ? map.get((int)_position).get("price").toString() : "");
-			copies.setText(map.get((int)_position).get("available_copies") != null ? map.get((int)_position).get("copies").toString() : "");
+			copies.setText(map.get((int)_position).get("copies") != null ? map.get((int)_position).get("copies").toString() : "");
 			
 			imageview3.setOnClickListener(new View.OnClickListener() {
 				    @Override
 				    public void onClick(View _view) {
 					        // Get the price of the item to be deleted
 					        double priceValue = 0;
-					String email2 = email.replace("@", "_").replace(".", "_");
-					    String subPath_cart = "inter_user/" + email2 + "/data/cart";
+					        String email2 = email.replace("@", "").replace(".", "");
+					        String subPath_cart = "inter_user/" + email2 + "/data/cart";
+					        DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference(subPath_cart);
+					        databaseRef.setValue(map);
 					
-					
-					    DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference(subPath_cart);
-					    databaseRef.setValue(map);
 					        try {
+						            // Calculate the total price for the item based on the price and copies
 						            priceValue = Double.parseDouble(map.get((int)_position).get("price").toString()) * 
-						                        Double.parseDouble(map.get((int)_position).get("copies").toString());
-						
+						                         Double.parseDouble(map.get((int)_position).get("copies").toString());
 						        } catch (NumberFormatException e) {
-						            // Handle error if needed
+						            Log.e("NumberFormatException", "Error parsing price or copies: " + e.getMessage());
 						        }
 					
 					        // Remove the item at the specified position from the ArrayList
 					        map.remove((int) _position);
 					
 					        // Subtract the price of the removed item from totalprivate
-					        totalprivate = totalprivate - priceValue;
-					       if(totalprivate<0){totalprivate=0;} total.setText(String.valueOf(totalprivate)); // Update total price display
+					        totalprivate -= priceValue;
+					        if (totalprivate < 0) {
+						            totalprivate = 0;
+						        }
+					        total.setText(String.valueOf(totalprivate)); // Update total price display
 					
+					        // Check if the cart is empty and clear the stored cart if it is
 					        if (new Gson().toJson(map).equals("[]")) {
 						            cart.edit().putString("cart", "").commit();
 						        }
@@ -654,29 +621,79 @@ public class ViewCartActivity extends AppCompatActivity {
 				    @Override
 				    public void onCheckedChanged(CompoundButton cb, boolean isChecked) {
 					        try {
-						            double priceValue = Double.parseDouble(price.getText().toString()) * 
-						                                 Double.parseDouble(map.get((int)_position).get("copies").toString());
+						            // Calculate the base price of the item
+						            double itemPrice = Double.parseDouble(price.getText().toString());
+						            double availableCopies = Double.parseDouble(map.get((int)_position).get("copies").toString());
+						            double priceValue = itemPrice * availableCopies;
+						
+						            // Get the delivery fee value
+						            double deliveryFee = 0;
+						            try {
+							                deliveryFee = Double.parseDouble(feesondelivey.getText().toString());
+							            } catch (NumberFormatException e) {
+							                Log.e("NumberFormatException", "Error parsing delivery fee: " + e.getMessage());
+							            }
 						
 						            // Check if the checkbox or switch is checked
 						            if (isChecked) {
-							number++;
-							                // Add the price if checked
-							                totalprivate = totalprivate + priceValue;
-							                total.setText(String.valueOf(totalprivate)); // Update total price display
+							                number++;
+							                
+							                // Add the price and delivery fee (if it's not zero)
+							                if (deliveryFee > 0) {
+								                    priceValue += deliveryFee;
+								                }
+							                
+							                totalprivate += priceValue;
 							            } else {
-							number--;
-							                // Subtract the price if unchecked
-							                totalprivate = totalprivate - priceValue;
-							               if(totalprivate<0){totalprivate=0;} total.setText(String.valueOf(totalprivate)); // Update total price display
+							                number--;
+							                
+							                // Subtract the price and delivery fee (if it's not zero)
+							                if (deliveryFee > 0) {
+								                    priceValue += deliveryFee;
+								                }
+							                
+							                totalprivate -= priceValue;
+							                
+							                // Ensure totalprivate doesn't go below zero
+							                if (totalprivate < 0) {
+								                    totalprivate = 0;
+								                }
+							            }
+						
+						            // Update the total TextView
+						            total.setText(String.valueOf(totalprivate));
+						
+						            // Check if balance is sufficient to cover the total
+						            double currentBalance = Double.parseDouble(information.getString("balance", ""));
+						            if (currentBalance < totalprivate) {
+							                SketchwareUtil.showMessage(getApplicationContext(), "You can add the products to your wishlist because the balance is not enough!");
+							                materialbutton1.setEnabled(false);
+							            } else {
+							                materialbutton1.setEnabled(true);
 							            }
 						
 						        } catch (NumberFormatException e) {
-						            // Handle error or set default value if needed
-						            // Example: set priceValue to 0 if there's an error in parsing
-						            totalprivate = totalprivate; // No change if there's an error
+						            // Handle any parsing errors gracefully
+						            Log.e("NumberFormatException", "Error parsing price or copies: " + e.getMessage());
 						        }
 					    }
 			});
+			mins.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			textview2.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			bookname.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			textview6.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			boid.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			copies.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			price.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			textview4.setTypeface(Typeface.createFromAsset(getAssets(),"fonts/ggg.ttf"), 1);
+			imageview1.setBackground(new GradientDrawable() { public GradientDrawable getIns(int a, int b) { this.setCornerRadius(a); this.setColor(b); return this; } }.getIns((int)50, Color.TRANSPARENT));
+			if ((Double.parseDouble(information.getString("balance", "")) == Double.parseDouble(total.getText().toString())) || (Double.parseDouble(information.getString("balance", "")) > Double.parseDouble(total.getText().toString()))) {
+				
+			}
+			else {
+				SketchwareUtil.showMessage(getApplicationContext(), "you can the products to your wishlist because the balance not enough !");
+				materialbutton1.setEnabled(false);
+			}
 			
 			return _view;
 		}
