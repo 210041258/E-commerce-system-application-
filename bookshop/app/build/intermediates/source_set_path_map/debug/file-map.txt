@@ -1,0 +1,23 @@
+ps.iut.projectsoftware.app-google-services-0 C:\New folder\E-commerce-system-application-\bookshop\app\build\generated\res\google-services\debug
+ps.iut.projectsoftware.app-pngs-1 C:\New folder\E-commerce-system-application-\bookshop\app\build\generated\res\pngs\debug
+ps.iut.projectsoftware.app-resValues-2 C:\New folder\E-commerce-system-application-\bookshop\app\build\generated\res\resValues\debug
+ps.iut.projectsoftware.app-rs-3 C:\New folder\E-commerce-system-application-\bookshop\app\build\generated\res\rs\debug
+ps.iut.projectsoftware.app-mergeDebugResources-4 C:\New folder\E-commerce-system-application-\bookshop\app\build\intermediates\incremental\debug\mergeDebugResources\merged.dir
+ps.iut.projectsoftware.app-mergeDebugResources-5 C:\New folder\E-commerce-system-application-\bookshop\app\build\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+ps.iut.projectsoftware.app-merged_res-6 C:\New folder\E-commerce-system-application-\bookshop\app\build\intermediates\merged_res\debug
+ps.iut.projectsoftware.app-debug-7 C:\New folder\E-commerce-system-application-\bookshop\app\src\debug\res
+ps.iut.projectsoftware.app-main-8 C:\New folder\E-commerce-system-application-\bookshop\app\src\main\res
+ps.iut.projectsoftware.app-material-1.4.0-9 C:\Users\asdal\.gradle\caches\transforms-3\065371bfd584b30fb8828c63a3b04e70\transformed\material-1.4.0\res
+ps.iut.projectsoftware.app-transition-1.2.0-10 C:\Users\asdal\.gradle\caches\transforms-3\2faa4ac8faeb48caad41d67c49feb47c\transformed\transition-1.2.0\res
+ps.iut.projectsoftware.app-recyclerview-1.1.0-11 C:\Users\asdal\.gradle\caches\transforms-3\5a045cdfaafb47a8e410b1d40c214cb3\transformed\recyclerview-1.1.0\res
+ps.iut.projectsoftware.app-play-services-basement-17.0.0-12 C:\Users\asdal\.gradle\caches\transforms-3\6517fb3965489fd0a798bf5ceb3233ff\transformed\play-services-basement-17.0.0\res
+ps.iut.projectsoftware.app-core-1.5.0-13 C:\Users\asdal\.gradle\caches\transforms-3\6b0ebc842afe4cad6c195955b15d0b86\transformed\core-1.5.0\res
+ps.iut.projectsoftware.app-play-services-base-17.1.0-14 C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\res
+ps.iut.projectsoftware.app-appcompat-resources-1.2.0-15 C:\Users\asdal\.gradle\caches\transforms-3\9f4356ba970ccbe28b5e1a9323a0e67b\transformed\appcompat-resources-1.2.0\res
+ps.iut.projectsoftware.app-cardview-1.0.0-16 C:\Users\asdal\.gradle\caches\transforms-3\ced7b5c55eafcca486c1d98e2cc435b8\transformed\cardview-1.0.0\res
+ps.iut.projectsoftware.app-glide-4.12.0-17 C:\Users\asdal\.gradle\caches\transforms-3\d39745236dbf4af7712d96bf84dccd4d\transformed\glide-4.12.0\res
+ps.iut.projectsoftware.app-viewpager2-1.0.0-18 C:\Users\asdal\.gradle\caches\transforms-3\d3c153c345f1d1ff62a74d3f972dc1e5\transformed\viewpager2-1.0.0\res
+ps.iut.projectsoftware.app-appcompat-1.2.0-19 C:\Users\asdal\.gradle\caches\transforms-3\d42a87f8df70345f69d928ed02246581\transformed\appcompat-1.2.0\res
+ps.iut.projectsoftware.app-circleimageview-3.1.0-20 C:\Users\asdal\.gradle\caches\transforms-3\f57328b1c9c443a47ce3cd387315d9b8\transformed\circleimageview-3.1.0\res
+ps.iut.projectsoftware.app-constraintlayout-2.0.1-21 C:\Users\asdal\.gradle\caches\transforms-3\f65bb5ee049a97b4d6ab8cc54475bf84\transformed\constraintlayout-2.0.1\res
+ps.iut.projectsoftware.app-coordinatorlayout-1.1.0-22 C:\Users\asdal\.gradle\caches\transforms-3\fa41d68166e73318c7adb1a7441f5afc\transformed\coordinatorlayout-1.1.0\res

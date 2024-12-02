@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "300755004711",
+    "firebase_url": "https://iutianbookshop-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "iutianbookshop",
+    "storage_bucket": "iutianbookshop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300755004711:android:d3f39454226083c8c78d02",
+        "android_client_info": {
+          "package_name": "ps.iut.projectsoftware"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8kRLstMrVSkS5A3emb-mTLT55rjf5Mlw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

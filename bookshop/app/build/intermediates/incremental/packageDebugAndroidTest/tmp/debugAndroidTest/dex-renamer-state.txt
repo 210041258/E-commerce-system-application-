@@ -1,0 +1,7 @@
+#Mon Dec 02 20:10:26 BDT 2024
+base.1=C\:\\New folder\\E-commerce-system-application-\\bookshop\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\9\\classes.dex
+path.1=9/classes.dex
+base.0=C\:\\New folder\\E-commerce-system-application-\\bookshop\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+path.0=0/classes.dex

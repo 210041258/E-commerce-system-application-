@@ -1,0 +1,445 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="ps.iut.projectsoftware"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+10
+11    <!-- Permissions -->
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:5:2-64
+12-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:5:19-61
+13    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+13-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:6:2-76
+13-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:6:19-73
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:7:2-77
+14-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:7:19-74
+15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+15-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:8:2-78
+15-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:8:19-75
+16    <!-- Application -->
+17    <application
+17-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:11:2-206:16
+18        android:allowBackup="true"
+18-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:12:3-29
+19        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+19-->[androidx.core:core:1.5.0] C:\Users\asdal\.gradle\caches\transforms-3\6b0ebc842afe4cad6c195955b15d0b86\transformed\core-1.5.0\AndroidManifest.xml:24:18-86
+20        android:debuggable="true"
+21        android:icon="@drawable/app_icon"
+21-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:13:3-36
+22        android:label="@string/app_name"
+22-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:14:3-35
+23        android:requestLegacyExternalStorage="true"
+23-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:15:3-46
+24        android:theme="@style/AppTheme"
+24-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:17:3-34
+25        android:usesCleartextTraffic="true" >
+25-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:16:3-38
+26
+27        <!-- MainActivity -->
+28        <activity
+28-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:20:3-31:14
+29            android:name="ps.iut.projectsoftware.MainActivity"
+29-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:21:4-32
+30            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+30-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:23:4-97
+31            android:exported="true"
+31-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:22:4-27
+32            android:hardwareAccelerated="true"
+32-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:24:4-38
+33            android:supportsPictureInPicture="true"
+33-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:25:4-43
+34            android:windowSoftInputMode="stateHidden" >
+34-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:26:4-45
+35            <intent-filter>
+35-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:27:4-30:20
+36                <action android:name="android.intent.action.MAIN" />
+36-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:28:5-57
+36-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:28:13-54
+37
+38                <category android:name="android.intent.category.LAUNCHER" />
+38-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:29:5-65
+38-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:29:15-62
+39            </intent-filter>
+40        </activity>
+41
+42        <!-- Other Activities -->
+43        <activity
+43-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:34:3-39:48
+44            android:name="ps.iut.projectsoftware.LoginActivity"
+44-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:35:4-33
+45            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+45-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:36:4-97
+46            android:hardwareAccelerated="true"
+46-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:37:4-38
+47            android:supportsPictureInPicture="true"
+47-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:38:4-43
+48            android:windowSoftInputMode="stateHidden" />
+48-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:39:4-45
+49        <activity
+49-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:40:3-45:43
+50            android:name="ps.iut.projectsoftware.SginupActivity"
+50-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:41:4-34
+51            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+51-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:42:4-97
+52            android:hardwareAccelerated="true"
+52-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:43:4-38
+53            android:screenOrientation="portrait"
+53-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:45:4-40
+54            android:supportsPictureInPicture="true" />
+54-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:44:4-43
+55        <activity
+55-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:46:3-51:48
+56            android:name="ps.iut.projectsoftware.ForgotpassActivity"
+56-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:47:4-38
+57            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+57-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:48:4-97
+58            android:hardwareAccelerated="true"
+58-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:49:4-38
+59            android:supportsPictureInPicture="true"
+59-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:50:4-43
+60            android:windowSoftInputMode="stateHidden" />
+60-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:51:4-45
+61        <activity
+61-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:52:3-57:48
+62            android:name="ps.iut.projectsoftware.ViewMainActivity"
+62-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:53:4-36
+63            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+63-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:54:4-97
+64            android:hardwareAccelerated="true"
+64-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:55:4-38
+65            android:supportsPictureInPicture="true"
+65-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:56:4-43
+66            android:windowSoftInputMode="stateHidden" />
+66-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:57:4-45
+67        <activity
+67-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:58:3-63:48
+68            android:name="ps.iut.projectsoftware.ViewProductActivity"
+68-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:59:4-39
+69            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+69-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:60:4-97
+70            android:hardwareAccelerated="true"
+70-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:61:4-38
+71            android:supportsPictureInPicture="true"
+71-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:62:4-43
+72            android:windowSoftInputMode="stateHidden" />
+72-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:63:4-45
+73        <activity
+73-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:64:3-69:48
+74            android:name="ps.iut.projectsoftware.ViewCartActivity"
+74-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:65:4-36
+75            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+75-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:66:4-97
+76            android:hardwareAccelerated="true"
+76-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:67:4-38
+77            android:supportsPictureInPicture="true"
+77-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:68:4-43
+78            android:windowSoftInputMode="stateHidden" />
+78-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:69:4-45
+79        <activity
+79-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:70:3-75:48
+80            android:name="ps.iut.projectsoftware.ProfileActivity"
+80-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:71:4-35
+81            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+81-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:72:4-97
+82            android:hardwareAccelerated="true"
+82-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:73:4-38
+83            android:supportsPictureInPicture="true"
+83-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:74:4-43
+84            android:windowSoftInputMode="stateHidden" />
+84-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:75:4-45
+85        <activity
+85-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:76:3-81:48
+86            android:name="ps.iut.projectsoftware.MyprofileActivity"
+86-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:77:4-37
+87            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+87-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:78:4-97
+88            android:hardwareAccelerated="true"
+88-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:79:4-38
+89            android:supportsPictureInPicture="true"
+89-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:80:4-43
+90            android:windowSoftInputMode="stateHidden" />
+90-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:81:4-45
+91        <activity
+91-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:82:3-87:48
+92            android:name="ps.iut.projectsoftware.MyorderActivity"
+92-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:83:4-35
+93            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+93-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:84:4-97
+94            android:hardwareAccelerated="true"
+94-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:85:4-38
+95            android:supportsPictureInPicture="true"
+95-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:86:4-43
+96            android:windowSoftInputMode="stateHidden" />
+96-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:87:4-45
+97        <activity
+97-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:88:3-93:48
+98            android:name="ps.iut.projectsoftware.MyfivouritActivity"
+98-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:89:4-38
+99            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+99-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:90:4-97
+100            android:hardwareAccelerated="true"
+100-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:91:4-38
+101            android:supportsPictureInPicture="true"
+101-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:92:4-43
+102            android:windowSoftInputMode="stateHidden" />
+102-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:93:4-45
+103        <activity
+103-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:94:3-99:48
+104            android:name="ps.iut.projectsoftware.ViewSearchActivity"
+104-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:95:4-38
+105            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+105-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:96:4-97
+106            android:hardwareAccelerated="true"
+106-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:97:4-38
+107            android:supportsPictureInPicture="true"
+107-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:98:4-43
+108            android:windowSoftInputMode="stateHidden" />
+108-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:99:4-45
+109        <activity
+109-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:100:3-105:48
+110            android:name="ps.iut.projectsoftware.AdminActivity"
+110-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:101:4-33
+111            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+111-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:102:4-97
+112            android:hardwareAccelerated="true"
+112-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:103:4-38
+113            android:supportsPictureInPicture="true"
+113-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:104:4-43
+114            android:windowSoftInputMode="stateHidden" />
+114-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:105:4-45
+115        <activity
+115-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:106:3-111:48
+116            android:name="ps.iut.projectsoftware.NotificationActivity"
+116-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:107:4-40
+117            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+117-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:108:4-97
+118            android:hardwareAccelerated="true"
+118-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:109:4-38
+119            android:supportsPictureInPicture="true"
+119-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:110:4-43
+120            android:windowSoftInputMode="stateHidden" />
+120-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:111:4-45
+121        <activity
+121-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:112:3-117:48
+122            android:name="ps.iut.projectsoftware.EditbalanceActivity"
+122-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:113:4-39
+123            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+123-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:114:4-97
+124            android:hardwareAccelerated="true"
+124-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:115:4-38
+125            android:supportsPictureInPicture="true"
+125-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:116:4-43
+126            android:windowSoftInputMode="stateHidden" />
+126-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:117:4-45
+127        <activity
+127-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:118:3-123:48
+128            android:name="ps.iut.projectsoftware.AdminmainListviewActivity"
+128-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:119:4-45
+129            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+129-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:120:4-97
+130            android:hardwareAccelerated="true"
+130-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:121:4-38
+131            android:supportsPictureInPicture="true"
+131-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:122:4-43
+132            android:windowSoftInputMode="stateHidden" />
+132-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:123:4-45
+133        <activity
+133-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:124:3-129:48
+134            android:name="ps.iut.projectsoftware.AdminMainEditActivity"
+134-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:125:4-41
+135            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+135-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:126:4-97
+136            android:hardwareAccelerated="true"
+136-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:127:4-38
+137            android:supportsPictureInPicture="true"
+137-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:128:4-43
+138            android:windowSoftInputMode="stateHidden" />
+138-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:129:4-45
+139        <activity
+139-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:130:3-135:48
+140            android:name="ps.iut.projectsoftware.AdminMainAddActivity"
+140-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:131:4-40
+141            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+141-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:132:4-97
+142            android:hardwareAccelerated="true"
+142-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:133:4-38
+143            android:supportsPictureInPicture="true"
+143-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:134:4-43
+144            android:windowSoftInputMode="stateHidden" />
+144-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:135:4-45
+145        <activity
+145-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:136:3-141:48
+146            android:name="ps.iut.projectsoftware.AdminMainHistoryActivity"
+146-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:137:4-44
+147            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+147-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:138:4-97
+148            android:hardwareAccelerated="true"
+148-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:139:4-38
+149            android:supportsPictureInPicture="true"
+149-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:140:4-43
+150            android:windowSoftInputMode="stateHidden" />
+150-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:141:4-45
+151        <activity
+151-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:142:3-147:48
+152            android:name="ps.iut.projectsoftware.AdminAddNotificationActivity"
+152-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:143:4-48
+153            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+153-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:144:4-97
+154            android:hardwareAccelerated="true"
+154-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:145:4-38
+155            android:supportsPictureInPicture="true"
+155-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:146:4-43
+156            android:windowSoftInputMode="stateHidden" />
+156-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:147:4-45
+157        <activity
+157-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:148:3-153:48
+158            android:name="ps.iut.projectsoftware.ManuelActivity"
+158-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:149:4-34
+159            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+159-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:150:4-97
+160            android:hardwareAccelerated="true"
+160-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:151:4-38
+161            android:supportsPictureInPicture="true"
+161-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:152:4-43
+162            android:windowSoftInputMode="stateHidden" />
+162-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:153:4-45
+163        <activity
+163-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:154:3-159:48
+164            android:name="ps.iut.projectsoftware.GatewayActivity"
+164-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:155:4-35
+165            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+165-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:156:4-97
+166            android:hardwareAccelerated="true"
+166-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:157:4-38
+167            android:supportsPictureInPicture="true"
+167-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:158:4-43
+168            android:windowSoftInputMode="stateHidden" />
+168-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:159:4-45
+169        <activity
+169-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:160:3-165:48
+170            android:name="ps.iut.projectsoftware.OrderproofActivity"
+170-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:161:4-38
+171            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+171-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:162:4-97
+172            android:hardwareAccelerated="true"
+172-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:163:4-38
+173            android:supportsPictureInPicture="true"
+173-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:164:4-43
+174            android:windowSoftInputMode="stateHidden" />
+174-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:165:4-45
+175        <activity
+175-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:166:3-171:48
+176            android:name="ps.iut.projectsoftware.HistoryOperationActivity"
+176-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:167:4-44
+177            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+177-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:168:4-97
+178            android:hardwareAccelerated="true"
+178-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:169:4-38
+179            android:supportsPictureInPicture="true"
+179-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:170:4-43
+180            android:windowSoftInputMode="stateHidden" />
+180-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:171:4-45
+181        <activity
+181-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:172:3-177:48
+182            android:name="ps.iut.projectsoftware.ViewPhotoActivity"
+182-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:173:4-37
+183            android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
+183-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:174:4-97
+184            android:hardwareAccelerated="true"
+184-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:175:4-38
+185            android:supportsPictureInPicture="true"
+185-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:176:4-43
+186            android:windowSoftInputMode="stateHidden" />
+186-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:177:4-45
+187        <activity
+187-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:178:3-180:43
+188            android:name="ps.iut.projectsoftware.DebugActivity"
+188-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:179:4-33
+189            android:screenOrientation="portrait" />
+189-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:180:4-40
+190
+191        <!-- Firebase Meta-data -->
+192        <meta-data
+192-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:183:3-185:60
+193            android:name="com.google.android.gms.version"
+193-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:184:4-49
+194            android:value="@integer/google_play_services_version" />
+194-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:185:4-57
+195
+196        <!-- Firebase Initialization -->
+197        <provider
+197-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:188:3-192:30
+198            android:name="com.google.firebase.provider.FirebaseInitProvider"
+198-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:189:4-68
+199            android:authorities="ps.iut.projectsoftware.firebaseinitprovider"
+199-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:190:4-69
+200            android:exported="false"
+200-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:191:4-28
+201            android:initOrder="100" />
+201-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:192:4-27
+202
+203        <!-- Firebase Services -->
+204        <service
+204-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:195:3-204:13
+205            android:name="com.google.firebase.components.ComponentDiscoveryService"
+205-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:196:4-75
+206            android:exported="false" >
+206-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:197:4-28
+207            <meta-data
+207-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:198:4-200:73
+208                android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
+208-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:199:5-97
+209                android:value="com.google.firebase.components.ComponentRegistrar" />
+209-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:200:5-70
+210            <meta-data
+210-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:201:4-203:73
+211                android:name="com.google.firebase.components:com.google.firebase.analytics.FirebaseAnalyticsRegistrar"
+211-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:202:5-107
+212                android:value="com.google.firebase.components.ComponentRegistrar" />
+212-->C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:203:5-70
+213            <meta-data
+213-->[com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:32:13-34:85
+214                android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
+214-->[com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:33:17-109
+215                android:value="com.google.firebase.components.ComponentRegistrar" />
+215-->[com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:34:17-82
+216            <meta-data
+216-->[com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:33:13-35:85
+217                android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+217-->[com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:34:17-107
+218                android:value="com.google.firebase.components.ComponentRegistrar" />
+218-->[com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:35:17-82
+219        </service>
+220
+221        <activity
+221-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:24:9-31:50
+222            android:name="com.google.firebase.auth.internal.FederatedSignInActivity"
+222-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:25:13-85
+223            android:excludeFromRecents="true"
+223-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:26:13-46
+224            android:exported="true"
+224-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:27:13-36
+225            android:launchMode="singleTask"
+225-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:28:13-44
+226            android:permission="com.google.firebase.auth.api.gms.permission.LAUNCH_FEDERATED_SIGN_IN"
+226-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:29:13-102
+227            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+227-->[com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:30:13-72
+228        <activity
+228-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+229            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+229-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:24:13-79
+230            android:exported="false"
+230-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+231            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+231-->[com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+232    </application>
+233
+234</manifest>

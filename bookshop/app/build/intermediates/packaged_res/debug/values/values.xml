@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="colorControlHighlight">#FF4081</color>
+    <color name="colorControlNormal">#FF5722</color>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <string name="app_name" translatable="false">Book Shop</string>
+    <string name="firebase_database_url" translatable="false">https://iutianbookshop-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gcm_defaultSenderId" translatable="false">300755004711</string>
+    <string name="google_api_key" translatable="false">AIzaSyD8kRLstMrVSkS5A3emb-mTLT55rjf5Mlw</string>
+    <string name="google_app_id" translatable="false">1:300755004711:android:d3f39454226083c8c78d02</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD8kRLstMrVSkS5A3emb-mTLT55rjf5Mlw</string>
+    <string name="google_storage_bucket" translatable="false">iutianbookshop.appspot.com</string>
+    <string name="project_id" translatable="false">iutianbookshop</string>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+		<item name="colorPrimary">@color/colorPrimary</item>
+		<item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+		<item name="colorAccent">@color/colorAccent</item>
+		<item name="colorControlHighlight">@color/colorControlHighlight</item>
+		<item name="colorControlNormal">@color/colorControlNormal</item>
+	</style>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+    <style name="AppTheme.FullScreen" parent="AppTheme">
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+	</style>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light"/>
+</resources>

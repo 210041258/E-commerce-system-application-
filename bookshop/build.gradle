@@ -1,24 +1,26 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+// Root-level build.gradle file
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
+// there is file must also acive the andoridx and set it to true named as "gradle.properties"
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
-        classpath 'com.google.gms:google-services:4.3.3'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // gradle make sure the gradle must have a good spasficition with character of the mobile you will create for it
+        // the gradle is with creation of the efficent way to create software eng
+        // now after all of the time i can say that 7.4.0 these three number can time more than 5 hrs to find them
+        // if you will work on the application of the android check the character of the mobile and the system of the android
+        //
+        classpath 'com.android.tools.build:gradle:7.4.0'  // Make sure the correct version is used
+        classpath 'com.google.gms:google-services:4.3.15'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
+        // this is also may lead you to error throw what pervious to the garhph also with the that
+        // use the below keywrod mavenCentral to avoid the error of the bulid.gradle
+        mavenCentral()
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

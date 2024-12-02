@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- here is the values of the firebase  -->
+<!-- now the values you must delete it to garghp, means thats you must configure the .json of the services  -->
+<!-- the file is will be after the app dictory -->
+<!-- but thats also cost but not so much time -->
+
+<resources>
+    <string name="firebase_database_url" translatable="false">https://iutianbookshop-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+    <string name="gcm_defaultSenderId" translatable="false">300755004711</string>
+    <string name="google_api_key" translatable="false">AIzaSyD8kRLstMrVSkS5A3emb-mTLT55rjf5Mlw</string>
+    <string name="google_app_id" translatable="false">1:300755004711:android:d3f39454226083c8c78d02</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD8kRLstMrVSkS5A3emb-mTLT55rjf5Mlw</string>
+    <string name="google_storage_bucket" translatable="false">iutianbookshop.appspot.com</string>
+    <string name="project_id" translatable="false">iutianbookshop</string>
+</resources>
+    <!--
+     about styles and color and themses no i dont work with anymore ,
+     i work a lone , with separte sheet to avoid any multi-error i desgined mine structure,
+     and i finsied by today,
+     as the wise statment said : "you will lose more, if you didn't think once"
+     you will be donkey shotting
+     , thats why i have been deleting all of them, the achivement of it dosn't deserve it
+     , now the colors, styles can have some values i just sub them with simple implemtion small once,
+     i configure them direct without any process on separet sheet any questions i will answer be sure i will !!
+     -->

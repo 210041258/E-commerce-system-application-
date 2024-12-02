@@ -1,11 +1,13 @@
-
-<manifest
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	package="ps.iut.projectsoftware">
+
+	<!-- Permissions -->
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+	<!-- Application -->
 	<application
 		android:allowBackup="true"
 		android:icon="@drawable/app_icon"
@@ -13,8 +15,11 @@
 		android:requestLegacyExternalStorage="true"
 		android:usesCleartextTraffic="true"
 		android:theme="@style/AppTheme">
+
+		<!-- MainActivity -->
 		<activity
 			android:name=".MainActivity"
+			android:exported="true"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
 			android:hardwareAccelerated="true"
 			android:supportsPictureInPicture="true"
@@ -24,6 +29,8 @@
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
 		</activity>
+
+		<!-- Other Activities -->
 		<activity
 			android:name=".LoginActivity"
 			android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"
@@ -171,14 +178,20 @@
 		<activity
 			android:name=".DebugActivity"
 			android:screenOrientation="portrait" />
+
+		<!-- Firebase Meta-data -->
 		<meta-data
 			android:name="com.google.android.gms.version"
 			android:value="@integer/google_play_services_version" />
+
+		<!-- Firebase Initialization -->
 		<provider
 			android:name="com.google.firebase.provider.FirebaseInitProvider"
 			android:authorities="ps.iut.projectsoftware.firebaseinitprovider"
 			android:exported="false"
 			android:initOrder="100" />
+
+		<!-- Firebase Services -->
 		<service
 			android:name="com.google.firebase.components.ComponentDiscoveryService"
 			android:exported="false">
@@ -186,14 +199,9 @@
 				android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar"
 				android:value="com.google.firebase.components.ComponentRegistrar" />
 			<meta-data
-				android:name="com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar"
-				android:value="com.google.firebase.components.ComponentRegistrar" />
-			<meta-data
-				android:name="com.google.firebase.components:com.google.firebase.storage.StorageRegistrar"
+				android:name="com.google.firebase.components:com.google.firebase.analytics.FirebaseAnalyticsRegistrar"
 				android:value="com.google.firebase.components.ComponentRegistrar" />
 		</service>
-		<uses-library
-			android:name="org.apache.http.legacy"
-			android:required="false" />
+
 	</application>
-</manifest>
+</manifest>

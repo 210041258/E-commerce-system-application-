@@ -1,0 +1,645 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:1-207:12
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:1-207:12
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:1-207:12
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:1-207:12
+MERGED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:17:1-42:12
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:15:1-38:12
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:15:1-39:12
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\d39745236dbf4af7712d96bf84dccd4d\transformed\glide-4.12.0\AndroidManifest.xml:2:1-12:12
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\asdal\.gradle\caches\transforms-3\065371bfd584b30fb8828c63a3b04e70\transformed\material-1.4.0\AndroidManifest.xml:17:1-24:12
+MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\asdal\.gradle\caches\transforms-3\f57328b1c9c443a47ce3cd387315d9b8\transformed\circleimageview-3.1.0\AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] C:\Users\asdal\.gradle\caches\transforms-3\b60ca281e2c95f33c0fc038db44f8dd4\transformed\firebase-auth-interop-18.0.0\AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.firebase:firebase-common:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f2803a83f5ba5575a1ca13573ee2cbf5\transformed\firebase-common-19.0.0\AndroidManifest.xml:2:1-19:12
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\2f275d366b934bef693fa579491caef4\transformed\play-services-tasks-17.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6517fb3965489fd0a798bf5ceb3233ff\transformed\play-services-basement-17.0.0\AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\fa41d68166e73318c7adb1a7441f5afc\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\asdal\.gradle\caches\transforms-3\f65bb5ee049a97b4d6ab8cc54475bf84\transformed\constraintlayout-2.0.1\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\3e26520342a67a7dc6f051819dd757bf\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\2faa4ac8faeb48caad41d67c49feb47c\transformed\transition-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\d42a87f8df70345f69d928ed02246581\transformed\appcompat-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\9f4356ba970ccbe28b5e1a9323a0e67b\transformed\appcompat-resources-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\e5b9817338f4b7e90041aa289acfef0f\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\481c33980f533854b55c3c76954dec02\transformed\vectordrawable-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\d3c153c345f1d1ff62a74d3f972dc1e5\transformed\viewpager2-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\5dc1a18baa079c2f96c85ff605321f5a\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\92b8cbf554ee5c7017a558b8a2380c16\transformed\fragment-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\65abe3c7ce0b997047f1aac6c3805de8\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\c08b82cbea6078f2aadcb92f43861728\transformed\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\5a045cdfaafb47a8e410b1d40c214cb3\transformed\recyclerview-1.1.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f94bfffdcd1f9ff49f7836dfdfee8caf\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\fce632ceecb6e017bfe917ebee97ba6f\transformed\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\91ed3d927bf67ed2dddbf8b994ba6ec1\transformed\activity-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.5.0] C:\Users\asdal\.gradle\caches\transforms-3\6b0ebc842afe4cad6c195955b15d0b86\transformed\core-1.5.0\AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\asdal\.gradle\caches\transforms-3\8dcdb7e7e0421a8832d2d06a764c5a74\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6ad7ebedf32fc6d7b72d84b341483b26\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\ca48f791b13986ff194034cd5d7bf2e4\transformed\gifdecoder-4.12.0\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.exifinterface:exifinterface:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\fd4c16baee0a24b5efdd281a1ad20dfa\transformed\exifinterface-1.2.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\ced7b5c55eafcca486c1d98e2cc435b8\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\b003afaa2f65d0c50add9df5143df818\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\c5652be38b872b070c7e7931d7c1e477\transformed\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\557e411a576cbdddadb348192ab3d1ca\transformed\print-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\asdal\.gradle\caches\transforms-3\88fbe4e0b80298f58bf555ebecf91b5a\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\asdal\.gradle\caches\transforms-3\d6dbdc5b7910a48b87b468d834628f8e\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\asdal\.gradle\caches\transforms-3\be6d88f8615486210e99e12d12be2b1e\transformed\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\asdal\.gradle\caches\transforms-3\eef076becaebc6a933e9ab9b4ba1d1bb\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\asdal\.gradle\caches\transforms-3\0e10c1be3e0fce6530194a623ac860cf\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f333bf2a8931213636ec3af43e424759\transformed\savedstate-1.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\5965b916fe8f00d28a36a5cff901adad\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.firebase:firebase-database-collection:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\db03f817405607682e708ef05ad55b91\transformed\firebase-database-collection-17.0.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\5e032f20043c69609310ab2f954684b7\transformed\annotation-experimental-1.0.0\AndroidManifest.xml:17:1-24:12
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:1-207:12
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:1-207:12
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:1-207:12
+	package
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:2:2-34
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:1-207:12
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+	android:versionCode
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:1-207:12
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:5:2-64
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:26:5-67
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:26:5-67
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:27:5-67
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:27:5-67
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:5:19-61
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:6:2-76
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:25:5-79
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:25:5-79
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:26:5-79
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:6:19-73
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:7:2-77
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:7:19-74
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:8:2-78
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:8:19-75
+application
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:11:2-206:16
+MERGED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:23:5-40:19
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:28:5-36:19
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:29:5-37:19
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:29:5-37:19
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\d39745236dbf4af7712d96bf84dccd4d\transformed\glide-4.12.0\AndroidManifest.xml:10:5-20
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\d39745236dbf4af7712d96bf84dccd4d\transformed\glide-4.12.0\AndroidManifest.xml:10:5-20
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\asdal\.gradle\caches\transforms-3\065371bfd584b30fb8828c63a3b04e70\transformed\material-1.4.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\asdal\.gradle\caches\transforms-3\065371bfd584b30fb8828c63a3b04e70\transformed\material-1.4.0\AndroidManifest.xml:22:5-20
+MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\asdal\.gradle\caches\transforms-3\f57328b1c9c443a47ce3cd387315d9b8\transformed\circleimageview-3.1.0\AndroidManifest.xml:9:5-20
+MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\asdal\.gradle\caches\transforms-3\f57328b1c9c443a47ce3cd387315d9b8\transformed\circleimageview-3.1.0\AndroidManifest.xml:9:5-20
+MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] C:\Users\asdal\.gradle\caches\transforms-3\b60ca281e2c95f33c0fc038db44f8dd4\transformed\firebase-auth-interop-18.0.0\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] C:\Users\asdal\.gradle\caches\transforms-3\b60ca281e2c95f33c0fc038db44f8dd4\transformed\firebase-auth-interop-18.0.0\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.firebase:firebase-common:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f2803a83f5ba5575a1ca13573ee2cbf5\transformed\firebase-common-19.0.0\AndroidManifest.xml:11:5-17:19
+MERGED from [com.google.firebase:firebase-common:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f2803a83f5ba5575a1ca13573ee2cbf5\transformed\firebase-common-19.0.0\AndroidManifest.xml:11:5-17:19
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\2f275d366b934bef693fa579491caef4\transformed\play-services-tasks-17.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\2f275d366b934bef693fa579491caef4\transformed\play-services-tasks-17.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6517fb3965489fd0a798bf5ceb3233ff\transformed\play-services-basement-17.0.0\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6517fb3965489fd0a798bf5ceb3233ff\transformed\play-services-basement-17.0.0\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\asdal\.gradle\caches\transforms-3\f65bb5ee049a97b4d6ab8cc54475bf84\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\asdal\.gradle\caches\transforms-3\f65bb5ee049a97b4d6ab8cc54475bf84\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.5.0] C:\Users\asdal\.gradle\caches\transforms-3\6b0ebc842afe4cad6c195955b15d0b86\transformed\core-1.5.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.core:core:1.5.0] C:\Users\asdal\.gradle\caches\transforms-3\6b0ebc842afe4cad6c195955b15d0b86\transformed\core-1.5.0\AndroidManifest.xml:24:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\asdal\.gradle\caches\transforms-3\8dcdb7e7e0421a8832d2d06a764c5a74\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\asdal\.gradle\caches\transforms-3\8dcdb7e7e0421a8832d2d06a764c5a74\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\ca48f791b13986ff194034cd5d7bf2e4\transformed\gifdecoder-4.12.0\AndroidManifest.xml:9:5-20
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\ca48f791b13986ff194034cd5d7bf2e4\transformed\gifdecoder-4.12.0\AndroidManifest.xml:9:5-20
+	android:requestLegacyExternalStorage
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:15:3-46
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.5.0] C:\Users\asdal\.gradle\caches\transforms-3\6b0ebc842afe4cad6c195955b15d0b86\transformed\core-1.5.0\AndroidManifest.xml:24:18-86
+	android:label
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:14:3-35
+	android:icon
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:13:3-36
+	android:allowBackup
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:12:3-29
+	android:theme
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:17:3-34
+	android:usesCleartextTraffic
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:16:3-38
+activity#ps.iut.projectsoftware.MainActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:20:3-31:14
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:24:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:26:4-45
+	android:exported
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:22:4-27
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:25:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:23:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:21:4-32
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:27:4-30:20
+action#android.intent.action.MAIN
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:28:5-57
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:28:13-54
+category#android.intent.category.LAUNCHER
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:29:5-65
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:29:15-62
+activity#ps.iut.projectsoftware.LoginActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:34:3-39:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:37:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:39:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:38:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:36:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:35:4-33
+activity#ps.iut.projectsoftware.SginupActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:40:3-45:43
+	android:screenOrientation
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:45:4-40
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:43:4-38
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:44:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:42:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:41:4-34
+activity#ps.iut.projectsoftware.ForgotpassActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:46:3-51:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:49:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:51:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:50:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:48:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:47:4-38
+activity#ps.iut.projectsoftware.ViewMainActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:52:3-57:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:55:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:57:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:56:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:54:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:53:4-36
+activity#ps.iut.projectsoftware.ViewProductActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:58:3-63:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:61:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:63:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:62:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:60:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:59:4-39
+activity#ps.iut.projectsoftware.ViewCartActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:64:3-69:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:67:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:69:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:68:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:66:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:65:4-36
+activity#ps.iut.projectsoftware.ProfileActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:70:3-75:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:73:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:75:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:74:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:72:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:71:4-35
+activity#ps.iut.projectsoftware.MyprofileActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:76:3-81:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:79:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:81:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:80:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:78:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:77:4-37
+activity#ps.iut.projectsoftware.MyorderActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:82:3-87:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:85:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:87:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:86:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:84:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:83:4-35
+activity#ps.iut.projectsoftware.MyfivouritActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:88:3-93:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:91:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:93:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:92:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:90:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:89:4-38
+activity#ps.iut.projectsoftware.ViewSearchActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:94:3-99:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:97:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:99:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:98:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:96:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:95:4-38
+activity#ps.iut.projectsoftware.AdminActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:100:3-105:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:103:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:105:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:104:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:102:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:101:4-33
+activity#ps.iut.projectsoftware.NotificationActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:106:3-111:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:109:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:111:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:110:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:108:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:107:4-40
+activity#ps.iut.projectsoftware.EditbalanceActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:112:3-117:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:115:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:117:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:116:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:114:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:113:4-39
+activity#ps.iut.projectsoftware.AdminmainListviewActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:118:3-123:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:121:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:123:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:122:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:120:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:119:4-45
+activity#ps.iut.projectsoftware.AdminMainEditActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:124:3-129:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:127:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:129:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:128:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:126:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:125:4-41
+activity#ps.iut.projectsoftware.AdminMainAddActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:130:3-135:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:133:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:135:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:134:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:132:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:131:4-40
+activity#ps.iut.projectsoftware.AdminMainHistoryActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:136:3-141:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:139:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:141:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:140:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:138:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:137:4-44
+activity#ps.iut.projectsoftware.AdminAddNotificationActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:142:3-147:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:145:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:147:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:146:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:144:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:143:4-48
+activity#ps.iut.projectsoftware.ManuelActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:148:3-153:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:151:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:153:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:152:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:150:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:149:4-34
+activity#ps.iut.projectsoftware.GatewayActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:154:3-159:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:157:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:159:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:158:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:156:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:155:4-35
+activity#ps.iut.projectsoftware.OrderproofActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:160:3-165:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:163:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:165:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:164:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:162:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:161:4-38
+activity#ps.iut.projectsoftware.HistoryOperationActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:166:3-171:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:169:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:171:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:170:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:168:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:167:4-44
+activity#ps.iut.projectsoftware.ViewPhotoActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:172:3-177:48
+	android:hardwareAccelerated
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:175:4-38
+	android:windowSoftInputMode
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:177:4-45
+	android:supportsPictureInPicture
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:176:4-43
+	android:configChanges
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:174:4-97
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:173:4-37
+activity#ps.iut.projectsoftware.DebugActivity
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:178:3-180:43
+	android:screenOrientation
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:180:4-40
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:179:4-33
+meta-data#com.google.android.gms.version
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:183:3-185:60
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6517fb3965489fd0a798bf5ceb3233ff\transformed\play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6517fb3965489fd0a798bf5ceb3233ff\transformed\play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:185:4-57
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:184:4-49
+provider#com.google.firebase.provider.FirebaseInitProvider
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:188:3-192:30
+MERGED from [com.google.firebase:firebase-common:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f2803a83f5ba5575a1ca13573ee2cbf5\transformed\firebase-common-19.0.0\AndroidManifest.xml:12:9-16:39
+MERGED from [com.google.firebase:firebase-common:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f2803a83f5ba5575a1ca13573ee2cbf5\transformed\firebase-common-19.0.0\AndroidManifest.xml:12:9-16:39
+	android:authorities
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:190:4-69
+	android:exported
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:191:4-28
+	android:initOrder
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:192:4-27
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:189:4-68
+service#com.google.firebase.components.ComponentDiscoveryService
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:195:3-204:13
+MERGED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:33:9-39:19
+MERGED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:33:9-39:19
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:29:9-35:19
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:30:9-36:19
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:30:9-36:19
+	android:exported
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:197:4-28
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:196:4-75
+meta-data#com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:198:4-200:73
+MERGED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:36:13-38:85
+MERGED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:36:13-38:85
+	android:value
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:200:5-70
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:199:5-97
+meta-data#com.google.firebase.components:com.google.firebase.analytics.FirebaseAnalyticsRegistrar
+ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:201:4-203:73
+	android:value
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:203:5-70
+	android:name
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml:202:5-107
+uses-sdk
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+MERGED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:21:5-44
+MERGED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:21:5-44
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:19:5-21:41
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\d39745236dbf4af7712d96bf84dccd4d\transformed\glide-4.12.0\AndroidManifest.xml:6:5-8:41
+MERGED from [com.github.bumptech.glide:glide:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\d39745236dbf4af7712d96bf84dccd4d\transformed\glide-4.12.0\AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\asdal\.gradle\caches\transforms-3\065371bfd584b30fb8828c63a3b04e70\transformed\material-1.4.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.4.0] C:\Users\asdal\.gradle\caches\transforms-3\065371bfd584b30fb8828c63a3b04e70\transformed\material-1.4.0\AndroidManifest.xml:20:5-44
+MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\asdal\.gradle\caches\transforms-3\f57328b1c9c443a47ce3cd387315d9b8\transformed\circleimageview-3.1.0\AndroidManifest.xml:5:5-7:41
+MERGED from [de.hdodenhof:circleimageview:3.1.0] C:\Users\asdal\.gradle\caches\transforms-3\f57328b1c9c443a47ce3cd387315d9b8\transformed\circleimageview-3.1.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] C:\Users\asdal\.gradle\caches\transforms-3\b60ca281e2c95f33c0fc038db44f8dd4\transformed\firebase-auth-interop-18.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-auth-interop:18.0.0] C:\Users\asdal\.gradle\caches\transforms-3\b60ca281e2c95f33c0fc038db44f8dd4\transformed\firebase-auth-interop-18.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-common:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f2803a83f5ba5575a1ca13573ee2cbf5\transformed\firebase-common-19.0.0\AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.firebase:firebase-common:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f2803a83f5ba5575a1ca13573ee2cbf5\transformed\firebase-common-19.0.0\AndroidManifest.xml:6:5-8:41
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\2f275d366b934bef693fa579491caef4\transformed\play-services-tasks-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\2f275d366b934bef693fa579491caef4\transformed\play-services-tasks-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6517fb3965489fd0a798bf5ceb3233ff\transformed\play-services-basement-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6517fb3965489fd0a798bf5ceb3233ff\transformed\play-services-basement-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\fa41d68166e73318c7adb1a7441f5afc\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\fa41d68166e73318c7adb1a7441f5afc\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\asdal\.gradle\caches\transforms-3\f65bb5ee049a97b4d6ab8cc54475bf84\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] C:\Users\asdal\.gradle\caches\transforms-3\f65bb5ee049a97b4d6ab8cc54475bf84\transformed\constraintlayout-2.0.1\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\3e26520342a67a7dc6f051819dd757bf\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\3e26520342a67a7dc6f051819dd757bf\transformed\dynamicanimation-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\2faa4ac8faeb48caad41d67c49feb47c\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\2faa4ac8faeb48caad41d67c49feb47c\transformed\transition-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\d42a87f8df70345f69d928ed02246581\transformed\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\d42a87f8df70345f69d928ed02246581\transformed\appcompat-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\9f4356ba970ccbe28b5e1a9323a0e67b\transformed\appcompat-resources-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.appcompat:appcompat-resources:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\9f4356ba970ccbe28b5e1a9323a0e67b\transformed\appcompat-resources-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\e5b9817338f4b7e90041aa289acfef0f\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\e5b9817338f4b7e90041aa289acfef0f\transformed\vectordrawable-animated-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\481c33980f533854b55c3c76954dec02\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\481c33980f533854b55c3c76954dec02\transformed\vectordrawable-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\d3c153c345f1d1ff62a74d3f972dc1e5\transformed\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\d3c153c345f1d1ff62a74d3f972dc1e5\transformed\viewpager2-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\5dc1a18baa079c2f96c85ff605321f5a\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\5dc1a18baa079c2f96c85ff605321f5a\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\92b8cbf554ee5c7017a558b8a2380c16\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\92b8cbf554ee5c7017a558b8a2380c16\transformed\fragment-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\65abe3c7ce0b997047f1aac6c3805de8\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\65abe3c7ce0b997047f1aac6c3805de8\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\c08b82cbea6078f2aadcb92f43861728\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\c08b82cbea6078f2aadcb92f43861728\transformed\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\5a045cdfaafb47a8e410b1d40c214cb3\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] C:\Users\asdal\.gradle\caches\transforms-3\5a045cdfaafb47a8e410b1d40c214cb3\transformed\recyclerview-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f94bfffdcd1f9ff49f7836dfdfee8caf\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f94bfffdcd1f9ff49f7836dfdfee8caf\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\fce632ceecb6e017bfe917ebee97ba6f\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\fce632ceecb6e017bfe917ebee97ba6f\transformed\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\91ed3d927bf67ed2dddbf8b994ba6ec1\transformed\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\91ed3d927bf67ed2dddbf8b994ba6ec1\transformed\activity-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] C:\Users\asdal\.gradle\caches\transforms-3\6b0ebc842afe4cad6c195955b15d0b86\transformed\core-1.5.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.5.0] C:\Users\asdal\.gradle\caches\transforms-3\6b0ebc842afe4cad6c195955b15d0b86\transformed\core-1.5.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\asdal\.gradle\caches\transforms-3\8dcdb7e7e0421a8832d2d06a764c5a74\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\asdal\.gradle\caches\transforms-3\8dcdb7e7e0421a8832d2d06a764c5a74\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6ad7ebedf32fc6d7b72d84b341483b26\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\6ad7ebedf32fc6d7b72d84b341483b26\transformed\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\ca48f791b13986ff194034cd5d7bf2e4\transformed\gifdecoder-4.12.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.github.bumptech.glide:gifdecoder:4.12.0] C:\Users\asdal\.gradle\caches\transforms-3\ca48f791b13986ff194034cd5d7bf2e4\transformed\gifdecoder-4.12.0\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.exifinterface:exifinterface:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\fd4c16baee0a24b5efdd281a1ad20dfa\transformed\exifinterface-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.2.0] C:\Users\asdal\.gradle\caches\transforms-3\fd4c16baee0a24b5efdd281a1ad20dfa\transformed\exifinterface-1.2.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\ced7b5c55eafcca486c1d98e2cc435b8\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\ced7b5c55eafcca486c1d98e2cc435b8\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\b003afaa2f65d0c50add9df5143df818\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\b003afaa2f65d0c50add9df5143df818\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\c5652be38b872b070c7e7931d7c1e477\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\c5652be38b872b070c7e7931d7c1e477\transformed\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\557e411a576cbdddadb348192ab3d1ca\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\557e411a576cbdddadb348192ab3d1ca\transformed\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\asdal\.gradle\caches\transforms-3\88fbe4e0b80298f58bf555ebecf91b5a\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\asdal\.gradle\caches\transforms-3\88fbe4e0b80298f58bf555ebecf91b5a\transformed\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\asdal\.gradle\caches\transforms-3\d6dbdc5b7910a48b87b468d834628f8e\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\asdal\.gradle\caches\transforms-3\d6dbdc5b7910a48b87b468d834628f8e\transformed\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\asdal\.gradle\caches\transforms-3\be6d88f8615486210e99e12d12be2b1e\transformed\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\asdal\.gradle\caches\transforms-3\be6d88f8615486210e99e12d12be2b1e\transformed\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\asdal\.gradle\caches\transforms-3\eef076becaebc6a933e9ab9b4ba1d1bb\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] C:\Users\asdal\.gradle\caches\transforms-3\eef076becaebc6a933e9ab9b4ba1d1bb\transformed\lifecycle-runtime-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\asdal\.gradle\caches\transforms-3\0e10c1be3e0fce6530194a623ac860cf\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] C:\Users\asdal\.gradle\caches\transforms-3\0e10c1be3e0fce6530194a623ac860cf\transformed\lifecycle-viewmodel-2.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f333bf2a8931213636ec3af43e424759\transformed\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.savedstate:savedstate:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f333bf2a8931213636ec3af43e424759\transformed\savedstate-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\5965b916fe8f00d28a36a5cff901adad\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\5965b916fe8f00d28a36a5cff901adad\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.firebase:firebase-database-collection:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\db03f817405607682e708ef05ad55b91\transformed\firebase-database-collection-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.firebase:firebase-database-collection:17.0.0] C:\Users\asdal\.gradle\caches\transforms-3\db03f817405607682e708ef05ad55b91\transformed\firebase-database-collection-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\5e032f20043c69609310ab2f954684b7\transformed\annotation-experimental-1.0.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.annotation:annotation-experimental:1.0.0] C:\Users\asdal\.gradle\caches\transforms-3\5e032f20043c69609310ab2f954684b7\transformed\annotation-experimental-1.0.0\AndroidManifest.xml:20:5-22:41
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+		ADDED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+		INJECTED from C:\New folder\E-commerce-system-application-\bookshop\app\src\main\AndroidManifest.xml
+activity#com.google.firebase.auth.internal.FederatedSignInActivity
+ADDED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:24:9-31:50
+	android:excludeFromRecents
+		ADDED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:26:13-46
+	android:launchMode
+		ADDED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:28:13-44
+	android:exported
+		ADDED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:27:13-36
+	android:permission
+		ADDED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:29:13-102
+	android:theme
+		ADDED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:30:13-72
+	tools:replace
+		ADDED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:31:13-47
+	android:name
+		ADDED from [com.google.firebase:firebase-auth:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\e347f148c5757429a3436eaf112557cf\transformed\firebase-auth-19.0.0\AndroidManifest.xml:25:13-85
+meta-data#com.google.firebase.components:com.google.firebase.database.DatabaseRegistrar
+ADDED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:32:13-34:85
+	android:value
+		ADDED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:34:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-database:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\f7a1e358f2ba37bdf49afe6d747b015d\transformed\firebase-database-19.0.0\AndroidManifest.xml:33:17-109
+meta-data#com.google.firebase.components:com.google.firebase.storage.StorageRegistrar
+ADDED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:33:13-35:85
+	android:value
+		ADDED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:35:17-82
+	android:name
+		ADDED from [com.google.firebase:firebase-storage:19.0.0] C:\Users\asdal\.gradle\caches\transforms-3\9ad362d17b46c891b091595419687b92\transformed\firebase-storage-19.0.0\AndroidManifest.xml:34:17-107
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:17.1.0] C:\Users\asdal\.gradle\caches\transforms-3\7941d4a40158809581bd9a816a8acc9a\transformed\play-services-base-17.1.0\AndroidManifest.xml:24:13-79

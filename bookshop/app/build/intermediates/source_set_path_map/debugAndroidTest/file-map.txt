@@ -1,0 +1,7 @@
+ps.iut.projectsoftware.test.app-androidTest-0 C:\New folder\E-commerce-system-application-\bookshop\app\build\generated\res\resValues\androidTest\debug
+ps.iut.projectsoftware.test.app-androidTest-1 C:\New folder\E-commerce-system-application-\bookshop\app\build\generated\res\rs\androidTest\debug
+ps.iut.projectsoftware.test.app-mergeDebugAndroidTestResources-2 C:\New folder\E-commerce-system-application-\bookshop\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+ps.iut.projectsoftware.test.app-mergeDebugAndroidTestResources-3 C:\New folder\E-commerce-system-application-\bookshop\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+ps.iut.projectsoftware.test.app-merged_res-4 C:\New folder\E-commerce-system-application-\bookshop\app\build\intermediates\merged_res\debugAndroidTest
+ps.iut.projectsoftware.test.app-androidTest-5 C:\New folder\E-commerce-system-application-\bookshop\app\src\androidTest\res
+ps.iut.projectsoftware.test.app-androidTestDebug-6 C:\New folder\E-commerce-system-application-\bookshop\app\src\androidTestDebug\res

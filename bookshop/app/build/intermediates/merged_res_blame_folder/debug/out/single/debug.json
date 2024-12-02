@@ -1,0 +1,338 @@
+[
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_spinneritem.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/spinneritem.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_profile.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/profile.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_cloud_off_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_cloud_off_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_local_shipping_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_local_shipping_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_iso_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_iso_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_add_shopping_cart_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_add_shopping_cart_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_favorite_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_favorite_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_filter_list_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_filter_list_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_admin_manager.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/admin_manager.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_view_caart.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/view_caart.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_filter_list_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_filter_list_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_admin_add_notification.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/admin_add_notification.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_forgotpass.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/forgotpass.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_delete_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_delete_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_myfivourit.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/myfivourit.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_default_image.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/default_image.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_vpn_key_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_vpn_key_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_view_search.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/view_search.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_add_circle_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_add_circle_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_myorder.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/myorder.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_history_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_history_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_account_circle_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_account_circle_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_directions_walk_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_directions_walk_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_orderproof.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/orderproof.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_arrow_forward_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_arrow_forward_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_editbalance.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/editbalance.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_cached_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_cached_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_receipt_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_receipt_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_drafts_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_drafts_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_shopping_basket_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_shopping_basket_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_search_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_search_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_admin_staff.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/admin_staff.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_admin_main_history.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/admin_main_history.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_notificationa.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/notificationa.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_arrow_back_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_arrow_back_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_error_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_error_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_exposure_plus_1_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_exposure_plus_1_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_edit_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_edit_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_book_shop_1.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/book_shop_1.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_done_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_done_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_view_product.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/view_product.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_description_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_description_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_notifications_none_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_notifications_none_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_email_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_email_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_login.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/login.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_admin.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/admin.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_collections_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_collections_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_open_in_browser_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_open_in_browser_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_local_grocery_store_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_local_grocery_store_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_notification.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/notification.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_admin_main_edit.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/admin_main_edit.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_add_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_add_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_search_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_search_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_remove_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_remove_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_product.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/product.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_myprofile.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/myprofile.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_person_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_person_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_gateway.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/gateway.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_view_photo.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/view_photo.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_order.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/order.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_store_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_store_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_adminmain_listview.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/adminmain_listview.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_history_operation.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/history_operation.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_admin_cuppon.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/admin_cuppon.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_manuel.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/manuel.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_location_history_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_location_history_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_view_cart.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/view_cart.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_favorite_outline_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_favorite_outline_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_collections_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_collections_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_sginup.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/sginup.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_main.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/main.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_admin_main_add.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/admin_main_add.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_launch_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_launch_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_notifications_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_notifications_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_app_icon.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/app_icon.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_cached_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_cached_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_bookmark_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_bookmark_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_admin_book.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/admin_book.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_done_all_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_done_all_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_view_main.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/view_main.xml"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_pageview_black.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_pageview_black.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_exposure_minus_1_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_exposure_minus_1_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/drawable-xhdpi_ic_bookmark_outline_white.png.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/drawable-xhdpi/ic_bookmark_outline_white.png"
+    },
+    {
+        "merged": "ps.iut.projectsoftware.app-merged_res-6:/layout_mess.xml.flat",
+        "source": "ps.iut.projectsoftware.app-main-8:/layout/mess.xml"
+    }
+]

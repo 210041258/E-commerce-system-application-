@@ -1,20 +1,33 @@
+
+// you need to configure the bulid very carful upon the usage that will cost you so much
+// the cost is the libaray space in the user momory
+
 plugins {
 	id 'com.android.application'
 }
 
+// gms is the package of the google server and services supplies
+// which for the connecions of teh auth fb and storage
+apply plugin: 'com.google.gms.google-services'
+
 android {
-	compileSdkVersion 28
-	
-	useLibrary 'org.apache.http.legacy'
-	
+	namespace "ps.iut.projectsoftware"
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_11
+		targetCompatibility JavaVersion.VERSION_11
+	}
+	compileSdk 33
+// for the sourceCompatibility targetCompatibility this is which you will before comiplation process to move the main code it will pass to it make sure also it have been added
+
 	defaultConfig {
 		applicationId "ps.iut.projectsoftware"
 		minSdkVersion 21
-		targetSdkVersion 28
+		targetSdkVersion 33
 		versionCode 1
 		versionName "1.0"
 	}
-	
+
 	buildTypes {
 		release {
 			minifyEnabled false
@@ -23,14 +36,17 @@ android {
 	}
 }
 
+// here is the library : which is the cost of the size in the algoritm ..
+// take care of the versions of each lirbray
+
 dependencies {
-	implementation fileTree(dir: 'libs', include: ['*.jar'])
-	implementation 'androidx.appcompat:appcompat:1.2.0'
-	implementation 'com.google.android.material:material:1.4.0'
+	testImplementation 'junit:junit:4.13.2'
 	implementation 'com.google.firebase:firebase-auth:19.0.0'
 	implementation 'com.google.firebase:firebase-database:19.0.0'
 	implementation 'com.google.firebase:firebase-storage:19.0.0'
 	implementation 'com.github.bumptech.glide:glide:4.12.0'
 	implementation 'com.google.code.gson:gson:2.8.7'
 	implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+	implementation 'com.google.android.material:material:1.4.0'
+	implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
