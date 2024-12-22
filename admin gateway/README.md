@@ -12,7 +12,7 @@
 
 #### 1- the view of the working will be a request the same session order to mydb 
 
-#### 2- now that pin can be accessible by the one person in the android admin gui view in the application after passing the condition situation as admin which is limited which the system admin with one email 
+#### 2- now that pin can be accessible by the one person in the android admin gui view in the application after passing the condition situation as admin which is limited which the system admin with one email with also as any amngmnet system have for big information export proccess to insure the information sent to multi interfaces we created the pdf creator as js in website applcaition of the book system
 
 #### 3- as human simulation brain will say that can't be , now if they hack the db fireabse that will be the breaking of the system of the admin gateway becuase thats the only case to cut the connection
 
