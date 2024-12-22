@@ -21,7 +21,7 @@
 
 #### 4- now let continue the simulation , there is no one will be accessible to get the access otherwise the admin at that moment , if the can play the role of the 3-if condition that will be the only case to my system to out
 
-#### 5- the gateway after accessing it , you can play the role of the admin as managment things simple like that 
+#### 5- the gateway after accessing it , you can play the role of the admin as managment things simple like that (one person at once can sgin in and manage at the same time no used to teh amangment in the website with lock of os digital organized )
 
 #### 6- managment have a conneciton with all branchs of the user data and interfaces of the applications i provide the photo screenshots for that 
 
