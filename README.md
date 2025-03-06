@@ -1,6 +1,6 @@
-# New Contrubtions desgin 
+# Contrubtions Equally distrubted desgin  
 
- Nima Mohamed Ali (210041256) - Project Manager, UI/UX Designer
+ Nima Mohamed Ali (210041256) - Project Manager, UI/UX Designer 
 
 NAMBEJJA SHUKRAH HADIJAH (210041250) - Data Management
 
