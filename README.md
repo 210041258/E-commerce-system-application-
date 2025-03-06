@@ -33,7 +33,7 @@
    View customer details and purchase history 
    Manage student discount eligibility 
  # Technical Considerations: 
-   Database Integration: Robust database t[bookShopWorkflow.drawio (1).pdf](https://github.com/user-attachments/files/19099524/bookShopWorkflow.drawio.1.pdf)
+   Database Integration: Robust database t(https://github.com/user-attachments/files/19099524/bookShopWorkflow.drawio.1.pdf)
 o store book information, user data, order details, and inventory levels. 
    User Interface: Intuitive design with clear navigation for easy browsing and purchasing. 
 # Mobile Compatibility:
@@ -42,4 +42,6 @@ o store book information, user data, order details, and inventory levels.
   Encryption for sensitive data like payment information.
 
 # Basic Application Work Flow  
+![image](https://github.com/user-attachments/assets/633b4af1-6efb-411d-b9b0-3d237018a89a)
+
 [Uploading bookShopWorkflow.drawio (1).pdf…]()
