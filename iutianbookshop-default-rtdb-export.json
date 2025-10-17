@@ -1,0 +1,812 @@
+{
+  "access": false,
+  "blocked": {
+    "details": {
+      "admin": {
+        "gateway": {
+          "ips": {
+            "1967b3847e42edd439a3cc55674f0bf1dd27d7aa4d18bbb43ba398d841b165d4": true
+          }
+        }
+      }
+    }
+  },
+  "book": [
+    {
+      "author": "Curtis R. Finch and John R. Crunkilton",
+      "copies": "1",
+      "copy_preview": "https://www.researchgate.net/publication/325803643_Handbook_of_Vocational_Education_and_Training_Developments_in_the_Changing_World_of_Work",
+      "department": "TVE",
+      "description": "This textbook would likely be used in a Vocational/Technical Education or Career and Technical Education (CTE) department.",
+      "edition": "1st Edition",
+      "id": "1",
+      "keywords": [
+        "Vocational Education",
+        "Technical Education",
+        "Career Education",
+        "Curriculum Development",
+        "CTE"
+      ],
+      "name": "Curriculum Development in Vocational",
+      "price": "100",
+      "semester": "1",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.17.29%20PM.jpeg?alt=media&token=6630d6ed-29aa-4e67-acfb-f6b142ff4469"
+    },
+    null,
+    {
+      "author": "Steve Ingle and Vicky Duckwort",
+      "copies": "0",
+      "copy_preview": "https://www.researchgate.net/publication/325803643_Handbook_of_Vocational_Education_and_Training_Developments_in_the_Changing_World_of_Work",
+      "department": "TVE",
+      "description": "Designed for educators working with vocational learners in vocational schools, colleges, and training centers.",
+      "edition": "3rd Edition",
+      "id": "3",
+      "keywords": [
+        "Vocational Training",
+        "Educator Resources",
+        "Teaching Vocational Students",
+        "Training Centers",
+        "Vocational Schools"
+      ],
+      "name": "Teaching and Training Vocational Learners",
+      "price": "100",
+      "semester": "3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.19.04%20PM.jpeg?alt=media&token=a9b40f02-3bfa-421b-b2be-6e06e195ab20"
+    },
+    {
+      "author": "John Burke",
+      "copies": "8",
+      "copy_preview": "https://files.eric.ed.gov/fulltext/EJ1326834.pdf",
+      "department": "TVE",
+      "description": "It likely deals with the theory and practice of competency-based education (CBE), where students progress based on demonstrated mastery.",
+      "edition": "4th Edition",
+      "id": "4",
+      "keywords": [
+        "Competency-Based Education",
+        "Mastery Learning",
+        "CBE",
+        "Skill Assessment",
+        "Educational Theory"
+      ],
+      "name": "Competency Based Education and Training",
+      "price": "100",
+      "semester": "4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.19.48%20PM.jpeg?alt=media&token=52a3ec7e-fd50-488f-8cdc-4d83e59c92d5"
+    },
+    {
+      "author": "Stephen D. Brookfield",
+      "copies": "10",
+      "copy_preview": "https://archive.org/details/skillfulteachero0000broo_d5d9_3rdedi/page/n7/mode/1up",
+      "department": "TVE",
+      "description": "A widely recognized text in teacher education focusing on practical teaching skills and creating a responsive classroom environment.",
+      "edition": "5th Edition",
+      "id": "5",
+      "keywords": [
+        "Teaching Skills",
+        "Classroom Management",
+        "Teacher Education",
+        "Responsive Classroom",
+        "Educational Methods"
+      ],
+      "name": "The Skillful Teacher",
+      "price": "100",
+      "semester": "4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.20.48%20PM.jpeg?alt=media&token=5fc96e81-d324-41b1-911a-f11cbb96198c"
+    },
+    {
+      "author": "Efraim Turban",
+      "copies": "9",
+      "copy_preview": "https://archive.org/details/informationtechn0009turb",
+      "department": "BTM",
+      "description": "This textbook covers the application of information technology in business, focusing on management information systems and IT strategy.",
+      "edition": "1st Edition",
+      "id": "6",
+      "keywords": [
+        "Information Technology",
+        "Business IT",
+        "Management Information Systems",
+        "IT Strategy",
+        "Technology in Business"
+      ],
+      "name": "Information Technology for Management",
+      "price": "100",
+      "semester": "1",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.22.27%20PM.jpeg?alt=media&token=93550f92-8115-49fb-b2ed-6e62c665a3ee"
+    },
+    {
+      "author": "Eric Ries",
+      "copies": "9",
+      "copy_preview": "https://ia600509.us.archive.org/7/items/TheLeanStartupErickRies/The%20Lean%20Startup%20-%20Erick%20Ries.pdf",
+      "department": "BTM",
+      "description": "The Lean Startup methodology emphasizes rapid iteration, validated learning, and building minimum viable products.",
+      "edition": "2nd Edition",
+      "id": "7",
+      "keywords": [
+        "Lean Startup",
+        "Entrepreneurship",
+        "Innovation",
+        "Business Strategy",
+        "Product Development"
+      ],
+      "name": "The Lean Startup",
+      "price": "100",
+      "semester": "2",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.23.29%20PM.jpeg?alt=media&token=bb76b245-906c-4a58-b4fc-343ac9f86ace"
+    },
+    {
+      "author": "Alexander Osterwalder",
+      "copies": "10",
+      "copy_preview": "http://nutsandbolts.mit.edu/2014/resources/businessmodelgeneration_preview.pdf",
+      "department": "BTM",
+      "description": "Business Model Generation introduces the Business Model Canvas, widely used in business schools for designing business models.",
+      "edition": "3rd Edition",
+      "id": "8",
+      "keywords": [
+        "Business Model Canvas",
+        "Business Design",
+        "Entrepreneurship",
+        "Startup Strategy",
+        "Business Planning"
+      ],
+      "name": "Business Model Generation",
+      "price": "100",
+      "semester": "3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.24.24%20PM.jpeg?alt=media&token=f08ce3ef-3274-4717-8fef-c2af27503852"
+    },
+    {
+      "author": "Marilyn B. Young, David M. Kroenke",
+      "copies": "10",
+      "copy_preview": "https://archive.org/details/essentialsofbusi0000maga",
+      "department": "BTM",
+      "description": "This textbook provides an overview of core business processes and how information systems support and integrate them.",
+      "edition": "4th Edition",
+      "id": "9",
+      "keywords": [
+        "Business Processes",
+        "Information Systems",
+        "System Integration",
+        "Business Operations",
+        "Enterprise Systems"
+      ],
+      "name": "Essentials of Business Processes and Information Systems",
+      "price": "100",
+      "semester": "4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.25.01%20PM.jpeg?alt=media&token=46aa3a3b-6bda-4019-89b0-a231440652a5"
+    },
+    {
+      "author": "Scott Shane",
+      "copies": "10",
+      "copy_preview": "https://archive.org/details/isbn_9780558700249",
+      "department": "BTM",
+      "description": "This text focuses on developing and implementing technology strategies within organizations, aimed at both managers and entrepreneurs.",
+      "edition": "5th Edition",
+      "id": "10",
+      "keywords": [
+        "Technology Strategy",
+        "Business Innovation",
+        "Management",
+        "Entrepreneurship",
+        "Tech Implementation"
+      ],
+      "name": "Technology Strategy for Managers and Entrepreneurs",
+      "price": "100",
+      "semester": "5",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.25.53%20PM.jpeg?alt=media&token=67f0f119-1829-4218-afc1-d0aff2d91a21"
+    },
+    {
+      "author": "Allan R. Hambley",
+      "copies": "9",
+      "copy_preview": "https://archive.org/details/electricalengine0000hamb_v2r7",
+      "department": "EEE",
+      "description": "This textbook covers fundamental concepts in electrical circuits, electronics, electromagnetism, and signal processing.",
+      "edition": "1st Edition",
+      "id": "11",
+      "keywords": [
+        "Electrical Circuits",
+        "Electronics",
+        "Electromagnetism",
+        "Signal Processing",
+        "EEE Principles"
+      ],
+      "name": "Electrical Engineering: Principles & Application",
+      "price": "100",
+      "semester": "1",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.27.31%20PM.jpeg?alt=media&token=e7bae42f-2042-4895-a302-5d50f94d42c5"
+    },
+    {
+      "author": "Adel S. Sedra and Kenneth C. Smith",
+      "copies": "0",
+      "copy_preview": "https://archive.org/details/microelectronic-circuits-6th-edition-a",
+      "department": "EEE",
+      "description": "This textbook covers the analysis and design of microelectronic circuits, including transistors and operational amplifiers.",
+      "edition": "2nd Edition",
+      "id": "12",
+      "keywords": [
+        "Microelectronics",
+        "Circuit Analysis",
+        "Transistors",
+        "Operational Amplifiers",
+        "EEE Design"
+      ],
+      "name": "Sedra/Smith Microelectronic Circuits",
+      "price": "100",
+      "semester": "2",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.28.07%20PM.jpeg?alt=media&token=093c8269-8caa-4490-8a22-0b865630f035"
+    },
+    {
+      "author": "Alexander S. Sadiku",
+      "copies": "10",
+      "copy_preview": "https://drive.google.com/file/d/1xr7MGGwtd_49ZJ_hgOhGmuBZOxVQzp0K/view",
+      "department": "EEE",
+      "description": "This textbook covers fundamental circuit concepts like Ohm's law, Kirchhoff's laws, and AC/DC circuit analysis techniques.",
+      "edition": "3rd Edition",
+      "id": "13",
+      "keywords": [
+        "Electric Circuits",
+        "AC/DC Analysis",
+        "Ohm's Law",
+        "Kirchhoff's Laws",
+        "Circuit Analysis"
+      ],
+      "name": "Fundamentals of Electric Circuits",
+      "price": "100",
+      "semester": "3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.28.46%20PM.jpeg?alt=media&token=0e938fbe-783a-4cd9-a2e3-95a708dd5b70"
+    },
+    {
+      "author": "J. Duncan Glover, Thomas Overbye, and Mulukutla S. Sarma",
+      "copies": "10",
+      "copy_preview": "https://archive.org/details/powersystemanaly0000glov_t0m4",
+      "department": "EEE",
+      "description": "This textbook focuses on power systems engineering, covering power generation, transmission, and distribution.",
+      "edition": "4th Edition",
+      "id": "14",
+      "keywords": [
+        "Power Systems",
+        "Engineering",
+        "Power Generation",
+        "Transmission",
+        "Distribution"
+      ],
+      "name": "Power System Analysis and Design",
+      "price": "100",
+      "semester": "4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.29.34%20PM.jpeg?alt=media&token=7addaa76-eb04-4735-b0ad-9bb55f89d598"
+    },
+    {
+      "author": "Norman S. Nise",
+      "copies": "9",
+      "copy_preview": "https://drive.google.com/file/d/0B8Cz-DSjC9EoVmt6WXNNRUgtUkU/view?resourcekey=0-Nvs4l9xJOx8WyDqsUnngag",
+      "department": "EEE",
+      "description": "This textbook covers topics like modeling of dynamic systems, feedback control, and design of controllers in control systems.",
+      "edition": "5th Edition",
+      "id": "15",
+      "keywords": [
+        "Control Systems",
+        "Dynamic Modeling",
+        "Feedback Control",
+        "System Design",
+        "EEE"
+      ],
+      "name": "Control Systems Engineering",
+      "price": "100",
+      "semester": "5",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.30.43%20PM.jpeg?alt=media&token=aa794bd2-db8b-4828-9245-cb7d1813c3fb"
+    },
+    {
+      "author": "Hugh D. Young, Roger A. Freedman",
+      "copies": "8",
+      "copy_preview": "https://drive.google.com/file/d/0B8Cz-DSjC9EoVmt6WXNNRUgtUkU/view?resourcekey=0-Nvs4l9xJOx8WyDqsUnngag",
+      "department": "MPE",
+      "description": "This calculus-based textbook covers classical mechanics, electromagnetism, optics, and modern physics.",
+      "edition": "1st Edition",
+      "id": "16",
+      "keywords": [
+        "Physics",
+        "Classical Mechanics",
+        "Electromagnetism",
+        "Optics",
+        "Modern Physics"
+      ],
+      "name": "University Physics with Modern Physics",
+      "price": "100",
+      "semester": "1",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM%20(1).jpeg?alt=media&token=46d5eda8-84ec-4703-b1c0-30f76e07f465"
+    },
+    {
+      "author": "Erwin Kreyszig",
+      "copies": "1097",
+      "copy_preview": "https://drive.google.com/file/d/0B-YtfYA4_6pSelhqMW1JbmJkSlk/edit?resourcekey=0-DJaXgK4pKnqAbOGyQRUtBQ",
+      "department": "MPE",
+      "description": "This textbook is widely used for engineering students, covering topics like calculus, linear algebra, and differential equations.",
+      "edition": "2nd Edition",
+      "id": "17",
+      "keywords": [
+        "Engineering Mathematics",
+        "Calculus",
+        "Linear Algebra",
+        "Differential Equations",
+        "Math"
+      ],
+      "name": "Advanced Engineering Mathematics",
+      "price": "100",
+      "semester": "2",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM.jpeg?alt=media&token=87cdd866-f7d0-4821-a4bb-9ab48eda3995"
+    },
+    {
+      "author": "Brian W. Kernighan",
+      "copies": "0",
+      "copy_preview": "https://seriouscomputerist.atariverse.com/media/pdf/book/C%20Programming%20Language%20-%202nd%20Edition%20(OCR).pdf",
+      "department": "MPE",
+      "description": "A classic book for learning C programming, authored by the creator of the C language, Dennis Ritchie.",
+      "edition": "3rd Edition",
+      "id": "18",
+      "keywords": [
+        "C Programming",
+        "Coding",
+        "Programming Language",
+        "Dennis Ritchie",
+        "Software Development"
+      ],
+      "name": "The C Programming Language",
+      "price": "100",
+      "semester": "3",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.11%20AM%20(1).jpeg?alt=media&token=25ac852e-6b50-4599-90a0-2914155ab0af"
+    },
+    {
+      "author": "Theodore L. Brown",
+      "copies": "8",
+      "copy_preview": "https://archive.org/details/chemistrycentral0000brow_13ed",
+      "department": "MPE",
+      "description": "This general chemistry textbook covers fundamental concepts such as atomic structure, chemical bonding, and thermodynamics.",
+      "edition": "4th Edition",
+      "id": "19",
+      "keywords": [
+        "Chemistry",
+        "Atomic Structure",
+        "Chemical Bonding",
+        "Thermodynamics",
+        "Science"
+      ],
+      "name": "Chemistry: The Central Science",
+      "price": "100",
+      "semester": "4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.11%20AM.jpeg?alt=media&token=a82d1f26-5e12-4f03-802e-fe3d8ebf46db"
+    },
+    {
+      "author": "David A. Madsen",
+      "copies": "5",
+      "copy_preview": "https://archive.org/details/engineeringdrawi0000mads_o8c8",
+      "department": "CSE",
+      "description": "This book teaches the fundamentals of technical drawing, including orthographic projection, isometric views, and dimensioning.",
+      "edition": "2nd Edition",
+      "id": "21",
+      "keywords": [
+        "Technical Drawing",
+        "Engineering Design",
+        "Orthographic Projection",
+        "Isometric Views",
+        "CSE"
+      ],
+      "name": "Engineering Drawing & Design",
+      "price": "200",
+      "semester": "2",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.12%20AM.jpeg?alt=media&token=b0218286-6fb2-4d69-9cb6-d0f875bb07b1"
+    },
+    {
+      "author": "James F. Kurose",
+      "copies": "7",
+      "copy_preview": "https://ia803105.us.archive.org/24/items/computernetworking_201912/Computer%20Networking.pdf",
+      "department": "CSE",
+      "description": "This is a widely used textbook in computer science and related fields for learning about computer networks. Its 'top-down approach' starts with the application layer and works its way down to the physical layer, covering key networking concepts like architectures, protocols, security, and performance analysis.",
+      "edition": "5th Edition",
+      "id": "22",
+      "keywords": [
+        "Computer Networking",
+        "Protocols",
+        "Network Security",
+        "Performance Analysis",
+        "Top-Down Approach"
+      ],
+      "name": "Computer Networking",
+      "price": "400",
+      "semester": "5",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.13%20AM%20(1).jpeg?alt=media&token=3e897635-fe40-4341-807b-650295d4dde8"
+    },
+    {
+      "author": "Abraham Silberschatz, Peter B. Galvin",
+      "copies": "96",
+      "copy_preview": "https://archive.org/details/operatingsystemconcepts10th",
+      "department": "CSE",
+      "description": "This book is a widely used textbook for undergraduate operating systems courses. It provides a comprehensive introduction to the principles and concepts of operating systems, covering process management, memory management, file systems, I/O systems, and concurrency.",
+      "edition": "7th Edition",
+      "id": "23",
+      "keywords": [
+        "Operating Systems",
+        "Process Management",
+        "Memory Management",
+        "File Systems",
+        "Concurrency"
+      ],
+      "name": "Operating System Concepts",
+      "price": "300",
+      "semester": "7",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.13%20AM.jpeg?alt=media&token=3341f3f9-32fd-43aa-9176-cf6143373427"
+    },
+    {
+      "author": "J.L. Meriam and L.G. Kraige",
+      "copies": "6",
+      "copy_preview": "https://docs.google.com/file/d/0Bw8MfqmgWLS4V0NFR2dVUWpuYzg/edit?pli=1&resourcekey=0-AgaygGX1zvKLyquLBe9fWA",
+      "department": "CEE",
+      "description": "This textbook is a common choice for engineering dynamics courses, typically taken after statics. It covers topics like kinematics, kinetics, Newton's laws of motion, work and energy, impulse and momentum, and vibrations, using the SI system of units.",
+      "edition": "1st Edition",
+      "id": "24",
+      "keywords": [
+        "Engineering Mechanics",
+        "Dynamics",
+        "Kinematics",
+        "Newton's Laws",
+        "Vibrations"
+      ],
+      "name": "Meriam's Engineering Mechanics",
+      "price": "100",
+      "semester": "1",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.14%20AM%20(1).jpeg?alt=media&token=45da8ae6-5608-4b0c-bd9d-da500719001e"
+    },
+    {
+      "author": "Robert C. Martin",
+      "copies": "8",
+      "copy_preview": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/",
+      "department": "CSE",
+      "description": "This book focuses on writing clean, readable, and maintainable code. It covers principles, patterns, and practices for writing good code and improving existing code. It emphasizes the importance of code quality in Agile development methodologies.",
+      "edition": "4th Edition",
+      "id": "25",
+      "keywords": [
+        "Clean Code",
+        "Agile Development",
+        "Software Craftsmanship",
+        "Coding Best Practices",
+        "Code Quality"
+      ],
+      "name": "A Handbook of Agile Software Craftsmanship",
+      "price": "10000",
+      "semester": "4",
+      "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.14%20AM.jpeg?alt=media&token=fa443e98-22c3-48fe-85c1-0512c447acf1"
+    }
+  ],
+  "bookCounter": 24,
+  "contact": {
+    "albreem": {
+      "239": {
+        "orderid": "14",
+        "orderprice": "100.0"
+      },
+      "760": {
+        "orderid": "22",
+        "orderprice": "400.0"
+      },
+      "2207": {
+        "orderid": "22",
+        "orderprice": "400.0"
+      },
+      "3385": {
+        "orderid": "21",
+        "orderprice": "200.0"
+      }
+    },
+    "nima": {
+      "7940": {
+        "orderid": "16",
+        "orderprice": "100.0"
+      }
+    }
+  },
+  "coupons": {
+    "-OBQz6tHIw1an10hAbto": {
+      "code": "123",
+      "discount": 50,
+      "expiryDate": "2030-12-12"
+    }
+  },
+  "history": {
+    "nima": {
+      "-OKW020Y2FT7EWj1R5ap": {
+        "color": "red",
+        "orderno": "8505",
+        "text": "Order no. 8505 Spent 100.0 Book id : 16",
+        "timestamp": "2025-03-04 17:54:46"
+      },
+      "-OKWK-iC-TDd9ic5I-wE": {
+        "color": "red",
+        "orderno": "7940",
+        "text": "Order no. 7940 Spent 100.0 Book id : 16",
+        "timestamp": "2025-03-04 19:21:59"
+      }
+    }
+  },
+  "hpin": "4657bf5fc7bfc8f0a8bc50fd4070fcfa595f953af8cd877736d584ce689dfad6",
+  "information": {
+    "albreem": {
+      "balance": "299400.0",
+      "email": "albreem@iut-dhaka.edu"
+    },
+    "albreem2003": {
+      "balance": "0.00",
+      "email": "albreem2003@gmail.com",
+      "url": ""
+    },
+    "amssalbreem": {
+      "balance": "6600.0",
+      "email": "amssalbreem@gmail.com"
+    },
+    "kingrap125": {
+      "balance": "1000.00",
+      "email": "kingrap125@gmail.com"
+    },
+    "mssnaima8": {
+      "balance": "1000.00",
+      "email": "mssnaima8@gmail.com"
+    },
+    "nima": {
+      "balance": "9700.0",
+      "email": "nima@iut-dhaka.edu"
+    },
+    "shukrahhadie54": {
+      "balance": "10000.00",
+      "email": "shukrahhadie54@gmail.com"
+    }
+  },
+  "inter_user": {
+    "albreem2003_gmail_com": {
+      "data": {
+        "cart": [
+          {
+            "author": "David A. Madsen",
+            "available_copies": "5",
+            "copies": "1",
+            "copy_preview": "https://archive.org/details/engineeringdrawi0000mads_o8c8",
+            "department": "CSE",
+            "description": "This book teaches the fundamentals of technical drawing, including orthographic projection, isometric views, and dimensioning.",
+            "edition": "2nd Edition",
+            "id": "21",
+            "name": "Engineering Drawing & Design",
+            "price": "200",
+            "semester": "2",
+            "total_price": "200",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.12%20AM.jpeg?alt=media&token=b0218286-6fb2-4d69-9cb6-d0f875bb07b1"
+          },
+          {
+            "author": "Robert C. Martin",
+            "available_copies": "8",
+            "copies": "1",
+            "copy_preview": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/",
+            "department": "CSE",
+            "description": "This book focuses on writing clean, readable, and maintainable code. It covers principles, patterns, and practices for writing good code and improving existing code. It emphasizes the importance of code quality in Agile development methodologies.",
+            "edition": "4th Edition",
+            "id": "25",
+            "name": "A Handbook of Agile Software Craftsmanship",
+            "price": "10000",
+            "semester": "4",
+            "total_price": "10000",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.14%20AM.jpeg?alt=media&token=fa443e98-22c3-48fe-85c1-0512c447acf1"
+          },
+          {
+            "author": "Erwin Kreyszig",
+            "available_copies": "1099",
+            "copies": "1",
+            "copy_preview": "https://drive.google.com/file/d/0B-YtfYA4_6pSelhqMW1JbmJkSlk/edit?resourcekey=0-DJaXgK4pKnqAbOGyQRUtBQ",
+            "department": "MPE",
+            "description": "This textbook is widely used for engineering students, covering topics like calculus, linear algebra, and differential equations.",
+            "edition": "2nd Edition",
+            "id": "17",
+            "name": "Advanced Engineering Mathematics",
+            "price": "100",
+            "semester": "2",
+            "total_price": "100",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM.jpeg?alt=media&token=87cdd866-f7d0-4821-a4bb-9ab48eda3995"
+          },
+          {
+            "author": "David A. Madsen",
+            "available_copies": "5",
+            "copies": "1",
+            "copy_preview": "https://archive.org/details/engineeringdrawi0000mads_o8c8",
+            "department": "CSE",
+            "description": "This book teaches the fundamentals of technical drawing, including orthographic projection, isometric views, and dimensioning.",
+            "edition": "2nd Edition",
+            "id": "21",
+            "name": "Engineering Drawing & Design",
+            "price": "200",
+            "semester": "2",
+            "total_price": "200",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.12%20AM.jpeg?alt=media&token=b0218286-6fb2-4d69-9cb6-d0f875bb07b1"
+          }
+        ]
+      }
+    },
+    "albreem_iut-dhaka_edu": {
+      "data": {
+        "cart": [
+          {
+            "author": "David A. Madsen",
+            "available_copies": "5",
+            "copies": "1",
+            "copy_preview": "https://archive.org/details/engineeringdrawi0000mads_o8c8",
+            "department": "CSE",
+            "description": "This book teaches the fundamentals of technical drawing, including orthographic projection, isometric views, and dimensioning.",
+            "edition": "2nd Edition",
+            "id": "21",
+            "name": "Engineering Drawing & Design",
+            "price": "200",
+            "semester": "2",
+            "total_price": "200",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.12%20AM.jpeg?alt=media&token=b0218286-6fb2-4d69-9cb6-d0f875bb07b1"
+          },
+          {
+            "author": "Robert C. Martin",
+            "available_copies": "8",
+            "copies": "1",
+            "copy_preview": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/",
+            "department": "CSE",
+            "description": "This book focuses on writing clean, readable, and maintainable code. It covers principles, patterns, and practices for writing good code and improving existing code. It emphasizes the importance of code quality in Agile development methodologies.",
+            "edition": "4th Edition",
+            "id": "25",
+            "name": "A Handbook of Agile Software Craftsmanship",
+            "price": "10000",
+            "semester": "4",
+            "total_price": "10000",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.14%20AM.jpeg?alt=media&token=fa443e98-22c3-48fe-85c1-0512c447acf1"
+          },
+          {
+            "author": "Erwin Kreyszig",
+            "available_copies": "1099",
+            "copies": "1",
+            "copy_preview": "https://drive.google.com/file/d/0B-YtfYA4_6pSelhqMW1JbmJkSlk/edit?resourcekey=0-DJaXgK4pKnqAbOGyQRUtBQ",
+            "department": "MPE",
+            "description": "This textbook is widely used for engineering students, covering topics like calculus, linear algebra, and differential equations.",
+            "edition": "2nd Edition",
+            "id": "17",
+            "name": "Advanced Engineering Mathematics",
+            "price": "100",
+            "semester": "2",
+            "total_price": "100",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM.jpeg?alt=media&token=87cdd866-f7d0-4821-a4bb-9ab48eda3995"
+          },
+          {
+            "author": "David A. Madsen",
+            "available_copies": "5",
+            "copies": "1",
+            "copy_preview": "https://archive.org/details/engineeringdrawi0000mads_o8c8",
+            "department": "CSE",
+            "description": "This book teaches the fundamentals of technical drawing, including orthographic projection, isometric views, and dimensioning.",
+            "edition": "2nd Edition",
+            "id": "21",
+            "name": "Engineering Drawing & Design",
+            "price": "200",
+            "semester": "2",
+            "total_price": "200",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.12%20AM.jpeg?alt=media&token=b0218286-6fb2-4d69-9cb6-d0f875bb07b1"
+          }
+        ],
+        "history": {
+          "-OJk2clzLP_QuKnHbAi-": {
+            "color": "red",
+            "orderno": "239",
+            "text": "Order no. 239 Spent 100.0 Book id : 14",
+            "timestamp": "2025-02-23 05:46:54"
+          },
+          "-OKVDceT0ry6pIEnlGLx": {
+            "color": "red",
+            "orderno": "760",
+            "text": "Order no. 760 Spent 400.0 Book id : 22",
+            "timestamp": "2025-03-04 14:16:43"
+          },
+          "-OKVG1gOau-WXVcPi7Id": {
+            "color": "red",
+            "orderno": "8165",
+            "text": "Order no. 8165 Spent 100.0 Book id : 15",
+            "timestamp": "2025-03-04 14:27:14"
+          }
+        },
+        "myfavorite": [
+          {
+            "author": "Hugh D. Young, Roger A. Freedman",
+            "copies": "9",
+            "copy_preview": "https://drive.google.com/file/d/0B8Cz-DSjC9EoVmt6WXNNRUgtUkU/view?resourcekey=0-Nvs4l9xJOx8WyDqsUnngag",
+            "department": "MPE",
+            "description": "This calculus-based textbook covers classical mechanics, electromagnetism, optics, and modern physics.",
+            "edition": "1st Edition",
+            "id": "16",
+            "name": "University Physics with Modern Physics",
+            "price": "100",
+            "semester": "1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.10%20AM%20(1).jpeg?alt=media&token=46d5eda8-84ec-4703-b1c0-30f76e07f465"
+          },
+          {
+            "author": "Allan R. Hambley",
+            "copies": "9",
+            "copy_preview": "https://archive.org/details/electricalengine0000hamb_v2r7",
+            "department": "EEE",
+            "description": "This textbook covers fundamental concepts in electrical circuits, electronics, electromagnetism, and signal processing.",
+            "edition": "1st Edition",
+            "id": "11",
+            "name": "Electrical Engineering: Principles & Application",
+            "price": "100",
+            "semester": "1",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.27.31%20PM.jpeg?alt=media&token=e7bae42f-2042-4895-a302-5d50f94d42c5"
+          },
+          {
+            "author": "Robert C. Martin",
+            "copies": "8",
+            "copy_preview": "https://www.oreilly.com/library/view/clean-code-a/9780136083238/",
+            "department": "CSE",
+            "description": "This book focuses on writing clean, readable, and maintainable code. It covers principles, patterns, and practices for writing good code and improving existing code. It emphasizes the importance of code quality in Agile development methodologies.",
+            "edition": "4th Edition",
+            "id": "25",
+            "name": "A Handbook of Agile Software Craftsmanship",
+            "price": "10000",
+            "semester": "4",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-10%20at%201.44.14%20AM.jpeg?alt=media&token=fa443e98-22c3-48fe-85c1-0512c447acf1"
+          }
+        ],
+        "myorder": {
+          "-OJk2cli4LNJRKLI5irJ": {
+            "orderid": "14",
+            "orderprice": "100.0"
+          },
+          "-OKVDce7rIsFLztudJEs": {
+            "orderid": "22",
+            "orderprice": "400.0"
+          },
+          "-OKVG1g7l6YEOIY72JA4": {
+            "orderid": "15",
+            "orderprice": "100.0"
+          }
+        },
+        "notification": {
+          "-OJk8SdOUloeT_UzGkvF": {
+            "message": "asd",
+            "senderEmail": "admin@bookshop.iut",
+            "timestamp": "2025-02-23T00:12:21.929Z",
+            "title": "as"
+          },
+          "-OKVGQYvKLUb7i0EDX2q": {
+            "message": "order at xxxx on xx/xx in xx place",
+            "senderEmail": "admin@bookshop.iut",
+            "timestamp": "2025-03-04T08:28:57.631Z",
+            "title": "confirmed order"
+          }
+        },
+        "wishlist": [
+          {
+            "author": "Steve Ingle and Vicky Duckwort",
+            "copies": "0",
+            "copy_preview": "https://www.researchgate.net/publication/325803643_Handbook_of_Vocational_Education_and_Training_Developments_in_the_Changing_World_of_Work",
+            "department": "TVE",
+            "description": "Designed for educators working with vocational learners in vocational schools, colleges, and training centers.",
+            "edition": "3rd Edition",
+            "id": "3",
+            "name": "Teaching and Training Vocational Learners",
+            "price": "100",
+            "semester": "3",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.19.04%20PM.jpeg?alt=media&token=a9b40f02-3bfa-421b-b2be-6e06e195ab20"
+          },
+          {
+            "author": "Stephen D. Brookfield",
+            "copies": "0",
+            "copy_preview": "https://archive.org/details/skillfulteachero0000broo_d5d9_3rdedi/page/n7/mode/1up",
+            "department": "TVE",
+            "description": "A widely recognized text in teacher education focusing on practical teaching skills and creating a responsive classroom environment.",
+            "edition": "5th Edition",
+            "id": "4",
+            "name": "The Skillful Teacher",
+            "price": "100",
+            "semester": "4",
+            "url": "https://firebasestorage.googleapis.com/v0/b/iutianbookshop.appspot.com/o/WhatsApp%20Image%202024-10-07%20at%201.20.48%20PM.jpeg?alt=media&token=5fc96e81-d324-41b1-911a-f11cbb96198c"
+          }
+        ]
+      }
+    }
+  },
+  "pin": "5319",
+  "refresh_pin": false
+}
